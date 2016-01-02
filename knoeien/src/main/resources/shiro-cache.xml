@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ehcache name="shiro">
+	
+	<cache name="shiro-activeSessionCache" maxEntriesLocalHeap="10000"
+		overflowToDisk="false" eternal="false" diskPersistent="false"
+		timeToLiveSeconds="0" timeToIdleSeconds="0" statistics="true" />
+	
+	<cache name="authorizationCache" maxEntriesLocalHeap="10000"
+		overflowToDisk="false" eternal="false" diskPersistent="false"
+		timeToLiveSeconds="0" timeToIdleSeconds="0" statistics="true" />
+		
+	<cache name="authenticationCache" maxEntriesLocalHeap="10000"
+		overflowToDisk="false" eternal="false" diskPersistent="false"
+		timeToLiveSeconds="0" timeToIdleSeconds="0" statistics="true" />
+			
+	<defaultCache maxElementsInMemory="1000" eternal="false" timeToIdleSeconds="120"/>
+			
+</ehcache>

@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
+	id="WebApp_ID" version="3.0">
+
+	<context-param>
+		<param-name>shiroEnvironmentClass</param-name>
+		<param-value>com.selvesperer.knoeien.config.ShiroWebEnvironment</param-value>
+	</context-param>
+	<context-param>
+		<param-name>shiroConfigLocations</param-name>
+		<param-value>classpath:shiro.ini</param-value>
+	</context-param>
+	
+	<filter>
+		<filter-name>ShiroFilter</filter-name>
+		<filter-class>org.apache.shiro.web.servlet.ShiroFilter</filter-class>
+	</filter>
+
+	<filter>
+	    <filter-name>ExpiresFilter</filter-name>
+	    <filter-class>org.apache.catalina.filters.ExpiresFilter</filter-class>
+	    <init-param>
+	        <param-name>ExpiresByType image</param-name>
+	        <param-value>access plus 1 month</param-value>
+	    </init-param>     
+	    <init-param>
+	        <param-name>ExpiresByType font</param-name>
+	        <param-value>access plus 1 month</param-value>
+	    </init-param>     
+	    <init-param>
+	        <param-name>ExpiresByType text/css</param-name>
+	        <param-value>access plus 1 week</param-value>
+	    </init-param>
+	    <init-param>
+	        <param-name>ExpiresByType application/javascript</param-name>
+	        <param-value>access plus 1 week</param-value>
+	    </init-param>
+	   <init-param>
+	        <param-name>ExpiresByType application/json</param-name>
+	        <param-value>access plus 0 seconds</param-value>
+	    </init-param>
+	   <init-param>
+	        <param-name>ExpiresByType text/html</param-name>
+	        <param-value>access plus 0 seconds</param-value>
+	    </init-param>
+	   <init-param>
+	        <param-name>ExpiresByType application/xhtml+xml</param-name>
+	        <param-value>access plus 0 seconds</param-value>
+	    </init-param>
+	   <init-param>
+	        <param-name>ExpiresByType application/xml</param-name>
+	        <param-value>access plus 0 seconds</param-value>
+	    </init-param>
+	   <init-param>
+	        <param-name>ExpiresByType text/xml</param-name>
+	        <param-value>access plus 0 seconds</param-value>
+	    </init-param>
+	</filter> 
+ 	
+	<filter>
+		<filter-name>CorsFilter</filter-name>
+		<filter-class>org.apache.catalina.filters.CorsFilter</filter-class>
+		
+		<init-param>
+                <param-name>cors.allowed.methods</param-name>
+                <param-value>GET, POST, HEAD, PUT, DELETE</param-value>
+        </init-param>
+	</filter>
+
+	<filter-mapping>
+		<filter-name>ShiroFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+
+	<listener>
+		<listener-class>org.springframework.web.context.request.RequestContextListener</listener-class>
+	</listener>
+	<listener>
+		<listener-class>org.apache.shiro.web.env.EnvironmentLoaderListener</listener-class>
+	</listener>
+
+
+	<context-param>
+		<param-name>javax.faces.PROJECT_STAGE</param-name>
+		<param-value>Production</param-value>
+	</context-param>
+	<context-param>
+		<param-name>org.omnifaces.HTML5_RENDER_KIT_PASSTHROUGH_ATTRIBUTES</param-name>
+		<param-value>
+       javax.faces.component.UIInput=x-webkit-speech,x-webkit-grammar;
+       javax.faces.component.UIComponent=contenteditable,draggable
+      </param-value>
+	</context-param>
+	
+	<context-param>
+		<param-name>javax.faces.PARTIAL_STATE_SAVING</param-name>
+		<param-value>true</param-value>
+	</context-param>
+
+	<context-param>
+		<param-name>facelets.SKIP_COMMENTS</param-name>
+		<param-value>true</param-value>
+	</context-param>
+	
+<servlet>
+    <servlet-name>dispatcher</servlet-name>
+    <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+     <init-param>
+      <param-name>contextConfigLocation</param-name>
+      <param-value>com.selvesperer.knoeien.data.config.MvcConfiguration</param-value>
+    </init-param> 
+    <init-param>
+      <param-name>contextClass</param-name>
+      <param-value>org.springframework.web.context.support.AnnotationConfigWebApplicationContext</param-value>
+    </init-param> 
+    <load-on-startup>1</load-on-startup>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>dispatcher</servlet-name>
+    <url-pattern>/</url-pattern>
+  </servlet-mapping>
+	
+	<servlet>
+		<servlet-name>Faces Servlet</servlet-name>
+		<servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>Faces Servlet</servlet-name>
+		<url-pattern>/faces/*</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>Faces Servlet</servlet-name>
+		<url-pattern>*.jsf</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>Faces Servlet</servlet-name>
+		<url-pattern>*.faces</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>Faces Servlet</servlet-name>
+		<url-pattern>*.xhtml</url-pattern>
+	</servlet-mapping>
+	<session-config>
+		<session-timeout>15</session-timeout>
+		<tracking-mode>COOKIE</tracking-mode>
+	</session-config>
+	<mime-mapping>
+		<extension>woff</extension>
+		<mime-type>application/x-font-woff</mime-type>
+	</mime-mapping>
+	<welcome-file-list>
+		<welcome-file>index.xhtml</welcome-file>
+	</welcome-file-list>
+	<error-page>
+		<exception-type>javax.faces.application.ViewExpiredException</exception-type>
+		<location>/index.xhtml</location>
+	</error-page>
+	<error-page>
+		<exception-type>java.lang.Throwable</exception-type>
+		<location>/error.xhtml</location>
+	</error-page>
+	<error-page>
+		<error-code>500</error-code>
+		<location>/error.xhtml</location>
+	</error-page>
+	<error-page>
+		<error-code>401</error-code>
+		<location>/401-not-authorized.xhtml</location>
+	</error-page>
+	<error-page>
+		<error-code>404</error-code>
+		<location>/pageNotFound.xhtml</location>
+	</error-page>
+	
+	<mime-mapping>
+		<extension>xls</extension>
+		<mime-type>application/vnd.ms-excel</mime-type>
+	</mime-mapping>
+</web-app>

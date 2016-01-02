@@ -1,0 +1,22 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets">
+	
+	<div class="grid-cell-noflex bg-color-light-gray" style="height:40px;width:100%;margin-top:20px;display:#{userSessionBean.browserSupported?'':'none'};">
+		<div class="grid" style="margin-top:8px;">
+			<div class="grid-cell"></div>			
+			<div class="grid-cell managed-width">
+				<div class="grid center footer">
+					<div class="grid-cell-noflex"><img src="" height="28"/></div>
+					<div class="grid-cell-noflex hide-second">Powered by SelvEsperer</div>
+					<div class="grid-cell-noflex hide-first"><i class="icon-o"/></div>
+					<div class="grid-cell-noflex hide-first"><a href="mailto:support@selvesperer.com">Support</a></div>				
+				</div>
+			</div>
+			<div class="grid-cell"></div>
+		</div>
+	</div>
+
+	<script type="text/javascript">
+		head.js('#{request.contextPath}/resources/assets/js/application.js?#{msg['vrsn']}');
+	</script>
+	<div id="ajaxloader" class="loader"><div class="animated spin icon-refresh" ></div><h5>Loading...</h5></div>
+</ui:composition>

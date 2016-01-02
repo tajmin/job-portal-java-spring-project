@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+	<appender name="STDOUT"
+			class="ch.qos.logback.core.ConsoleAppender">
+		<encoder>
+            <charset>UTF-8</charset>
+<!--             <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger - %msg%n</pattern> -->
+            <pattern>%-5level %logger - %msg%n</pattern>
+        </encoder>
+	</appender>
+ 
+
+        <!--Daily rolling file appender -->
+ 	<appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<File>SelvE_prod/selvesperer_logback.log</File> make sure you have permissions on this file	
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+		    daily rollover
+			<FileNamePattern>logs/logFile.%d{yyyy-MM-dd}.%i.log</FileNamePattern>
+			<timeBasedFileNamingAndTriggeringPolicy
+                class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                or whenever the file size reaches 100MB
+                <maxFileSize>50MB</maxFileSize>
+            </timeBasedFileNamingAndTriggeringPolicy>
+            keep 30 days' worth of history
+            <maxHistory>30</maxHistory>
+		</rollingPolicy>
+ 
+		<encoder>
+            <charset>UTF-8</charset>
+            <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger - %msg%n</pattern>
+        </encoder>
+        
+	</appender>
+	<root>
+		<level value="error" />
+		<appender-ref ref="STDOUT" />
+		<!-- <appender-ref ref="FILE" />-->
+	</root>
+	
+</configuration>

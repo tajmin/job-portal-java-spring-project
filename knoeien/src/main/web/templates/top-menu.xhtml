@@ -1,0 +1,9 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:fn="http://java.sun.com/jsp/jstl/functions">
+<style>
+.header-bottom .active:before { border-color:##{userSessionBean.accentColor1}; }
+.header-bottom a {color:##{userSessionBean.accentColor2};}
+</style>
+<div class="grid-cell lower-menu" style="white-space: nowrap;overflow:hidden;height:30px;">
+	<span class="header-bottom"><h:outputLink  value="#{request.contextPath}/home/" styleClass="#{fn:contains(request.requestURI, 'home') ? 'active' : ''}">#{msg['home']}</h:outputLink></span>
+</div>
+</ui:composition>

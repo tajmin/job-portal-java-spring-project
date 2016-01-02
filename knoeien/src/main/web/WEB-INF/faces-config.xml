@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<faces-config xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee 
+    http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_2.xsd"
+    version="2.2">
+ 	<application>
+		<el-resolver>org.springframework.web.jsf.el.SpringBeanFacesELResolver</el-resolver>
+		<locale-config>
+			<default-locale>en</default-locale>
+			<supported-locale>pt</supported-locale>
+			<supported-locale>ar</supported-locale>
+		</locale-config>
+		<resource-bundle>
+			<base-name>com.selvesperer.knoeien.utils.localization.Messages</base-name>
+			<var>msg</var>
+		</resource-bundle>
+		<resource-bundle>
+			<base-name>ValidationMessages</base-name>
+			<var>validation</var>
+		</resource-bundle>
+		
+		<view-handler>com.selvesperer.knoeien.utils.RestorableViewHandler</view-handler>			
+	   <system-event-listener>
+		    <system-event-listener-class>com.selvesperer.knoeien.spring.ViewScopeCallbackRegistrar</system-event-listener-class>
+		    <system-event-class>javax.faces.event.PostConstructViewMapEvent</system-event-class>
+		    <source-class>javax.faces.component.UIViewRoot</source-class>
+		</system-event-listener>
+		 
+		<system-event-listener>
+		    <system-event-listener-class>com.selvesperer.knoeien.spring.ViewScopeCallbackRegistrar</system-event-listener-class>
+		    <system-event-class>javax.faces.event.PreDestroyViewMapEvent</system-event-class>
+		    <source-class>javax.faces.component.UIViewRoot</source-class>
+		</system-event-listener>
+	</application>
+	<converter>
+		<converter-for-class>java.lang.Enum</converter-for-class>
+		<converter-class>javax.faces.convert.EnumConverter</converter-class>
+	</converter>
+ 
+	<factory>
+		<render-kit-factory>org.omnifaces.renderkit.Html5RenderKitFactory</render-kit-factory>    	
+	</factory>
+
+	<lifecycle>
+		<phase-listener>com.selvesperer.knoeien.listener.DebugPhaseListener</phase-listener>
+	</lifecycle>
+</faces-config>

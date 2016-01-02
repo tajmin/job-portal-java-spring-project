@@ -1,0 +1,20 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	template="../templates/faces-base.xhtml">
+	<ui:define name="head">	</ui:define>
+	<ui:define name="menu"><ui:include src="../templates/top-menu.xhtml" /></ui:define>	
+	<ui:define name="header"><ui:include src="../templates/faces-header.xhtml" /></ui:define>
+	<!--  default left side -->
+	<ui:define name="left-side">
+		<div class="grid-cell-noflex left-column hide-first">
+			<h1> Left side content</h1>        
+		</div>
+	</ui:define>
+	<ui:define name="center-section">
+		<div class="grid-cell center-column" style="width:100%;max-width:1315px;">
+			<ui:insert name="content"></ui:insert>
+		</div>
+	</ui:define>
+</ui:composition>
