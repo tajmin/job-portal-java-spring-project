@@ -1,22 +1,37 @@
-<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets">
-	
-	<div class="grid-cell-noflex bg-color-light-gray" style="height:40px;width:100%;margin-top:20px;display:#{userSessionBean.browserSupported?'':'none'};">
-		<div class="grid" style="margin-top:8px;">
-			<div class="grid-cell"></div>			
-			<div class="grid-cell managed-width">
-				<div class="grid center footer">
-					<div class="grid-cell-noflex"><img src="" height="28"/></div>
-					<div class="grid-cell-noflex hide-second">Powered by SelvEsperer</div>
-					<div class="grid-cell-noflex hide-first"><i class="icon-o"/></div>
-					<div class="grid-cell-noflex hide-first"><a href="mailto:support@selvesperer.com">Support</a></div>				
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets">	
+	<!-- footer starts here -->
+	<div class="callout large hlpr-color-black helper-footer">
+		<div class="row">
+			<div class="large-3 medium-6 columns">
+				<ul class="menu vertical">
+					<li class="lead"><strong>Company</strong></li>
+					<li><a href="#">About helpers</a></li>
+					<li><a href="#">Contact</a></li>
+					<li><a href="#">Trust and security</a></li>
+					<li><a href="#">Press</a></li>
+					<li><a href="#">Blog</a></li>
+				</ul>
+			</div>
+			<div class="large-3 medium-6 columns">
+				<ul class="menu vertical">
+					<li class="lead"><strong>Jobs</strong></li>
+					<li><a href="#">Invite friends</a></li>
+					<li><a href="#">Guidelines</a></li>
+					<li><a href="#">Terms &amp; privacy</a></li>
+					<li><a href="#">Payment and taxes</a></li>
+				</ul>
+			</div>
+			<div class="large-6 columns">
+				<div class="text-center">
+					<div class="menu-text title">Helpers</div>
+					<div class="social-button">
+						<a href="#"><img src="#{request.contextPath}/resources/assets/images/facebook.png" alt="facebook" height="45" width="45"></img></a>
+						<a href="#"><img src="#{request.contextPath}/resources/assets/images/instagram.png" alt="instagram" height="45" width="45"></img></a>
+						<a href="#"><img src="#{request.contextPath}/resources/assets/images/linkedIn.png" alt="linkedIn" height="45" width="45"></img></a>
+					</div>
 				</div>
 			</div>
-			<div class="grid-cell"></div>
 		</div>
 	</div>
-
-	<script type="text/javascript">
-		head.js('#{request.contextPath}/resources/assets/js/application.js?#{msg['vrsn']}');
-	</script>
-	<div id="ajaxloader" class="loader"><div class="animated spin icon-refresh" ></div><h5>Loading...</h5></div>
+	<!-- footer ends here -->
 </ui:composition>
