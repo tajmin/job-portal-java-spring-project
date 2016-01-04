@@ -34,7 +34,7 @@ public class UserController extends AbstractController implements Serializable {
 		return 1;
 	}
 	
-	@RequestMapping(method = RequestMethod.PUT, produces = "application/json")
+	@RequestMapping(method = RequestMethod.POST , produces = "application/json")
 	@ResponseBody
 	public ResponseEntity<RestResponse> addUser(@RequestBody UserModel userModel) {		
 		User user = null;

@@ -15,10 +15,12 @@ Controllers.controller("UserCtrl", function($scope, $rootScope, restservice, $co
 			console.log( data );
         });
 		
-		restservice.put( $scope.user, "api/v1/user").then(function(data) {
+		restservice.post( $scope.user, "api/v1/user").then(function(data) {
 			if (data != null) {
 				console.log( data );
         	}
         });
     };   
+    
+    
 });
