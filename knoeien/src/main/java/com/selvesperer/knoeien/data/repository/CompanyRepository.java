@@ -12,6 +12,6 @@ import com.selvesperer.knoeien.data.repository.custom.CompanyRepositoryCustom;
 
 @Repository
 public interface CompanyRepository extends JpaRepository<Company, String>, CompanyRepositoryCustom {
-	@Query("from Company c where c.companyId = :companyID")
-	List<Company> findCompanyByCompanyId(@Param("companyID") String companyID);	
+	@Query("from Company c where c.id = :companyID")
+	List<Company> findCompanyById(@Param("companyID") String companyID);	
 }

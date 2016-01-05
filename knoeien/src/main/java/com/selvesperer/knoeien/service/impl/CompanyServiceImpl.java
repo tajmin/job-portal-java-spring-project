@@ -13,9 +13,10 @@ import com.selvesperer.knoeien.service.CompanyService;
 import com.selvesperer.knoeien.spring.ScopeType;
 import com.selvesperer.knoeien.web.controllers.model.CompanyModel;
 
-@Service("comapnyService")
+@Service("companyService")
 @Scope(ScopeType.SINGLETON)
 public class CompanyServiceImpl implements CompanyService {
+	
 	private static final Logger log = LoggerFactory.getLogger(CompanyServiceImpl.class);
 
 	@Inject
@@ -26,10 +27,12 @@ public class CompanyServiceImpl implements CompanyService {
 		// TODO Auto-generated method stub
 		return null;
 	}
-
+	
 	@Override
-	public Company saveCompany(CompanyModel companyModel) {
-		// TODO Auto-generated method stub
+	public Company saveCompany(CompanyModel companyModel) {		
 		return companyRepository.saveAndFlush(new Company(companyModel));
 	}
+
+
+	
 }
