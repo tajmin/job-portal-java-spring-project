@@ -4,11 +4,16 @@
 <head>
 	<title>SelvEsperer<ui:fragment rendered="#{not empty pageTitle}">-#{pageTitle}</ui:fragment></title>
 	<meta charset="utf-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<meta name="viewport" content="width=device-width, height=device-height initial-scale=1.0"/>
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 	<meta name="HandheldFriendly" content="True" />
 	<link rel="icon" href="#{request.contextPath}/resources/assets/img/favicon.ico" type="image/x-icon" />
+	
+	<link rel="stylesheet" type="text/css" href="#{request.contextPath}/resources/assets/css/foundation/foundation.css?#{msg['vrsn']}" />
+	<link rel="stylesheet" type="text/css" href="#{request.contextPath}/resources/assets/css/foundation/motion-ui.css?#{msg['vrsn']}" />
+	<link rel="stylesheet" type="text/css" href="#{request.contextPath}/resources/assets/css/foundation/foundation-icons.css?#{msg['vrsn']}" />
 	<link rel="stylesheet" type="text/css" href="#{request.contextPath}/resources/assets/css/application.css?#{msg['vrsn']}" />
+		
 	<script type="text/javascript" src="#{request.contextPath}/resources/assets/js/head.js?#{msg['vrsn']}"></script>
 	<script type="text/javascript" src="#{request.contextPath}/resources/angular/lib/angular/angular.min.js?#{msg['vrsn']}"></script>
     
@@ -22,35 +27,152 @@
 	<script type="text/javascript" src="#{request.contextPath}/resources/angular/js/directives/directives.js?#{msg['vrsn']}"></script>
 	<script type="text/javascript" src="#{request.contextPath}/resources/angular/js/services/applicationService.js?#{msg['vrsn']}"></script>
 	<script type="text/javascript" src="#{request.contextPath}/resources/angular/js/controllers/applicationCtrl.js?#{msg['vrsn']}"></script>
+	
+	<script type="text/javascript" src="#{request.contextPath}/resources/assets/js/foundation/motion-ui.js?#{msg['vrsn']}"></script>
+	<script type="text/javascript" src="#{request.contextPath}/resources/assets/js/foundation/foundation.js?#{msg['vrsn']}"></script>
+	<script type="text/javascript" src="#{request.contextPath}/resources/assets/js/foundation/what-input.min.js?#{msg['vrsn']}"></script>
+	<script type="text/javascript" src="#{request.contextPath}/resources/assets/js/application.js?#{msg['vrsn']}"></script>
+	
 	<ui:insert name="head"></ui:insert>
 </head>
 <body>
-<script>
-</script>
-<div class="grid center column-wrap justify-space" style="min-height:100vh;width:100%;">
-	<ui:insert name="header"></ui:insert>
-	<div class="grid-cell managed-width">
-		<div class="grid wrappable">
-			<ui:insert name="left-side"></ui:insert>
-			<ui:insert name="center-section"></ui:insert>
-			<ui:insert name="right-side"></ui:insert>
+	<!-- body wrapper starts here -->
+	<div class="off-canvas-wrapper">
+		<div class="off-canvas-wrapper-inner" data-off-canvas-wrapper="true">
+			<div class="off-canvas position-left" id="offCanvasLeft" data-off-canvas = "true">				
+				<button class="close-button" data-close="offCanvasLeft" type="button">
+					<span aria-hidden="true">&amp;times;</span>
+				</button>
+				<ul class="off-canvas-list">
+					<li> <label class="first">Helpers</label> </li>
+					<li> <a  href="index.html">Home</a> </li>
+				</ul>
+				<hr />
+				
+				<ul class="off-canvas-list">
+					<li> <a  data-toggle="not-logedin-modal">Find work</a> </li>
+					<li> <a data-toggle="login-modal">Login</a> </li>
+					<li> <a href="#">My page</a> </li>
+				</ul>				
+			</div>
+			
+			<div class="off-canvas-content" data-off-canvas-content = "true">
+				<!-- content starts here -->				
+				<header id="header">
+					<nav class="top-bar">
+						<!-- menu for small device starts here -->
+						<ul class="menu expanded sticky hide-for-large">
+							<li>
+								<button class="menu-text title" data-open="offCanvasLeft" type="button">
+									<i class="fi-list"></i> Helpers
+								</button>
+							</li>
+						</ul>
+						<!-- menu for small device ends here -->
+						
+						<!-- menu for large device starts here -->
+						<ul class="menu expanded sticky show-for-large">
+							<li>
+								<div class="medium-6">
+									<!-- site title / logo goes here -->
+									<a href="index.html" class="menu-text title">Helpers</a>
+								</div>
+							</li>
+							<li>
+								<!-- menu button goes here -->
+								<div class="text-center">
+									<a data-toggle="not-logedin-modal" class="hlpr-color-success button">Find work</a>
+								</div>
+							</li>
+							<li class="clearfix">
+								<!-- menu button goes here -->
+								<a href="#" class="hollow hlpr-color-white button float-right">My page</a>
+								<a data-toggle="login-modal" class="hollow hlpr-color-white button float-right">Login</a>
+							</li>
+						</ul>
+						<!-- menu for large device ends here -->
+					</nav>
+				 </header>
+				
+				<section id="body-wrapper">
+					<ui:insert name="center-section"></ui:insert>
+				</section>
+				
+				<footer id="footer">
+					<ui:insert name="footer"></ui:insert>
+				</footer>				
+				<!-- content ends here -->
+			</div>
 		</div>
-		<ui:insert name="footer"></ui:insert>		
-		<script type="text/javascript">
-			var Settings = {};
-			Settings.serviceBaseUrl='#{request.contextPath}';				  
-		</script>
 	</div>
-	<ui:include src="footer.xhtml" />
-</div>
-<c:if test="#{!userSessionBean.browserSupported}">
-<style>
-.left-column {display:none!important;}
-.right-column {display:none!important;}
-.upper-menu {display:none!important;}
-.lower-menu {margin-left:150px;}
-</style>
-</c:if>
-
+	<!-- body wrapper ends here -->
+	
+	<!-- modal / reveal login form starts here -->
+		<div class="reveal fast ease-in" id="login-modal" data-reveal="true" data-close-on-click="true" data-animation-in="wiggle" data-animation-out="slide-out-right">
+			<form data-abide="true" novalidate="true">
+				<div class="row">
+					<div class="medium-12 columns">
+						<h4>Login</h4>
+					</div>
+				</div>
+				<div class="row">
+					<div class="medium-12 columns">
+						<div data-abide-error="true" class="alert callout" style="display: none;">
+							<p><i class="fi-alert"></i> Please fill required fields.</p>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="medium-12 columns">
+						<label>Email
+							<input type="text" id="login-email" placeholder="Enter your email" required = "true" />
+							<span class="form-error">
+								It's required.
+							</span>
+						</label>
+					</div>
+				</div>
+				<div class="row">
+					<div class="medium-12 columns">
+						<label>Password
+							<input type="Password" id="login-pss" placeholder="Enter your password" required = "true" />
+							<span class="form-error">
+								It's required.
+							</span>
+						</label>
+					</div>
+				</div>
+				<div class="row">
+					<fieldset class="medium-12 columns">
+						<div class="button-group float-right">
+							<button class="button hlpr-color-info" type="submit">Login</button>
+							<button class="button hlpr-color-alert" data-close="true" aria-label="Close reveal" type="button">Close</button>
+						</div>
+					</fieldset>
+				</div>
+			</form>
+			<button class="close-button" data-close="true" aria-label="Close reveal" type="button">
+				<span aria-hidden="true">&amp;times;</span>
+			</button>
+		</div>
+		<!-- modal / reveal login form ends here -->
+		
+		<!-- modal / reveal error starts here -->
+		<div class="reveal fast ease-in" id="not-logedin-modal" data-reveal="true" data-close-on-click="true" data-animation-in="shake" data-animation-out="fade-out">
+			<div class="text-center">
+				<i class="fi-alert" style="font-size: 5em; color: #999"></i>
+			</div>
+			<div class="text-center">
+				<p>Sorry your are not logged-in. Please login to search job. If you Don't have an account then please sign-up.</p>
+			</div>
+			<div class="button-group float-right">
+				<a class="hlpr-color-info button" id="sign-up-btn" data-close="true" aria-label="Close reveal">Sign-up</a>
+				<a class="hlpr-color-alert button" data-close="true" aria-label="Close reveal">Close</a>
+			</div>
+			<button class="close-button" data-close="true" aria-label="Close reveal" type="button">
+				<span aria-hidden="true">&amp;times;</span>
+			</button>
+		</div>
+		<!-- modal / reveal error here -->
 </body>
 </html>
