@@ -39,7 +39,7 @@ public class JobInterested extends AuditableEntity {
 	@Override
 	public String getObjCode() {
 		// TODO Auto-generated method stub
-		return null;
+		return "jbin";
 	}
 
 	@Override

@@ -1,97 +1,52 @@
-package com.selvesperer.knoeien.data.domain;
+package com.selvesperer.knoeien.web.controllers.model;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.Calendar;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+public class CompanyModel implements Serializable {
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.selvesperer.knoeien.web.controllers.model.CompanyModel;
-
-/**
- * Company Object to store the company data of a user.
- * 
- * @author Mithun <shahinur.bd@gmail.com>
- */
-@Entity
-@Table(name = "company")
-public class Company extends AuditableEntity {
-
-	private static final long serialVersionUID = 817782032520736141L;
-
-	@Column(name = "name", nullable = false, length = 100)
-	private String name;
-
-	@Column(name = "description", length = 250)
-	private String description;
-
-	@Column(name = "url", length = 250)
-	private String url;
-
-	@Column(name = "company_category", length = 250)
-	private String companyCategory;
-
-	@Column(name = "company_sub_category", length = 150)
-	private String companySubCategory;
-
-	@Column(name = "city", length = 150)
-	private String city;
-
-	@Column(name = "state", length = 100)
-	private String state;
-
-	@Column(name = "country", length = 3)
-	private String country;
-
-	@Column(name = "gps_location", length = 200)
-	private String gpsLocation;
-
-	@Column(name = "origin", length = 100)
-	private String origin;
-
-	@Column(name = "is_verified")
-	private boolean isVerified = false;
-
-	@Column(name = "is_active")
-	private boolean isActive = false;
-
-	@Column(name = "is_live")
-	private boolean isLive = false;
-
-	@Column(name = "license_count")
-	private int licenseCount = 0;
-
-	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "account_expiration")
-	@JsonIgnore
-	private Calendar accountExpirationDate;
-
-	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "go_live_date")
-	@JsonIgnore
-	private Calendar goLiveDate;
-
-	@Column(name = "email", length = 100)
-	private String email;
-
-	@Column(name = "cost_per_license")
-	private BigDecimal costPerLicense = BigDecimal.ZERO.setScale(2, RoundingMode.HALF_UP);
-
-	@Column(name = "admin_id", length = 36)
-	private String adminId;
-
-	public Company() {}
+	private static final long serialVersionUID = -4601977999718229676L;
 	
-	public Company(CompanyModel companyModel) {
-		super();
-		this.setName(companyModel.getName());
-	}
-
+	private String name;
+	
+	private String description;
+	
+	private String url;
+	
+	private String companyCategory;
+	
+	private String companySubCategory;
+	
+	private String city;
+	
+	private String state;
+	
+	private String country;
+	
+	private String gpsLocation;
+	
+	private String origin;
+	
+	private boolean isVerified = false;
+	
+	private boolean isActive = false;
+	
+	private boolean isLive = false;
+	
+	private int licenseCount = 0;
+	
+	private Calendar accountExpirationDate;
+	
+	private Calendar goLiveDate;
+	
+	private String email;
+	
+	private BigDecimal costPerLicense = BigDecimal.ZERO.setScale(2, RoundingMode.HALF_UP);
+	
+	private String adminId;
+	
 	public String getName() {
 		return name;
 	}
@@ -244,13 +199,4 @@ public class Company extends AuditableEntity {
 		this.adminId = adminId;
 	}
 
-	@JsonIgnore
-	public String getObjCode() {
-		return "cmpy";
-	}
-
-	@Override
-	public String getCompanyID() {
-		return null;
-	}
 }
