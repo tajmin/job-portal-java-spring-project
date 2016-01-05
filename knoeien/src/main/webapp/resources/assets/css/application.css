@@ -1,5 +1,5 @@
 .hero {
-	background: url("../img/start.png") no-repeat center center;
+	background: url("../images/start.png") no-repeat center center;
 	background-size: cover;
 	background-attachment: fixed;
 	min-height: 100vh;
@@ -221,11 +221,11 @@
 	height: 422px;
 }
 .helper-job-detail .img-tidfordegogdine {
-	background: url("../img/tidfordegogdine.jpg") no-repeat center center;
+	background: url("../images/tidfordegogdine.jpg") no-repeat center center;
 	background-size: cover;
 }
 .helper-job-detail .img-rydde {
-	background: url("../img/rydde.jpg") no-repeat center center;
+	background: url("../images/rydde.jpg") no-repeat center center;
 	background-size: cover;
 }
 .helper-footer {

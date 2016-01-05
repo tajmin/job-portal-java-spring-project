@@ -1,9 +1,5 @@
 !function($) {
 	$(document).foundation();
-	$('div#offCanvasLeft').load('template/left-nav.html');
-	$('header#header').load('template/nav.html');
-	$('section#body-wrapper').load('template/home.html');
-	$('footer#footer').load('template/footer.html');
 	dateSelect();
 	
 	$(window).scroll(function() {
