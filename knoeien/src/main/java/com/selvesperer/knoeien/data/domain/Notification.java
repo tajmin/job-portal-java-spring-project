@@ -58,7 +58,7 @@ public class Notification extends AuditableEntity {
 	@Override
 	public String getObjCode() {
 		// TODO Auto-generated method stub
-		return null;
+		return "ntfn";
 	}
 
 	@Override
