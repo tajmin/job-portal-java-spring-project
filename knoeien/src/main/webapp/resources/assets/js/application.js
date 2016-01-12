@@ -12,8 +12,8 @@
 		}
 	});
 	
-	$('#sign-up-btn').click(function(){
-		$('section#body-wrapper').load('template/register.html');
+	$(document).on('click tap touchstart', '.reveal .modal-close', function() {
+		return $('[data-reveal="data-reveal"]').foundation('close');
 	});
 	
 }(jQuery);

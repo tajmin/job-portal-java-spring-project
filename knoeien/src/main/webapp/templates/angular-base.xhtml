@@ -7,11 +7,11 @@
 	<meta name="viewport" content="width=device-width, height=device-height initial-scale=1.0"/>
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 	<meta name="HandheldFriendly" content="True" />
-	<link rel="icon" href="#{request.contextPath}/resources/assets/img/favicon.ico" type="image/x-icon" />
+	<link rel="icon" href="#{request.contextPath}/resources/assets/images/favicon.png" type="image/png" />
 	
-	<link rel="stylesheet" type="text/css" href="#{request.contextPath}/resources/assets/css/foundation/foundation.css?#{msg['vrsn']}" />
-	<link rel="stylesheet" type="text/css" href="#{request.contextPath}/resources/assets/css/foundation/motion-ui.css?#{msg['vrsn']}" />
-	<link rel="stylesheet" type="text/css" href="#{request.contextPath}/resources/assets/css/foundation/foundation-icons.css?#{msg['vrsn']}" />
+	<link rel="stylesheet" type="text/css" href="#{request.contextPath}/resources/assets/css/foundation.css?#{msg['vrsn']}" />
+	<link rel="stylesheet" type="text/css" href="#{request.contextPath}/resources/assets/css/motion-ui.css?#{msg['vrsn']}" />
+	<link rel="stylesheet" type="text/css" href="#{request.contextPath}/resources/assets/css/foundation-icons.css?#{msg['vrsn']}" />
 	<link rel="stylesheet" type="text/css" href="#{request.contextPath}/resources/assets/css/application.css?#{msg['vrsn']}" />
 		
 	<script type="text/javascript" src="#{request.contextPath}/resources/assets/js/head.js?#{msg['vrsn']}"></script>
@@ -28,11 +28,6 @@
 	<script type="text/javascript" src="#{request.contextPath}/resources/angular/js/services/applicationService.js?#{msg['vrsn']}"></script>
 	<script type="text/javascript" src="#{request.contextPath}/resources/angular/js/controllers/applicationCtrl.js?#{msg['vrsn']}"></script>
 	
-	<script type="text/javascript" src="#{request.contextPath}/resources/assets/js/foundation/motion-ui.js?#{msg['vrsn']}"></script>
-	<script type="text/javascript" src="#{request.contextPath}/resources/assets/js/foundation/foundation.js?#{msg['vrsn']}"></script>
-	<script type="text/javascript" src="#{request.contextPath}/resources/assets/js/foundation/what-input.min.js?#{msg['vrsn']}"></script>
-	<script type="text/javascript" src="#{request.contextPath}/resources/assets/js/application.js?#{msg['vrsn']}"></script>
-	
 	<ui:insert name="head"></ui:insert>
 </head>
 <body>
@@ -41,7 +36,7 @@
 		<div class="off-canvas-wrapper-inner" data-off-canvas-wrapper="true">
 			<div class="off-canvas position-left" id="offCanvasLeft" data-off-canvas = "true">				
 				<button class="close-button" data-close="offCanvasLeft" type="button">
-					<span aria-hidden="true">&amp;times;</span>
+					<span aria-hidden="true">&#215;</span>
 				</button>
 				<ul class="off-canvas-list">
 					<li> <label class="first">Helpers</label> </li>
@@ -107,77 +102,13 @@
 	</div>
 	<!-- body wrapper ends here -->
 	
-	<!-- modal / reveal login form starts here -->
-		<div class="reveal fast ease-in" id="login-modal" data-reveal="true" data-close-on-click="true" data-animation-in="wiggle" data-animation-out="slide-out-right">
-			<form data-abide="true" novalidate="true">
-				<div class="row">
-					<div class="medium-12 columns">
-						<h4>Login</h4>
-					</div>
-				</div>
-				<div class="row">
-					<div class="medium-12 columns">
-						<div data-abide-error="true" class="alert callout" style="display: none;">
-							<p><i class="fi-alert"></i> Please fill required fields.</p>
-						</div>
-					</div>
-				</div>
-				<div class="row">
-					<div class="medium-12 columns">
-						<label>Email
-							<input type="text" id="login-email" placeholder="Enter your email" required = "true" />
-							<span class="form-error">
-								It's required.
-							</span>
-						</label>
-					</div>
-				</div>
-				<div class="row">
-					<div class="medium-12 columns">
-						<label>Password
-							<input type="Password" id="login-pss" placeholder="Enter your password" required = "true" />
-							<span class="form-error">
-								It's required.
-							</span>
-						</label>
-					</div>
-				</div>
-				<div class="row">
-					<fieldset class="medium-12 columns">
-						<div class="button-group float-right">
-							<button class="button hlpr-color-info" type="submit">Login</button>
-							<button class="button hlpr-color-alert" data-close="true" aria-label="Close reveal" type="button">Close</button>
-						</div>
-					</fieldset>
-				</div>
-			</form>
-			<button class="close-button" data-close="true" aria-label="Close reveal" type="button">
-				<span aria-hidden="true">&amp;times;</span>
-			</button>
-		</div>
-		<!-- modal / reveal login form ends here -->
-		
-		<!-- modal / reveal error starts here -->
-		<div class="reveal fast ease-in" id="not-logedin-modal" data-reveal="true" data-close-on-click="true" data-animation-in="shake" data-animation-out="fade-out">
-			<div class="text-center">
-				<i class="fi-alert" style="font-size: 5em; color: #999"></i>
-			</div>
-			<div class="text-center">
-				<p>Sorry your are not logged-in. Please login to search job. If you Don't have an account then please sign-up.</p>
-			</div>
-			<div class="button-group float-right">
-				<a class="hlpr-color-info button" id="sign-up-btn" data-close="true" aria-label="Close reveal">Sign-up</a>
-				<a class="hlpr-color-alert button" data-close="true" aria-label="Close reveal">Close</a>
-			</div>
-			<button class="close-button" data-close="true" aria-label="Close reveal" type="button">
-				<span aria-hidden="true">&amp;times;</span>
-			</button>
-		</div>
-		<!-- modal / reveal error here -->
-		
-		<script type="text/javascript">
-			var Settings = {};
-			Settings.serviceBaseUrl='#{request.contextPath}';			
-		</script>
+	<script type="text/javascript" src="#{request.contextPath}/resources/assets/js/foundation/motion-ui.js?#{msg['vrsn']}"></script>
+	<script type="text/javascript" src="#{request.contextPath}/resources/assets/js/foundation/foundation.js?#{msg['vrsn']}"></script>
+	<script type="text/javascript" src="#{request.contextPath}/resources/assets/js/foundation/what-input.min.js?#{msg['vrsn']}"></script>
+	<script type="text/javascript" src="#{request.contextPath}/resources/assets/js/application.js?#{msg['vrsn']}"></script>
+	<script type="text/javascript">
+		var Settings = {};
+		Settings.serviceBaseUrl='#{request.contextPath}';			
+	</script>
 </body>
 </html>
