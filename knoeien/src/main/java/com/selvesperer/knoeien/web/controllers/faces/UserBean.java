@@ -5,11 +5,9 @@ import java.io.Serializable;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
-
 import org.omnifaces.util.Messages;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import com.selvesperer.knoeien.service.UserService;
 import com.selvesperer.knoeien.spring.utils.SpringBeanFactory;
 import com.selvesperer.knoeien.web.controllers.model.UserModel;

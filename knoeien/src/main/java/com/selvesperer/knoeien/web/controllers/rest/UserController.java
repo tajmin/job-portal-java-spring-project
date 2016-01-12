@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.selvesperer.knoeien.data.domain.User;
+import com.selvesperer.knoeien.emails.ActivationEmail;
+import com.selvesperer.knoeien.service.EmailService;
 import com.selvesperer.knoeien.service.UserService;
 import com.selvesperer.knoeien.spring.utils.SpringBeanFactory;
 import com.selvesperer.knoeien.web.controllers.model.RestResponse;
@@ -41,6 +43,9 @@ public class UserController extends AbstractController implements Serializable {
 		try {
 			UserService userService = SpringBeanFactory.getBean(UserService.class);
 			user = userService.saveUser(userModel);
+			
+			EmailService emailService = SpringBeanFactory.getBean(EmailService.class);
+			emailService.sendEmail(new ActivationEmail(user, "123456"));
 		} catch (Exception ex) {
 			Messages.addGlobalError(ex.getMessage());
 		}
