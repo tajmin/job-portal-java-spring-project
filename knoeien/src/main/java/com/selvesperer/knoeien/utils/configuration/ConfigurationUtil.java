@@ -56,7 +56,7 @@ public class ConfigurationUtil {
 	}	
 	
 	public static String getProfileName() {
-		String profileName = System.getProperty("profile.name");
+		String profileName = "dev"; //System.getProperty("profile.name");
 		profileName = profileName == null ? DEFAULT_PROFILE_NAME : profileName;
 		return profileName;
 	}
