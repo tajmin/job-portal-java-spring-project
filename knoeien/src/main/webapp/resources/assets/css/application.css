@@ -41,7 +41,7 @@
 	-o-transition: background-color 300ms ease-in;
 }
 .top-bar .menu.top-bar-color {
-	background-color: rgba(0,0,0,0.6) !important;
+	background-color: rgba(43,42,41,0.6) !important;
 }
 .top-bar, .top-bar ul {
     background-color: rgba(0,0,0,0);
@@ -99,7 +99,7 @@
 	text-align: center;
 }
 .off-canvas-wrapper, .off-canvas{
-	background-color: #2b2a29;
+	background-color: rgba(43,42,41,0.9);		/* #2b2a29 */
 }
 .off-canvas {
 	padding: 15px 0;
@@ -261,7 +261,8 @@
 	margin-top: -10px;
 }
 .wrapper-content {
-	padding-top: 22vh;
+	margin-top: 82px;
+	padding: 50px 0;
 }
 /* Helper Colours Start */
 .hlpr-color-info {
@@ -371,6 +372,9 @@
 	.button.wide-x{
 		padding: 0.80em 3em;
 	}
+	.wrapper-content {
+		margin-top: 64px;
+	}
 }
 /* Small only */
 @media screen and (max-width: 39.9375em) {
@@ -385,6 +389,9 @@
 	}
 	[class*="helper-"] h3 {
 		font-size: 1.6rem;
+	}
+	.wrapper-content {
+		margin-top: 70px;
 	}
 }
 /* Medium only */

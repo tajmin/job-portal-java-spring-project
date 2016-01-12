@@ -1,0 +1,119 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition template="templates/angular-template.xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core">
+
+	<ui:define name="content">
+		<div class="row wrapper-content">
+			<div class="medium-7 medium-centered columns">
+				<!-- Foundation "abide" plug-in used for validation  -->
+				<form data-abide="data-abide" novalidate="novalidate">
+					<div class="row">
+						<div class="medium-12 columns text-center">
+							<h2>Sign-up</h2>
+						</div>
+					</div>
+					<div class="row">
+						<div data-abide-error="data-abide-error" class="medium-12 columns alert callout" style="display: none;">
+							<p><i class="fi-alert"></i> Please fill required="required" fields.</p>
+						</div>
+					</div>
+					<div class="row">
+						<div class="medium-6 columns">
+							<label>First Name
+								<input type="text" id="first-name" placeholder="Write your first name" required="required" />
+								<span class="form-error">
+									It's required.
+								</span>
+							</label>
+						</div>
+						<div class="medium-6 columns">
+							<label>Surname
+								<input type="text" id="surname" placeholder="Write your surname" />
+							</label>
+						</div>
+					</div>
+					<div class="row">
+						<div class="medium-4 columns">
+							<label>Date of birth
+								<select class="day-select" id="date-day" required="required">
+									<option value="" disabled="disabled" selected="selected">Day</option>
+								</select>
+								<span class="form-error">
+									It's required".
+								</span>
+							</label>
+						</div>
+						<div class="medium-4 columns">
+							<label><span class="hide-for-small-only">&nbsp;</span>
+								<select class="full-month-select" id="date-month" required="required">
+									<option value="" disabled="disabled" selected="selected">Month</option>
+								</select>
+								<span class="form-error">
+									It's required.
+								</span>
+							</label>
+						</div>
+						<div class="medium-4 columns">
+							<label><span class="hide-for-small-only">&nbsp;</span>
+								<select class="year-select" id="date-year" required="required">
+									<option value="" disabled="disabled" selected="selected">Year</option>
+								</select>
+								<span class="form-error">
+									It's required.
+								</span>
+							</label>
+						</div>
+					</div>
+					<div class="row">
+						<fieldset class="medium-4 columns">
+							<legend>Gender</legend>
+							<input type="radio" name="gender" value="male" id="male" required="required" /><label for="male">Male</label>
+							<input type="radio" name="gender" value="female" id="female" /><label for="female">Female</label>
+						</fieldset>
+						<div class="medium-8 columns">
+							<label>Email
+								<input type="text" id="email" placeholder="Provide your email" required="required" />
+								<span class="form-error">
+									It's required.
+								</span>
+							</label>
+						</div>
+					</div>
+					<div class="row">
+						<div class="medium-6 columns">
+							<label>Password required="required"
+								<input type="password" id="password" placeholder="Enter a password" aria-describedby="password-help-text" required="required" />
+								<span class="form-error">
+									It's required.
+								</span>
+							</label>
+						</div>
+						<div class="medium-6 columns">
+							<label>Confirm Password
+								<input type="password" placeholder="Retype your password" required="required" pattern="alpha_numeric" data-equalto="password" />
+								<span class="form-error">
+									Passwords do not match!
+								</span>
+							</label>
+						</div>
+						<div class="small-12 columns">
+							<p class="help-text" id="password-help-text">Password must be at least 8 characters long.</p>
+						</div>
+					</div>
+					<div class="row">
+						<fieldset class="medium-12 columns">
+							<div class="button-group float-right">
+								<button class="button hlpr-color-info" type="submit">Sign up</button>
+								<a class="button hlpr-color-alert" href="index.xhtml">Cancel</a>
+							</div>
+						</fieldset>
+					</div>
+				</form>
+				<!-- Sign up form ends here -->
+			</div>
+		</div>
+		
+		<ui:insert name="login-modal"></ui:insert>
+		<ui:insert name="forgot-password-modal"></ui:insert>
+	</ui:define>
+</ui:composition>
