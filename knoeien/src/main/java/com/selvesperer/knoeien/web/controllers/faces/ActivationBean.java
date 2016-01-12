@@ -1,5 +1,6 @@
 package com.selvesperer.knoeien.web.controllers.faces;
 
+import java.io.IOException;
 import java.io.Serializable;
 
 import javax.annotation.PostConstruct;
@@ -7,10 +8,12 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 
 import org.apache.commons.lang3.StringUtils;
+import org.omnifaces.util.Faces;
 import org.omnifaces.util.Messages;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.selvesperer.knoeien.data.domain.User;
 import com.selvesperer.knoeien.service.UserService;
 import com.selvesperer.knoeien.spring.utils.SpringBeanFactory;
 
@@ -27,15 +30,32 @@ public class ActivationBean implements Serializable {
 	
 	@PostConstruct
 	public void init() {
-		if (log.isDebugEnabled()) log.debug("@Activation bean");
-		
-		if(StringUtils.isBlank(getKey())) {
-			Messages.addGlobalInfo("This is not a valid key. Please use valid key and try agian");
-			return;
-		}	
-		UserService userService = SpringBeanFactory.getBean(UserService.class);
+		if (log.isDebugEnabled()) log.debug("@Init");
 	}
 
+	public void initActivation() {
+		if (log.isDebugEnabled()) log.debug("@Activation bean");		
+		try {
+			if(StringUtils.isBlank(getKey())) {
+				Messages.addGlobalInfo("This is not a valid key. Please use valid key and try agian");
+				return;
+			}
+			UserService userService = SpringBeanFactory.getBean(UserService.class);
+			User user = userService.findUserByResetToken(this.getKey());
+			if(user  == null) {
+				Messages.addGlobalInfo("This is not a valid key.");
+				return;
+			}
+			
+			userService.activeUser(user);
+			Faces.redirect("home");
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+	
 	public String getKey() {
 		return key;
 	}

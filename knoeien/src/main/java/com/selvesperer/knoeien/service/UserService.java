@@ -14,4 +14,6 @@ public interface UserService {
 	public User saveUser(UserModel userModel);
 	
 	public User resetPassword(String userId, String password, String resetToken);
+	
+	public User activeUser(User user);
 }

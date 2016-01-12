@@ -62,4 +62,10 @@ public class UserServiceImpl implements UserService {
 		u = userRepository.saveAndFlush(u);
 		return u;
 	}
+	
+	public User activeUser(User user) {
+		user.setActive(true);
+		user = userRepository.saveAndFlush(user);
+		return user;
+	}
 }
