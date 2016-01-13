@@ -29,17 +29,29 @@ public class Company extends AuditableEntity {
 
 	@Column(name = "description", length = 250)
 	private String description;
-
+	
+	@Column(name = "contact_number", length = 100)
+	private String contactNumber;
+	
+	@Column(name = "email", length = 100)
+	private String email;
+	
 	@Column(name = "url", length = 250)
 	private String url;
-
-	@Column(name = "company_category", length = 250)
-	private String companyCategory;
-
-	@Column(name = "company_sub_category", length = 150)
-	private String companySubCategory;
-
-	@Column(name = "city", length = 150)
+	
+	@Column(name = "address_line_1", length = 100)
+	private String addressLine1;
+	
+	@Column(name = "address_line_2", length = 100)
+	private String addressLine2;
+	
+	@Column(name = "address_line_3", length = 100)
+	private String addressLine3;
+	
+	@Column(name = "zip", length = 10)
+	private String zip;
+	
+	@Column(name = "city", length = 100)
 	private String city;
 
 	@Column(name = "state", length = 100)
@@ -47,49 +59,44 @@ public class Company extends AuditableEntity {
 
 	@Column(name = "country", length = 3)
 	private String country;
-
-	@Column(name = "gps_location", length = 200)
-	private String gpsLocation;
-
-	@Column(name = "origin", length = 100)
-	private String origin;
-
-	@Column(name = "is_verified")
-	private boolean isVerified = false;
-
-	@Column(name = "is_active")
-	private boolean isActive = false;
-
-	@Column(name = "is_live")
-	private boolean isLive = false;
-
-	@Column(name = "license_count")
-	private int licenseCount = 0;
-
-	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "account_expiration")
-	@JsonIgnore
-	private Calendar accountExpirationDate;
-
-	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "go_live_date")
-	@JsonIgnore
-	private Calendar goLiveDate;
-
-	@Column(name = "email", length = 100)
-	private String email;
-
-	@Column(name = "cost_per_license")
-	private BigDecimal costPerLicense = BigDecimal.ZERO.setScale(2, RoundingMode.HALF_UP);
-
-	@Column(name = "admin_id", length = 36)
-	private String adminId;
-
-	public Company() {}
 	
-	public Company(CompanyModel companyModel) {
+	@Column(name = "facebook", length = 100)
+	private String facebook;
+	
+	@Column(name = "googleplus", length = 100)
+	private String googlePlus;
+	
+	@Column(name = "linkedin", length = 100)
+	private String linkedin;
+	
+	@Column(name = "latitude", nullable = false)
+	private BigDecimal latitude = BigDecimal.ZERO.setScale(5, RoundingMode.HALF_UP);
+	
+	@Column(name = "longitude", nullable = false)
+	private BigDecimal longitude = BigDecimal.ZERO.setScale(5, RoundingMode.HALF_UP);
+
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name = "recent_job_period")
+	@JsonIgnore
+	private Calendar recentJobPeriod;
+	
+	@Column(name = "best_job_amount", nullable = false)
+	private BigDecimal bestJobAmount = BigDecimal.ZERO.setScale(2, RoundingMode.HALF_UP);
+
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name = "shortest_time_job_period")
+	@JsonIgnore
+	private Calendar shortestTimeJobPeriod;
+	
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name = "earliest_date_job_period")
+	@JsonIgnore
+	private Calendar earliestDateJobPeriod;
+
+	
+	
+	public Company() {
 		super();
-		this.setName(companyModel.getName());
 	}
 
 	public String getName() {
@@ -103,9 +110,25 @@ public class Company extends AuditableEntity {
 	public String getDescription() {
 		return description;
 	}
-
+	
 	public void setDescription(String description) {
 		this.description = description;
+	}
+	
+	public String getContactNumber() {
+		return contactNumber;
+	}
+
+	public void setContactNumber(String contactNumber) {
+		this.contactNumber = contactNumber;
+	}
+	
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
 	public String getUrl() {
@@ -116,22 +139,38 @@ public class Company extends AuditableEntity {
 		this.url = url;
 	}
 
-	public String getCompanyCategory() {
-		return companyCategory;
+	public String getAddressLine1() {
+		return addressLine1;
 	}
 
-	public void setCompanyCategory(String companyCategory) {
-		this.companyCategory = companyCategory;
+	public void setAddressLine1(String addressLine1) {
+		this.addressLine1 = addressLine1;
+	}
+	
+	public String getAddressLine2() {
+		return addressLine2;
 	}
 
-	public String getCompanySubCategory() {
-		return companySubCategory;
+	public void setAddressLine2(String addressLine2) {
+		this.addressLine2 = addressLine2;
+	}
+	
+	public String getAddressLine3() {
+		return addressLine3;
 	}
 
-	public void setCompanySubCategory(String companySubCategory) {
-		this.companySubCategory = companySubCategory;
+	public void setAddressLine3(String addressLine3) {
+		this.addressLine3 = addressLine3;
+	}
+	
+	public String getZip() {
+		return zip;
 	}
 
+	public void setZip(String zip) {
+		this.zip = zip;
+	}
+	
 	public String getCity() {
 		return city;
 	}
@@ -155,94 +194,79 @@ public class Company extends AuditableEntity {
 	public void setCountry(String country) {
 		this.country = country;
 	}
-
-	public String getGpsLocation() {
-		return gpsLocation;
+	
+	public BigDecimal getLatitude() {
+		return latitude;
 	}
 
-	public void setGpsLocation(String gpsLocation) {
-		this.gpsLocation = gpsLocation;
+	public void setLatitude(BigDecimal latitude) {
+		this.latitude = latitude;
+	}
+	
+	public BigDecimal getLongitude() {
+		return longitude;
 	}
 
-	public String getOrigin() {
-		return origin;
+	public void setLongitude(BigDecimal longitude) {
+		this.longitude = longitude;
 	}
 
-	public void setOrigin(String origin) {
-		this.origin = origin;
+	public String getFacebook() {
+		return facebook;
 	}
 
-	public boolean isVerified() {
-		return isVerified;
+	public void setFacebook(String facebook) {
+		this.facebook = facebook;
 	}
 
-	public void setVerified(boolean isVerified) {
-		this.isVerified = isVerified;
+	public String getGooglePlus() {
+		return googlePlus;
 	}
 
-	public boolean isActive() {
-		return isActive;
+	public void setGooglePlus(String googlePlus) {
+		this.googlePlus = googlePlus;
+	}
+	
+	public String getLinkedin() {
+		return linkedin;
 	}
 
-	public void setActive(boolean isActive) {
-		this.isActive = isActive;
+	public void setLinkedin(String linkedin) {
+		this.linkedin = linkedin;
 	}
 
-	public boolean isLive() {
-		return isLive;
+	public Calendar getRecentJobPeriod() {
+		return recentJobPeriod;
 	}
 
-	public void setLive(boolean isLive) {
-		this.isLive = isLive;
+	public void setRecentJobPeriod(Calendar recentJobPeriod) {
+		this.recentJobPeriod = recentJobPeriod;
 	}
 
-	public int getLicenseCount() {
-		return licenseCount;
+	public BigDecimal getBestJobAmount() {
+		return bestJobAmount;
 	}
 
-	public void setLicenseCount(int licenseCount) {
-		this.licenseCount = licenseCount;
+	public void setBestJobAmount(BigDecimal bestJobAmount) {
+		this.bestJobAmount = bestJobAmount;
+	}
+	
+	public Calendar getShortestTimeJobPeriod() {
+		return shortestTimeJobPeriod;
 	}
 
-	public Calendar getAccountExpirationDate() {
-		return accountExpirationDate;
+	public void setShortestTimeJobPeriod(Calendar shortestTimeJobPeriod) {
+		this.shortestTimeJobPeriod = shortestTimeJobPeriod;
+	}
+	
+	public Calendar getEarliestDateJobPeriod() {
+		return earliestDateJobPeriod;
 	}
 
-	public void setAccountExpirationDate(Calendar accountExpirationDate) {
-		this.accountExpirationDate = accountExpirationDate;
+	public void setEarliestDateJobPeriod(Calendar earliestDateJobPeriod) {
+		this.earliestDateJobPeriod = earliestDateJobPeriod;
 	}
 
-	public Calendar getGoLiveDate() {
-		return goLiveDate;
-	}
-
-	public void setGoLiveDate(Calendar goLiveDate) {
-		this.goLiveDate = goLiveDate;
-	}
-
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
-	public BigDecimal getCostPerLicense() {
-		return costPerLicense;
-	}
-
-	public void setCostPerLicense(BigDecimal costPerLicense) {
-		this.costPerLicense = costPerLicense;
-	}
-
-	public String getAdminId() {
-		return adminId;
-	}
-
-	public void setAdminId(String adminId) {
-		this.adminId = adminId;
-	}
 
 	@JsonIgnore
 	public String getObjCode() {

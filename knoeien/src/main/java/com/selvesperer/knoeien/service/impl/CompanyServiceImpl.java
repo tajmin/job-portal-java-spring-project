@@ -30,9 +30,31 @@ public class CompanyServiceImpl implements CompanyService {
 	
 	@Override
 	public Company saveCompany(CompanyModel companyModel) {		
-		return companyRepository.saveAndFlush(new Company(companyModel));
+		Company company = new Company();
+		company.setName(companyModel.getName());
+		company.setDescription(companyModel.getDescription());
+		company.setContactNumber(companyModel.getContactNumber());
+		company.setEmail(companyModel.getEmail());
+		company.setUrl(companyModel.getUrl());
+		company.setAddressLine1(companyModel.getAddressLine1());
+		company.setAddressLine2(companyModel.getAddressLine2());
+		company.setAddressLine3(companyModel.getAddressLine3());
+		company.setZip(companyModel.getZip());
+		company.setCity(companyModel.getCity());
+		company.setState(companyModel.getState());
+		company.setCountry(companyModel.getCountry());
+		company.setLatitude(companyModel.getLatitude());
+		company.setLongitude(companyModel.getLongitude());
+		company.setFacebook(companyModel.getFacebook());
+		company.setGooglePlus(companyModel.getGooglePlus());
+		company.setLinkedin(companyModel.getLinkedin());
+		company.setRecentJobPeriod(companyModel.getRecentJobPeriod());
+		company.setBestJobAmount(companyModel.getBestJobAmount());
+		company.setShortestTimeJobPeriod(companyModel.getShortestTimeJobPeriod());
+		company.setEarliestDateJobPeriod(companyModel.getEarliestDateJobPeriod());
+		
+		return companyRepository.saveAndFlush(company);
 	}
-
 
 	
 }

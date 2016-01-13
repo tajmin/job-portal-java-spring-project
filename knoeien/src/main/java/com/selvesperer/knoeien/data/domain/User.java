@@ -92,6 +92,7 @@ public class User extends AuditableEntity {
 		this.setPreferredName(userModel.getPreferredName());
 		this.setEmail(userModel.getEmail());
 		this.setPassword(userModel.getPassword());
+		this.setPasswordResetToken(userModel.getPasswordResetToken());
 	}
 	
 	public String getFullName() {					

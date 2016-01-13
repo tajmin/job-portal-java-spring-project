@@ -1,0 +1,161 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition template="../templates/angular-template.xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core">
+	
+	<ui:define name="content">
+		<div ng-controller="CompanyCtrl">
+			<form data-abide="true" novalidate="true">
+				<div class="row">
+					<div class="medium-12 columns">
+						<h4>Company Management</h4>
+					</div>
+				</div>
+				<div class="row">
+					<div class="medium-12 columns">
+						<div data-abide-error="true" class="alert callout" style="display: none;">
+							<p><i class="fi-alert"></i> Please fill required fields.</p>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="medium-6 columns">
+						<label>Company Name
+							<input ng-model="company.name" type="text" id="" placeholder="Enter Company Name" required = "true" />
+							<span class="form-error">
+								It's required.
+							</span>
+						</label>
+					</div>
+					<div class="medium-6 columns">
+						<label>Email
+							<input ng-model="company.email" type="text" id="" placeholder="Enter Company Email" required = "true" />
+							<span class="form-error">
+								It's required.
+							</span>
+						</label>
+					</div>
+				</div>
+				<div class="row">
+					<div class="medium-12 columns">
+						<label>Description
+							<textarea ng-model="company.description" id="" placeholder="Enter Description about company" required = "true" />
+							<span class="form-error">
+								It's required.
+							</span>
+						</label>
+					</div>
+				</div>
+				<div class="row">
+					<div class="medium-6 columns">
+						<label>Contact Number
+							<input ng-model="company.contactNumber" type="text" id="" placeholder="Enter Contact Number" required = "true" />
+							<span class="form-error">
+								It's required.
+							</span>
+						</label>
+					</div>
+					<div class="medium-6 columns">
+						<label>Website
+							<input ng-model="company.url" type="text" id="" placeholder="Enter Website URL" required = "true" />
+							<span class="form-error">
+								It's required.
+							</span>
+						</label>
+					</div>
+					<div class="medium-6 columns">
+						<label>Address Line 1
+							<input ng-model="company.addressLine1" type="text" id="" placeholder="" required = "true" />
+							<span class="form-error">
+								It's required.
+							</span>
+						</label>
+					</div>
+					<div class="medium-6 columns">
+						<label>Address Line 2
+							<input ng-model="company.addressLine2" type="text" id="" placeholder="" required = "true" />
+							<span class="form-error">
+								It's required.
+							</span>
+						</label>
+					</div>
+					<div class="medium-6 columns">
+						<label>Address Line 3
+							<input ng-model="company.addressLine3" type="text" id="" placeholder="" required = "true" />
+							<span class="form-error">
+								It's required.
+							</span>
+						</label>
+					</div>
+					<div class="medium-6 columns">
+						<label>Zip Code
+							<input ng-model="company.zip" type="text" id="" placeholder="" required = "true" />
+							<span class="form-error">
+								It's required.
+							</span>
+						</label>
+					</div>
+					<div class="medium-6 columns">
+						<label>City
+							<input ng-model="company.city" type="text" id="" placeholder="" required = "true" />
+							<span class="form-error">
+								It's required.
+							</span>
+						</label>
+					</div>
+					<div class="medium-6 columns">
+						<label>State
+							<input ng-model="company.state" type="text" id="" placeholder="" required = "true" />
+							<span class="form-error">
+								It's required.
+							</span>
+						</label>
+					</div>
+					<div class="medium-6 columns">
+						<label>Country
+							<input ng-model="company.country" type="text" id="" placeholder="" required = "true" />
+							<span class="form-error">
+								It's required.
+							</span>
+						</label>
+					</div>
+					<div class="medium-6 columns">
+						<label>Facebook URL
+							<input ng-model="company.facebook" type="text" id="" placeholder="" required = "true" />
+							<span class="form-error">
+								It's required.
+							</span>
+						</label>
+					</div>
+					<div class="medium-6 columns">
+						<label>Google+ 
+							<input ng-model="company.googlePlus" type="text" id="" placeholder="" required = "true" />
+							<span class="form-error">
+								It's required.
+							</span>
+						</label>
+					</div>
+					<div class="medium-6 columns">
+						<label>Linkedin Profile URL
+							<input ng-model="company.linkedin" type="text" id="" placeholder="" required = "true" />
+							<span class="form-error">
+								It's required.
+							</span>
+						</label>
+					</div>
+				</div>
+				<div class="row">
+					<fieldset class="medium-12 columns">
+						<div class="button-group float-right">
+							<button class="button hlpr-color-info" type="submit" ng-click="addCompany();">Submit</button>
+							
+						</div>
+					</fieldset>
+				</div>
+			</form>
+			<button class="close-button" data-close="true" aria-label="Close reveal" type="button">
+				<span aria-hidden="true">&amp;times;</span>
+			</button>
+		</div>
+		
+	</ui:define>
+</ui:composition>

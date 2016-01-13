@@ -10,42 +10,46 @@ public class CompanyModel implements Serializable {
 	private static final long serialVersionUID = -4601977999718229676L;
 	
 	private String name;
-	
+
 	private String description;
 	
-	private String url;
-	
-	private String companyCategory;
-	
-	private String companySubCategory;
-	
-	private String city;
-	
-	private String state;
-	
-	private String country;
-	
-	private String gpsLocation;
-	
-	private String origin;
-	
-	private boolean isVerified = false;
-	
-	private boolean isActive = false;
-	
-	private boolean isLive = false;
-	
-	private int licenseCount = 0;
-	
-	private Calendar accountExpirationDate;
-	
-	private Calendar goLiveDate;
+	private String contactNumber;
 	
 	private String email;
 	
-	private BigDecimal costPerLicense = BigDecimal.ZERO.setScale(2, RoundingMode.HALF_UP);
+	private String url;
 	
-	private String adminId;
+	private String addressLine1;
+	
+	private String addressLine2;
+	
+	private String addressLine3;
+	
+	private String zip;
+		
+	private String city;
+	
+	private String state;
+
+	private String country;
+	
+	private String facebook;
+	
+	private String googlePlus;
+	
+	private String linkedin;
+	
+	private BigDecimal latitude = BigDecimal.ZERO.setScale(5, RoundingMode.HALF_UP);
+	
+	private BigDecimal longitude = BigDecimal.ZERO.setScale(5, RoundingMode.HALF_UP);
+
+	private Calendar recentJobPeriod;
+		
+	private BigDecimal bestJobAmount = BigDecimal.ZERO.setScale(2, RoundingMode.HALF_UP);
+
+	private Calendar shortestTimeJobPeriod;
+	
+	private Calendar earliestDateJobPeriod;
 	
 	public String getName() {
 		return name;
@@ -58,9 +62,25 @@ public class CompanyModel implements Serializable {
 	public String getDescription() {
 		return description;
 	}
-
+	
 	public void setDescription(String description) {
 		this.description = description;
+	}
+	
+	public String getContactNumber() {
+		return contactNumber;
+	}
+
+	public void setContactNumber(String contactNumber) {
+		this.contactNumber = contactNumber;
+	}
+	
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
 	public String getUrl() {
@@ -71,22 +91,38 @@ public class CompanyModel implements Serializable {
 		this.url = url;
 	}
 
-	public String getCompanyCategory() {
-		return companyCategory;
+	public String getAddressLine1() {
+		return addressLine1;
 	}
 
-	public void setCompanyCategory(String companyCategory) {
-		this.companyCategory = companyCategory;
+	public void setAddressLine1(String addressLine1) {
+		this.addressLine1 = addressLine1;
+	}
+	
+	public String getAddressLine2() {
+		return addressLine2;
 	}
 
-	public String getCompanySubCategory() {
-		return companySubCategory;
+	public void setAddressLine2(String addressLine2) {
+		this.addressLine2 = addressLine2;
+	}
+	
+	public String getAddressLine3() {
+		return addressLine3;
 	}
 
-	public void setCompanySubCategory(String companySubCategory) {
-		this.companySubCategory = companySubCategory;
+	public void setAddressLine3(String addressLine3) {
+		this.addressLine3 = addressLine3;
+	}
+	
+	public String getZip() {
+		return zip;
 	}
 
+	public void setZip(String zip) {
+		this.zip = zip;
+	}
+	
 	public String getCity() {
 		return city;
 	}
@@ -110,93 +146,77 @@ public class CompanyModel implements Serializable {
 	public void setCountry(String country) {
 		this.country = country;
 	}
-
-	public String getGpsLocation() {
-		return gpsLocation;
+	
+	public BigDecimal getLatitude() {
+		return latitude;
 	}
 
-	public void setGpsLocation(String gpsLocation) {
-		this.gpsLocation = gpsLocation;
+	public void setLatitude(BigDecimal latitude) {
+		this.latitude = latitude;
+	}
+	
+	public BigDecimal getLongitude() {
+		return longitude;
 	}
 
-	public String getOrigin() {
-		return origin;
+	public void setLongitude(BigDecimal longitude) {
+		this.longitude = longitude;
 	}
 
-	public void setOrigin(String origin) {
-		this.origin = origin;
+	public String getFacebook() {
+		return facebook;
 	}
 
-	public boolean isVerified() {
-		return isVerified;
+	public void setFacebook(String facebook) {
+		this.facebook = facebook;
 	}
 
-	public void setVerified(boolean isVerified) {
-		this.isVerified = isVerified;
+	public String getGooglePlus() {
+		return googlePlus;
 	}
 
-	public boolean isActive() {
-		return isActive;
+	public void setGooglePlus(String googlePlus) {
+		this.googlePlus = googlePlus;
+	}
+	
+	public String getLinkedin() {
+		return linkedin;
 	}
 
-	public void setActive(boolean isActive) {
-		this.isActive = isActive;
+	public void setLinkedin(String linkedin) {
+		this.linkedin = linkedin;
 	}
 
-	public boolean isLive() {
-		return isLive;
+	public Calendar getRecentJobPeriod() {
+		return recentJobPeriod;
 	}
 
-	public void setLive(boolean isLive) {
-		this.isLive = isLive;
+	public void setRecentJobPeriod(Calendar recentJobPeriod) {
+		this.recentJobPeriod = recentJobPeriod;
 	}
 
-	public int getLicenseCount() {
-		return licenseCount;
+	public BigDecimal getBestJobAmount() {
+		return bestJobAmount;
 	}
 
-	public void setLicenseCount(int licenseCount) {
-		this.licenseCount = licenseCount;
+	public void setBestJobAmount(BigDecimal bestJobAmount) {
+		this.bestJobAmount = bestJobAmount;
+	}
+	
+	public Calendar getShortestTimeJobPeriod() {
+		return shortestTimeJobPeriod;
 	}
 
-	public Calendar getAccountExpirationDate() {
-		return accountExpirationDate;
+	public void setShortestTimeJobPeriod(Calendar shortestTimeJobPeriod) {
+		this.shortestTimeJobPeriod = shortestTimeJobPeriod;
+	}
+	
+	public Calendar getEarliestDateJobPeriod() {
+		return earliestDateJobPeriod;
 	}
 
-	public void setAccountExpirationDate(Calendar accountExpirationDate) {
-		this.accountExpirationDate = accountExpirationDate;
-	}
-
-	public Calendar getGoLiveDate() {
-		return goLiveDate;
-	}
-
-	public void setGoLiveDate(Calendar goLiveDate) {
-		this.goLiveDate = goLiveDate;
-	}
-
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
-	public BigDecimal getCostPerLicense() {
-		return costPerLicense;
-	}
-
-	public void setCostPerLicense(BigDecimal costPerLicense) {
-		this.costPerLicense = costPerLicense;
-	}
-
-	public String getAdminId() {
-		return adminId;
-	}
-
-	public void setAdminId(String adminId) {
-		this.adminId = adminId;
+	public void setEarliestDateJobPeriod(Calendar earliestDateJobPeriod) {
+		this.earliestDateJobPeriod = earliestDateJobPeriod;
 	}
 
 }
