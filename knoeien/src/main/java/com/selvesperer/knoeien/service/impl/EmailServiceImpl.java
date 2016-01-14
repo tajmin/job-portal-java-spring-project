@@ -2,8 +2,20 @@ package com.selvesperer.knoeien.service.impl;
 
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.Properties;
 
 import javax.ejb.Asynchronous;
+import javax.mail.Address;
+import javax.mail.BodyPart;
+import javax.mail.Message;
+import javax.mail.Multipart;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeBodyPart;
+import javax.mail.internet.MimeMessage;
+import javax.mail.internet.MimeMultipart;
 
 import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.slf4j.Logger;
@@ -16,8 +28,8 @@ import com.github.jknack.handlebars.io.ClassPathTemplateLoader;
 import com.selvesperer.knoeien.emails.AbstractEmail;
 import com.selvesperer.knoeien.service.EmailService;
 import com.selvesperer.knoeien.utils.HandlebarsCustomHelper;
-
-import net.sf.ehcache.search.SearchException;
+import com.selvesperer.knoeien.utils.configuration.ConfigurationUtil;
+import com.sun.mail.util.MailSSLSocketFactory;
 
 /**
  * @author Mithun <shahinur.bd@gmail.com>
@@ -28,21 +40,67 @@ public class EmailServiceImpl implements EmailService {
 	private static Logger log = LoggerFactory.getLogger(EmailService.class);
 	private static Handlebars handleBars;
 
-	
 	@Override
 	@Asynchronous
 	public void sendEmail(AbstractEmail abstractEmail) {
-		
+
 		try {
-			if (log.isDebugEnabled())log.debug("Sending an immediate email");
+			if (log.isDebugEnabled())
+				log.debug("Sending an immediate email");
 			String text = this.constructEmail(abstractEmail);
-			this._sendEmail( text );
+			this.sendDirect(abstractEmail, text);
 		} catch (Throwable ex) {
 			if (log.isErrorEnabled()) {
 				log.error("Exception happned @saveEmail() " + ExceptionUtils.getStackTrace(ex));
 			}
 		}
-	}	
+	}
+
+	public boolean sendDirect(AbstractEmail abstractEmail, String text) {
+		try {
+			Properties props = new Properties();
+			props.put("mail.smtp.host", ConfigurationUtil.config().getString("host"));
+			props.put("mail.smtp.auth", "true");
+			props.put("mail.smtp.port", ConfigurationUtil.config().getString("port"));
+			props.put("mail.smtp.ssl.enable", "true");
+			MailSSLSocketFactory socketFactory = new MailSSLSocketFactory();
+			socketFactory.setTrustAllHosts(true);
+
+			props.put("mail.smtp.connectiontimeout", 1000 * 13);
+			props.put("mail.smtp.timeout", 1000 * 13);
+
+			Session session = Session.getInstance(props, new javax.mail.Authenticator() {
+				@Override
+				protected PasswordAuthentication getPasswordAuthentication() {
+					return new PasswordAuthentication(ConfigurationUtil.config().getString("username"),
+							ConfigurationUtil.config().getString("password"));
+				}
+			});
+
+			// Message _message = new MimeMessage(session);
+			Message _message = new MimeMessage(session);
+			Address faddress = new InternetAddress(ConfigurationUtil.config().getString("defaultFrom"));
+			Address taddress = new InternetAddress(abstractEmail.getUser().getEmail());
+
+			_message.setFrom(faddress);
+			_message.setRecipient(Message.RecipientType.TO, taddress);
+
+			_message.setSubject(abstractEmail.getSubject());
+			Multipart multipart = new MimeMultipart("alternative");
+			BodyPart htmlBodyPart = new MimeBodyPart();
+
+			htmlBodyPart.setContent(text, "text/html");
+			multipart.addBodyPart(htmlBodyPart);
+
+			_message.setContent(multipart);
+
+			Transport.send(_message);
+			return true;
+		} catch (Throwable ex) {
+			log.debug("Post:Run:: stopped causes " + ExceptionUtils.getMessage(ex));
+		}
+		return false;
+	}
 
 	private String constructEmail(AbstractEmail source) {
 		HashMap<String, String> vals = new HashMap<>();
@@ -69,11 +127,11 @@ public class EmailServiceImpl implements EmailService {
 			Template template = handlebars.compile(source.getEmailTemplateName());
 			messageText = template.apply(hbProps);
 		} catch (IOException e) {
-			//throw new SearchException("email.templateinvalid");
+			// throw new SearchException("email.templateinvalid");
 			e.printStackTrace();
 		}
-		
-		return messageText;		
+
+		return messageText;
 	}
 
 	private Handlebars getDefaultHandlebars() {
@@ -86,13 +144,4 @@ public class EmailServiceImpl implements EmailService {
 		}
 		return handleBars;
 	}
-	
-	private boolean _sendEmail(String messageText) {
-        try {
-            System.out.println("::::::::::::::::::::"+messageText);
-        } catch (Throwable ex) {
-            log.debug("Post:Run:: stopped causes " + ExceptionUtils.getMessage(ex));
-        }
-        return false;
-    }
 }

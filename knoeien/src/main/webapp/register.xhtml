@@ -9,12 +9,7 @@
 				<form data-abide="data-abide" novalidate="novalidate">
 					<div class="row">
 						<div class="medium-12 columns text-center">
-							<h2>Sign-up</h2>
-						</div>
-					</div>
-					<div class="row">
-						<div data-abide-error="data-abide-error" class="medium-12 columns alert callout" style="display: none;">
-							<p><i class="fi-alert"></i> Please fill required="required" fields.</p>
+							<h2>Regiester your user here</h2>
 						</div>
 					</div>
 					<div class="row">
@@ -22,13 +17,16 @@
 							<label>First Name
 								<input ng-model="user.firstName" type="text" id="first-name" placeholder="Write your first name" required="required" />
 								<span class="form-error">
-									It's required.
+									First Name is required.
 								</span>
 							</label>
 						</div>
 						<div class="medium-6 columns">
-							<label>Surname
-								<input ng-model="user.lastName" type="text" id="surname" placeholder="Write your surname" />
+							<label>Last name
+								<input ng-model="user.lastName" type="text" id="lastname" placeholder="Write your lastname" />
+								<span class="form-error">
+									Last Name is required.
+								</span>
 							</label>
 						</div>
 					</div>
@@ -39,7 +37,7 @@
 									<option value="" disabled="disabled" selected="selected">Day</option>
 								</select>
 								<span class="form-error">
-									It's required".
+									Day is required.
 								</span>
 							</label>
 						</div>
@@ -49,7 +47,7 @@
 									<option value="" disabled="disabled" selected="selected">Month</option>
 								</select>
 								<span class="form-error">
-									It's required.
+									Month is required.
 								</span>
 							</label>
 						</div>
@@ -59,32 +57,34 @@
 									<option value="" disabled="disabled" selected="selected">Year</option>
 								</select>
 								<span class="form-error">
-									It's required.
+									Year is required.
 								</span>
 							</label>
 						</div>
 					</div>
 					<div class="row">
+						<!-- 
 						<fieldset class="medium-4 columns">
 							<legend>Gender</legend>
 							<input type="radio" name="gender" value="male" id="male" required="required" /><label for="male">Male</label>
 							<input type="radio" name="gender" value="female" id="female" /><label for="female">Female</label>
 						</fieldset>
-						<div class="medium-8 columns">
+						 -->
+						<div class="medium-12 columns">
 							<label>Email
 								<input ng-model="user.email" type="text" id="email" placeholder="Provide your email" required="required" />
 								<span class="form-error">
-									It's required.
+									Email is required.
 								</span>
 							</label>
 						</div>
 					</div>
 					<div class="row">
 						<div class="medium-6 columns">
-							<label>Password required="required"
+							<label>Password
 								<input ng-model="user.password" type="password" id="password" placeholder="Enter a password" aria-describedby="password-help-text" required="required" />
 								<span class="form-error">
-									It's required.
+									Password is required.
 								</span>
 							</label>
 						</div>
