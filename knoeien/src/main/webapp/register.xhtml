@@ -3,7 +3,7 @@
 <ui:composition template="templates/angular-template.xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core">
 
 	<ui:define name="content">
-		<div class="row wrapper-content">
+		<div class="row wrapper-content" ng-controller="UserCtrl">
 			<div class="medium-7 medium-centered columns">
 				<!-- Foundation "abide" plug-in used for validation  -->
 				<form data-abide="data-abide" novalidate="novalidate">
@@ -20,7 +20,7 @@
 					<div class="row">
 						<div class="medium-6 columns">
 							<label>First Name
-								<input type="text" id="first-name" placeholder="Write your first name" required="required" />
+								<input ng-model="user.firstName" type="text" id="first-name" placeholder="Write your first name" required="required" />
 								<span class="form-error">
 									It's required.
 								</span>
@@ -28,7 +28,7 @@
 						</div>
 						<div class="medium-6 columns">
 							<label>Surname
-								<input type="text" id="surname" placeholder="Write your surname" />
+								<input ng-model="user.lastName" type="text" id="surname" placeholder="Write your surname" />
 							</label>
 						</div>
 					</div>
@@ -72,7 +72,7 @@
 						</fieldset>
 						<div class="medium-8 columns">
 							<label>Email
-								<input type="text" id="email" placeholder="Provide your email" required="required" />
+								<input ng-model="user.email" type="text" id="email" placeholder="Provide your email" required="required" />
 								<span class="form-error">
 									It's required.
 								</span>
@@ -82,7 +82,7 @@
 					<div class="row">
 						<div class="medium-6 columns">
 							<label>Password required="required"
-								<input type="password" id="password" placeholder="Enter a password" aria-describedby="password-help-text" required="required" />
+								<input ng-model="user.password" type="password" id="password" placeholder="Enter a password" aria-describedby="password-help-text" required="required" />
 								<span class="form-error">
 									It's required.
 								</span>
@@ -103,7 +103,7 @@
 					<div class="row">
 						<fieldset class="medium-12 columns">
 							<div class="button-group float-right">
-								<button class="button hlpr-color-info" type="submit">Sign up</button>
+								<button class="button hlpr-color-info" type="submit" ng-click="addUser();" >Sign up</button>
 								<a class="button hlpr-color-alert" href="index.xhtml">Cancel</a>
 							</div>
 						</fieldset>

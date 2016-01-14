@@ -6,6 +6,7 @@ import java.io.Serializable;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
+import javax.faces.bean.ViewScoped;
 
 import org.apache.commons.lang3.StringUtils;
 import org.omnifaces.util.Faces;
@@ -18,7 +19,7 @@ import com.selvesperer.knoeien.service.UserService;
 import com.selvesperer.knoeien.spring.utils.SpringBeanFactory;
 
 @ManagedBean(name = "activationBean")
-@RequestScoped
+@ViewScoped
 public class ActivationBean implements Serializable {
 
 	private static final long serialVersionUID = -2646367043318201544L;
@@ -48,7 +49,7 @@ public class ActivationBean implements Serializable {
 			}
 			
 			userService.activeUser(user);
-			Faces.redirect("home");
+			Faces.redirect("index.xhtml");
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

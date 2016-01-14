@@ -1,6 +1,7 @@
 package com.selvesperer.knoeien.web.controllers.rest;
 
 import java.io.Serializable;
+import java.util.UUID;
 
 import org.omnifaces.util.Messages;
 import org.slf4j.Logger;
@@ -42,13 +43,23 @@ public class UserController extends AbstractController implements Serializable {
 		User user = null;
 		try {
 			UserService userService = SpringBeanFactory.getBean(UserService.class);
-			user = userService.saveUser(userModel);
 			
+			String token = UUID.randomUUID().toString(); 
+			userModel.setPasswordResetToken(token);
+			user = userService.saveUser(userModel);
 			EmailService emailService = SpringBeanFactory.getBean(EmailService.class);
-			emailService.sendEmail(new ActivationEmail(user, "123456"));
+			emailService.sendEmail(new ActivationEmail(user, token));
 		} catch (Exception ex) {
 			Messages.addGlobalError(ex.getMessage());
 		}
 		return new ResponseEntity<RestResponse>(convertToRestResponse(user), HttpStatus.OK);
+	}
+	
+	@RequestMapping(method = RequestMethod.POST , produces = "application/json")
+	@ResponseBody
+	public ResponseEntity<RestResponse> login(@RequestBody UserModel userModel) {
+		System.out.println(" i dont know what i am doing ");
+		
+		return null;
 	}
 }
