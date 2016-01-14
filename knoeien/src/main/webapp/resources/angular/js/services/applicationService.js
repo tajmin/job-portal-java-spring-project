@@ -8,11 +8,14 @@ Services.factory('authService', function(Restangular, $rootScope, $cookies) {
 	$rootScope.isProcessing = false;
 	$rootScope.isRequestCompleted = true;
 	$rootScope.allowToSubmit = true;
+	$rootScope.allowToSubmit = true;
+	$rootScope.restMessages = {};
 	service.enableAuth = function(isPost) {
 		return Restangular.withConfig(function(RestangularConfigurer) {
 			RestangularConfigurer.addRequestInterceptor(function(element) {
 				$rootScope.isProcessing = true;
 				$rootScope.isRequestCompleted = true;
+				$rootScope.restMessages = {};
 				if (!$rootScope.firstTime) {
 					setTimeout(function() {
 						$rootScope.isProcessing = false;
@@ -28,11 +31,20 @@ Services.factory('authService', function(Restangular, $rootScope, $cookies) {
 				}
 				return element
 			});
-			RestangularConfigurer.addResponseInterceptor(function(response,restangularObject, url) {
+			
+			RestangularConfigurer.addResponseInterceptor(function(response, restangularObject, url) {
 				$rootScope.isProcessing = false;
 				ajaxCount--;
 				if (ajaxCount == 0) {
 					$("#ajaxloader").css("top", "-35px")
+				}
+				
+				console.log(response);
+				
+				if(!response.success) {
+					$rootScope.restMessages = response.messages;
+					console.log($rootScope.restMessages);
+					return false;
 				}
 				
 				if (response.response) {
@@ -40,6 +52,7 @@ Services.factory('authService', function(Restangular, $rootScope, $cookies) {
 				}
 				return response;
 			});
+			
 			RestangularConfigurer.setErrorInterceptor(function(response, restangularObject, url) {
 				$rootScope.isProcessing = false;
 				ajaxCount--;
@@ -51,8 +64,7 @@ Services.factory('authService', function(Restangular, $rootScope, $cookies) {
 			
 				
 				if (response.status === 503) {
-					window.location.href = window.location.origin
-							+ service.serviceBaseUrl + '/outOfService.xhtml'
+					window.location.href = window.location.origin + service.serviceBaseUrl + '/noService.xhtml'
 							
 				} else if(response.status == 401) {
 					window.location.href = window.location.origin + service.serviceBaseUrl + '/login.xhtml'

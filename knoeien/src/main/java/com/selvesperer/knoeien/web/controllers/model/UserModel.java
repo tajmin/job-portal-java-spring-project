@@ -45,6 +45,8 @@ public class UserModel implements Serializable {
 
 	private String fullName;
 
+	private String confirmPassword;
+	
 	public String getCompanyId() {
 		return companyId;
 	}
@@ -195,5 +197,13 @@ public class UserModel implements Serializable {
 
 	public void setFullName(String fullName) {
 		this.fullName = fullName;
+	}
+
+	public String getConfirmPassword() {
+		return confirmPassword;
+	}
+
+	public void setConfirmPassword(String confirmPassword) {
+		this.confirmPassword = confirmPassword;
 	}
 }

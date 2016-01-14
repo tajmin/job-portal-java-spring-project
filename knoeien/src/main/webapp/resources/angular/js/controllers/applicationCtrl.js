@@ -21,6 +21,7 @@ Controllers.controller("UserCtrl", function($scope, $rootScope, restservice, $co
         	}
         });
     };   
+    
     $scope.login = function() {
 		
 		//$scope.user.email = n + "aj@selvesperer.com";
@@ -30,6 +31,17 @@ Controllers.controller("UserCtrl", function($scope, $rootScope, restservice, $co
 			console.log( data );
         });
 		
+		restservice.post( $scope.user, "api/v1/user").then(function(data) {
+			if (data != null) {
+				console.log( data );
+        	}
+        });
+    };
+});
+
+Controllers.controller("signupCtrl", function($scope, $rootScope, restservice, $cookies) {
+	$scope.user = {};
+	$scope.signup = function() {
 		restservice.post( $scope.user, "api/v1/user").then(function(data) {
 			if (data != null) {
 				console.log( data );
