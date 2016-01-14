@@ -55,18 +55,15 @@ public class UserController extends AbstractController implements Serializable {
 		try {
 			RestResponse restResponse = null;
 			if (StringUtils.isBlank(userModel.getEmail())) {
-				restResponse = convertToRestBadResponse("",
-						LocalizationUtil.findLocalizedString("error.emptyemail.text"));
+				restResponse = convertToRestBadResponse("",	LocalizationUtil.findLocalizedString("error.emptyemail.text"));
 			}
 
 			if (StringUtils.isBlank(userModel.getPassword())) {
-				restResponse = convertToRestBadResponse(restResponse, "",
-						LocalizationUtil.findLocalizedString("error.emptypassword.text"));
+				restResponse = convertToRestBadResponse(restResponse, "", LocalizationUtil.findLocalizedString("error.emptypassword.text"));
 			}
 
 			if (!StringUtils.equals(userModel.getPassword(), userModel.getConfirmPassword())) {
-				restResponse = convertToRestBadResponse(restResponse, "",
-						LocalizationUtil.findLocalizedString("error.passwordandconfirmpasswordnotmatch.text"));
+				restResponse = convertToRestBadResponse(restResponse, "", LocalizationUtil.findLocalizedString("error.passwordandconfirmpasswordnotmatch.text"));
 			}
 
 			if (restResponse != null) {

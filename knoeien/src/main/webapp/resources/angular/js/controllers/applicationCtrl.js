@@ -58,6 +58,7 @@ Controllers.controller("loginCtrl", function($scope, $rootScope, restservice, $c
 			if (response != null && response.success) {
 				$scope.isproceed = true;
 				$scope.userinfos = response.response;
+				// TODO . close modal...
 				console.log($scope.userinfos );
         	}
         });

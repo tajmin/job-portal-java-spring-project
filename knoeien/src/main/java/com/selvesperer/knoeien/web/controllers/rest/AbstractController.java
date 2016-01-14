@@ -49,9 +49,12 @@ public abstract class AbstractController {
 		}
 			
 		if(restResponse.getMessages() == null) restResponse.setMessages(new ArrayList<RestMessage>());
+		RestMessage restMessage = new RestMessage();
 		
-		RestMessage restMessage = new RestMessage(); 
 		restMessage.setField(field);
+		restMessage.setMessage(message);
+		restMessage.setMessage(message);		
+		
 		restResponse.getMessages().add(restMessage);
 		return restResponse;
 	}

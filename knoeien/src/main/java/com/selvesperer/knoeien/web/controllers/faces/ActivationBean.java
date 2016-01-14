@@ -6,7 +6,6 @@ import java.io.Serializable;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
-import javax.faces.bean.ViewScoped;
 
 import org.apache.commons.lang3.StringUtils;
 import org.omnifaces.util.Faces;
@@ -19,7 +18,7 @@ import com.selvesperer.knoeien.service.UserService;
 import com.selvesperer.knoeien.spring.utils.SpringBeanFactory;
 
 @ManagedBean(name = "activationBean")
-@ViewScoped
+@RequestScoped
 public class ActivationBean implements Serializable {
 
 	private static final long serialVersionUID = -2646367043318201544L;
@@ -27,7 +26,6 @@ public class ActivationBean implements Serializable {
 	private static final Logger log = (Logger) LoggerFactory.getLogger(ActivationBean.class);
 	
 	private String key;
-	private String message = "";
 	
 	@PostConstruct
 	public void init() {
