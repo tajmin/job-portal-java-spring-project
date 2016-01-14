@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import com.selvesperer.knoeien.data.domain.User;
 import com.selvesperer.knoeien.data.repository.UserRepository;
+import com.selvesperer.knoeien.exception.AuthenticationFailedException;
 import com.selvesperer.knoeien.exception.SelvEspererException;
 import com.selvesperer.knoeien.exception.UnauthorizedActionException;
 import com.selvesperer.knoeien.service.UserService;
@@ -66,6 +67,19 @@ public class UserServiceImpl implements UserService {
 	public User activeUser(User user) {
 		user.setActive(true);
 		user = userRepository.saveAndFlush(user);
+		return user;
+	}
+	
+	public User login(String username, String password) {
+		User user = userRepository.findUserByEmail(username);
+		if(user == null) {
+			throw new AuthenticationFailedException("error.usernameandpasswordnotmatch.text");
+		}
+		
+		if(!StringUtils.equals(password, user.getPassword())) {
+			throw new AuthenticationFailedException("error.usernameandpasswordnotmatch.text");
+		}
+		
 		return user;
 	}
 }

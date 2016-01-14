@@ -43,7 +43,6 @@ public class EmailServiceImpl implements EmailService {
 	@Override
 	@Asynchronous
 	public void sendEmail(AbstractEmail abstractEmail) {
-
 		try {
 			if (log.isDebugEnabled())
 				log.debug("Sending an immediate email");
@@ -59,9 +58,9 @@ public class EmailServiceImpl implements EmailService {
 	public boolean sendDirect(AbstractEmail abstractEmail, String text) {
 		try {
 			Properties props = new Properties();
-			props.put("mail.smtp.host", ConfigurationUtil.config().getString("host"));
+			props.put("mail.smtp.host", ConfigurationUtil.config().getString("smtp.host"));
 			props.put("mail.smtp.auth", "true");
-			props.put("mail.smtp.port", ConfigurationUtil.config().getString("port"));
+			props.put("mail.smtp.port", ConfigurationUtil.config().getString("smtp.port"));
 			props.put("mail.smtp.ssl.enable", "true");
 			MailSSLSocketFactory socketFactory = new MailSSLSocketFactory();
 			socketFactory.setTrustAllHosts(true);
@@ -72,14 +71,13 @@ public class EmailServiceImpl implements EmailService {
 			Session session = Session.getInstance(props, new javax.mail.Authenticator() {
 				@Override
 				protected PasswordAuthentication getPasswordAuthentication() {
-					return new PasswordAuthentication(ConfigurationUtil.config().getString("username"),
-							ConfigurationUtil.config().getString("password"));
+					return new PasswordAuthentication(ConfigurationUtil.config().getString("smtp.username"), ConfigurationUtil.config().getString("smtp.password"));
 				}
 			});
 
 			// Message _message = new MimeMessage(session);
 			Message _message = new MimeMessage(session);
-			Address faddress = new InternetAddress(ConfigurationUtil.config().getString("defaultFrom"));
+			Address faddress = new InternetAddress(ConfigurationUtil.config().getString("smtp.defaultFrom"));
 			Address taddress = new InternetAddress(abstractEmail.getUser().getEmail());
 
 			_message.setFrom(faddress);

@@ -37,7 +37,7 @@ public class UserModel implements Serializable {
 
 	private String locale = "en";
 
-	private String avatarUrl = com.selvesperer.knoeien.utils.Constants.DEFAULT_AVATAR;
+	private String avatarUrl = "";
 
 	private String backgroundImageUrl;
 

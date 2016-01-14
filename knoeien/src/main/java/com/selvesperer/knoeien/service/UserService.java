@@ -16,4 +16,7 @@ public interface UserService {
 	public User resetPassword(String userId, String password, String resetToken);
 	
 	public User activeUser(User user);
+	
+	public User login(String username, String password);
+	
 }

@@ -44,6 +44,6 @@ public class CompanyController extends AbstractController implements Serializabl
 		} catch (Exception ex) {
 			Messages.addGlobalError(ex.getMessage());
 		}
-		return new ResponseEntity<RestResponse>(convertToRestResponse(company), HttpStatus.OK);
+		return new ResponseEntity<RestResponse>(convertToRestGoodResponse(company), HttpStatus.OK);
 	}
 }

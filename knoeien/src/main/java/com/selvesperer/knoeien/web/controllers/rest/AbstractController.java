@@ -12,14 +12,22 @@ import com.selvesperer.knoeien.web.controllers.model.RestResponse;
 public abstract class AbstractController {
 	
 	@ResponseBody
-	protected RestResponse convertToRestResponse(Object responseObject) {
+	protected RestResponse convertToRestGoodResponse(Object responseObject) {
 		RestResponse response = new RestResponse();
 		response.setResponse(responseObject);
 		return response;
 	}
 	
 	@ResponseBody
-	protected RestResponse convertToRestResponse(String field, String message) {
+	protected RestResponse convertToRestGoodResponse(Object responseObject, String message) {
+		RestResponse response = new RestResponse();
+		response.setResponse(responseObject);
+		response.setMessage(message);
+		return response;
+	}
+	
+	@ResponseBody
+	protected RestResponse convertToRestBadResponse(String field, String message) {
 		RestResponse restResponse = new RestResponse();
 		RestMessage restMessage = new RestMessage();
 		ArrayList<RestMessage> restMessages = new ArrayList<RestMessage>();
@@ -34,7 +42,7 @@ public abstract class AbstractController {
 	}
 	
 	@ResponseBody
-	protected RestResponse convertToRestResponse(RestResponse restResponse, String field, String message) {
+	protected RestResponse convertToRestBadResponse(RestResponse restResponse, String field, String message) {
 		if(restResponse == null) {
 			restResponse = new RestResponse();
 			restResponse.setSuccess(false);
@@ -44,8 +52,6 @@ public abstract class AbstractController {
 		
 		RestMessage restMessage = new RestMessage(); 
 		restMessage.setField(field);
-		restMessage.setMessage(message);
-		restMessage.setMessage(message);
 		restResponse.getMessages().add(restMessage);
 		return restResponse;
 	}

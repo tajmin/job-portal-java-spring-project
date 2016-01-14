@@ -72,7 +72,7 @@ public class User extends AuditableEntity {
 	private String locale = "en";
 
 	@Column(name = "avatar_url", length = 300)
-	private String avatarUrl = com.selvesperer.knoeien.utils.Constants.DEFAULT_AVATAR;
+	private String avatarUrl = "";
 
 	@Column(name = "background_image_url", length = 300)
 	private String backgroundImageUrl;
