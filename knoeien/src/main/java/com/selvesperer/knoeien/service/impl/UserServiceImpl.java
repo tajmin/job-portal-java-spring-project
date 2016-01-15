@@ -96,6 +96,8 @@ public class UserServiceImpl implements UserService {
 		}
 		
 		String token = UUID.randomUUID().toString();
+		user.setPasswordResetToken(token);
+		user = userRepository.saveAndFlush(user);
 		EmailService emailService = SpringBeanFactory.getBean(EmailService.class);
 		emailService.sendEmail(new ForgetPasswordEmail(user, token));		
 	}

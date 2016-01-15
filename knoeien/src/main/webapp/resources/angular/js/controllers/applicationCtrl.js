@@ -89,23 +89,25 @@ Controllers.controller("resetPasswordCtrl", function($scope, $rootScope, restser
 	
 	$scope.resetPassword = function(isValid) {		
 		if(!isValid) return;
+		$scope.responseMessage = "";
+		
 		var key = getParameterByName("key");
 		$scope.user.passwordResetToken = key;
 		restservice.post($scope.user, "api/v1/user/resetPassword").then(function(response) {
 			if (response != null && response.success) {
 				$scope.isproceed = true;
-				$scope.userinfos = response.response;
+				$scope.responseMessage = response.response;
 				// TODO . close modal...
-				console.log($scope.userinfos );
+				console.log($scope.responseMessage );
 				
 	    	} 
 	    });
 	};
 	
-	function getParameterByName(name) {
-	    name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
-	    var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
-	        results = regex.exec(location.search);
-	    return results == null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
-	}
+		function getParameterByName(name) {
+		    name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+		    var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+		        results = regex.exec(location.search);
+		    return results == null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+		}
 });
