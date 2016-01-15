@@ -148,4 +148,31 @@ public class UserController extends AbstractController implements Serializable {
 		}
 		return "logout successfull";
 	}
+	
+	@RequestMapping(value = "/resetpassword", method = RequestMethod.POST, produces = "application/json")
+	public ResponseEntity<RestResponse> resetPassword(@RequestBody Map<String, String> requestObject, HttpServletRequest request, HttpServletResponse response) {
+		RestResponse restResponse = null;
+		if (log.isDebugEnabled()) log.debug("Reset Password!!!");
+		String email = requestObject.get("email");
+		
+		try {
+			UserService userService = SpringBeanFactory.getBean(UserService.class);
+			User u = userService.findUserByEmail(email);
+
+			HttpSession httpSession = request.getSession(true);
+			httpSession.setAttribute(Constants.CURRENT_USER_ID, u.getEmail());
+
+			HashMap<String, String> uData = new HashMap<>();
+			uData.put(Constants.CURRENT_USER_ID, u.getEmail());
+			uData.put(Constants.CURRENT_USER_NAME, u.getFullName());
+
+			response.sendRedirect(request.getContextPath() + "/index.xhtml");
+			return new ResponseEntity<RestResponse>(convertToRestGoodResponse(uData), HttpStatus.OK);
+		} catch (AuthenticationFailedException t) {
+			restResponse = convertToRestBadResponse("", t.getLocalizedMessage());
+		} catch (Exception t) {
+			restResponse = convertToRestBadResponse("", t.getLocalizedMessage());
+		}
+		return new ResponseEntity<RestResponse>(restResponse, HttpStatus.OK);
+	}*/
 }

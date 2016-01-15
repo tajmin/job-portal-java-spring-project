@@ -60,7 +60,30 @@ Controllers.controller("loginCtrl", function($scope, $rootScope, restservice, $c
 				$scope.userinfos = response.response;
 				// TODO . close modal...
 				console.log($scope.userinfos );
-        	}
+				
+        	} 
         });
     };
+});
+
+Controllers.controller("resetPasswordCtrl", function($scope, $rootScope, restservice, $cookies) {console.log("isValid:::::::::::::::::: ");
+$scope.isproceed = false;
+$scope.user = {};
+$scope.formSubmitted = false;
+$scope.responseMessage = "";
+$scope.resetPassword = function(isValid) {
+	
+	if(!isValid) return;
+	
+	console.log($scope.user);
+	restservice.post($scope.user, "api/v1/user/resetpassword").then(function(response) {
+		if (response != null && response.success) {
+			$scope.isproceed = true;
+			$scope.userinfos = response.response;
+			// TODO . close modal...
+			console.log($scope.userinfos );
+			
+    	} 
+    });
+};
 });
