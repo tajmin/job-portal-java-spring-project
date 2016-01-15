@@ -179,7 +179,7 @@ public class UserController extends AbstractController implements Serializable {
 			if (log.isDebugEnabled()) log.debug("login User");
 			String password = requestObject.get("password");
 			String confirmPassword = requestObject.get("confirmPassword");
-			String token = requestObject.get("token");
+			String token = requestObject.get("passwordResetToken");
 			
 			UserService userService = SpringBeanFactory.getBean(UserService.class);		
 

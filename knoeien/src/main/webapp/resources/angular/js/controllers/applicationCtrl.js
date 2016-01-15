@@ -89,7 +89,8 @@ Controllers.controller("resetPasswordCtrl", function($scope, $rootScope, restser
 	
 	$scope.resetPassword = function(isValid) {		
 		if(!isValid) return;
-	
+		var key = getParameterByName("key");
+		$scope.user.passwordResetToken = key;
 		restservice.post($scope.user, "api/v1/user/resetPassword").then(function(response) {
 			if (response != null && response.success) {
 				$scope.isproceed = true;
@@ -101,5 +102,10 @@ Controllers.controller("resetPasswordCtrl", function($scope, $rootScope, restser
 	    });
 	};
 	
-	
+	function getParameterByName(name) {
+	    name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+	    var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+	        results = regex.exec(location.search);
+	    return results == null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+	}
 });
