@@ -20,6 +20,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.selvesperer.knoeien.data.domain.User;
@@ -77,9 +78,7 @@ public class UserController extends AbstractController implements Serializable {
 			EmailService emailService = SpringBeanFactory.getBean(EmailService.class);
 			emailService.sendEmail(new ActivationEmail(user, token));
 
-			return new ResponseEntity<RestResponse>(
-					convertToRestGoodResponse(null, LocalizationUtil.findLocalizedString("signupsuccess.text")),
-					HttpStatus.OK);
+			return new ResponseEntity<RestResponse>( convertToRestGoodResponse(null, LocalizationUtil.findLocalizedString("signupsuccess.text")),HttpStatus.OK);
 		} catch (Exception ex) {
 			// Messages.addGlobalError(ex.getMessage());
 		}
@@ -149,30 +148,61 @@ public class UserController extends AbstractController implements Serializable {
 		return "logout successfull";
 	}
 	
-	@RequestMapping(value = "/resetpassword", method = RequestMethod.POST, produces = "application/json")
-	public ResponseEntity<RestResponse> resetPassword(@RequestBody Map<String, String> requestObject, HttpServletRequest request, HttpServletResponse response) {
+	@RequestMapping(value = "/sendChangePasswordEmail", method = RequestMethod.POST, produces = "application/json")
+	public ResponseEntity<RestResponse> sendChangePasswordEmail(@RequestParam(value="email", required=true) String email) {
 		RestResponse restResponse = null;
-		if (log.isDebugEnabled()) log.debug("Reset Password!!!");
-		String email = requestObject.get("email");
-		
-		try {
+		try {			
+			if (StringUtils.isBlank(email)) {
+				restResponse = convertToRestBadResponse("",	LocalizationUtil.findLocalizedString("error.emptyemail.text"));
+			}
+
+			if (restResponse != null) {
+				return new ResponseEntity<RestResponse>(restResponse, HttpStatus.OK);
+			}
+			
 			UserService userService = SpringBeanFactory.getBean(UserService.class);
-			User u = userService.findUserByEmail(email);
-
-			HttpSession httpSession = request.getSession(true);
-			httpSession.setAttribute(Constants.CURRENT_USER_ID, u.getEmail());
-
-			HashMap<String, String> uData = new HashMap<>();
-			uData.put(Constants.CURRENT_USER_ID, u.getEmail());
-			uData.put(Constants.CURRENT_USER_NAME, u.getFullName());
-
-			response.sendRedirect(request.getContextPath() + "/index.xhtml");
-			return new ResponseEntity<RestResponse>(convertToRestGoodResponse(uData), HttpStatus.OK);
+			userService.sendForgetPasswordEmail(email);
+			
+			return new ResponseEntity<RestResponse>( convertToRestGoodResponse(null, "Please check your email and follow the instructions"),HttpStatus.OK);
 		} catch (AuthenticationFailedException t) {
 			restResponse = convertToRestBadResponse("", t.getLocalizedMessage());
 		} catch (Exception t) {
 			restResponse = convertToRestBadResponse("", t.getLocalizedMessage());
 		}
 		return new ResponseEntity<RestResponse>(restResponse, HttpStatus.OK);
-	}*/
+	}
+	
+	@RequestMapping(value = "/resetPassword", method = RequestMethod.POST, produces = "application/json")
+	public ResponseEntity<RestResponse> resetPassword(@RequestBody Map<String, String> requestObject, HttpServletRequest request, HttpServletResponse response) {
+		RestResponse restResponse = null;
+		try {
+			if (log.isDebugEnabled()) log.debug("login User");
+			String password = requestObject.get("password");
+			String confirmPassword = requestObject.get("confirmPassword");
+			String token = requestObject.get("token");
+			
+			UserService userService = SpringBeanFactory.getBean(UserService.class);		
+
+			if (StringUtils.isBlank(password)) {
+				restResponse = convertToRestBadResponse(restResponse, "", LocalizationUtil.findLocalizedString("error.emptypassword.text"));
+			}
+
+			if (!StringUtils.equals(password, confirmPassword)) {
+				restResponse = convertToRestBadResponse(restResponse, "", LocalizationUtil.findLocalizedString("error.passwordandconfirmpasswordnotmatch.text"));
+			}
+
+			if (restResponse != null) {
+				return new ResponseEntity<RestResponse>(restResponse, HttpStatus.OK);
+			}
+			
+			userService.resetPassword(password, token);
+			
+			return new ResponseEntity<RestResponse>( convertToRestGoodResponse(null, "Your password has been change successfully, Please click for login"),HttpStatus.OK);			
+		} catch (AuthenticationFailedException t) {
+			restResponse = convertToRestBadResponse("", t.getLocalizedMessage());
+		} catch (Exception t) {
+			restResponse = convertToRestBadResponse("", t.getLocalizedMessage());
+		}
+		return new ResponseEntity<RestResponse>(restResponse, HttpStatus.OK);
+	}
 }

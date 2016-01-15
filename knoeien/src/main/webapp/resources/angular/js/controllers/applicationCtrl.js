@@ -66,24 +66,40 @@ Controllers.controller("loginCtrl", function($scope, $rootScope, restservice, $c
     };
 });
 
-Controllers.controller("resetPasswordCtrl", function($scope, $rootScope, restservice, $cookies) {console.log("isValid:::::::::::::::::: ");
-$scope.isproceed = false;
-$scope.user = {};
-$scope.formSubmitted = false;
-$scope.responseMessage = "";
-$scope.resetPassword = function(isValid) {
+Controllers.controller("resetPasswordCtrl", function($scope, $rootScope, restservice, $cookies) {
+	$scope.isproceed = false;
+	$scope.username = "";
+	$scope.formSubmitted = false;
+	$scope.responseMessage = "";
+	$scope.user = {};
 	
-	if(!isValid) return;
+	$scope.sendChangePasswordEmail = function(isValid) {
+		if(!isValid) return;
+		$scope.responseMessage = "";
+		
+		console.log(":::::::::::::::::::::::::::::::::");
+		console.log($scope.user.username);
+		restservice.post($scope.user, "api/v1/user/sendChangePasswordEmail?email="+$scope.user.username).then(function(response) {
+			if (response != null && response.success) {
+				$scope.isproceed = true;
+				$scope.responseMessage = response.message;
+	    	} 
+	    });
+	};
 	
-	console.log($scope.user);
-	restservice.post($scope.user, "api/v1/user/resetpassword").then(function(response) {
-		if (response != null && response.success) {
-			$scope.isproceed = true;
-			$scope.userinfos = response.response;
-			// TODO . close modal...
-			console.log($scope.userinfos );
-			
-    	} 
-    });
-};
+	$scope.resetPassword = function(isValid) {		
+		if(!isValid) return;
+	
+		restservice.post($scope.user, "api/v1/user/resetPassword").then(function(response) {
+			if (response != null && response.success) {
+				$scope.isproceed = true;
+				$scope.userinfos = response.response;
+				// TODO . close modal...
+				console.log($scope.userinfos );
+				
+	    	} 
+	    });
+	};
+	
+	
 });

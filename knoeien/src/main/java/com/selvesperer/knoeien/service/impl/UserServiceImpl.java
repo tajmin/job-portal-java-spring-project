@@ -1,8 +1,12 @@
 package com.selvesperer.knoeien.service.impl;
 
+import java.io.IOException;
+import java.util.UUID;
+
 import javax.inject.Inject;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.mail.EmailException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Scope;
@@ -11,9 +15,11 @@ import org.springframework.stereotype.Service;
 
 import com.selvesperer.knoeien.data.domain.User;
 import com.selvesperer.knoeien.data.repository.UserRepository;
+import com.selvesperer.knoeien.emails.ForgetPasswordEmail;
 import com.selvesperer.knoeien.exception.AuthenticationFailedException;
 import com.selvesperer.knoeien.exception.SelvEspererException;
 import com.selvesperer.knoeien.exception.UnauthorizedActionException;
+import com.selvesperer.knoeien.service.EmailService;
 import com.selvesperer.knoeien.service.UserService;
 import com.selvesperer.knoeien.spring.ScopeType;
 import com.selvesperer.knoeien.spring.utils.SpringBeanFactory;
@@ -48,14 +54,14 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public User resetPassword(String userId, String password, String resetToken) {
-		User u = this.findUserById(userId);
+	public User resetPassword(String password, String token) {
+		User u = this.findUserByResetToken(token);
 
-		if (log.isInfoEnabled()) log.info("Reset Password for " + userId);
+		if (log.isInfoEnabled()) log.info("Reset Password for " + token);
 		if (u == null) throw new SelvEspererException("error.usernotfound.text");
 		if (password == null || password.length() > 40 || password.length() < 6) throw new SelvEspererException("error.passwordnotvalid.text");
 
-		if (!StringUtils.equals(u.getPasswordResetToken(), resetToken)) throw new UnauthorizedActionException("");
+		if (!StringUtils.equals(u.getPasswordResetToken(), token)) throw new UnauthorizedActionException("");
 
 		StandardPasswordEncoder passwordEncoder = SpringBeanFactory.getBean(StandardPasswordEncoder.class);
 		u.setPassword(passwordEncoder.encode(password));
@@ -81,5 +87,16 @@ public class UserServiceImpl implements UserService {
 		}
 		
 		return user;
+	}
+	
+	public void sendForgetPasswordEmail(String email) throws EmailException, IOException {
+		User user = userRepository.findUserByEmail(email);
+		if(user == null) {
+			throw new AuthenticationFailedException("error.usernotfound.text");
+		}
+		
+		String token = UUID.randomUUID().toString();
+		EmailService emailService = SpringBeanFactory.getBean(EmailService.class);
+		emailService.sendEmail(new ForgetPasswordEmail(user, token));		
 	}
 }
