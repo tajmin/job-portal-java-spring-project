@@ -13,106 +13,84 @@
 						</div>
 					</div>
 					<hr />
-					<div class="row small-uncollapse medium-collapse">
+					<div class="row">
   						<div class="medium-6 columns">
-    						<label>Bank Information
-								<input type="text" id="bank-name" placeholder="Provide bank name" />
-							</label>
+  							<div class="row">
+  								<div class="medium-12 columns">
+    								<h4>Bank Information</h4>
+  								</div>
+  							</div>
+  							<div class="row">
+  								<div class="medium-12 columns">
+									<input type="text" id="bank-name" placeholder="Provide bank name" required="required" />
+									<span class="form-error">
+										It's required".
+									</span>
+  								</div>
+  							</div>
   						</div>
   						<div class="medium-6 columns">
-    						Removes gutter at large media query
+  							<div class="row">
+  								<div class="medium-12 columns">
+    								<h4>Card Information</h4>
+    							</div>
+    						</div>
+    						<div class="row">
+  								<div class="medium-6 columns">
+  									<input type="text" id="first-name" placeholder="Write First Name" required="required" />
+  									<span class="form-error">
+										It's required".
+									</span>
+  								</div>
+  								<div class="medium-6 columns">
+  									<input type="text" id="last-name" placeholder="Write Last Name" />
+  								</div>
+  							</div>
+  							<div class="row">
+  								<div class="medium-8 columns">
+  									<input type="text" id="card-number" placeholder="Write Your Card Number" required="required" />
+  									<span class="form-error">
+										It's required".
+									</span>
+  								</div>
+  								<div class="medium-4 columns">
+  								</div>
+  							</div>
+  							<div class="row">
+  								<div class="medium-4 columns">
+									<input type="password" id="cvc" placeholder="CVC" required="required" />
+									<span class="form-error">
+										It's required".
+									</span>
+								</div>
+								<div class="medium-4 columns">
+									<select class="month-select" id="date-month" required="required">
+										<option value="" disabled="disabled" selected="selected">Month</option>
+									</select>
+									<span class="form-error">
+										It's required.
+									</span>
+								</div>
+								<div class="medium-4 columns">
+									<select class="future-year-select" id="date-year" required="required">
+										<option value="" disabled="disabled" selected="selected">Year</option>
+									</select>
+									<span class="form-error">
+										It's required.
+									</span>
+								</div>
+  							</div>
   						</div>
-					</div>
-					<div class="row">
-						<div data-abide-error="data-abide-error" class="medium-12 columns alert callout" style="display: none;">
-							<p><i class="fi-alert"></i> Please fill required="required" fields.</p>
+  						<div class="row">
+							<fieldset class="medium-12 columns medium-centered">
+								<div class="button-group">
+									<button class="button hlpr-color-info" type="submit">Sign up</button>
+									<a class="button hlpr-color-alert" href="index.xhtml">Cancel</a>
+								</div>
+							</fieldset>
 						</div>
 					</div>
-					<div class="row">
-						<div class="medium-6 columns">
-						</div>
-						<div class="medium-6 columns">
-							<label>Surname
-								<input type="text" id="surname" placeholder="Write your surname" />
-							</label>
-						</div>
-					</div>
-					<div class="row">
-						<div class="medium-4 columns">
-							<label>Date of birth
-								<select class="day-select" id="date-day" required="required">
-									<option value="" disabled="disabled" selected="selected">Day</option>
-								</select>
-								<span class="form-error">
-									It's required".
-								</span>
-							</label>
-						</div>
-						<div class="medium-4 columns">
-							<label><span class="hide-for-small-only">&nbsp;</span>
-								<select class="full-month-select" id="date-month" required="required">
-									<option value="" disabled="disabled" selected="selected">Month</option>
-								</select>
-								<span class="form-error">
-									It's required.
-								</span>
-							</label>
-						</div>
-						<div class="medium-4 columns">
-							<label><span class="hide-for-small-only">&nbsp;</span>
-								<select class="year-select" id="date-year" required="required">
-									<option value="" disabled="disabled" selected="selected">Year</option>
-								</select>
-								<span class="form-error">
-									It's required.
-								</span>
-							</label>
-						</div>
-					</div>
-					<div class="row">
-						<fieldset class="medium-4 columns">
-							<legend>Gender</legend>
-							<input type="radio" name="gender" value="male" id="male" required="required" /><label for="male">Male</label>
-							<input type="radio" name="gender" value="female" id="female" /><label for="female">Female</label>
-						</fieldset>
-						<div class="medium-8 columns">
-							<label>Email
-								<input type="text" id="email" placeholder="Provide your email" required="required" />
-								<span class="form-error">
-									It's required.
-								</span>
-							</label>
-						</div>
-					</div>
-					<div class="row">
-						<div class="medium-6 columns">
-							<label>Password
-								<input type="password" id="password" placeholder="Enter a password" aria-describedby="password-help-text" required="required" />
-								<span class="form-error">
-									It's required.
-								</span>
-							</label>
-						</div>
-						<div class="medium-6 columns">
-							<label>Confirm Password
-								<input type="password" placeholder="Retype your password" required="required" pattern="alpha_numeric" data-equalto="password" />
-								<span class="form-error">
-									Passwords do not match!
-								</span>
-							</label>
-						</div>
-						<div class="small-12 columns">
-							<p class="help-text" id="password-help-text">Password must be at least 8 characters long.</p>
-						</div>
-					</div>
-					<div class="row">
-						<fieldset class="medium-12 columns">
-							<div class="button-group float-right">
-								<button class="button hlpr-color-info" type="submit">Sign up</button>
-								<a class="button hlpr-color-alert" href="index.xhtml">Cancel</a>
-							</div>
-						</fieldset>
-					</div>
+					
 				</form>
 				<!-- Sign up form ends here -->
 			</div>

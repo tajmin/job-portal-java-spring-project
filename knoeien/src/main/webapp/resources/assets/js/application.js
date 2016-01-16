@@ -28,6 +28,7 @@ function dateSelect() {
 	for(var i=1; i <= 100; i++) {
 		var valueText = ("0"+i).slice(-2);
 		var year = currentDate.getFullYear() - i + 1;
+		var futureYear = currentDate.getFullYear() + i - 1;
 		
 		/* Set dates to day drop-down list */
 		if(i <= 31) {
@@ -60,6 +61,12 @@ function dateSelect() {
 		$('select.year-select').append($('<option>', {
 			value: year,
 			text: year
+		}));
+		
+		/* Set futureYear to year drop-down list */
+		$('select.future-year-select').append($('<option>', {
+			value: futureYear,
+			text: futureYear
 		}));
 	}
 };
