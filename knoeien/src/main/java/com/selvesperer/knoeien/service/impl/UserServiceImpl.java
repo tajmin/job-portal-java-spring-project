@@ -22,7 +22,6 @@ import com.selvesperer.knoeien.emails.ForgetPasswordEmail;
 import com.selvesperer.knoeien.exception.AuthenticationFailedException;
 import com.selvesperer.knoeien.exception.SelvEspererException;
 import com.selvesperer.knoeien.exception.UnauthorizedActionException;
-import com.selvesperer.knoeien.security.SecurityManager;
 import com.selvesperer.knoeien.service.EmailService;
 import com.selvesperer.knoeien.service.UserService;
 import com.selvesperer.knoeien.spring.ScopeType;
@@ -48,8 +47,11 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public User saveUser(UserModel userModel) {
-		return userRepository.saveAndFlush(new User(userModel));
+	public User saveUser(UserModel userModel) {		
+		User user = new User(userModel);
+		StandardPasswordEncoder encoder = ApplicationBeanFactory.getBean(StandardPasswordEncoder.class);
+		user.setPassword(encoder.encode(userModel.getPassword()));
+		return userRepository.saveAndFlush(user);
 	}
 
 	@Override
@@ -88,10 +90,6 @@ public class UserServiceImpl implements UserService {
 
 		User user = userRepository.findUserByEmail(username);
 		if (user == null) {
-			throw new AuthenticationFailedException("error.usernameandpasswordnotmatch.text");
-		}
-
-		if (!StringUtils.equals(password, user.getPassword())) {
 			throw new AuthenticationFailedException("error.usernameandpasswordnotmatch.text");
 		}
 

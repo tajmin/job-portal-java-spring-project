@@ -29,7 +29,6 @@ import com.selvesperer.knoeien.exception.AuthenticationFailedException;
 import com.selvesperer.knoeien.service.EmailService;
 import com.selvesperer.knoeien.service.UserService;
 import com.selvesperer.knoeien.spring.utils.ApplicationBeanFactory;
-import com.selvesperer.knoeien.utils.Constants;
 import com.selvesperer.knoeien.utils.localization.LocalizationUtil;
 import com.selvesperer.knoeien.web.controllers.model.RestResponse;
 import com.selvesperer.knoeien.web.controllers.model.UserModel;
@@ -104,7 +103,7 @@ public class UserController extends AbstractController implements Serializable {
 	}
 
 	@RequestMapping(value = "/login", method = RequestMethod.POST, produces = "application/json")
-	public ResponseEntity<RestResponse> login(@RequestBody Map<String, String> requestObject, HttpServletRequest request, HttpServletResponse response) {
+	public String login(@RequestBody Map<String, String> requestObject, HttpServletRequest request, HttpServletResponse response) {
 		RestResponse restResponse = null;
 		if (log.isDebugEnabled()) log.debug("login User");
 		String username = requestObject.get("username");
@@ -116,18 +115,18 @@ public class UserController extends AbstractController implements Serializable {
 			/*HttpSession httpSession = request.getSession(true);
 			httpSession.setAttribute(Constants.CURRENT_USER_ID, u.getEmail());
 
-			HashMap<String, String> uData = new HashMap<>();
+			HashMap<String, String> uData = new HashMap<>();z
 			uData.put(Constants.CURRENT_USER_ID, u.getEmail());
 			uData.put(Constants.CURRENT_USER_NAME, u.getFullName());
 			*/
-			if(u != null) response.sendRedirect(request.getContextPath() + "/home.xhtml");
-			return new ResponseEntity<RestResponse>(restResponse, HttpStatus.OK);
+			if(u != null) response.sendRedirect("http://localhost:8080/knoeien/home.xhtml");
+			return "loggedin";
 		} catch (AuthenticationFailedException t) {
 			restResponse = convertToRestBadResponse("", t.getLocalizedMessage());
 		} catch (Exception t) {
 			restResponse = convertToRestBadResponse("", t.getLocalizedMessage());
 		}
-		return new ResponseEntity<RestResponse>(restResponse, HttpStatus.OK);
+		return "loggedin";
 	}
 
 	@RequestMapping(value = "logout", method = RequestMethod.GET, produces = "application/json")
