@@ -12,7 +12,7 @@ import org.springframework.data.domain.Persistable;
 
 
 @MappedSuperclass
-public abstract class PersistableEntity implements Persistable<String>, HasCompanyId {
+public abstract class PersistableEntity implements Persistable<String> {
 	
 	private static final long serialVersionUID = -8762380193517415707L;
 	
@@ -61,8 +61,4 @@ public abstract class PersistableEntity implements Persistable<String>, HasCompa
 			return false;
 		return true;
 	}
-	
-	public abstract String getObjCode();
-		
-	public abstract String getCompanyID();
 }

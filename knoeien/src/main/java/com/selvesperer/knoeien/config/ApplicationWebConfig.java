@@ -9,7 +9,6 @@ import org.springframework.context.annotation.ComponentScan.Filter;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.ImportResource;
 
-import com.selvesperer.knoeien.spring.FlashScope;
 import com.selvesperer.knoeien.spring.ViewScope;
 
 @Configuration
@@ -17,15 +16,10 @@ import com.selvesperer.knoeien.spring.ViewScope;
 @ImportResource( { "classpath:/META-INF/spring/security.xml",
 	"classpath:/META-INF/spring/applicationContext.xml",
 	"classpath:/META-INF/spring/dispatcher-servlet.xml"} )  
-public class SpringWebConfig {
+public class ApplicationWebConfig {
 	@Bean
 	public static ViewScope viewScope() {
 		return new ViewScope();
-	}
-
-	@Bean
-	public static FlashScope flashScope() {
-		return new FlashScope();
 	}
 
 	@Bean
@@ -33,7 +27,6 @@ public class SpringWebConfig {
 		CustomScopeConfigurer configurer = new CustomScopeConfigurer();
 		HashMap<String, Object> hashMap = new HashMap<String, Object>();
 		hashMap.put("view", viewScope());
-		hashMap.put("flash", flashScope());
 		configurer.setScopes(hashMap);
 		return configurer;
 	}

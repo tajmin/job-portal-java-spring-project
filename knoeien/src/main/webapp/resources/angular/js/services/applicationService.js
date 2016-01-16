@@ -3,56 +3,37 @@ Services.factory('authService', function(Restangular, $rootScope, $cookies) {
 	service.access_token = localStorage.auth || '';
 	service.serviceBaseUrl = '';
 	$rootScope.access_token = service.access_token;
-	var ajaxCount = 0;
-	$rootScope.firstTime = true;
-	$rootScope.isProcessing = false;
-	$rootScope.isRequestCompleted = true;
-	$rootScope.allowToSubmit = true;
+	$rootScope.isGoodResponse = true;
+	$rootScope.restMessages = {};
 	service.enableAuth = function(isPost) {
 		return Restangular.withConfig(function(RestangularConfigurer) {
 			RestangularConfigurer.addRequestInterceptor(function(element) {
-				$rootScope.isProcessing = true;
-				$rootScope.isRequestCompleted = true;
-				if (!$rootScope.firstTime) {
-					setTimeout(function() {
-						$rootScope.isProcessing = false;
-						$rootScope.firstTime = false
-					}, 800)
-				} else {
-					setTimeout(function() {
-						ajaxCount++;
-						if (ajaxCount > 0) {
-							$("#ajaxloader").css("top", "0px")
-						}
-					}, 800)
-				}
+				$rootScope.isGoodResponse = false;
+				$rootScope.restMessages = {};
 				return element
 			});
-			RestangularConfigurer.addResponseInterceptor(function(response,restangularObject, url) {
-				$rootScope.isProcessing = false;
-				ajaxCount--;
-				if (ajaxCount == 0) {
-					$("#ajaxloader").css("top", "-35px")
+			
+			RestangularConfigurer.addResponseInterceptor(function(response, restangularObject, url) {
+				console.log(response);
+				console.log(response.success);
+				console.log(response.messages);
+				
+				if(!response.success) {
+					$rootScope.restMessages = response.messages;
+					console.log($rootScope.restMessages);
+					return false;
 				}
 				
+				$rootScope.isGoodResponse = true;
 				if (response.response) {
 					return response.response;
 				}
 				return response;
 			});
-			RestangularConfigurer.setErrorInterceptor(function(response, restangularObject, url) {
-				$rootScope.isProcessing = false;
-				ajaxCount--;
-				if (ajaxCount == 0) {
-					setTimeout(function() {
-						$("#ajaxloader").css("top", "-35px")
-					}, 800)
-				}
 			
-				
+			RestangularConfigurer.setErrorInterceptor(function(response, restangularObject, url) {
 				if (response.status === 503) {
-					window.location.href = window.location.origin
-							+ service.serviceBaseUrl + '/outOfService.xhtml'
+					window.location.href = window.location.origin + service.serviceBaseUrl + '/noService.xhtml'
 							
 				} else if(response.status == 401) {
 					window.location.href = window.location.origin + service.serviceBaseUrl + '/login.xhtml'

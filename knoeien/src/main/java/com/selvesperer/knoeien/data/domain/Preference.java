@@ -126,17 +126,4 @@ public class Preference extends AuditableEntity {
 	public void setEmailInvitationToFriend(Boolean emailInvitationToFriend) {
 		this.emailInvitationToFriend = emailInvitationToFriend;
 	}
-
-	@Override
-	public String getObjCode() {
-		// TODO Auto-generated method stub
-		return "pfrn";
-	}
-
-	@Override
-	public String getCompanyID() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	
 }

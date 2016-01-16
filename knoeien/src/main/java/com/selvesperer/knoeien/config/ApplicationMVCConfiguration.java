@@ -16,15 +16,14 @@ import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
 import com.fasterxml.jackson.databind.DeserializationFeature;
-/**
- * Company Object to store the company data of a user.
- * 
- * @author Mithun <shahinur.bd@gmail.com>
+/*
+ * @author Mithun
+ * configuration for MVCConfiguration
  */
 @ComponentScan(basePackages="com.selvesperer.knoeien.web.controllers.rest")
 @Configuration
 @EnableWebMvc
-public class SelvEspererConfiguration extends WebMvcConfigurerAdapter {   
+public class ApplicationMVCConfiguration extends WebMvcConfigurerAdapter {   
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
     	Map<String, String> resources = new HashMap<String, String>();    	

@@ -28,7 +28,6 @@ public class ViewScopeViewMapListener implements ViewMapListener {
         if (event instanceof PreDestroyViewMapEvent) {
             LOGGER.debug("Going call callback for bean {}", name);
             doCallback();
-//            viewScope.clearFromListener(this);
         }
     }
 

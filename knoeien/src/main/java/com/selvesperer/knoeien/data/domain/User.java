@@ -72,7 +72,7 @@ public class User extends AuditableEntity {
 	private String locale = "en";
 
 	@Column(name = "avatar_url", length = 300)
-	private String avatarUrl = com.selvesperer.knoeien.utils.Constants.DEFAULT_AVATAR;
+	private String avatarUrl = "";
 
 	@Column(name = "background_image_url", length = 300)
 	private String backgroundImageUrl;
@@ -92,6 +92,7 @@ public class User extends AuditableEntity {
 		this.setPreferredName(userModel.getPreferredName());
 		this.setEmail(userModel.getEmail());
 		this.setPassword(userModel.getPassword());
+		this.setPasswordResetToken(userModel.getPasswordResetToken());
 	}
 	
 	public String getFullName() {					
@@ -244,7 +245,7 @@ public class User extends AuditableEntity {
 	}
 
 	@JsonIgnore
-	public String getObjCode() {
+	public String getObjectCode() {
 		return "user";
 	}
 	
@@ -265,10 +266,5 @@ public class User extends AuditableEntity {
 			if (other.getId() != null) return false;
 		} else if (!getId().equals(other.getId())) return false;
 		return true;
-	}
-
-	@Override
-	public String getCompanyID() {
-		return null;
 	}
 }

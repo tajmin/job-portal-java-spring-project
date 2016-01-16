@@ -15,7 +15,7 @@ import org.slf4j.LoggerFactory;
 
 import com.selvesperer.knoeien.data.domain.User;
 import com.selvesperer.knoeien.service.UserService;
-import com.selvesperer.knoeien.spring.utils.SpringBeanFactory;
+import com.selvesperer.knoeien.spring.utils.ApplicationBeanFactory;
 
 @ManagedBean(name = "activationBean")
 @RequestScoped
@@ -26,7 +26,6 @@ public class ActivationBean implements Serializable {
 	private static final Logger log = (Logger) LoggerFactory.getLogger(ActivationBean.class);
 	
 	private String key;
-	private String message = "";
 	
 	@PostConstruct
 	public void init() {
@@ -40,7 +39,7 @@ public class ActivationBean implements Serializable {
 				Messages.addGlobalInfo("This is not a valid key. Please use valid key and try agian");
 				return;
 			}
-			UserService userService = SpringBeanFactory.getBean(UserService.class);
+			UserService userService = ApplicationBeanFactory.getBean(UserService.class);
 			User user = userService.findUserByResetToken(this.getKey());
 			if(user  == null) {
 				Messages.addGlobalInfo("This is not a valid key.");
@@ -48,7 +47,7 @@ public class ActivationBean implements Serializable {
 			}
 			
 			userService.activeUser(user);
-			Faces.redirect("home");
+			Faces.redirect("index.xhtml");
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

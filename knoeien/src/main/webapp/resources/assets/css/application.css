@@ -264,6 +264,13 @@
 	margin-top: 82px;
 	padding: 50px 0;
 }
+.circular-img {
+	border: 1px solid #3ac5e6;
+	border-radius: 50%;
+}
+#offCanvasLeft {
+	z-index: 6;
+}
 /* Helper Colours Start */
 .hlpr-color-info {
 	background-color: #3ac5e6;

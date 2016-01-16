@@ -4,22 +4,18 @@ import java.io.IOException;
 import javax.servlet.FilterConfig;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
-import javax.servlet.http.HttpServletRequest;
 
 import org.apache.shiro.authc.LockedAccountException;
 import org.apache.shiro.web.filter.authc.UserFilter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class ShiroAjaxAwareUserFilter extends UserFilter{
-	
-	private static Logger log = (Logger)LoggerFactory.getLogger(ShiroAjaxAwareUserFilter.class);
-	private static final String FACES_REDIRECT_XML = "<?xml version=\"1.0\" encoding=\"UTF-8\"?><partial-response><redirect url=\"%s\"></redirect></partial-response>";
+public class ApplicationSecurityFilter extends UserFilter {	
+	private static Logger log = (Logger)LoggerFactory.getLogger(ApplicationSecurityFilter.class);
  
 	@Override
     protected void redirectToLogin(ServletRequest req, ServletResponse res) throws IOException {
-    	if (log.isDebugEnabled()) log.debug("auto-login attempt from shiro");   
-        HttpServletRequest request = (HttpServletRequest) req;
+    	if (log.isDebugEnabled()) log.debug("Here auto-login will attempt from shiro"); 
     	try {
 	    	// Do logic here.
     	} catch (LockedAccountException le) {

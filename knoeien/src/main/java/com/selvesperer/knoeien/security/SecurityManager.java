@@ -1,7 +1,6 @@
 
 package com.selvesperer.knoeien.security;
 
-import java.util.Arrays;
 import java.util.HashSet;
 
 import org.apache.shiro.SecurityUtils;
@@ -14,9 +13,9 @@ import org.slf4j.LoggerFactory;
 import com.selvesperer.knoeien.data.domain.User;
 import com.selvesperer.knoeien.utils.Constants;
 
-public class SecurityUtil {
+public class SecurityManager {
 
-	private static final Logger log = (Logger) LoggerFactory.getLogger(SecurityUtil.class);
+	private static final Logger log = (Logger) LoggerFactory.getLogger(SecurityManager.class);
 
 
 	public static String getCurrentUserId() {
@@ -61,10 +60,11 @@ public class SecurityUtil {
 	}
 
 
-	public static void setSessionValues(String userID, String companyID) {
+	public static void setSessionValues(String userID, String companyID, String username) {
 		try {
 			SecurityUtils.getSubject().getSession().setAttribute(Constants.CURRENT_USER_ID, userID);
 			SecurityUtils.getSubject().getSession().setAttribute(Constants.CURRENT_COMPANY_ID, companyID);
+			SecurityUtils.getSubject().getSession().setAttribute(Constants.CURRENT_USER_NAME, username);
 		} catch (Exception e) {
 			log.error("Exception in setSessionValues:",e);
 		}
@@ -84,17 +84,9 @@ public class SecurityUtil {
         SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
         HashSet<String> hs = new HashSet<String>();
         
-        // TODO role load from db
-        //info.addRole(SelvEspererRoles.USER);
-        // addPermissions(hs, SecurityConfigLoader.getProperty(SelvEspererRoles.USER));
-        info.addStringPermissions(hs);
+       info.addStringPermissions(hs);
         if (log.isDebugEnabled()) log.debug("User Permissions:"+hs.toString());
         return info;
 
 	}
-
-	private static void addPermissions(HashSet<String> hs, String perms) {
-		if (perms != null) hs.addAll(Arrays.asList(perms.split(",")));
-	}
-
 }

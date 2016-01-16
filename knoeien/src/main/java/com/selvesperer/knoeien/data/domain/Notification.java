@@ -54,17 +54,4 @@ public class Notification extends AuditableEntity {
 	public void setExpireDate(Calendar expireDate) {
 		this.expireDate = expireDate;
 	}
-
-	@Override
-	public String getObjCode() {
-		// TODO Auto-generated method stub
-		return "ntfn";
-	}
-
-	@Override
-	public String getCompanyID() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 }

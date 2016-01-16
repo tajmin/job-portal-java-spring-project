@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.selvesperer.knoeien.data.domain.Company;
 import com.selvesperer.knoeien.service.CompanyService;
-import com.selvesperer.knoeien.spring.utils.SpringBeanFactory;
+import com.selvesperer.knoeien.spring.utils.ApplicationBeanFactory;
 import com.selvesperer.knoeien.web.controllers.model.RestResponse;
 import com.selvesperer.knoeien.web.controllers.model.CompanyModel;
 
@@ -39,11 +39,11 @@ public class CompanyController extends AbstractController implements Serializabl
 	public ResponseEntity<RestResponse> addCompany(@RequestBody CompanyModel companyModel) {		
 		Company company = null;
 		try {
-			CompanyService companyService = SpringBeanFactory.getBean(CompanyService.class);
+			CompanyService companyService = ApplicationBeanFactory.getBean(CompanyService.class);
 			company = companyService.saveCompany(companyModel);
 		} catch (Exception ex) {
 			Messages.addGlobalError(ex.getMessage());
 		}
-		return new ResponseEntity<RestResponse>(convertToRestResponse(company), HttpStatus.OK);
+		return new ResponseEntity<RestResponse>(convertToRestGoodResponse(company), HttpStatus.OK);
 	}
 }

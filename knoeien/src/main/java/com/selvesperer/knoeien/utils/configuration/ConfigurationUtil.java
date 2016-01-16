@@ -51,7 +51,7 @@ public class ConfigurationUtil {
 	public static String getMailtest() {
 		String s = lookupValue("selvesperer-mailtest");
 		if (s == null) s = System.getProperty("selvesperer-mailtest");
-		if(log.isDebugEnabled()) log.debug("Got mailtest value of " + s);
+		if(log.isDebugEnabled()) log.debug("mailtest value of " + s);
 		return s;
 	}	
 	

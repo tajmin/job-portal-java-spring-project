@@ -2,7 +2,7 @@ package com.selvesperer.knoeien.spring.utils;
 
 import org.springframework.context.ApplicationContext;
 
-public class SpringBeanFactory {
+public class ApplicationBeanFactory {
 
 	private static ApplicationContext applicationContext;
 
@@ -24,8 +24,8 @@ public class SpringBeanFactory {
 
 	public static void setApplicationContext(
 			final ApplicationContext applicationContext) {
-		if (SpringBeanFactory.applicationContext == null) {
-			SpringBeanFactory.applicationContext = applicationContext;
+		if (ApplicationBeanFactory.applicationContext == null) {
+			ApplicationBeanFactory.applicationContext = applicationContext;
 		}
 	}
 

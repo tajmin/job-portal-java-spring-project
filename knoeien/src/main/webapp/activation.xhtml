@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<ui:composition template="templates/faces-template.xhtml" 
+<ui:composition template="templates/angular-template.xhtml" 
 	xmlns="http://www.w3.org/1999/xhtml" 
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html" xmlns:ui="http://java.sun.com/jsf/facelets"
@@ -18,6 +18,7 @@
 		<f:metadata>
 		    <!--  Meta data like view actin will goes here -->
 		    <f:viewAction action="#{activationBean.initActivation()}" />
+		    <f:viewParam name="key" value="#{activationBean.key}" />		    
 		</f:metadata>
 	</ui:define>
 	<ui:define name="right-side">
@@ -25,9 +26,7 @@
 	</ui:define>
 	<ui:define name="content">
 		<h:form>
-			<h:commandLink value="Create User!" actionListener="#{userBean.saveUser()}">
-				<f:ajax execute="@this" render="@form"></f:ajax>
-			</h:commandLink>
+			
 			<h:messages errorClass="" infoClass="" warnClass="" styleClass="" id="messages" autoUpdate="true" />
 		</h:form>		
 	</ui:define>
