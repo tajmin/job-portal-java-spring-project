@@ -149,16 +149,4 @@ public class Job extends AuditableEntity {
 	public void setZip(String zip) {
 		this.zip = zip;
 	}
-
-	@Override
-	public String getObjCode() {
-		// TODO Auto-generated method stub
-		return "jobs";
-	}
-
-	@Override
-	public String getCompanyID() {
-		// TODO Auto-generated method stub
-		return null;
-	}
 }

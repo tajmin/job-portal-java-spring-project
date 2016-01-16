@@ -10,7 +10,7 @@ import org.springframework.context.annotation.Bean;
 import com.mchange.v2.c3p0.ComboPooledDataSource;
 import com.selvesperer.knoeien.utils.configuration.ConfigurationUtil;
 
-public class SpringJNDIDataConfig {
+public class ApplicationJNDIDataConfig {
 	@Bean
 	protected DataSource dataSource() {
 		try {

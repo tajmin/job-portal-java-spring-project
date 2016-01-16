@@ -8,20 +8,13 @@ import org.hibernate.HibernateException;
 import org.hibernate.engine.spi.SessionImplementor;
 import org.hibernate.id.IdentifierGenerator;
 
-import com.selvesperer.knoeien.data.domain.PersistableEntity;
-
 public class IdGenerator implements IdentifierGenerator { 
 	
 	  /** 
 	   * @see org.hibernate.id.IdentifierGenerator#generate(org.hibernate.engine.SessionImplementor, java.lang.Object) 
 	   */ 
 	  public Serializable generate(SessionImplementor session, Object obj) throws HibernateException { 
-		  String component = "udef";
-		  if (obj instanceof PersistableEntity) {
-			  try {
-				  component = ((PersistableEntity) obj).getObjCode();
-			  } catch (Exception e) {component="uspt";}
-		  }
+		  String component = "uuid";
 		  return doStuff(component);
 	 }
 	  

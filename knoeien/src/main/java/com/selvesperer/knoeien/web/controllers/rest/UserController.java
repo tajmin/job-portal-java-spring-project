@@ -28,7 +28,7 @@ import com.selvesperer.knoeien.emails.ActivationEmail;
 import com.selvesperer.knoeien.exception.AuthenticationFailedException;
 import com.selvesperer.knoeien.service.EmailService;
 import com.selvesperer.knoeien.service.UserService;
-import com.selvesperer.knoeien.spring.utils.SpringBeanFactory;
+import com.selvesperer.knoeien.spring.utils.ApplicationBeanFactory;
 import com.selvesperer.knoeien.utils.Constants;
 import com.selvesperer.knoeien.utils.localization.LocalizationUtil;
 import com.selvesperer.knoeien.web.controllers.model.RestResponse;
@@ -71,11 +71,11 @@ public class UserController extends AbstractController implements Serializable {
 				return new ResponseEntity<RestResponse>(restResponse, HttpStatus.OK);
 			}
 
-			UserService userService = SpringBeanFactory.getBean(UserService.class);
+			UserService userService = ApplicationBeanFactory.getBean(UserService.class);
 			String token = UUID.randomUUID().toString();
 			userModel.setPasswordResetToken(token);
 			user = userService.saveUser(userModel);
-			EmailService emailService = SpringBeanFactory.getBean(EmailService.class);
+			EmailService emailService = ApplicationBeanFactory.getBean(EmailService.class);
 			emailService.sendEmail(new ActivationEmail(user, token));
 
 			return new ResponseEntity<RestResponse>( convertToRestGoodResponse(null, LocalizationUtil.findLocalizedString("signupsuccess.text")),HttpStatus.OK);
@@ -90,12 +90,12 @@ public class UserController extends AbstractController implements Serializable {
 	public ResponseEntity<RestResponse> addUser(@RequestBody UserModel userModel) {
 		User user = null;
 		try {
-			UserService userService = SpringBeanFactory.getBean(UserService.class);
+			UserService userService = ApplicationBeanFactory.getBean(UserService.class);
 
 			String token = UUID.randomUUID().toString();
 			userModel.setPasswordResetToken(token);
 			user = userService.saveUser(userModel);
-			EmailService emailService = SpringBeanFactory.getBean(EmailService.class);
+			EmailService emailService = ApplicationBeanFactory.getBean(EmailService.class);
 			emailService.sendEmail(new ActivationEmail(user, token));
 		} catch (Exception ex) {
 			Messages.addGlobalError(ex.getMessage());
@@ -110,18 +110,18 @@ public class UserController extends AbstractController implements Serializable {
 		String username = requestObject.get("username");
 		String password = requestObject.get("password");
 		try {
-			UserService userService = SpringBeanFactory.getBean(UserService.class);
+			UserService userService = ApplicationBeanFactory.getBean(UserService.class);
 			User u = userService.login(username, password);
 
-			HttpSession httpSession = request.getSession(true);
+			/*HttpSession httpSession = request.getSession(true);
 			httpSession.setAttribute(Constants.CURRENT_USER_ID, u.getEmail());
 
 			HashMap<String, String> uData = new HashMap<>();
 			uData.put(Constants.CURRENT_USER_ID, u.getEmail());
 			uData.put(Constants.CURRENT_USER_NAME, u.getFullName());
-
-			response.sendRedirect(request.getContextPath() + "/index.xhtml");
-			return new ResponseEntity<RestResponse>(convertToRestGoodResponse(uData), HttpStatus.OK);
+			*/
+			if(u != null) response.sendRedirect(request.getContextPath() + "/home.xhtml");
+			return new ResponseEntity<RestResponse>(restResponse, HttpStatus.OK);
 		} catch (AuthenticationFailedException t) {
 			restResponse = convertToRestBadResponse("", t.getLocalizedMessage());
 		} catch (Exception t) {
@@ -160,7 +160,7 @@ public class UserController extends AbstractController implements Serializable {
 				return new ResponseEntity<RestResponse>(restResponse, HttpStatus.OK);
 			}
 			
-			UserService userService = SpringBeanFactory.getBean(UserService.class);
+			UserService userService = ApplicationBeanFactory.getBean(UserService.class);
 			userService.sendForgetPasswordEmail(email);
 			
 			return new ResponseEntity<RestResponse>( convertToRestGoodResponse(null, "Please check your email and follow the instructions"),HttpStatus.OK);
@@ -181,7 +181,7 @@ public class UserController extends AbstractController implements Serializable {
 			String confirmPassword = requestObject.get("confirmPassword");
 			String token = requestObject.get("passwordResetToken");
 			
-			UserService userService = SpringBeanFactory.getBean(UserService.class);		
+			UserService userService = ApplicationBeanFactory.getBean(UserService.class);		
 
 			if (StringUtils.isBlank(password)) {
 				restResponse = convertToRestBadResponse(restResponse, "", LocalizationUtil.findLocalizedString("error.emptypassword.text"));

@@ -71,17 +71,4 @@ public class TransactionHistory extends AuditableEntity {
 	public void setUserId(String userId) {
 		this.userId = userId;
 	}
-
-	@Override
-	public String getObjCode() {
-		// TODO Auto-generated method stub
-		return "tsht";
-	}
-
-	@Override
-	public String getCompanyID() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 }

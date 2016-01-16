@@ -62,16 +62,4 @@ public class TypicalJob extends AuditableEntity{
 	public void setImageUrl(String imageUrl) {
 		this.imageUrl = imageUrl;
 	}
-
-	@Override
-	public String getObjCode() {
-		return "tpjb";
-	}
-
-	@Override
-	public String getCompanyID() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 }

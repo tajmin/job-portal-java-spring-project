@@ -9,7 +9,7 @@ import org.omnifaces.util.Messages;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import com.selvesperer.knoeien.service.UserService;
-import com.selvesperer.knoeien.spring.utils.SpringBeanFactory;
+import com.selvesperer.knoeien.spring.utils.ApplicationBeanFactory;
 import com.selvesperer.knoeien.web.controllers.model.UserModel;
 
 @ManagedBean(name = "userBean")
@@ -27,7 +27,7 @@ public class UserBean implements Serializable {
 
 	public void saveUser() {
 		try {
-			UserService userService = SpringBeanFactory.getBean(UserService.class);
+			UserService userService = ApplicationBeanFactory.getBean(UserService.class);
 			UserModel userModel = new UserModel();
 			userModel.setFirstName("Test f name");
 			userModel.setLastName("Test l name");

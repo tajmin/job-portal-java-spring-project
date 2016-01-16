@@ -12,7 +12,7 @@ import com.selvesperer.knoeien.utils.SelvEDate;
 
 @MappedSuperclass
 @EntityListeners(value = { AuditEntityListener.class })
-public abstract class AuditableEntity extends PersistableEntity implements HasCreatedById {
+public abstract class AuditableEntity extends PersistableEntity {
 	
 	private static final long serialVersionUID = -4504547440588298187L;
 
@@ -97,7 +97,4 @@ public abstract class AuditableEntity extends PersistableEntity implements HasCr
 		}
 		return "";
 	}
-	
-
-	
 }

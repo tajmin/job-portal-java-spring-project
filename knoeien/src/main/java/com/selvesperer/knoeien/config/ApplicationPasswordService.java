@@ -10,18 +10,17 @@ import org.springframework.security.crypto.password.StandardPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
-public class SelvEspererPasswordService implements PasswordService {
+public class ApplicationPasswordService implements PasswordService {
 
 	@Inject
-	StandardPasswordEncoder passwordEncoder;
+	StandardPasswordEncoder standardPasswordEncoder;
 
-	private static Logger log = (Logger) LoggerFactory.getLogger(SelvEspererPasswordService.class);
+	private static Logger log = (Logger) LoggerFactory.getLogger(ApplicationPasswordService.class);
 
 	@Override
 	public String encryptPassword(Object paramObject) throws IllegalArgumentException {
-		if (log.isDebugEnabled())
-			log.debug("encryptPassword");
-		return passwordEncoder.encode(paramObject.toString());
+		if (log.isDebugEnabled()) log.debug("@ApplicationPasswordService");
+		return standardPasswordEncoder.encode(paramObject.toString());
 	}
 
 	@Override
@@ -33,7 +32,7 @@ public class SelvEspererPasswordService implements PasswordService {
 				input.append(c);
 			}
 
-			boolean result = passwordEncoder.matches(input.toString(), paramString);
+			boolean result = standardPasswordEncoder.matches(input.toString(), paramString);
 			if (!result)
 				result = input.toString().equals(paramString);
 			if (log.isDebugEnabled())

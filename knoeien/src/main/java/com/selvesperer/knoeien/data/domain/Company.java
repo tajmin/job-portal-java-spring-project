@@ -245,12 +245,7 @@ public class Company extends AuditableEntity {
 	}
 
 	@JsonIgnore
-	public String getObjCode() {
+	public String getObjectCode() {
 		return "cmpy";
-	}
-
-	@Override
-	public String getCompanyID() {
-		return null;
 	}
 }

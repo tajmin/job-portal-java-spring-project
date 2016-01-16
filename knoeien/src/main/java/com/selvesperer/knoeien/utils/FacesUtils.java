@@ -9,17 +9,12 @@ import javax.faces.application.FacesMessage;
 import javax.faces.component.UIComponent;
 import javax.faces.component.UIViewRoot;
 import javax.faces.context.FacesContext;
-import javax.faces.context.Flash;
 
 import org.omnifaces.util.Messages;
 
 import com.selvesperer.knoeien.exception.SelvEBusinessException;
 
-public class JSFUtils {
-	public static Flash getFlashScope() {
-		return FacesContext.getCurrentInstance().getExternalContext().getFlash();
-	}
-
+public class FacesUtils {
 	public static Locale getViewLocale() {
 		return FacesContext.getCurrentInstance().getViewRoot().getLocale();
 	}

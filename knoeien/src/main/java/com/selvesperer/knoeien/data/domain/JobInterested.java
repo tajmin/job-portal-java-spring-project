@@ -35,17 +35,4 @@ public class JobInterested extends AuditableEntity {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-
-	@Override
-	public String getObjCode() {
-		// TODO Auto-generated method stub
-		return "jbin";
-	}
-
-	@Override
-	public String getCompanyID() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 }

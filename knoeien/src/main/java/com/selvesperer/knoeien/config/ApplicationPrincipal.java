@@ -7,17 +7,16 @@ import org.apache.shiro.authz.AuthorizationInfo;
 
 import com.selvesperer.knoeien.data.domain.User;
 
-public class SelvEPrincipal implements Serializable{
+public class ApplicationPrincipal implements Serializable{
 
 	private static final long serialVersionUID = 5631773323625356340L;
 	
-	User principleUser;
-	AuthorizationInfo authorizationInfo;
-	AuthenticationInfo authenticationInfo;
+	private User principleUser;
+	private AuthorizationInfo authorizationInfo;
+	private AuthenticationInfo authenticationInfo;
 	
-	public SelvEPrincipal(User principleUser,	AuthorizationInfo authorizationInfo){
+	public ApplicationPrincipal(User principleUser,	AuthorizationInfo authorizationInfo){
 		this.principleUser = principleUser;
-//		this.authenticationInfo = authenticationInfo;
 		this.authorizationInfo = authorizationInfo;
 		
 	}
