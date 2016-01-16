@@ -7,9 +7,9 @@ import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.selvesperer.knoeien.security.SecurityUtil;
+import com.selvesperer.knoeien.security.SecurityManager;
 import com.selvesperer.knoeien.service.UserService;
-import com.selvesperer.knoeien.spring.utils.SpringBeanFactory;
+import com.selvesperer.knoeien.spring.utils.ApplicationBeanFactory;
 import com.selvesperer.knoeien.utils.SelvEDate;
 
 public class AuditEntityListener {
@@ -21,11 +21,11 @@ public class AuditEntityListener {
 			if (!StringUtils.isEmpty(e.getCreatedByID()) && !StringUtils.isEmpty(e.getCreatedByName())) {
 				return;//already set so don't override
 			}
-			if (SecurityUtil.getCurrentUserId() != null && SecurityUtil.isAuthenticated()) {
+			if (SecurityManager.getCurrentUserId() != null && SecurityManager.isAuthenticated()) {
 
 				try {
-					UserService userService = SpringBeanFactory.getBean(UserService.class);
-					User user = userService.findUserById(SecurityUtil.getCurrentUserId());
+					UserService userService = ApplicationBeanFactory.getBean(UserService.class);
+					User user = userService.findUserById(SecurityManager.getCurrentUserId());
 					if (user != null && e.getCreatedByName() == null) {
 						e.setCreatedByID(user.getId());
 						e.setCreatedByName(user.getFullName());
@@ -51,10 +51,10 @@ public class AuditEntityListener {
 	@PreUpdate
 	public void preUpdate(AuditableEntity e) {
 		try {
-			if (SecurityUtil.getCurrentUserId() != null && SecurityUtil.isAuthenticated()) {
+			if (SecurityManager.getCurrentUserId() != null && SecurityManager.isAuthenticated()) {
 				try {
-					UserService userService = SpringBeanFactory.getBean(UserService.class);
-					User user = userService.findUserById(SecurityUtil.getCurrentUserId());
+					UserService userService = ApplicationBeanFactory.getBean(UserService.class);
+					User user = userService.findUserById(SecurityManager.getCurrentUserId());
 					if (user != null) {
 						e.setLastModifiedByID(user.getId());
 						e.setLastModifiedByName(user.getFullName());

@@ -1,13 +1,10 @@
 package com.selvesperer.knoeien.utils;
 
 import java.text.DateFormat;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
-import java.util.List;
 import java.util.Locale;
 import java.util.TimeZone;
 import java.util.regex.Matcher;
@@ -37,11 +34,7 @@ public class SelvEDate extends GregorianCalendar implements Comparable<Calendar>
 	public final static int ONE_WEEK = 7 * ONE_DAY;
 	public final static int ONE_YEAR = 365 * ONE_DAY;
 
-	public static final long MILLISECONDS_PER_DAY = 24 * 60 * 60 * 1000;
-
-	private static final Pattern BIRTHDAY_PATTERN = Pattern.compile(
-	// MM - DD
-	"\\d{1,2}-\\d{1,2}");
+	public static final long MILLISECONDS_PER_DAY = 24 * 60 * 60 * 1000;	
 
 	private static final Pattern TIMESTAMP_PATTERN = Pattern.compile("-?\\d+");
 
@@ -75,10 +68,8 @@ public class SelvEDate extends GregorianCalendar implements Comparable<Calendar>
 
 	/**
 	 * 
-	 * @param month
-	 *            - the 1-based month of the year (1-12)
-	 * @param day
-	 *            - the day of the month
+	 * @param month - the 1-based month of the year (1-12)
+	 * @param day - the day of the month
 	 */
 	public SelvEDate(int month, int day) {
 		set(MONTH, month - 1);
@@ -677,138 +668,6 @@ public class SelvEDate extends GregorianCalendar implements Comparable<Calendar>
 	public int getDayOfMonth() {
 		return get(Calendar.DAY_OF_MONTH);
 	}
-
-	/**
-	 * Get the natural formatting of a date (e.g., Just now, 10 minutes ago,
-	 * Yesterday at 10:00 am, etc.)
-	 * 
-	 * @return natural format of date
-	 */
-	public String toReadableString() {
-
-		SelvEDate now = now();
-		long diff = now.getTime().getTime() - this.getTime().getTime();
-
-		// Just now
-		if (Math.abs(diff) < ONE_MINUTE) {
-			return LocalizationUtil.findLocalizedString("datedifference.now");
-		}
-		// Past
-		else if (diff > 0) {
-			// x minutes ago
-			if (diff < ONE_HOUR) {
-				int minutes = (int) (diff / ONE_MINUTE);
-				return minutes > 1 ? LocalizationUtil.findLocalizedString("datedifference.past.minute.plural", minutes + "") : LocalizationUtil.findLocalizedString("datedifference.past.minute");
-			}
-			// x hours ago
-			else if (diff < ONE_DAY) {
-				// TODO - if this date has the time fields cleared, the result
-				// should be 'today'
-				if (!hasTimeSet())
-					return LocalizationUtil.findLocalizedString("today");
-				int hours = (int) (diff / ONE_HOUR);
-				return hours > 1 ? LocalizationUtil.findLocalizedString("datedifference.past.hour.plural", hours + "") : LocalizationUtil.findLocalizedString("datedifference.past.hour", hours + "");
-			}
-			// Yesterday
-			else if (isSameDay(this, now.addDays(-1))) {
-				return LocalizationUtil.findLocalizedString("datedifference.yesterday");
-			}
-			// x days ago
-			else if (diff < ONE_WEEK) {
-				int days = (int) (diff / ONE_DAY);
-				if (days == 1) {
-					int hours = (int) (diff / ONE_HOUR);
-					return LocalizationUtil.findLocalizedString("datedifference.past.hour.plural", hours + "");
-				}
-				return LocalizationUtil.findLocalizedString("datedifference.past.day.plural", days + "");
-			}
-			// last week
-			else if (diff < ONE_WEEK * 2) {
-				int days = (int) (diff / ONE_DAY);
-				return days <= 8 ? LocalizationUtil.findLocalizedString("datedifference.past.week") : LocalizationUtil.findLocalizedString("datedifference.past.day.plural", days + "");
-			}
-			// x weeks ago
-			else if ((int) (diff / ONE_WEEK) < 6) {
-				int weeks = (int) (diff / ONE_WEEK);
-				return LocalizationUtil.findLocalizedString("datedifference.past.week.plural", weeks + "");
-			} else if ((int) (diff / ONE_WEEK) < 20) {
-				return toFullMonthString();
-			} else {
-				return toMediumString();
-			}
-		}
-		// Future
-		else {
-			diff = Math.abs(diff);
-
-			// in x minutes
-			if (diff < ONE_HOUR) {
-				int minutes = (int) (diff / ONE_MINUTE);
-				return minutes > 1 ? LocalizationUtil.findLocalizedString("datedifference.future.minute.plural", minutes + "") : LocalizationUtil.findLocalizedString("datedifference.future.minute");
-			}
-			// in x hours, or between tomorrow and x days
-			else if (diff < ONE_DAY || (diff > ONE_DAY && diff < ONE_DAY * 2)) {
-				int hours = (int) (diff / ONE_HOUR);
-				return hours > 1 ? LocalizationUtil.findLocalizedString("datedifference.future.hour.plural", hours + "") : LocalizationUtil.findLocalizedString("datedifference.future.hour");
-			}
-			// tomorrow
-			else if (isSameDay(this, now.addDays(1))) {
-				return LocalizationUtil.findLocalizedString("datedifference.tomorrow");
-			}
-			// in x days
-			else if (diff < ONE_WEEK) {
-				int days = (int) (diff / ONE_DAY);
-				return LocalizationUtil.findLocalizedString("datedifference.future.day.plural", days + "");
-			}
-			// last week
-			else if (diff < ONE_WEEK * 2) {
-				int days = (int) (diff / ONE_DAY);
-				return days <= 8 ? LocalizationUtil.findLocalizedString("datedifference.future.week") : LocalizationUtil.findLocalizedString("datedifference.future.day.plural", days + "");
-			}
-			// x weeks ago
-			else if ((int) (diff / ONE_WEEK) < 6) {
-				int weeks = (int) (diff / ONE_WEEK);
-				return LocalizationUtil.findLocalizedString("datedifference.future.week.plural", weeks + "");
-			}
-			// Just the date
-			else {
-				return toFullMonthString();
-			}
-		}
-	}
-	
-	/**
-	 * Get the natural formatting of a date (e.g., Sunday, April 30
-	 * 
-	 * @return natural format of date
-	 */
-	public String getReadableActualDayString() {
-		SelvEDate now = now();
-		long diff = now.getTime().getTime() - this.getTime().getTime();
-		
-		if (isSameDay(this, now)) {
-			return toFullDayString();
-		} 
-		
-		if (diff > 0) {
-			if (diff < ONE_DAY * 2) {
-				return toFullDayString();
-			} else if (diff >= ONE_DAY * 2 && diff < ONE_YEAR) {
-				return toFullMonthString();
-			} else {
-				return toShortString();
-			}
-		} else {
-			diff = Math.abs(diff);
-			if (diff < ONE_DAY * 2) {
-				return toFullDayString();
-			} else if (diff >= ONE_DAY * 2 && diff < ONE_YEAR) {
-				return toFullMonthString();
-			} else {
-				return toShortString();
-			}
-		}
-	}
 	
 	public SelvEDate addField(int field, int value) {
 		SelvEDate tmp = clone();
@@ -1080,66 +939,7 @@ public class SelvEDate extends GregorianCalendar implements Comparable<Calendar>
 
 	public static int getCurrentDayOfCurrentMonth() {
 		return SelvEDate.getDayOfMonth(new SelvEDate().getTime());
-	}
-
-
-	/**
-	 * Get a list containing the month numbers for the next X months (between 1
-	 * and 12);
-	 * 
-	 * @param howMany
-	 * @return list of int
-	 */
-	public static List<Integer> getNextXMonths(int howMany) {
-		List<Integer> xmonths = new ArrayList<Integer>(howMany);
-		int currentMont = SelvEDate.getCurrentMonthNumber();
-		int counter = 0;
-		for (int i = currentMont; i < currentMont + howMany; i++) {
-			if (counter == 6)
-				break;
-			counter++;
-			if (i == 13)
-				i = 1;
-			xmonths.add(i);
-		}
-		return xmonths;
-	}
-
-	/**
-	 * Get a list containing the month numbers for the last X months (between 1
-	 * and 12);
-	 * 
-	 * @param howMany
-	 * @return list of int
-	 */
-	public static List<Integer> getLastXMonths(int howMany) {
-		List<Integer> xmonths = new ArrayList<Integer>(howMany);
-		int currentMont = SelvEDate.getCurrentMonthNumber();
-		int counter = 0;
-		xmonths.add(currentMont);
-		for (int i = (currentMont - 1);; i--) {
-			if (counter == howMany)
-				break;
-			counter++;
-			if (i == 0)
-				i = 12;
-			xmonths.add(i);
-		}
-		return xmonths;
-	}
-
-	/**
-	 * returns true if a month is within the next howMany months
-	 * 
-	 * @param month
-	 *            - which month to check
-	 * @param howMany
-	 *            - the next howMany months
-	 * @return true if yes
-	 */
-	public static boolean isMonthInNextXMonthsList(int month, int howMany) {
-		return getNextXMonths(howMany).contains(month);
-	}
+	}	
 
 	public static SelvEDate beginningOfLastWeek() {
 		SelvEDate d = beginningOfWeek().addWeeks(-1);
@@ -1221,98 +1021,102 @@ public class SelvEDate extends GregorianCalendar implements Comparable<Calendar>
 		return beginningOfYear(d).addYears(1).addSeconds(-1);
 	}
 	
-	public static SelvEDate nextAnnualOccurence(SelvEDate d) {
-		if (d != null) {
-			SelvEDate t = SelvEDate.today();
-			d = d.setField(SelvEDate.YEAR, t.get(SelvEDate.YEAR));
-			if (d.before(t)) {
-				return d.addYears(1);
-			}
-			return d;
-		}
-		return null;
-	}
-	
 	/**
-	 * Get previous day of week for a given day of week and given date, for
-	 * example get previous monday for given date.
-	 **/
-	public static SelvEDate getLastDayOfWeekForDate(SelvEDate date, int dayOfWeek) {
+	 * Get the natural formatting of a date (e.g., Just now, 10 minutes ago,
+	 * Yesterday at 10:00 am, etc.)
+	 * 
+	 * @return natural format of date
+	 */
+	public String toReadableString() {
 
-		int differenceToLastMonday = 0;
-		int currentDayOfWeek = date.get(Calendar.DAY_OF_WEEK);
-		int saturdayDayOfWeek = Calendar.SATURDAY;
-		int leftDaysInCurrentWeek = currentDayOfWeek - saturdayDayOfWeek;
-		if (dayOfWeek != currentDayOfWeek) {
-			if (dayOfWeek < currentDayOfWeek) {
-				differenceToLastMonday = dayOfWeek - currentDayOfWeek;
+		SelvEDate now = now();
+		long diff = now.getTime().getTime() - this.getTime().getTime();
+
+		// Just now
+		if (Math.abs(diff) < ONE_MINUTE) {
+			return LocalizationUtil.findLocalizedString("datedifference.now");
+		}
+		// Past
+		else if (diff > 0) {
+			// x minutes ago
+			if (diff < ONE_HOUR) {
+				int minutes = (int) (diff / ONE_MINUTE);
+				return minutes > 1 ? LocalizationUtil.findLocalizedString("datedifference.past.minute.plural", minutes + "") : LocalizationUtil.findLocalizedString("datedifference.past.minute");
+			}
+			// x hours ago
+			else if (diff < ONE_DAY) {
+				// TODO - if this date has the time fields cleared, the result
+				// should be 'today'
+				if (!hasTimeSet())
+					return LocalizationUtil.findLocalizedString("today");
+				int hours = (int) (diff / ONE_HOUR);
+				return hours > 1 ? LocalizationUtil.findLocalizedString("datedifference.past.hour.plural", hours + "") : LocalizationUtil.findLocalizedString("datedifference.past.hour", hours + "");
+			}
+			// Yesterday
+			else if (isSameDay(this, now.addDays(-1))) {
+				return LocalizationUtil.findLocalizedString("datedifference.yesterday");
+			}
+			// x days ago
+			else if (diff < ONE_WEEK) {
+				int days = (int) (diff / ONE_DAY);
+				if (days == 1) {
+					int hours = (int) (diff / ONE_HOUR);
+					return LocalizationUtil.findLocalizedString("datedifference.past.hour.plural", hours + "");
+				}
+				return LocalizationUtil.findLocalizedString("datedifference.past.day.plural", days + "");
+			}
+			// last week
+			else if (diff < ONE_WEEK * 2) {
+				int days = (int) (diff / ONE_DAY);
+				return days <= 8 ? LocalizationUtil.findLocalizedString("datedifference.past.week") : LocalizationUtil.findLocalizedString("datedifference.past.day.plural", days + "");
+			}
+			// x weeks ago
+			else if ((int) (diff / ONE_WEEK) < 6) {
+				int weeks = (int) (diff / ONE_WEEK);
+				return LocalizationUtil.findLocalizedString("datedifference.past.week.plural", weeks + "");
+			} else if ((int) (diff / ONE_WEEK) < 20) {
+				return toFullMonthString();
 			} else {
-				differenceToLastMonday = leftDaysInCurrentWeek;
+				return toMediumString();
 			}
-		} else {
-			differenceToLastMonday = -7;
 		}
-		int previousDayOfWeek = date.getDayOfMonth() + differenceToLastMonday;
-		SelvEDate previous = new SelvEDate().clearTime();
-		previous = previous.setField(SelvEDate.YEAR, date.get(SelvEDate.YEAR)).setField(SelvEDate.MONTH, date.get(SelvEDate.MONTH)).setField(SelvEDate.DAY_OF_MONTH, previousDayOfWeek);
-		return previous;
-	}
+		// Future
+		else {
+			diff = Math.abs(diff);
 
-	/**
-	 * Get next day of week for a given day of week and given date, for example
-	 * get next monday of given date.
-	 **/
-	public static SelvEDate getNextDayOfWeekForDate(SelvEDate date, int dayOfWeek) {
-		int diff = dayOfWeek - date.get(SelvEDate.DAY_OF_WEEK);
-		if (!(diff > 0)) {
-			diff += 7;
+			// in x minutes
+			if (diff < ONE_HOUR) {
+				int minutes = (int) (diff / ONE_MINUTE);
+				return minutes > 1 ? LocalizationUtil.findLocalizedString("datedifference.future.minute.plural", minutes + "") : LocalizationUtil.findLocalizedString("datedifference.future.minute");
+			}
+			// in x hours, or between tomorrow and x days
+			else if (diff < ONE_DAY || (diff > ONE_DAY && diff < ONE_DAY * 2)) {
+				int hours = (int) (diff / ONE_HOUR);
+				return hours > 1 ? LocalizationUtil.findLocalizedString("datedifference.future.hour.plural", hours + "") : LocalizationUtil.findLocalizedString("datedifference.future.hour");
+			}
+			// tomorrow
+			else if (isSameDay(this, now.addDays(1))) {
+				return LocalizationUtil.findLocalizedString("datedifference.tomorrow");
+			}
+			// in x days
+			else if (diff < ONE_WEEK) {
+				int days = (int) (diff / ONE_DAY);
+				return LocalizationUtil.findLocalizedString("datedifference.future.day.plural", days + "");
+			}
+			// last week
+			else if (diff < ONE_WEEK * 2) {
+				int days = (int) (diff / ONE_DAY);
+				return days <= 8 ? LocalizationUtil.findLocalizedString("datedifference.future.week") : LocalizationUtil.findLocalizedString("datedifference.future.day.plural", days + "");
+			}
+			// x weeks ago
+			else if ((int) (diff / ONE_WEEK) < 6) {
+				int weeks = (int) (diff / ONE_WEEK);
+				return LocalizationUtil.findLocalizedString("datedifference.future.week.plural", weeks + "");
+			}
+			// Just the date
+			else {
+				return toFullMonthString();
+			}
 		}
-		int nextDayOfWeek = date.getDayOfMonth() + diff;
-		SelvEDate next = new SelvEDate().clearTime();
-		next = next.setField(SelvEDate.YEAR, date.get(SelvEDate.YEAR)).setField(SelvEDate.MONTH, date.get(SelvEDate.MONTH)).setField(SelvEDate.DAY_OF_MONTH, nextDayOfWeek);
-		return next;
 	}
-
-	public static void main(String[] args) throws ParseException {
-		SelvEDate d = new SelvEDate("6/1/2015");
-		System.out.println("beginning of week " + SelvEDate.beginningOfWeek(d).toFullString());
-		System.out.println("beginning of month " + SelvEDate.beginningOfMonth(d).toFullString());
-		System.out.println("beginning of quarter " + SelvEDate.beginningOfQuarter(d).toFullString());
-		System.out.println("beginning of year " + SelvEDate.beginningOfYear(d).toFullString());
-		System.out.println("end of day " + SelvEDate.endOfDay(d).toFullString());
-		System.out.println("end of month " + SelvEDate.endOfMonth(d).toFullString());
-		System.out.println("end of quarter " + SelvEDate.endOfQuarter(d).toFullString());
-		System.out.println("end of year " + SelvEDate.endOfYear(d).toFullString());
-	
-//		System.out.println(new selvEDate("5/9/15").get(selvEDate.DAY_OF_WEEK));
-//		TimeZone tz = TimeZone.getDefault();
-//		Locale en = new Locale("en");
-//		Locale pt = new Locale("pt", "BR");
-//		DateFormat df = DateFormatUtils.shortDateFormatter(pt, tz);
-//		System.out.println(df.parse("30/4/15").toString());
-//		df = DateFormatUtils.shortDateFormatter(en, tz);
-//		System.out.println(df.parse("4/30/15").toString());
-//		
-//		selvEDate april30 = new selvEDate("30/4/15", pt);
-//		System.out.println(april30.toFullString() + " and " + april30.before(new selvEDate()));
-//		
-//		d = new selvEDate("Mar 20 1999");
-//		System.out.println(d.toLongString());
-		/*System.out.println(selvEDate.getLastDateOfCurrentMonth());
-		System.out.println(beginningOfNextWeek());
-		Date d = null;
-		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
-		d = df.parse("2013-08-24");
-		selvEDate date = new selvEDate(d);
-		
-		long timeNow = System.currentTimeMillis();
-		long entryTime = d.getTime();
-		long diff = timeNow - entryTime;
-		long diffSec = diff / 1000;
-		long difMin = diffSec / 60;
-		long difHours = difMin / 60;
-		long difDays = difHours / 24;*/
-
-	}
-
 }

@@ -21,20 +21,19 @@ import org.springframework.web.context.support.AnnotationConfigWebApplicationCon
 import com.selvesperer.knoeien.utils.LoggerUtils;
 import com.selvesperer.knoeien.utils.configuration.ConfigurationUtil;
 
-public class WebAppConfig implements WebApplicationInitializer {
+public class WebApplicationConfig implements WebApplicationInitializer {
 
-
-	private static Logger log = (Logger)LoggerFactory.getLogger(WebAppConfig.class);
+	private static Logger log = (Logger)LoggerFactory.getLogger(WebApplicationConfig.class);
 
 	@Override
 	public void onStartup(final ServletContext servletContext) throws ServletException {
-		if (log.isDebugEnabled()) log.debug("Starting web context configuration");
+		if (log.isDebugEnabled()) log.debug("initialization web context configuration");
 		
 		String currentLevel = ConfigurationUtil.config().getString("log.level");
 		LoggerUtils.setAllApplicationLogs(currentLevel);
 
 		AnnotationConfigWebApplicationContext rootContext = new AnnotationConfigWebApplicationContext();
-		rootContext.register(SpringConfig.class, SpringSecurityConfig.class, SpringWebConfig.class, SpringJNDIDataConfig.class,	SpringJNDIJPAConfig.class,MVCConfiguration.class);
+		rootContext.register(ApplicationSpringConfig.class, ApplicationWebConfig.class, ApplicationJNDIDataConfig.class,	ApplicationJNDIJPAConfig.class,ApplicationMVCConfiguration.class);
 	
 		servletContext.addListener(HttpSessionEventPublisher.class);
 		servletContext.addListener(RequestContextListener.class);
@@ -49,13 +48,13 @@ public class WebAppConfig implements WebApplicationInitializer {
 			private static final String BASE_NAME = "com.selvesperer.knoeien.messages";
 
 			public String getMessage(String message, Object... params) {
-				Assert.notNull(message, "arugment can not be null");
+				Assert.notNull(message, "arugment never be null or empty");
 
 				if (message.startsWith("{") && message.endsWith("}")) {
 					ResourceBundle bundle = ResourceBundle.getBundle(BASE_NAME,	Faces.getLocale());
 					String key = message.substring(1, message.length() - 1);
 					if (log.isDebugEnabled()) {
-						log.debug("get localized message for key@" + key + " with locale of " + Faces.getLocale().toString());
+						log.debug("fine localized message for key@" + key + " where locale is " + Faces.getLocale().toString());
 					}
 					if (bundle.containsKey(key)) {
 						message = bundle.getString(key);

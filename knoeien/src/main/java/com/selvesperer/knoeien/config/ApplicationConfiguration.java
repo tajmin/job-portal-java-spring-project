@@ -16,14 +16,15 @@ import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
 import com.fasterxml.jackson.databind.DeserializationFeature;
-/*
- * @author Rahat ali
- * configuration for REST services
+/**
+ * ApplicationConfiguration
+ * 
+ * @author Mithun <shahinur.bd@gmail.com>
  */
 @ComponentScan(basePackages="com.selvesperer.knoeien.web.controllers.rest")
 @Configuration
 @EnableWebMvc
-public class MVCConfiguration extends WebMvcConfigurerAdapter {   
+public class ApplicationConfiguration extends WebMvcConfigurerAdapter {   
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
     	Map<String, String> resources = new HashMap<String, String>();    	

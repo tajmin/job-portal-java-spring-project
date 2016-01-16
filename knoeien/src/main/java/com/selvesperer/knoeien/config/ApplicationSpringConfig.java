@@ -25,7 +25,7 @@ import com.selvesperer.knoeien.utils.localization.LocalizationUtil;
 @EnableJpaRepositories(basePackages = { "com.selvesperer.knoeien.data.repository" })
 @ComponentScan("com.selvesperer.knoeien")
 @EnableTransactionManagement
-public class SpringConfig {
+public class ApplicationSpringConfig {
 	@Bean
 	public static MethodValidationPostProcessor methodValidationPostProcessor() {
 		return new MethodValidationPostProcessor();

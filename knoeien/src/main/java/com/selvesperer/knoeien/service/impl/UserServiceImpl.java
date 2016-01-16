@@ -22,7 +22,7 @@ import com.selvesperer.knoeien.exception.UnauthorizedActionException;
 import com.selvesperer.knoeien.service.EmailService;
 import com.selvesperer.knoeien.service.UserService;
 import com.selvesperer.knoeien.spring.ScopeType;
-import com.selvesperer.knoeien.spring.utils.SpringBeanFactory;
+import com.selvesperer.knoeien.spring.utils.ApplicationBeanFactory;
 import com.selvesperer.knoeien.web.controllers.model.UserModel;
 
 @Service("userService")
@@ -63,7 +63,7 @@ public class UserServiceImpl implements UserService {
 
 		if (!StringUtils.equals(u.getPasswordResetToken(), token)) throw new UnauthorizedActionException("");
 
-		StandardPasswordEncoder passwordEncoder = SpringBeanFactory.getBean(StandardPasswordEncoder.class);
+		StandardPasswordEncoder passwordEncoder = ApplicationBeanFactory.getBean(StandardPasswordEncoder.class);
 		u.setPassword(passwordEncoder.encode(password));
 		u.setPasswordResetToken("");
 		u = userRepository.saveAndFlush(u);
@@ -98,7 +98,7 @@ public class UserServiceImpl implements UserService {
 		String token = UUID.randomUUID().toString();
 		user.setPasswordResetToken(token);
 		user = userRepository.saveAndFlush(user);
-		EmailService emailService = SpringBeanFactory.getBean(EmailService.class);
+		EmailService emailService = ApplicationBeanFactory.getBean(EmailService.class);
 		emailService.sendEmail(new ForgetPasswordEmail(user, token));		
 	}
 }

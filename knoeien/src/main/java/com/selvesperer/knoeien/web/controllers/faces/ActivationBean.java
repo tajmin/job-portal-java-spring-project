@@ -15,7 +15,7 @@ import org.slf4j.LoggerFactory;
 
 import com.selvesperer.knoeien.data.domain.User;
 import com.selvesperer.knoeien.service.UserService;
-import com.selvesperer.knoeien.spring.utils.SpringBeanFactory;
+import com.selvesperer.knoeien.spring.utils.ApplicationBeanFactory;
 
 @ManagedBean(name = "activationBean")
 @RequestScoped
@@ -39,7 +39,7 @@ public class ActivationBean implements Serializable {
 				Messages.addGlobalInfo("This is not a valid key. Please use valid key and try agian");
 				return;
 			}
-			UserService userService = SpringBeanFactory.getBean(UserService.class);
+			UserService userService = ApplicationBeanFactory.getBean(UserService.class);
 			User user = userService.findUserByResetToken(this.getKey());
 			if(user  == null) {
 				Messages.addGlobalInfo("This is not a valid key.");
