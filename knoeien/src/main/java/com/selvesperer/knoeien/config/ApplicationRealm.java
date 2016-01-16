@@ -40,7 +40,7 @@ public class ApplicationRealm extends AuthorizingRealm {
 	protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authToken) throws AuthenticationException {
         UsernamePasswordToken token = (UsernamePasswordToken) authToken;
         if (log.isDebugEnabled()) log.debug("gET Authentication Info for User : "+token.getUsername());
-        User user =userService.findUserByEmail(token.getUsername());
+        User user = userService.findUserByEmail(token.getUsername());
         log.debug("emm... Returned user is " +user);
         if (user != null) {
         	if (log.isDebugEnabled())  log.debug("User found in system");

@@ -7,6 +7,9 @@ import javax.inject.Inject;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.mail.EmailException;
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.subject.Subject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Scope;
@@ -19,6 +22,7 @@ import com.selvesperer.knoeien.emails.ForgetPasswordEmail;
 import com.selvesperer.knoeien.exception.AuthenticationFailedException;
 import com.selvesperer.knoeien.exception.SelvEspererException;
 import com.selvesperer.knoeien.exception.UnauthorizedActionException;
+import com.selvesperer.knoeien.security.SecurityManager;
 import com.selvesperer.knoeien.service.EmailService;
 import com.selvesperer.knoeien.service.UserService;
 import com.selvesperer.knoeien.spring.ScopeType;
@@ -57,11 +61,15 @@ public class UserServiceImpl implements UserService {
 	public User resetPassword(String password, String token) {
 		User u = this.findUserByResetToken(token);
 
-		if (log.isInfoEnabled()) log.info("Reset Password for " + token);
-		if (u == null) throw new SelvEspererException("error.usernotfound.text");
-		if (password == null || password.length() > 40 || password.length() < 6) throw new SelvEspererException("error.passwordnotvalid.text");
+		if (log.isInfoEnabled())
+			log.info("Reset Password for " + token);
+		if (u == null)
+			throw new SelvEspererException("error.usernotfound.text");
+		if (password == null || password.length() > 40 || password.length() < 6)
+			throw new SelvEspererException("error.passwordnotvalid.text");
 
-		if (!StringUtils.equals(u.getPasswordResetToken(), token)) throw new UnauthorizedActionException("");
+		if (!StringUtils.equals(u.getPasswordResetToken(), token))
+			throw new UnauthorizedActionException("");
 
 		StandardPasswordEncoder passwordEncoder = ApplicationBeanFactory.getBean(StandardPasswordEncoder.class);
 		u.setPassword(passwordEncoder.encode(password));
@@ -69,36 +77,43 @@ public class UserServiceImpl implements UserService {
 		u = userRepository.saveAndFlush(u);
 		return u;
 	}
-	
+
 	public User activeUser(User user) {
 		user.setActive(true);
 		user = userRepository.saveAndFlush(user);
 		return user;
 	}
-	
+
 	public User login(String username, String password) {
+
 		User user = userRepository.findUserByEmail(username);
-		if(user == null) {
+		if (user == null) {
 			throw new AuthenticationFailedException("error.usernameandpasswordnotmatch.text");
 		}
-		
-		if(!StringUtils.equals(password, user.getPassword())) {
+
+		if (!StringUtils.equals(password, user.getPassword())) {
 			throw new AuthenticationFailedException("error.usernameandpasswordnotmatch.text");
 		}
-		
+
+		Subject subject = SecurityUtils.getSubject();
+		subject.login(new UsernamePasswordToken(username, password, false));
+
+		if (!subject.isAuthenticated()) {
+			SecurityUtils.getSubject().logout();
+		}
 		return user;
 	}
-	
+
 	public void sendForgetPasswordEmail(String email) throws EmailException, IOException {
 		User user = userRepository.findUserByEmail(email);
-		if(user == null) {
+		if (user == null) {
 			throw new AuthenticationFailedException("error.usernotfound.text");
 		}
-		
+
 		String token = UUID.randomUUID().toString();
 		user.setPasswordResetToken(token);
 		user = userRepository.saveAndFlush(user);
 		EmailService emailService = ApplicationBeanFactory.getBean(EmailService.class);
-		emailService.sendEmail(new ForgetPasswordEmail(user, token));		
+		emailService.sendEmail(new ForgetPasswordEmail(user, token));
 	}
 }

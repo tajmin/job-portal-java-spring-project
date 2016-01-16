@@ -113,15 +113,15 @@ public class UserController extends AbstractController implements Serializable {
 			UserService userService = ApplicationBeanFactory.getBean(UserService.class);
 			User u = userService.login(username, password);
 
-			HttpSession httpSession = request.getSession(true);
+			/*HttpSession httpSession = request.getSession(true);
 			httpSession.setAttribute(Constants.CURRENT_USER_ID, u.getEmail());
 
 			HashMap<String, String> uData = new HashMap<>();
 			uData.put(Constants.CURRENT_USER_ID, u.getEmail());
 			uData.put(Constants.CURRENT_USER_NAME, u.getFullName());
-
-			response.sendRedirect(request.getContextPath() + "/index.xhtml");
-			return new ResponseEntity<RestResponse>(convertToRestGoodResponse(uData), HttpStatus.OK);
+			*/
+			if(u != null) response.sendRedirect(request.getContextPath() + "/home.xhtml");
+			return new ResponseEntity<RestResponse>(restResponse, HttpStatus.OK);
 		} catch (AuthenticationFailedException t) {
 			restResponse = convertToRestBadResponse("", t.getLocalizedMessage());
 		} catch (Exception t) {
