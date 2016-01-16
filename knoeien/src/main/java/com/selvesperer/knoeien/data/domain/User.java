@@ -245,7 +245,7 @@ public class User extends AuditableEntity {
 	}
 
 	@JsonIgnore
-	public String getObjCode() {
+	public String getObjectCode() {
 		return "user";
 	}
 	
@@ -266,10 +266,5 @@ public class User extends AuditableEntity {
 			if (other.getId() != null) return false;
 		} else if (!getId().equals(other.getId())) return false;
 		return true;
-	}
-
-	@Override
-	public String getCompanyID() {
-		return null;
 	}
 }

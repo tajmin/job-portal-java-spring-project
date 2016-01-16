@@ -65,17 +65,4 @@ public class ChatLog extends AuditableEntity {
 	public void getChat(String chat) {
 		this.chat = chat;
 	}
-
-	@Override
-	public String getObjCode() {
-		// TODO Auto-generated method stub
-		return "chlg";
-	}
-
-	@Override
-	public String getCompanyID() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 }

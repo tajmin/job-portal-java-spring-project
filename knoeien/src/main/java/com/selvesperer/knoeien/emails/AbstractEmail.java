@@ -6,7 +6,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 
-import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.mail.EmailException;
 import org.apache.commons.mail.MultiPartEmail;
 import org.omnifaces.util.Faces;
@@ -71,17 +70,6 @@ public abstract class AbstractEmail implements Serializable{
 		if (getCcUserList() != null && !getCcUserList().isEmpty()) return true;
 		if (getBccUserList() != null && !getBccUserList().isEmpty()) return true;
 		return false;
-	}
-	
-	public final String getCompanyID() {
-		String companyID = null;
-		List<User> u = getUsers();
-		if (u != null && !u.isEmpty() && !StringUtils.isBlank(u.get(0).getCompanyID())) return u.get(0).getCompanyID();
-		u = getCcUserList();
-		if (u != null && !u.isEmpty() && !StringUtils.isBlank(u.get(0).getCompanyID())) return u.get(0).getCompanyID();
-		u = getBccUserList();
-		if (u != null && !u.isEmpty() && !StringUtils.isBlank(u.get(0).getCompanyID())) return u.get(0).getCompanyID();
-		return "temp";
 	}
 	
 	public HashMap<String, String> addBaseURL(HashMap<String, String>vals) {

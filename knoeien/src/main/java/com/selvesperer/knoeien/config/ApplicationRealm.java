@@ -47,7 +47,7 @@ public class ApplicationRealm extends AuthorizingRealm {
         	AuthorizationInfo authorization = SecurityManager.populateAuthorization(user);
         	ApplicationPrincipal principal = new ApplicationPrincipal(user, authorization);
         	SimpleAuthenticationInfo authInfo = new SimpleAuthenticationInfo(principal, user.getPassword(), getName());
-        	SecurityManager.setSessionValues(user.getId(), user.getCompanyID());
+        	SecurityManager.setSessionValues(user.getId(), user.getCompanyId(), user.getFullName());
             return authInfo;
         } else {
         	if (log.isDebugEnabled()) log.debug("User not found in system");
