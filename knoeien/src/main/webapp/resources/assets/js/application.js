@@ -1,4 +1,5 @@
 !function($) {
+	window.validSession = 0;
 	$(document).foundation();
 	dateSelect();
 	
@@ -15,6 +16,11 @@
 	$(document).on('click tap touchstart', '.reveal .modal-close', function() {
 		return $('[data-reveal="data-reveal"]').foundation('close');
 	});
+	
+	if(validSession == 1) {
+		$('.loggedin-buttons').removeClass('hide');
+		$('.home-buttons').addClass('hide');
+	}
 	
 }(jQuery);
 

@@ -34,7 +34,7 @@
 	<!-- body wrapper starts here -->
 	<div class="off-canvas-wrapper">
 		<div class="off-canvas-wrapper-inner" data-off-canvas-wrapper="true">
-			<div class="off-canvas position-left" id="offCanvasLeft" data-off-canvas = "true">				
+			<div class="off-canvas position-left #{(leftMenu=='show') ? 'reveal-for-large' : ''}" id="offCanvasLeft" data-off-canvas = "true">				
 				<button class="close-button" data-close="offCanvasLeft" type="button">
 					<span aria-hidden="true">&#215;</span>
 				</button>
@@ -43,13 +43,19 @@
 					<li> <a  href="index.xhtml">Home</a> </li>
 				</ul>
 				<hr />
-				
-				<ul class="off-canvas-list">
+				<ul class="off-canvas-list home-buttons">
 					<li> <a  data-toggle="not-logedin-modal">Find work</a> </li>
 					<li> <a data-toggle="login-modal">Login</a> </li>
 					<li> <a data-toggle="not-logedin-modal">My page</a> </li>
-					
-				</ul>				
+				</ul>
+				<ul class="off-canvas-list loggedin-buttons">
+					<li> <a href="profile.xhtml">My profile</a> </li>
+					<li> <a href="payment.xhtml">Payment information</a> </li>
+					<li> <a href="balance.xhtml">Balance and payments</a> </li>
+					<li> <a href="settings.xhtml">Settings</a> </li>
+					<li> <a href="invite.xhtml">Invite friends</a> </li>
+					<li> <a href="#">Log out</a> </li>
+				</ul>
 			</div>
 			
 			<div class="off-canvas-content" data-off-canvas-content = "true">
@@ -68,7 +74,7 @@
 						
 						<!-- menu for large device starts here -->
 						<ul class="menu expanded sticky show-for-large">
-							<li>
+							<li class="#{(leftMenu=='show') ? 'invisible' : ''}">
 								<div class="medium-6">
 									<!-- site title / logo goes here -->
 									<a href="index.xhtml" class="menu-text title">Helpers</a>
@@ -80,11 +86,13 @@
 									<a data-toggle="not-logedin-modal" class="hlpr-color-success button">Find work</a>
 								</div>
 							</li>
-							<li class="clearfix">
+							<li class="home-buttons clearfix">
 								<!-- menu button goes here -->
 								<a data-toggle="not-logedin-modal" class="hollow hlpr-color-white button float-right">My page</a>
 								<a data-toggle="login-modal" class="hollow hlpr-color-white button float-right">Login</a>
-								
+							</li>
+							<li class="loggedin-buttons clearfix hide">
+								<a href="profile.xhtml" id="profile-pic" class="float-right"><img class="circular-img" width="64" alt="My Profile" src="#{request.contextPath}/resources/assets/images/profile_pic.png" /></a>
 							</li>
 						</ul>
 						<!-- menu for large device ends here -->
