@@ -261,7 +261,7 @@
 	margin-top: -10px;
 }
 .wrapper-content {
-	margin-top: 82px;
+	/*margin-top: 82px;*/
 	padding: 50px 0;
 }
 .circular-img {
@@ -291,6 +291,12 @@
 .hlpr-color-black {
 	background-color: #2b2a29;
 	color: #fff;
+}
+#main-wrapper {
+	margin-top: 64px;
+}
+#offCanvasLeft {
+	top: inherit;
 }
 /* Helper Colours End */
 /* Helper Buttons Start */
@@ -380,7 +386,7 @@
 		padding: 0.80em 3em;
 	}
 	.wrapper-content {
-		margin-top: 64px;
+		/*margin-top: 64px;*/
 	}
 }
 /* Small only */
@@ -398,7 +404,7 @@
 		font-size: 1.6rem;
 	}
 	.wrapper-content {
-		margin-top: 70px;
+		/*margin-top: 70px;*/
 	}
 }
 /* Medium only */

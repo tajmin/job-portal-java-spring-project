@@ -31,18 +31,56 @@
 	<ui:insert name="head"></ui:insert>
 </head>
 <body>
+	<header id="header">
+		<nav class="top-bar">
+			<!-- menu for small device starts here -->
+			<ul class="menu expanded sticky hide-for-large">
+				<li>
+					<button class="menu-text title" data-toggle="offCanvasLeft" type="button">
+						<i class="fi-list"></i> Helpers
+					</button>
+				</li>
+			</ul>
+			<!-- menu for small device ends here -->
+			
+			<!-- menu for large device starts here -->
+			<ul class="menu expanded sticky show-for-large">
+				<li class="">
+					<div class="medium-6">
+						<!-- site title / logo goes here -->
+						<a href="index.xhtml" class="menu-text title">Helpers</a>
+					</div>
+				</li>
+				<li>
+					<!-- menu button goes here -->
+					<div class="text-center">
+						<a data-toggle="not-logedin-modal" class="hlpr-color-success button">Find work</a>
+					</div>
+				</li>
+				<li class="home-buttons clearfix">
+					<!-- menu button goes here -->
+					<a data-toggle="not-logedin-modal" class="hollow hlpr-color-white button float-right">My page</a>
+					<a data-toggle="login-modal" class="hollow hlpr-color-white button float-right">Login</a>
+				</li>
+				<li class="loggedin-buttons clearfix hide">
+					<a href="profile.xhtml" id="profile-pic" class="float-right"><img class="circular-img" width="64" alt="My Profile" src="#{request.contextPath}/resources/assets/images/profile_pic.png" /></a>
+				</li>
+			</ul>
+			<!-- menu for large device ends here -->
+		</nav>
+	</header>
 	<!-- body wrapper starts here -->
 	<div class="off-canvas-wrapper">
-		<div class="off-canvas-wrapper-inner" data-off-canvas-wrapper="true">
-			<div class="off-canvas position-left #{(leftMenu=='show') ? 'reveal-for-large' : ''}" id="offCanvasLeft" data-off-canvas = "true">				
+		<div class="off-canvas-wrapper-inner" id="#{(pageLocation == 'index') ? '' : 'main-wrapper'}" data-off-canvas-wrapper="true">
+			<div class="off-canvas position-left #{(leftMenu=='show') ? 'reveal-for-large' : ''}" id="offCanvasLeft" data-off-canvas = "true" style="#{(pageLocation == 'index') ? 'top: 70px;' : ''}">				
 				<button class="close-button" data-close="offCanvasLeft" type="button">
 					<span aria-hidden="true">&#215;</span>
 				</button>
-				<ul class="off-canvas-list">
+				<!-- < ul class="off-canvas-list">
 					<li> <label class="first">Helpers</label> </li>
 					<li> <a  href="index.xhtml">Home</a> </li>
 				</ul>
-				<hr />
+				<hr /> -->
 				<ul class="off-canvas-list home-buttons">
 					<li> <a  data-toggle="not-logedin-modal">Find work</a> </li>
 					<li> <a data-toggle="login-modal">Login</a> </li>
@@ -59,46 +97,7 @@
 			</div>
 			
 			<div class="off-canvas-content" data-off-canvas-content = "true">
-				<!-- content starts here -->				
-				<header id="header">
-					<nav class="top-bar">
-						<!-- menu for small device starts here -->
-						<ul class="menu expanded sticky hide-for-large">
-							<li>
-								<button class="menu-text title" data-open="offCanvasLeft" type="button">
-									<i class="fi-list"></i> Helpers
-								</button>
-							</li>
-						</ul>
-						<!-- menu for small device ends here -->
-						
-						<!-- menu for large device starts here -->
-						<ul class="menu expanded sticky show-for-large">
-							<li class="#{(leftMenu=='show') ? 'invisible' : ''}">
-								<div class="medium-6">
-									<!-- site title / logo goes here -->
-									<a href="index.xhtml" class="menu-text title">Helpers</a>
-								</div>
-							</li>
-							<li>
-								<!-- menu button goes here -->
-								<div class="text-center">
-									<a data-toggle="not-logedin-modal" class="hlpr-color-success button">Find work</a>
-								</div>
-							</li>
-							<li class="home-buttons clearfix">
-								<!-- menu button goes here -->
-								<a data-toggle="not-logedin-modal" class="hollow hlpr-color-white button float-right">My page</a>
-								<a data-toggle="login-modal" class="hollow hlpr-color-white button float-right">Login</a>
-							</li>
-							<li class="loggedin-buttons clearfix hide">
-								<a href="profile.xhtml" id="profile-pic" class="float-right"><img class="circular-img" width="64" alt="My Profile" src="#{request.contextPath}/resources/assets/images/profile_pic.png" /></a>
-							</li>
-						</ul>
-						<!-- menu for large device ends here -->
-					</nav>
-				 </header>
-				
+				<!-- content starts here -->
 				<section id="body-wrapper">
 					<ui:insert name="center-section"></ui:insert>
 				</section>
