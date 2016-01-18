@@ -58,9 +58,10 @@ Controllers.controller("loginCtrl", function($scope, $rootScope, restservice, $c
 			if (response != null && response.success) {
 				$scope.isproceed = true;
 				$scope.userinfos = response.response;
-				// TODO . close modal...
-				console.log($scope.userinfos );
+				window.open("http://localhost:8080/knoeien/home.xhtml","_self"); 
 				
+				// TODO . close modal...
+				//console.log($scope.userinfos );				
         	} 
         });
     };
