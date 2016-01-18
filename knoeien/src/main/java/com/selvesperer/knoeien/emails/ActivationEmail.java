@@ -30,7 +30,7 @@ public class ActivationEmail extends AbstractEmail {
 
 	@Override
 	public String getSubject() {
-		return "";
+		return "Signup!";
 	}
 
 

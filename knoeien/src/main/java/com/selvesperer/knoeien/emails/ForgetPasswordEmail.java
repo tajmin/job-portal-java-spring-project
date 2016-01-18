@@ -30,7 +30,7 @@ public class ForgetPasswordEmail extends AbstractEmail {
 
 	@Override
 	public String getSubject() {
-		return "";
+		return "Reset Your Password";
 	}
 
 
