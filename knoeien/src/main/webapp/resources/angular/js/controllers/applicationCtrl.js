@@ -82,18 +82,15 @@ Controllers.controller("resetPasswordCtrl", function($scope, $rootScope, restser
 	};
 	
 	$scope.resetPassword = function(isValid) {		
-		if(!isValid) return;
+		if(!isValid) return; 
 		$scope.responseMessage = "";
 		
 		var key = getParameterByName("key");
 		$scope.user.passwordResetToken = key;
 		restservice.post($scope.user, "api/v1/user/resetPassword").then(function(response) {
 			if (response != null && response.success) {
-				$scope.isproceed = true;
-				$scope.responseMessage = response.response;
-				// TODO . close modal...
-				console.log($scope.responseMessage );
-				
+				$scope.isproceed = true; 
+				$scope.responseMessage = response.message;
 	    	} 
 	    });
 	};
