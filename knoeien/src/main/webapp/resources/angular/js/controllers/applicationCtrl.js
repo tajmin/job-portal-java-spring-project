@@ -60,6 +60,7 @@ Controllers.controller("loginCtrl", function($scope, $rootScope, restservice, $c
 });
 
 Controllers.controller("resetPasswordCtrl", function($scope, $rootScope, restservice, $cookies) {
+	$rootScope.restMessages = {};
 	$scope.isproceed = false;
 	$scope.username = "";
 	$scope.formSubmitted = false;
@@ -97,22 +98,17 @@ Controllers.controller("resetPasswordCtrl", function($scope, $rootScope, restser
 	    });
 	};
 	
-		function getParameterByName(name) {
-		    name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
-		    var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
-		        results = regex.exec(location.search);
-		    return results == null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
-		}
+	function getParameterByName(name) {
+	    name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+	    var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+	        results = regex.exec(location.search);
+	    return results == null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+	}
 });
 
-Controllers.controller("logoutCtrl", function($scope, $rootScope, restservice, $cookies) {
-	$scope.isproceed = false;
-	$scope.user = {};
-	$scope.formSubmitted = false;
-	$scope.responseMessage = "";
+Controllers.controller("logoutCtrl", function($scope, $rootScope, restservice, $cookies) { 	
 	$scope.logout = function() {
 		restservice.get('', "api/v1/user/logout").then(function(response) {
-			$rootScope.userinfos = response.response;
 			window.open("http://localhost:8080/knoeien/index.xhtml","_self");			
         });
     };

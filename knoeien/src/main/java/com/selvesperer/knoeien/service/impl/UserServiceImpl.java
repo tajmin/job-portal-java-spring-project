@@ -63,13 +63,9 @@ public class UserServiceImpl implements UserService {
 	public User resetPassword(String password, String token) {
 		User u = this.findUserByResetToken(token);
 
-		if (log.isInfoEnabled())
-			log.info("Reset Password for " + token);
-		if (u == null)
-			throw new SelvEspererException("error.usernotfound.text");
-		if (password == null || password.length() > 40 || password.length() < 6)
-			throw new SelvEspererException("error.passwordnotvalid.text");
-
+		if (log.isInfoEnabled()) log.info("Reset Password for " + token);
+		if  (u == null) throw new SelvEspererException("error.usernotfound.text");
+		
 		if (!StringUtils.equals(u.getPasswordResetToken(), token))
 			throw new UnauthorizedActionException("");
 
