@@ -60,10 +60,17 @@
 				<li class="home-buttons clearfix">
 					<!-- menu button goes here -->
 					<a data-toggle="not-logedin-modal" class="hollow hlpr-color-white button float-right">My page</a>
-					<a data-toggle="login-modal" class="hollow hlpr-color-white button float-right">Login</a>
+					
+					<h:panelGroup rendered="#{not authorizationBean.canView()}">
+						<a data-toggle="login-modal" class="hollow hlpr-color-white button float-right">Login</a>
+					</h:panelGroup>
 				</li>
-				<li class="loggedin-buttons clearfix hide">
-					<a href="profile.xhtml" id="profile-pic" class="float-right"><img class="circular-img" width="64" alt="My Profile" src="#{request.contextPath}/resources/assets/images/profile_pic.png" /></a>
+				<li class="clearfix">
+					<h:panelGroup rendered="#{authorizationBean.canView()}">
+						<a href="profile.xhtml" id="profile-pic" class="float-right">
+							<img class="circular-img" width="64" alt="My Profile" src="#{request.contextPath}/resources/assets/images/profile_pic.png" />
+						</a>
+					</h:panelGroup>
 				</li>
 			</ul>
 			<!-- menu for large device ends here -->
@@ -92,7 +99,7 @@
 					<li> <a href="balance.xhtml">Balance and payments</a> </li>
 					<li> <a href="settings.xhtml">Settings</a> </li>
 					<li> <a href="invite.xhtml">Invite friends</a> </li>
-					<li> <a href="#">Log out</a> </li>
+					<li ng-controller = "logoutCtrl"> <a href="#" ng-click="logout();">Log out</a> </li>
 				</ul>
 			</div>
 			

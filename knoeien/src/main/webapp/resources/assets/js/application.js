@@ -1,5 +1,4 @@
-!function($) {
-	window.validSession = 0;
+!function($) {	
 	$(document).foundation();
 	dateSelect();
 	
@@ -17,10 +16,6 @@
 		return $('[data-reveal="data-reveal"]').foundation('close');
 	});
 	
-	if(validSession == 1) {
-		$('.loggedin-buttons').removeClass('hide');
-		$('.home-buttons').addClass('hide');
-	}
 	
 }(jQuery);
 

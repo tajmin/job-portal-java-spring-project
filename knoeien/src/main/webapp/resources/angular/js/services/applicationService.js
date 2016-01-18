@@ -14,10 +14,6 @@ Services.factory('authService', function(Restangular, $rootScope, $cookies) {
 			});
 			
 			RestangularConfigurer.addResponseInterceptor(function(response, restangularObject, url) {
-				console.log(response);
-				console.log(response.success);
-				console.log(response.messages);
-				
 				if(!response.success) {
 					$rootScope.restMessages = response.messages;
 					console.log($rootScope.restMessages);

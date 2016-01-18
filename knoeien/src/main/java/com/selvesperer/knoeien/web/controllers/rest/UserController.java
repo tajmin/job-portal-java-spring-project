@@ -8,9 +8,9 @@ import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.shiro.SecurityUtils;
 import org.omnifaces.util.Messages;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -127,22 +127,22 @@ public class UserController extends AbstractController implements Serializable {
 		return new ResponseEntity<RestResponse>( restResponse, HttpStatus.OK);
 	}
 
-	@RequestMapping(value = "logout", method = RequestMethod.GET, produces = "application/json")
+	@RequestMapping(value = "/logout", method = RequestMethod.GET, produces = "application/json")
 	@ResponseBody
-	public String logout(HttpServletRequest request, HttpServletResponse response) throws IOException {
+	public ResponseEntity<RestResponse> logout(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		if (log.isDebugEnabled()) log.debug("Logging out");
-	
+		RestResponse restResponse = null;
 		try {
-			HttpSession httpSession = request.getSession(true);
-			httpSession.invalidate();
-			response.sendRedirect(request.getContextPath() + "/index.xhtml");
+			SecurityUtils.getSubject().logout();
+			request.getSession().invalidate();
+			return new ResponseEntity<RestResponse>( convertToRestGoodResponse("", "logout success"),HttpStatus.OK);
 		} catch (Throwable ex) {
 			ex.printStackTrace();
 			if (log.isErrorEnabled()) {
 				log.error("Exceptions happned! " + ex.getMessage());
 			}
 		}
-		return "logout successfull";
+		return new ResponseEntity<RestResponse>( restResponse, HttpStatus.OK);
 	}
 	
 	@RequestMapping(value = "/sendChangePasswordEmail", method = RequestMethod.POST, produces = "application/json")
