@@ -71,8 +71,6 @@ Controllers.controller("resetPasswordCtrl", function($scope, $rootScope, restser
 		if(!isValid) return;
 		$scope.responseMessage = "";
 		
-		console.log(":::::::::::::::::::::::::::::::::");
-		console.log($scope.user.username);
 		restservice.post($scope.user, "api/v1/user/sendChangePasswordEmail?email="+$scope.user.username).then(function(response) {
 			if (response != null && response.success) {
 				$scope.isproceed = true;
