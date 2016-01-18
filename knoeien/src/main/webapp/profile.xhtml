@@ -4,101 +4,59 @@
 	<ui:param name="leftMenu" value="show"></ui:param>
 	<ui:define name="content">
 		<div class="row wrapper-content">
-			<div class="medium-10 medium-centered columns" ng-if="!isproceed">
+			<div class="medium-8 medium-centered columns" ng-if="!isproceed">
 				<!-- Foundation "abide" plug-in used for validation  -->
 				<form name="profileEditForm">
 					<div class="row">
 						<div class="medium-12 columns text-center">
-							<h4>User Full Name</h4>
+							<a data-open="image-upload-modal"><img class="circular-img" width="256" src="#{request.contextPath}/resources/assets/images/profile_pic.png" alt="Profile Pic" /></a>
 						</div>
 					</div>
 					<div class="row">
-						<div class="medium-6 columns">
-							<label>First Name</label>
-							<input ng-model="user.firstName" type="text" name="firstName" placeholder="Write your first name" required="required" />							
-	                        <div ng-messages="formSubmitted &amp;&amp; signupForm.firstName.$error">
-	                            <div ng-message="required" class="error">First name name is required</div>
-	                        </div>
-						</div>
-						
-						<div class="medium-6 columns">
-							<label>Last name</label>
-							<input ng-model="user.lastName" type="text" name="lastName" placeholder="Write your lastname" required="required"/>
-							<div ng-messages="formSubmitted &amp;&amp; signupForm.lastName.$error">
-                            	<div ng-message="required" class="error">Last name name is required</div>
-                        	</div>							
-						</div>
-					</div>
-					
-					<div class="row">
-						<div class="medium-4 columns">
-							<label>Date of birth</label>
-							<select name="dateDay" class="day-select" id="date-day" required="required">
-								<option value="" disabled="disabled" selected="selected">Day</option>
-							</select>
-							<div ng-messages="formSubmitted &amp;&amp; signupForm.dateDay.$error">
-                            	<div ng-message="required" class="error">Day is required.</div>
-                        	</div>							
-						</div>
-						<div class="medium-4 columns">
-							<label><span class="hide-for-small-only">&nbsp;</span></label>
-							<select name="dateMonth" class="full-month-select" id="date-month" required="required">
-								<option value="" disabled="disabled" selected="selected">Month</option>
-							</select>
-							
-							<div ng-messages="formSubmitted &amp;&amp; signupForm.dateMonth.$error">
-                            	<div ng-message="required" class="error">Month is required.</div>
-                        	</div>							
-						</div>
-						
-						<div class="medium-4 columns">
-							<label><span class="hide-for-small-only">&nbsp;</span></label>
-							<select name="dateYear" class="year-select" id="date-year" required="required">
-								<option value="" disabled="disabled" selected="selected">Year</option>
-							</select>
-							<div ng-messages="formSubmitted &amp;&amp; signupForm.dateYear.$error">
-                            	<div ng-message="required" class="error">Year is required.</div>
-                        	</div>
+						<div class="medium-12 columns text-center">
+							<h3>User Full Name</h3>
+							<p>something@something.com</p>
+							<p>Born on 01/01/1985</p>
 						</div>
 					</div>
 					<div class="row">
 						<div class="medium-12 columns">
-							<label>Email</label>
-							<input name="email" ng-model="user.email" type="text" id="email" placeholder="Provide your email" required="required" />
-							<div ng-messages="formSubmitted &amp;&amp; signupForm.email.$error">
-                            	<div ng-message="required" class="error">Email is required.</div>
-                        	</div>
+							<label>Phone</label>
+							<input type="text" placeholder="Write your phone number" />
 						</div>
 					</div>
-					<div class="row">
-						<div class="medium-6 columns">
-							<label>Password</label>
-							<input name="password" ng-model="user.password" type="password" id="password" placeholder="Enter a password" aria-describedby="password-help-text" required="required" />
-								
-							<div ng-messages="formSubmitted &amp;&amp; signupForm.password.$error">
-                            	<div ng-message="required" class="error">Password is required.</div>
-                        	</div>
-						</div>
-						<div class="medium-6 columns">
-							<label>Confirm Password</label>
-							<input name="confirmPassword" type="password" ng-model="user.confirmPassword" placeholder="Retype your password" required="required" data-ng-match="password"/>
-							<span class="error" data-ng-show="signupForm.confirmPassword.$error.match">Passwords do not match.</span>
-						</div>
-						<div class="small-12 columns">
-							<p class="help-text" id="password-help-text">Password must be at least 8 characters long.</p>
+					<div class="row">	
+						<div class="medium-12 columns">
+							<label>Address</label>
+							<input type="text" placeholder="Write your street address" required="required" />
 						</div>
 					</div>
 					
-					<ul class="global-message" style="white-space:normal">
-						<span ng-repeat="m in restMessages"> 
-							<li class="info-text info-modal">{{m.message}}</li>
-						</span>								
-					</ul>
+					<div class="row">	
+						<div class="medium-12 columns">
+							<label>Postcode</label>
+							<input type="text" placeholder="Write your area postcode" required="required" />
+						</div>
+					</div>
+					
+					<div class="row">	
+						<div class="medium-12 columns">
+							<label>By</label>
+							<input type="text" placeholder="This field must complete to get paid" required="required" />
+						</div>
+					</div>
+					
+					<div class="row">
+						<div class="medium-12 columns">
+							<label>Describe yourself</label>
+							<textarea rows="4" placeholder="If you write something about yourself, it is much more likely that people either verger a do your job or that you are selected as an employee."></textarea>
+						</div>
+					</div>
 							
 					<div class="row">
 						<fieldset class="medium-12 columns">
 							<div class="button-group float-right">
-								<a href="javascript:void(0);" ng-click="formSubmitted = true; signup(signupForm.$valid);" class="button hlpr-color-info" >Save</a>
+								<a href="#" class="button hlpr-color-info" >Save</a>
 								<a class="button hlpr-color-alert" href="index.xhtml">Cancel</a>
 							</div>
 						</fieldset>
@@ -107,8 +65,7 @@
 				<!-- Sign up form ends here -->
 			</div>
 		</div>
-		<script type="text/javascript">
-			hideOnPage();
-		</script>
+		
+		<ui:insert name="image-upload-modal"></ui:insert>
 	</ui:define>
 </ui:composition>
