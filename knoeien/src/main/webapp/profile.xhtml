@@ -1,0 +1,71 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition template="templates/angular-template.xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core">
+	<ui:param name="leftMenu" value="show"></ui:param>
+	<ui:define name="content">
+		<div class="row wrapper-content">
+			<div class="medium-8 medium-centered columns" ng-if="!isproceed">
+				<!-- Foundation "abide" plug-in used for validation  -->
+				<form name="profileEditForm">
+					<div class="row">
+						<div class="medium-12 columns text-center">
+							<a data-open="image-upload-modal"><img class="circular-img" width="256" src="#{request.contextPath}/resources/assets/images/profile_pic.png" alt="Profile Pic" /></a>
+						</div>
+					</div>
+					<div class="row">
+						<div class="medium-12 columns text-center">
+							<h3>User Full Name</h3>
+							<p>something@something.com</p>
+							<p>Born on 01/01/1985</p>
+						</div>
+					</div>
+					<div class="row">
+						<div class="medium-12 columns">
+							<label>Phone</label>
+							<input type="text" placeholder="Write your phone number" />
+						</div>
+					</div>
+					<div class="row">	
+						<div class="medium-12 columns">
+							<label>Address</label>
+							<input type="text" placeholder="Write your street address" required="required" />
+						</div>
+					</div>
+					
+					<div class="row">	
+						<div class="medium-12 columns">
+							<label>Postcode</label>
+							<input type="text" placeholder="Write your area postcode" required="required" />
+						</div>
+					</div>
+					
+					<div class="row">	
+						<div class="medium-12 columns">
+							<label>By</label>
+							<input type="text" placeholder="This field must complete to get paid" required="required" />
+						</div>
+					</div>
+					
+					<div class="row">
+						<div class="medium-12 columns">
+							<label>Describe yourself</label>
+							<textarea rows="4" placeholder="If you write something about yourself, it is much more likely that people either verger a do your job or that you are selected as an employee."></textarea>
+						</div>
+					</div>
+							
+					<div class="row">
+						<fieldset class="medium-12 columns">
+							<div class="button-group float-right">
+								<a href="#" class="button hlpr-color-info" >Save</a>
+								<a class="button hlpr-color-alert" href="index.xhtml">Cancel</a>
+							</div>
+						</fieldset>
+					</div>
+				</form>
+				<!-- Sign up form ends here -->
+			</div>
+		</div>
+		
+		<ui:insert name="image-upload-modal"></ui:insert>
+	</ui:define>
+</ui:composition>
