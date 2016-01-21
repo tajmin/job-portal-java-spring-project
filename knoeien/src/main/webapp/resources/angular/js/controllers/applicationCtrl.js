@@ -45,6 +45,25 @@ Controllers.controller("signupCtrl", function($scope, $rootScope, restservice, $
     };
 });
 
+//@author SHIFAT application controller for sending invitation 
+Controllers.controller("invitationCtrl", function($scope, $rootScope, restservice, $cookies) {
+	$scope.isproceed = false;
+	$scope.user = {};
+	$scope.formSubmitted = false;
+	$scope.responseMessage = "";
+	$scope.invite = function(isValid) {
+		if(!isValid) return;
+		
+		restservice.post('', "api/v1/user/invite?email="+$scope.user.email).then(function(response) {
+			if (response != null && response.success) {
+				$scope.isproceed = true;
+				$scope.responseMessage = response.message;				
+        	}
+        });
+    };
+});
+//@author SHIFAT - Ends
+
 Controllers.controller("loginCtrl", function($scope, $rootScope, restservice, $cookies) {console.log("isValid:::::::::::::::::: ");
 	$scope.formSubmitted = false;
 	$rootScope.userinfos = {};

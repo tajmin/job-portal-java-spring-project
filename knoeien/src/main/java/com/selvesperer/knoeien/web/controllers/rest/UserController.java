@@ -10,12 +10,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.mail.EmailException;
 import org.apache.shiro.SecurityUtils;
 import org.omnifaces.util.Messages;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,6 +29,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.selvesperer.knoeien.data.domain.User;
 import com.selvesperer.knoeien.emails.ActivationEmail;
+import com.selvesperer.knoeien.emails.InvitationFriendEmail;
 import com.selvesperer.knoeien.exception.AuthenticationFailedException;
 import com.selvesperer.knoeien.service.EmailService;
 import com.selvesperer.knoeien.service.UserService;
@@ -49,6 +54,40 @@ public class UserController extends AbstractController implements Serializable {
 		return 1;
 	}
 
+	//@author SHIFAT User controller edited for Invitation(invitation)
+	 @RequestMapping(value = "/invite", method = RequestMethod.POST, produces = "application/json")
+	 @ResponseBody
+	public ResponseEntity<RestResponse> invite(@RequestParam(value="email", required=true) String email) throws EmailException, IOException  {
+	
+		 User user=null;
+	 try {
+			RestResponse restResponse = null;
+			if (StringUtils.isBlank(email)) {
+				restResponse = convertToRestBadResponse("",	LocalizationUtil.findLocalizedString("error.emptyemail.text"));
+			}
+
+			if (restResponse != null) {
+				return new ResponseEntity<RestResponse>(restResponse, HttpStatus.OK);
+			}
+		
+			user = new User();
+			user.setEmail(email);
+			EmailService emailService = ApplicationBeanFactory.getBean(EmailService.class);
+			emailService.sendEmail(new InvitationFriendEmail(user));	
+			return new ResponseEntity<RestResponse>( convertToRestGoodResponse(null, LocalizationUtil.findLocalizedString("invitationsuccess.text")),HttpStatus.OK);
+		} catch (Exception ex) {
+			// Messages.addGlobalError(ex.getMessage());
+		}
+	
+		return new ResponseEntity<RestResponse>(convertToRestGoodResponse(user), HttpStatus.BAD_REQUEST);
+	}
+	
+	
+	
+	//@author SHIFAT ends
+	
+	
+	
 	@RequestMapping(value = "/signup", method = RequestMethod.POST, produces = "application/json")
 	@ResponseBody
 	public ResponseEntity<RestResponse> signup(@RequestBody UserModel userModel) {
@@ -78,6 +117,7 @@ public class UserController extends AbstractController implements Serializable {
 			EmailService emailService = ApplicationBeanFactory.getBean(EmailService.class);
 			emailService.sendEmail(new ActivationEmail(user, token));
 
+		
 			return new ResponseEntity<RestResponse>( convertToRestGoodResponse(null, LocalizationUtil.findLocalizedString("signupsuccess.text")),HttpStatus.OK);
 		} catch (Exception ex) {
 			// Messages.addGlobalError(ex.getMessage());

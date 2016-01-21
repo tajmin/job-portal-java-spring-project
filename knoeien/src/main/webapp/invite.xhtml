@@ -1,0 +1,62 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition template="templates/angular-template.xhtml" 
+	xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core">
+	<ui:param name="leftMenu" value="show"></ui:param>
+
+	<ui:define name="content">
+		<div class="row wrapper-content" ng-controller="invitationCtrl">
+			<div class="medium-7 medium-centered columns" ng-if="!isproceed">
+				<!-- Foundation "abide" plug-in used for validation  -->
+				<form name="inviteForm">
+					<div class="row">
+						<div class="medium-12 columns text-center">
+							<h2>Invite your Friend</h2>
+						</div>
+					</div>
+			
+				
+					<div class="row">
+						<div class="medium-12 columns">
+							<label>Email</label>
+							<input name="email" ng-model="user.email" type="text" id="email" placeholder="Provide your email" required="required" />
+							<div ng-messages="formSubmitted &amp;&amp; inviteForm.email.$error">
+                            	<div ng-message="required" class="error">Email is required.</div>
+                        	</div>
+						</div>
+					</div>
+					
+					
+					
+				
+							
+					<div class="row">
+						<fieldset class="medium-12 columns">
+							<div class="button-group float-right">
+								<a href="javascript:void(0);" ng-click="formSubmitted = true; invite(inviteForm.$valid);" class="button hlpr-color-info" >Send mail</a>
+<!-- 								<a class="button hlpr-color-alert" href="index.xhtml">Cancel</a> -->
+							</div>
+						</fieldset>
+					</div>
+				</form>
+				<!-- Sign up form ends here -->
+			</div>
+			
+			<div class="medium-7 medium-centered columns" ng-if="isproceed">
+				<div style="height:300px;">
+					<span>{{responseMessage}} </span>
+					<div class="row" style="text-align:center">
+						<fieldset class="medium-12 columns">
+							<div class="button-group float-right">
+								<a href="javascript:void(0);" class="button hlpr-color-info" >Ok</a>
+							</div>
+						</fieldset>
+					</div>
+				</div>					
+			</div>
+		</div>
+		
+<!-- 		<ui:insert name="login-modal"></ui:insert> -->
+<!-- 		<ui:insert name="forgot-password-modal"></ui:insert> -->
+	</ui:define>
+</ui:composition>
