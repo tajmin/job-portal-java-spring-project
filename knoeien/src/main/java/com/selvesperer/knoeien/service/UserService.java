@@ -17,6 +17,7 @@ public interface UserService {
 
 	public User saveUser(UserModel userModel);
 	
+	
 	public User resetPassword(String password, String resetToken);
 	
 	public User activeUser(User user);
@@ -24,5 +25,11 @@ public interface UserService {
 	public User login(String username, String password);
 	
 	public void sendForgetPasswordEmail(String email) throws EmailException, IOException;
+	
+	//edited for setting @author SHIFAT
+	
+	public void saveUserSetting(UserModel userModel,String id);
+	
+	//ends setting
 	
 }

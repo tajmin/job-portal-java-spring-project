@@ -83,6 +83,37 @@ public class User extends AuditableEntity {
 	@Transient
 	private String fullName;
 	
+	
+	//@author SHIFAT member variable for settings.xhtml
+	
+	@Column(name = "e_post")
+	private boolean ePost = false; 
+	
+	@Column(name = "sms")
+	private boolean sms = false;
+	
+	@Column(name = "message")
+	private boolean message = false; 
+	
+	@Column(name = "reports")
+	private boolean reports = false; 
+	
+	@Column(name = "assigned_job")
+	private boolean assignedJob = false;
+	
+	@Column(name = "confirm_job")
+	private boolean confirmJob = false; 
+	
+	@Column(name = "hide_address")
+	private boolean hideAddress = false;
+	
+	@Column(name = "receive_updates")
+	private boolean receiveUpdates = false;
+	
+	//@author SHIFAT ends here
+	
+	
+	
 	public User() {}
 	
 	public User(UserModel userModel) {
@@ -93,13 +124,86 @@ public class User extends AuditableEntity {
 		this.setEmail(userModel.getEmail());
 		this.setPassword(userModel.getPassword());
 		this.setPasswordResetToken(userModel.getPasswordResetToken());
+		
 	}
+	
+	//@author SHIFAT edited for setting 
+
+	public boolean isePost() {
+		return ePost;
+	}
+
+	public void setePost(boolean ePost) {
+		this.ePost = ePost;
+	}
+
+	public boolean isSms() {
+		return sms;
+	}
+
+	public void setSms(boolean sms) {
+		this.sms = sms;
+	}
+
+	public boolean isMessage() {
+		return message;
+	}
+
+	public void setMessage(boolean message) {
+		this.message = message;
+	}
+
+	public boolean isReports() {
+		return reports;
+	}
+
+	public void setReports(boolean reports) {
+		this.reports = reports;
+	}
+
+	public boolean isAssignedJob() {
+		return assignedJob;
+	}
+
+	public void setAssignedJob(boolean assignedJob) {
+		this.assignedJob = assignedJob;
+	}
+
+	public boolean isConfirmJob() {
+		return confirmJob;
+	}
+
+	public void setConfirmJob(boolean confirmJob) {
+		this.confirmJob = confirmJob;
+	}
+
+	public boolean isHideAddress() {
+		return hideAddress;
+	}
+
+	public void setHideAddress(boolean hideAddress) {
+		this.hideAddress = hideAddress;
+	}
+
+	public boolean isReceiveUpdates() {
+		return receiveUpdates;
+	}
+
+	public void setReceiveUpdates(boolean receiveUpdates) {
+		this.receiveUpdates = receiveUpdates;
+	}
+	
+	
+	//settings ends
+	
 	
 	public String getFullName() {					
 		fullName = firstName + " " + lastName;
 		return fullName;
 	}
 	
+
+
 	public String getCompanyId() {
 		return companyId;
 	}

@@ -47,6 +47,26 @@ public class UserModel implements Serializable {
 
 	private String confirmPassword;
 	
+	//@author SHIFAT settings.xhtml member variable declaration
+	
+	private boolean ePost = false;
+	private boolean sms = false;
+	
+	
+	private boolean message = false;
+	private boolean reports = false;
+	private boolean assignedJob = false;
+	private boolean confirmJob = false;
+	
+	
+	private boolean hideAddress = false;
+	private boolean receiveUpdates = false;
+	
+	//settings.xhtml declaration ends here
+	
+	
+	
+	
 	public String getCompanyId() {
 		return companyId;
 	}
@@ -206,4 +226,77 @@ public class UserModel implements Serializable {
 	public void setConfirmPassword(String confirmPassword) {
 		this.confirmPassword = confirmPassword;
 	}
+	
+	//settings.xhtml getter setter method
+	
+	public boolean isePost() {
+		return ePost;
+	}
+
+	public void setePost(boolean ePost) {
+		this.ePost = ePost;
+	}
+
+	public boolean isSms() {
+		return sms;
+	}
+
+	public void setSms(boolean sms) {
+		this.sms = sms;
+	}
+
+	public boolean isMessage() {
+		return message;
+	}
+
+	public void setMessage(boolean message) {
+		this.message = message;
+	}
+
+	public boolean isReports() {
+		return reports;
+	}
+
+	public void setReports(boolean reports) {
+		this.reports = reports;
+	}
+
+	public boolean isAssignedJob() {
+		return assignedJob;
+	}
+
+	public void setAssignedJob(boolean assignedJob) {
+		this.assignedJob = assignedJob;
+	}
+
+	public boolean isConfirmJob() {
+		return confirmJob;
+	}
+
+	public void setConfirmJob(boolean confirmJob) {
+		this.confirmJob = confirmJob;
+	}
+
+	public boolean isHideAddress() {
+		return hideAddress;
+	}
+
+	public void setHideAddress(boolean hideAddress) {
+		this.hideAddress = hideAddress;
+	}
+
+	public boolean isReceiveUpdates() {
+		return receiveUpdates;
+	}
+
+	public void setReceiveUpdates(boolean receiveUpdates) {
+		this.receiveUpdates = receiveUpdates;
+	}
+
+
+	
+	//settings.xhtml getter setter ends here
+	
+	
+	
 }

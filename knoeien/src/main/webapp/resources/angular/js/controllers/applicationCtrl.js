@@ -64,6 +64,26 @@ Controllers.controller("invitationCtrl", function($scope, $rootScope, restservic
 });
 //@author SHIFAT - Ends
 
+
+
+//@author SHIFAT controller for user settings
+Controllers.controller("settingsCtrl", function($scope, $rootScope, restservice, $cookies) {
+	$scope.isproceed = false;
+	$scope.user = {};
+	$scope.responseMessage = "";
+	$scope.settings = function() {
+		
+		
+		restservice.post( $scope.user, "api/v1/user/settings").then(function(response) {
+			if (response != null && response.success) {
+				$scope.isproceed = true;
+				$scope.responseMessage = response.message;				
+        	}
+        });
+    };
+});
+
+//@author SHIFAT ends
 Controllers.controller("loginCtrl", function($scope, $rootScope, restservice, $cookies) {console.log("isValid:::::::::::::::::: ");
 	$scope.formSubmitted = false;
 	$rootScope.userinfos = {};

@@ -110,4 +110,24 @@ public class UserServiceImpl implements UserService {
 		EmailService emailService = ApplicationBeanFactory.getBean(EmailService.class);
 		emailService.sendEmail(new ForgetPasswordEmail(user, token));
 	}
+
+	//@author SHIFAT edited for setting
+	
+	@Override
+	public void saveUserSetting(UserModel userModel,String id) {
+		// TODO Auto-generated method stub
+		
+		User user=userRepository.findUserById(id);
+		user.setePost(!userModel.isePost());
+		user.setSms(!userModel.isSms());
+		user=userRepository.saveAndFlush(user);
+		
+		
+		
+		
+		
+		
+	}
+	
+	//ends
 }

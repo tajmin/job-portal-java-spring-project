@@ -15,11 +15,8 @@ import org.apache.shiro.SecurityUtils;
 import org.omnifaces.util.Messages;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.mail.SimpleMailMessage;
-import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,6 +25,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.selvesperer.knoeien.data.domain.User;
+import com.selvesperer.knoeien.data.repository.UserRepository;
 import com.selvesperer.knoeien.emails.ActivationEmail;
 import com.selvesperer.knoeien.emails.InvitationFriendEmail;
 import com.selvesperer.knoeien.exception.AuthenticationFailedException;
@@ -38,6 +36,8 @@ import com.selvesperer.knoeien.utils.Constants;
 import com.selvesperer.knoeien.utils.localization.LocalizationUtil;
 import com.selvesperer.knoeien.web.controllers.model.RestResponse;
 import com.selvesperer.knoeien.web.controllers.model.UserModel;
+import com.selvesperer.knoeien.security.SecurityManager;
+
 
 @Controller
 @RequestMapping(value = "/api/v1/user")
@@ -86,7 +86,44 @@ public class UserController extends AbstractController implements Serializable {
 	
 	//@author SHIFAT ends
 	
+	 
+	 
+	 
+	//@author SHIFAT for setting
+	 
+	 
+	 @RequestMapping(value = "/settings", method = RequestMethod.POST, produces = "application/json")
+	 @ResponseBody
+	public ResponseEntity<RestResponse> invite(@RequestBody UserModel userModel) {	
+		 
+
+		 User user=new User();
 	
+	 try {
+		RestResponse restResponse = null;
+		
+		
+		UserService userService = ApplicationBeanFactory.getBean(UserService.class);
+		String id=SecurityManager.getCurrentUserId();	
+		userService.saveUserSetting(userModel, id);
+			
+		return new ResponseEntity<RestResponse>( convertToRestGoodResponse(null, LocalizationUtil.findLocalizedString("")),HttpStatus.OK);
+		} catch (Exception ex) {
+			// Messages.addGlobalError(ex.getMessage());
+		}
+	
+		return new ResponseEntity<RestResponse>(convertToRestGoodResponse(user), HttpStatus.BAD_REQUEST);
+	}
+	
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 //@author SHIFAT ends
 	
 	@RequestMapping(value = "/signup", method = RequestMethod.POST, produces = "application/json")
 	@ResponseBody
