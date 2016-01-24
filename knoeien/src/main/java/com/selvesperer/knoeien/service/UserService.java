@@ -25,4 +25,10 @@ public interface UserService {
 	
 	public void sendForgetPasswordEmail(String email) throws EmailException, IOException;
 	
+	public void updateUser(UserModel userModel, String id);
+	
+	public User showUserInfo(String id);
+	
+	
+	
 }
