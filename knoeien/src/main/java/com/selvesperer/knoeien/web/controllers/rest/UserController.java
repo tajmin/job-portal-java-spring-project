@@ -29,6 +29,7 @@ import com.selvesperer.knoeien.data.repository.UserRepository;
 import com.selvesperer.knoeien.emails.ActivationEmail;
 import com.selvesperer.knoeien.emails.InvitationFriendEmail;
 import com.selvesperer.knoeien.exception.AuthenticationFailedException;
+import com.selvesperer.knoeien.security.SecurityManager;
 import com.selvesperer.knoeien.service.EmailService;
 import com.selvesperer.knoeien.service.UserService;
 import com.selvesperer.knoeien.spring.utils.ApplicationBeanFactory;
@@ -279,4 +280,42 @@ public class UserController extends AbstractController implements Serializable {
 		}
 		return new ResponseEntity<RestResponse>(restResponse, HttpStatus.OK);
 	}
+	
+	@RequestMapping(value = "/editProfile", method = RequestMethod.POST, produces = "application/json")
+	public ResponseEntity<RestResponse> editProfile(@RequestBody UserModel userModel) {
+		RestResponse restResponse = null;
+		if (log.isDebugEnabled()) log.debug("Edit Profile");		
+		try {
+			UserService userService = ApplicationBeanFactory.getBean(UserService.class);
+			String id = SecurityManager.getCurrentUserId();
+			userService.updateUser(userModel, id);
+						
+			//if(u != null) response.sendRedirect("http://localhost:8080/knoeien/home.xhtml");
+			return new ResponseEntity<RestResponse>( convertToRestGoodResponse(null, LocalizationUtil.findLocalizedString("updatesuccess.text")),HttpStatus.OK);
+		} catch (AuthenticationFailedException t) {
+			restResponse = convertToRestBadResponse("", t.getLocalizedMessage());
+		} catch (Exception t) {
+			restResponse = convertToRestBadResponse("", t.getLocalizedMessage());
+		}
+		return new ResponseEntity<RestResponse>( restResponse, HttpStatus.OK);
+	}
+	
+	@RequestMapping(value = "/profileInfo", method = RequestMethod.GET, produces = "application/json")
+	public ResponseEntity<RestResponse> profileInfo() {
+		RestResponse restResponse = null;
+		if (log.isDebugEnabled()) log.debug("Profile Info");		
+		try {
+			UserService userService = ApplicationBeanFactory.getBean(UserService.class);
+			String id = SecurityManager.getCurrentUserId();
+			User user = userService.showUserInfo(id);
+			UserModel userModel = new UserModel(user);
+
+			return new ResponseEntity<RestResponse>( convertToRestGoodResponse(userModel, LocalizationUtil.findLocalizedString("signupsuccess.text")),HttpStatus.OK);
+		} catch (AuthenticationFailedException t) {
+			restResponse = convertToRestBadResponse("", t.getLocalizedMessage());
+		} catch (Exception t) {
+			restResponse = convertToRestBadResponse("", t.getLocalizedMessage());
+		}
+		return new ResponseEntity<RestResponse>( restResponse, HttpStatus.OK);
+	}	
 }

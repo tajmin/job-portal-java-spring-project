@@ -92,7 +92,8 @@ Controllers.controller("loginCtrl", function($scope, $rootScope, restservice, $c
 		if(!isValid) return;		
 		restservice.post($scope.user, "api/v1/user/login").then(function(response) {
 			$scope.isproceed = true;
-			$rootScope.userinfos = response.response;
+			$rootScope.userinfos = response;
+			console.log($rootScope.userinfos);
 			window.open("http://localhost:8080/knoeien/home.xhtml","_self");			
         });
     };
@@ -146,4 +147,39 @@ Controllers.controller("logoutCtrl", function($scope, $rootScope, restservice, $
 			window.open("http://localhost:8080/knoeien/index.xhtml","_self");			
         });
     };
+});
+
+Controllers.controller("editProfileCtrl", function($scope, $rootScope, restservice, $cookies) {
+	$scope.isproceed = false;
+	$rootScope.userinfos = {};
+	$scope.user = {};
+	$scope.formSubmitted = false;
+	$scope.responseMessage = "";
+	
+	$scope.profileInfo = function() {	
+		console.log("loading show profile");
+		restservice.get( '', "api/v1/user/profileInfo").then(function(response) {
+			if (response != null) {
+				$scope.user = response;	
+        	} else {
+        		$scope.responseMessage = response.message;	
+        	}
+        });
+	
+    };
+    $scope.profileInfo();
+    
+	
+	$scope.editProfile = function(isValid) {
+		if(!isValid) return;
+		
+		restservice.post( $scope.user, "api/v1/user/editProfile").then(function(response) {
+			if (response != null && response.success) {
+				$scope.isproceed = true;
+				$scope.responseMessage = response.message;				
+        	}
+        });
+		
+    };   
+    
 });

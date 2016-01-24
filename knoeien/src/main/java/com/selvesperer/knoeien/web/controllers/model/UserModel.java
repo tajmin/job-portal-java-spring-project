@@ -3,6 +3,8 @@ package com.selvesperer.knoeien.web.controllers.model;
 import java.io.Serializable;
 import java.util.Calendar;
 
+import com.selvesperer.knoeien.data.domain.User;
+
 public class UserModel implements Serializable {
 
 	private static final long serialVersionUID = 2361372848872111233L;
@@ -64,8 +66,17 @@ public class UserModel implements Serializable {
 	
 	//settings.xhtml declaration ends here
 	
+	public UserModel() {}
 	
-	
+	public UserModel(User user) {
+		super();
+		this.setEmail(user.getEmail());
+		this.setPhone(user.getPhone());
+		this.setFullName(user.getFullName());
+		this.setLocation(user.getLocation());
+		this.setCountryCode(user.getCountryCode());
+				
+	}
 	
 	public String getCompanyId() {
 		return companyId;
@@ -291,12 +302,5 @@ public class UserModel implements Serializable {
 
 	public void setReceiveUpdates(boolean receiveUpdates) {
 		this.receiveUpdates = receiveUpdates;
-	}
-
-
-	
-	//settings.xhtml getter setter ends here
-	
-	
-	
+	}	
 }

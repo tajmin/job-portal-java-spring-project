@@ -83,7 +83,6 @@ public class UserServiceImpl implements UserService {
 	}
 
 	public User login(String username, String password) {
-
 		User user = userRepository.findUserByEmail(username);
 		if (user == null) {
 			throw new AuthenticationFailedException("error.usernameandpasswordnotmatch.text");
@@ -111,8 +110,6 @@ public class UserServiceImpl implements UserService {
 		emailService.sendEmail(new ForgetPasswordEmail(user, token));
 	}
 
-	//@author SHIFAT edited for setting
-	
 	@Override
 	public void saveUserSetting(UserModel userModel,String id) {
 		// TODO Auto-generated method stub
@@ -120,14 +117,31 @@ public class UserServiceImpl implements UserService {
 		User user=userRepository.findUserById(id);
 		user.setePost(!userModel.isePost());
 		user.setSms(!userModel.isSms());
-		user=userRepository.saveAndFlush(user);
-		
-		
-		
-		
-		
-		
+		user=userRepository.saveAndFlush(user);			
 	}
 	
-	//ends
+	@Override
+	public void updateUser(UserModel userModel, String id) {
+		// TODO Auto-generated method stub
+		User user = userRepository.findUserById(id);
+		
+		if (user == null) {
+			throw new AuthenticationFailedException("error.usernotfound.text");
+		}
+		user.setPhone(userModel.getPhone());
+		user.setLocation(userModel.getLocation());
+		userRepository.saveAndFlush(user);		
+	}
+
+	@Override
+	public User showUserInfo(String id) {
+		// TODO Auto-generated method stub
+		User user = userRepository.findUserById(id);	
+		
+		if (user == null) {
+			throw new AuthenticationFailedException("error.usernotfound.text");
+		}
+		
+		return user;
+	}
 }

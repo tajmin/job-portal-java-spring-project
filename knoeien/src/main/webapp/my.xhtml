@@ -4,10 +4,91 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core">
 	<ui:param name="leftMenu" value="show"></ui:param>
 	<ui:define name="content">
-		<div class="row wrapper-content" style="height:700px;">
-			<div class="medium-12 columns text-center">
-				<h4>User Informations</h4>
+		<div class="row wrapper-content" ng-controller="editProfileCtrl">
+			<div class="medium-8 medium-centered columns" >
+				<!-- Foundation "abide" plug-in used for validation  -->
+				<form name="profileEditForm" ng-if="!isproceed">
+					<div class="row">
+						<div class="medium-12 columns text-center">
+							<a data-open="image-upload-modal"><img class="circular-img" width="256" src="#{request.contextPath}/resources/assets/images/profile_pic.png" alt="Profile Pic" /></a>
+						</div>
+					</div>
+					<div class="row">
+						<div class="medium-12 columns text-center">
+							<h3>{{user.fullName}}</h3>
+							<p>{{user.email}}</p>
+							<p>Born on 01/01/1985</p>
+							<p>{{user.phone}}</p>
+						</div>
+					</div>
+					<div class="row">
+						<div class="medium-12 columns">
+							<label>Phone</label>
+							<input ng-model="user.phone" type="text" placeholder="Write your phone number" />
+						</div>
+					</div>
+					<div class="row">	
+						<div class="medium-12 columns">
+							<label>Address</label>
+							<input ng-model="user.location" type="text" placeholder="Write your street address" required="required" />
+						</div>
+					</div>
+					
+					<div class="row">	
+						<div class="medium-12 columns">
+							<label>Postcode</label>
+							<input type="text" placeholder="Write your area postcode" required="required" />
+						</div>
+					</div>
+					 
+					<div class="row">	
+						<div class="medium-12 columns">
+							<label>By</label>
+							<input type="text" placeholder="This field must complete to get paid" required="required" />
+						</div>
+					</div>
+					
+					<div class="row">
+						<div class="medium-12 columns">
+							<label>Describe yourself</label>
+							<textarea rows="4" placeholder="If you write something about yourself, it is much more likely that people either verger a do your job or that you are selected as an employee."></textarea>
+						</div>
+					</div>
+					
+					<div class="row" ng-if="isproceed">
+						<span>{{responseMessage}} </span>
+						<div class="row">
+							<fieldset class="medium-12 columns">
+								<div class="button-group float-right">
+									<a href="javascript:void(0);" class="button hlpr-color-info" >Ok</a>
+								</div>
+							</fieldset>
+						</div>
+					</div>
+							
+					<div class="row">
+						<fieldset class="medium-12 columns">
+							<div class="button-group float-right">
+								<a href="javascript:void(0);" ng-click="formSubmitted = true; editProfile(profileEditForm.$valid);" class="button hlpr-color-info" >Save</a>
+								<a class="button hlpr-color-alert" href="index.xhtml">Cancel</a>
+							</div>
+						</fieldset>
+					</div>
+				</form>
+				<!-- Profile form ends here -->
+			</div>
+			<div class="medium-7 medium-centered columns" ng-if="isproceed" style="height: 300px;">
+					<span>{{responseMessage}} </span>
+					<div class="row">
+						<fieldset class="medium-12 columns">
+							<div class="button-group float-right">
+								<a href="javascript:void(0);" class="button hlpr-color-info" >Ok</a>
+							</div>
+						</fieldset>
+					</div>
 			</div>
 		</div>
+		
+		<ui:insert name="image-upload-modal"></ui:insert>
 	</ui:define>
 </ui:composition>
