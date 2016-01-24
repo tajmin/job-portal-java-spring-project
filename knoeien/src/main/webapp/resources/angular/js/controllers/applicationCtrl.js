@@ -71,10 +71,9 @@ Controllers.controller("settingsCtrl", function($scope, $rootScope, restservice,
 	$scope.isproceed = false;
 	$scope.user = {};
 	$scope.responseMessage = "";
-	$scope.settings = function() {
-		
-		
-		restservice.post( $scope.user, "api/v1/user/settings").then(function(response) {
+	$scope.settings = function(settingName) {
+				
+		restservice.post( $scope.user, "api/v1/user/settings?name="+settingName).then(function(response) {
 			if (response != null && response.success) {
 				$scope.isproceed = true;
 				$scope.responseMessage = response.message;				

@@ -95,7 +95,7 @@ public class UserController extends AbstractController implements Serializable {
 	 
 	 @RequestMapping(value = "/settings", method = RequestMethod.POST, produces = "application/json")
 	 @ResponseBody
-	public ResponseEntity<RestResponse> invite(@RequestBody UserModel userModel) {	
+	public ResponseEntity<RestResponse> invite(@RequestBody UserModel userModel, @RequestParam(value="name", required=true) String name) {	
 		 
 
 		 User user=new User();
