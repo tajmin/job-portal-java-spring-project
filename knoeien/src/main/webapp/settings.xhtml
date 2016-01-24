@@ -1,0 +1,142 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition template="templates/angular-template.xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+	<ui:param name="leftMenu" value="show"></ui:param>
+
+	<ui:define name="content">
+
+		<div class="row wrapper-content" ng-controller="settingsCtrl">
+			<div class="medium-7 medium-centered columns" ng-if="!isproceed">
+		
+				<!--  @author  SHIFAT -->
+		
+				  <h4>Send meg notifikasjoner pa</h4>
+				<div class="row">
+				<div class="medium-6 columns">
+					<p>E-POST</p>
+					<hr></hr>
+				</div>
+				<div class="medium-6 columns">
+					<div class="switch round">
+						<input id="epost" ng-model="user.epost" type="checkbox" ng-change="settings();"></input>
+						<label for="epost"></label>
+					</div>
+				</div>
+				</div>
+
+				<div class="row">
+				<div class="medium-6 columns">
+					<p>SMS</p>
+					<hr></hr>
+				</div>
+
+				<div class="medium-6 columns">
+					<div class="switch round">
+						<input id="sms" ng-model="user.sms" type="checkbox" ng-change="settings();"></input> 
+						<label for="sms"></label>
+					</div>
+				</div>
+				
+				</div>
+				
+				 <h4>Send meg notifikasjon pa e-post/sms nar</h4>
+				
+				<div class="row">
+				<div class="medium-6 columns">
+					<p>SOMEONE SEND ME A MESSAGE</p>
+					<hr></hr>
+				</div>
+
+				<div class="medium-6 columns">
+					<div class="switch round">
+						<input id="message" ng-model="user.message" type="checkbox" ng-change="message()"></input> 
+						<label for="message"></label>
+					</div>
+				</div>
+				
+				</div>
+				
+				
+				<div class="row">
+				<div class="medium-6 columns">
+					<p>SOME REPORTS INTEREST FOR MY JOB</p>
+					<hr></hr>
+				</div>
+
+				<div class="medium-6 columns">
+					<div class="switch round">
+						<input id="reports" ng-model="user.reports" type="checkbox" ng-change="reports()"></input> 
+						<label for="reports"></label>
+					</div>
+				</div>
+				
+				</div>
+				
+				<div class="row">
+				<div class="medium-6 columns">
+					<p>I GET ASSIGNED A JOB</p>
+					<hr></hr>
+				</div>
+
+				<div class="medium-6 columns">
+					<div class="switch round">
+						<input id="assignedJob" ng-model="user.assignedJob" type="checkbox" ng-change="assignedJob()"></input> 
+						<label for="assignedJob"></label>
+					</div>
+				</div>
+				
+				</div>
+							
+				<div class="row">
+				<div class="medium-6 columns">
+					<p>THE EMPLOYER CONFIRMS THE JOB IS DONE</p>
+					<hr></hr>
+				</div>
+
+				<div class="medium-6 columns">
+					<div class="switch round">
+						<input id="confirmJob" ng-model="user.confirmJob" type="checkbox" ng-change="confirmJob()"></input> 
+						<label for="confirmJob"></label>
+					</div>
+				</div>
+				
+				</div>
+			<h4>Diverse</h4>  
+				<div class="row">
+				<div class="medium-6 columns">
+					<p>HIDE MY ADDRESS</p>
+					<hr></hr>
+				</div>
+
+				<div class="medium-6 columns">
+					<div class="switch round">
+						<input id="hideAddress" ng-model="user.hideAddress" type="checkbox" ng-change="hideAddress()"></input> 
+						<label for="hideAddress"></label>
+					</div>
+				</div>
+				
+				</div>
+				<div class="row">
+				<div class="medium-6 columns">
+					<p>RECEIVE UPDATES BY EMAIL</p>
+					<hr></hr>
+				</div>
+
+				<div class="medium-6 columns">
+					<div class="switch round">
+						<input id="receiveUpdates" ng-model="user.receiveUpdates" type="checkbox" ng-change="receiveUpdates()"></input> 
+						<label for="receiveUpdates"></label>
+					</div>
+				</div>
+				
+				</div>
+	
+			<!-- end -->
+			</div>
+		</div>
+
+	</ui:define>
+</ui:composition>

@@ -8,6 +8,7 @@ import javax.ejb.Asynchronous;
 import javax.mail.Address;
 import javax.mail.BodyPart;
 import javax.mail.Message;
+import javax.mail.MessagingException;
 import javax.mail.Multipart;
 import javax.mail.PasswordAuthentication;
 import javax.mail.Session;
@@ -18,8 +19,12 @@ import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
 
 import org.apache.commons.lang3.exception.ExceptionUtils;
+import org.apache.commons.mail.EmailException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 
 import com.github.jknack.handlebars.Handlebars;
@@ -35,6 +40,10 @@ import com.sun.mail.util.MailSSLSocketFactory;
  * @author Mithun <shahinur.bd@gmail.com>
  * 
  */
+
+
+
+
 @Service
 public class EmailServiceImpl implements EmailService {
 	private static Logger log = LoggerFactory.getLogger(EmailService.class);
@@ -142,4 +151,10 @@ public class EmailServiceImpl implements EmailService {
 		}
 		return handleBars;
 	}
-}
+
+	
+	
+
+	
+	
+}	

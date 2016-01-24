@@ -111,6 +111,16 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
+	public void saveUserSetting(UserModel userModel,String id) {
+		// TODO Auto-generated method stub
+		
+		User user=userRepository.findUserById(id);
+		user.setePost(!userModel.isePost());
+		user.setSms(!userModel.isSms());
+		user=userRepository.saveAndFlush(user);			
+	}
+	
+	@Override
 	public void updateUser(UserModel userModel, String id) {
 		// TODO Auto-generated method stub
 		User user = userRepository.findUserById(id);
@@ -134,5 +144,4 @@ public class UserServiceImpl implements UserService {
 		
 		return user;
 	}
-
 }

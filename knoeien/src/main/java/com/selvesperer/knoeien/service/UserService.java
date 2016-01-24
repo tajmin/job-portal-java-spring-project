@@ -17,6 +17,7 @@ public interface UserService {
 
 	public User saveUser(UserModel userModel);
 	
+	
 	public User resetPassword(String password, String resetToken);
 	
 	public User activeUser(User user);
@@ -25,10 +26,10 @@ public interface UserService {
 	
 	public void sendForgetPasswordEmail(String email) throws EmailException, IOException;
 	
+	public void saveUserSetting(UserModel userModel,String id);
+	
 	public void updateUser(UserModel userModel, String id);
 	
 	public User showUserInfo(String id);
-	
-	
 	
 }
