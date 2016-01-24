@@ -265,11 +265,55 @@
 	padding: 50px 0;
 }
 .circular-img {
-	border: 1px solid #3ac5e6;
+	border: 1px solid rgba(0,0,0,0.3);
 	border-radius: 50%;
 }
 #offCanvasLeft {
 	z-index: 6;
+}
+.border-radius-5px{
+	border-radius: 5px;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	-ms-border-radius: 5px;
+	-o-border-radius: 5px;
+}
+.border-radius-7px{
+	border-radius: 7px;
+	-webkit-border-radius: 7px;
+	-moz-border-radius: 7px;
+	-ms-border-radius: 7px;
+	-o-border-radius: 7px;
+}
+.border-radius-9px{
+	border-radius: 9px;
+	-webkit-border-radius: 9px;
+	-moz-border-radius: 9px;
+	-ms-border-radius: 9px;
+	-o-border-radius: 9px;
+}
+.search-list {
+	border-bottom: 1px solid #e6e6e6;
+	padding: 1rem 0;
+}
+.search-list:last-child {
+	border-bottom: none;
+	padding-bottom: 0;
+}
+.search-list:first-child {
+	padding-top: 0;
+}
+.search-list .job-title {
+	margin-bottom: 0;
+}
+.search-list .job-time-info {
+	margin-bottom: 0.5rem;
+	color: #ababab;
+}
+.search-list i {
+	font-size: 1.3em;
+	margin-right: 0.5rem;
+	width: 0.2rem;
 }
 /* Helper Colours Start */
 .hlpr-color-info {
