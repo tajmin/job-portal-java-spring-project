@@ -8,11 +8,12 @@
 
 	<ui:define name="content">
 
-		<div class="row wrapper-content" ng-controller="settingsCtrl">
+		<div class="row wrapper-content" ng-controller="saveUserSettingCtrl">
 			<div class="medium-7 medium-centered columns" ng-if="!isproceed">
 		
-				<!--  @author  SHIFAT -->
+				<!--  @author  SHIFAT edited settings -->
 		
+				<form name="saveSettingForm">
 				  <h4>Send meg notifikasjoner pa</h4>
 				<div class="row">
 				<div class="medium-6 columns">
@@ -21,11 +22,13 @@
 				</div>
 				<div class="medium-6 columns">
 					<div class="switch round">
-						<input id="epost" ng-model="user.epost" type="checkbox" ng-change="settings('epost');"></input>
+						<input id="epost" ng-model="user.ePost" type="checkbox"  ng-click="settings('epost')"></input>
 						<label for="epost"></label>
 					</div>
 				</div>
 				</div>
+				
+				
 
 				<div class="row">
 				<div class="medium-6 columns">
@@ -35,7 +38,7 @@
 
 				<div class="medium-6 columns">
 					<div class="switch round">
-						<input id="sms" ng-model="user.sms" type="checkbox" ng-change="settings();"></input> 
+						<input id="sms" ng-model="user.sms" type="checkbox" ng-click="settings('sms');"></input> 
 						<label for="sms"></label>
 					</div>
 				</div>
@@ -52,7 +55,7 @@
 
 				<div class="medium-6 columns">
 					<div class="switch round">
-						<input id="message" ng-model="user.message" type="checkbox" ng-change="message()"></input> 
+						<input id="message" ng-model="user.message" type="checkbox" ng-click="settings('message')"></input> 
 						<label for="message"></label>
 					</div>
 				</div>
@@ -68,7 +71,7 @@
 
 				<div class="medium-6 columns">
 					<div class="switch round">
-						<input id="reports" ng-model="user.reports" type="checkbox" ng-change="reports()"></input> 
+						<input id="reports" ng-model="user.reports" type="checkbox" ng-click="settings('reports')"></input> 
 						<label for="reports"></label>
 					</div>
 				</div>
@@ -83,7 +86,7 @@
 
 				<div class="medium-6 columns">
 					<div class="switch round">
-						<input id="assignedJob" ng-model="user.assignedJob" type="checkbox" ng-change="assignedJob()"></input> 
+						<input id="assignedJob" ng-model="user.assignedJob" type="checkbox" ng-click="settings('assignedJob')"></input> 
 						<label for="assignedJob"></label>
 					</div>
 				</div>
@@ -98,7 +101,7 @@
 
 				<div class="medium-6 columns">
 					<div class="switch round">
-						<input id="confirmJob" ng-model="user.confirmJob" type="checkbox" ng-change="confirmJob()"></input> 
+						<input id="confirmJob" ng-model="user.confirmJob" type="checkbox" ng-click="settings('confirmJob')"></input> 
 						<label for="confirmJob"></label>
 					</div>
 				</div>
@@ -113,7 +116,7 @@
 
 				<div class="medium-6 columns">
 					<div class="switch round">
-						<input id="hideAddress" ng-model="user.hideAddress" type="checkbox" ng-change="hideAddress()"></input> 
+						<input id="hideAddress" ng-model="user.hideAddress" type="checkbox" ng-click="settings('hideAddress')"></input> 
 						<label for="hideAddress"></label>
 					</div>
 				</div>
@@ -127,13 +130,14 @@
 
 				<div class="medium-6 columns">
 					<div class="switch round">
-						<input id="receiveUpdates" ng-model="user.receiveUpdates" type="checkbox" ng-change="receiveUpdates()"></input> 
+						<input id="receiveUpdates" ng-model="user.receiveUpdates" type="checkbox" ng-click="settings('receiveUpdates')"></input> 
 						<label for="receiveUpdates"></label>
 					</div>
 				</div>
 				
 				</div>
 	
+			</form>
 			<!-- end -->
 			</div>
 		</div>

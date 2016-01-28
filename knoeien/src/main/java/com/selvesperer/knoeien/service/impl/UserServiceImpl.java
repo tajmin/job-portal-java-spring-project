@@ -110,20 +110,51 @@ public class UserServiceImpl implements UserService {
 		emailService.sendEmail(new ForgetPasswordEmail(user, token));
 	}
 
+	
+	// @author SHIFAT save User settings 
 	@Override
-	public void saveUserSetting(UserModel userModel, String id) {
+	public void saveUserSetting(UserModel userModel, String id, String requestField) {
 		// TODO Auto-generated method stub
 		
 		User user=userRepository.findUserById(id);
-		if(id.equals("epost")) {
+		if(requestField.equals("epost")) {
 			user.setePost(userModel.isePost());
-		} else if(id.equals("epost")) {
-			user.setePost(!userModel.isePost());
 		}
 		
-		user.setSms(!userModel.isSms());
-		user=userRepository.saveAndFlush(user);			
+		if(requestField.equals("sms")){
+			user.setSms(userModel.isSms());
+		}
+		
+		//next
+		if(requestField.equals("message")){
+			user.setMessage(userModel.isMessage());
+		}
+		
+		if(requestField.equals("reports")){
+			user.setReports(userModel.isReports());
+		}
+		
+		if(requestField.equals("assignedJob")){
+			user.setAssignedJob(userModel.isAssignedJob());
+		}
+		
+		if(requestField.equals("confirmJob")){
+			user.setConfirmJob(userModel.isConfirmJob());
+		}
+		
+		if(requestField.equals("hideAddress")){
+			user.setHideAddress(userModel.isHideAddress());
+		}
+		
+		if(requestField.equals("receiveUpdates")){
+			user.setReceiveUpdates(userModel.isReceiveUpdates());
+		}
+		
+	
+		userRepository.saveAndFlush(user);			
 	}
+	
+	// @author SHIFAT ends
 	
 	@Override
 	public void updateUser(UserModel userModel, String id) {
@@ -149,4 +180,19 @@ public class UserServiceImpl implements UserService {
 		
 		return user;
 	}
+
+	//@author SHIFAT edited for settings 
+	@Override
+	public User loadUserSetting(String id) {
+		// TODO Auto-generated method stub
+		User user=userRepository.findUserById(id);
+		if (user == null) {
+			throw new AuthenticationFailedException("error.usernotfound.text");
+		}
+		
+		return user;
+	}
+	
+	
+	//@author SHIFAT ends
 }
