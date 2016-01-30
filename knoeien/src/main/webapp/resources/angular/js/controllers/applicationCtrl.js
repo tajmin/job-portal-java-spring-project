@@ -31,11 +31,15 @@ Controllers.controller("UserCtrl", function($scope, $rootScope, restservice, $co
 Controllers.controller("signupCtrl", function($scope, $rootScope, restservice, $cookies) {
 	$scope.isproceed = false;
 	$scope.user = {};
+	$scope.user.day = "";
+	$scope.user.month = "";
+	$scope.user.year = "";
+	$scope.user.dateOfBirth = "";
 	$scope.formSubmitted = false;
 	$scope.responseMessage = "";
 	$scope.signup = function(isValid) {
 		if(!isValid) return;
-		
+		$scope.user.dateOfBirth = $scope.user.year + "-" + $scope.user.month + "-" + $scope.user.day;
 		restservice.post( $scope.user, "api/v1/user/signup").then(function(response) {
 			if (response != null && response.success) {
 				$scope.isproceed = true;
@@ -182,4 +186,36 @@ Controllers.controller("editProfileCtrl", function($scope, $rootScope, restservi
 		
     };   
     
+});
+
+Controllers.controller("jobCtrl", function($scope, $rootScope, restservice, $cookies) {
+	$scope.isproceed = false;
+	$scope.job = {};
+	$scope.formSubmitted = false;
+	$scope.responseMessage = "";
+	
+	$scope.showJob = function() {	
+		
+		restservice.get( '', "api/v1/job/showjob").then(function(response) {
+			if (response != null) {
+				$scope.job = response;	
+        	} else {
+        		$scope.responseMessage = response.message;	
+        	}
+        });
+	
+    };
+    $scope.showJob();
+    
+	$scope.addJob = function(isValid) {
+		if(!isValid) return;
+				
+		restservice.post( $scope.job, "api/v1/job/addjob").then(function(response) {
+			if (response != null && response.success) {
+				$scope.isproceed = true;
+				$scope.responseMessage = response.message;				
+        	}
+        });
+		
+    };      
 });

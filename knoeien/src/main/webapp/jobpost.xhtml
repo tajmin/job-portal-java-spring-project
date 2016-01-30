@@ -3,7 +3,7 @@
 <ui:composition template="templates/angular-template.xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core">
 
 	<ui:define name="content">
-		<div class="row wrapper-content" ng-controller="signupCtrl">
+		<div class="row wrapper-content" ng-controller="jobCtrl">
 			<div class="medium-7 medium-centered columns" ng-if="!isproceed">
 				<form name="jobPostingForm" data-abide="data-abide" novalidate="novalidate">
 					<div class="row">
@@ -13,58 +13,87 @@
 					</div>
 					<div class="row">
 						<div class="small-12 columns">
-							<label><h4>Describe your job</h4></label>
-							<textarea rows="3"  placeholder="Write your details job description" required="required" />							
-	                        <span class="form-error">It's required</span>
+							<label><h4>Describe Your Job</h4></label>
+							<textarea rows="3"  placeholder="Write your details job description"  ng-model="job.description"/>							
+	                        <div ng-messages="formSubmitted &amp;&amp; jobPostingForm.description.$error">
+	                            <div ng-message="required" class="error">Description is required</div>
+	                        </div>
 						</div>
 						
 						<div class="small-12 columns">
 							<label><h4>How long will the job take?</h4></label>
 							<div class="input-group">
 								<span class="input-group-label">Approximately</span>
-								<input type="number" class="input-group-field" required="required"/>
+								<input type="number" class="input-group-field"  ng-model="job.duration"/>
 								<span class="input-group-label">Hour</span>
 							</div>
-							<span class="form-error">It's required</span>							
+							<div ng-messages="formSubmitted &amp;&amp; jobPostingForm.duration.$error">
+	                            <div ng-message="required" class="error">Job Duration is required</div>
+	                        </div>							
 						</div>
 						
 						<div class="small-12 columns">
 							<label><h4>How much will you pay your assistant?</h4></label>
 							<div class="input-group">
-								<input type="number" class="input-group-field" required="required"/>
+								<input type="number" class="input-group-field"  ng-model="job.payment"/>
 								<span class="input-group-label">%</span>
 							</div>
-							<span class="form-error">It's required</span>							
+							<div ng-messages="formSubmitted &amp;&amp; jobPostingForm.payment.$error">
+	                            <div ng-message="required" class="error">Payment is required</div>
+	                        </div>							
 						</div>
 						
 						<div class="small-12 columns">
 							<label><h4>Where do you need help?</h4></label>
 							<div class="input-group">
 								<span class="input-group-label" style="font-size: 20px;"><i class="fi-marker"></i></span>
-								<input type="text" class="input-group-field" placeholder="Enter your street address" required="required"/>
+								<input type="text" class="input-group-field" placeholder="Enter your street address"  ng-model="job.addressLine1"/>
 							</div>
-							<span class="form-error">It's required</span>							
+							<div ng-messages="formSubmitted &amp;&amp; jobPostingForm.addressLine1.$error">
+	                            <div ng-message="required" class="error">AddressLine1 is required</div>
+	                        </div>							
 						</div>
 						
 						<div class="small-12 columns">
 							<label><h4>When do you need help?</h4></label>
 							<div class="input-group">
 								<span class="input-group-label" style="font-size: 20px;"><i class="fi-calendar"></i></span>
-								<input type="text" class="input-group-field" placeholder="Enter your street address" required="required"/>
+								<input type="text" class="input-group-field" placeholder="Enter your street address" ng-model="job.date"/>
 							</div>
-							<span class="form-error">It's required</span>							
+							<div ng-messages="formSubmitted &amp;&amp; jobPostingForm.date.$error">
+	                            <div ng-message="required" class="error">Job Date is required</div>
+	                        </div>							
 						</div>
 					</div>
+					
+					<ul class="global-message" style="white-space:normal">
+						<span ng-repeat="m in restMessages"> 
+							<li class="info-text info-modal">{{m.message}}</li>
+						</span>								
+					</ul>
 							
 					<div class="row">
 						<fieldset class="medium-12 columns">
 							<div class="button-group float-right">
-								<a href="#" class="button hlpr-color-info" >Post</a>
+								<a 	href="javascript:void(0);" ng-click="formSubmitted = true; addJob(jobPostingForm.$valid);" class="button hlpr-color-info" >Post</a>
 								<a class="button hlpr-color-alert" href="index.xhtml">Cancel</a>
 							</div>
 						</fieldset>
 					</div>
 				</form>
+			</div>
+			
+			<div class="medium-7 medium-centered columns" ng-if="isproceed">
+				<div style="height:300px;">
+					<span>{{responseMessage}} </span>
+					<div class="row" style="text-align:center">
+						<fieldset class="medium-12 columns">
+							<div class="button-group float-right">
+								<a href="javascript:void(0);" class="button hlpr-color-info" >Ok</a>
+							</div>
+						</fieldset>
+					</div>
+				</div>					
 			</div>
 		</div>
 		

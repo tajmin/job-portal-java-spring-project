@@ -44,7 +44,7 @@ public class ApplicationJNDIJPAConfig {
 	private String showSql;
 
 	@Value("${hibernate.hbm2ddl.auto:none}")
-	//@Value("${hibernate.hbm2ddl.auto:create-drop}")
+//	@Value("${hibernate.hbm2ddl.auto:create-drop}")
 	private String hbm2ddlAuto;
 
 	@Value("${hibernate.format_sql:true}")

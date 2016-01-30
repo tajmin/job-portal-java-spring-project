@@ -10,7 +10,7 @@
   			<li class="tabs-title"><a href="#earliestDeadline">Earliest Deadline</a></li>
   			<li class="tabs-title"><a href="#nearestYou">Nearest You</a></li>
 		</ul>
-		<div class="tabs-content" data-tabs-content="job-tabs">
+		<div class="tabs-content" data-tabs-content="job-tabs" ng-controller="jobCtrl">
 			<div class="tabs-panel is-active" id="latest">
 				<div class="row search-list">
 					<div class="medium-3 columns text-center">
@@ -19,17 +19,17 @@
 					<div class="medium-9 columns">
 						<div class="row">
 							<div class="small-12 columns">
-								<h4 class="job-title">Mowing</h4>
+								<h4 class="job-title">{{job.title}}</h4>
 								<h5><small>This job was opened 3 days and 7 hours ago.</small></h5>
 							</div>
 						</div>
 						<div class="row">
-							<div class="medium-6 large-4 columns"><i class="fi-dollar"></i> NOK 150</div>
-							<div class="medium-6 large-8 columns"><i class="fi-clock"></i> Approximately 1.5 hours</div>
+							<div class="medium-6 large-4 columns"><i class="fi-dollar"></i> NOK {{job.payment}}</div>
+							<div class="medium-6 large-8 columns"><i class="fi-clock"></i> Approximately {{job.duration}}hours</div>
 						</div>
 						<div class="row">
-							<div class="medium-6 large-4 columns"><i class="fi-calendar"></i> 08/12/2016</div>
-							<div class="medium-6 large-8 columns"><i class="fi-marker"></i> Some, Where, Norway</div>
+							<div class="medium-6 large-4 columns"><i class="fi-calendar"></i>{{job.date}}</div>
+							<div class="medium-6 large-8 columns"><i class="fi-marker"></i>{{job.addressLine1}}</div>
 						</div>
 					</div>
 				</div>
