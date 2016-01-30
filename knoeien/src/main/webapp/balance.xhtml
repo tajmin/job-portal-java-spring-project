@@ -1,0 +1,67 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition template="templates/angular-template.xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core">
+
+	<ui:define name="content">
+		<div class="row wrapper-content">
+			<div class="medium-10 medium-centered columns">
+				<div class="row">
+					<div class="columns text-center">
+						<h2>Your Payments and Transfers</h2>
+						<p>Here are the list of jobs you've paid and jobs you've been paid for</p>
+					</div>
+				</div>
+				<hr />
+				<div class="row">
+					<div class="columns">
+						<div class="callout">
+							<div class="text-center"><h4>Payments</h4></div>
+							<table class="stack hover small-12">
+								<thead>
+									<tr>
+										<th>Amount</th>
+										<th>Job</th>
+										<th>Given</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td>$500</td>
+										<td>Mowing</td>
+										<td>$550</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="columns">
+						<div class="callout">
+							<div class="text-center"><h4>Transfers</h4></div>
+							<table class="stack hover small-12">
+								<thead>
+									<tr>
+										<th>Amount</th>
+										<th>Bank</th>
+										<th>Status</th>
+										<th>Paid</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td>$500</td>
+										<td>Something Bank Ltd.</td>
+										<td>Deposited</td>
+										<td>$550</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</ui:define>
+	
+</ui:composition>
