@@ -186,7 +186,7 @@ Controllers.controller("editProfileCtrl", function($scope, $rootScope,
 		restservice, $cookies) {
 	$scope.isproceed = false;
 	$rootScope.userinfos = {};
-	$scope.user = {};
+	$scope.balance = {};
 	$scope.formSubmitted = false;
 	$scope.responseMessage = "";
 
@@ -207,7 +207,7 @@ Controllers.controller("editProfileCtrl", function($scope, $rootScope,
 		if (!isValid)
 			return;
 
-		restservice.post($scope.user, "api/v1/user/editProfile").then(
+		restservice.post($scope.user, "api/v1/balance/editProfile").then(
 				function(response) {
 					if (response != null && response.success) {
 						$scope.isproceed = true;
@@ -218,3 +218,28 @@ Controllers.controller("editProfileCtrl", function($scope, $rootScope,
 	};
 
 });
+
+
+//@author SHIFAT controller for BALANCE
+Controllers.controller("balanceCtrl", function($scope, $rootScope,restservice, $cookies) {
+	
+	$scope.isproceed = false;
+	$scope.transactionHistory = {};
+	$scope.formSubmitted = false;
+	$scope.responseMessage = "";
+
+	$scope.balanceInfo = function() {
+		console.log("loading user balance");
+		restservice.get('', "api/v1/balance/balanceInfo").then(function(response) {
+			if (response != null) {
+				$scope.transactionHistory = response;
+			} else {
+				$scope.responseMessage = response.message;
+			}
+		});
+
+	};
+	$scope.balanceInfo();
+});
+
+//@author SHIFAT ends
