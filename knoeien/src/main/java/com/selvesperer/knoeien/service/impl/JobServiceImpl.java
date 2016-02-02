@@ -41,6 +41,12 @@ public class JobServiceImpl implements JobService {
 		return job;
 	}
 
+	@Override
+	public Job showBestPaidJob() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 
 	
 }

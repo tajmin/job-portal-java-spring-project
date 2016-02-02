@@ -194,9 +194,11 @@ Controllers.controller("jobCtrl", function($scope, $rootScope, restservice, $coo
 	$scope.formSubmitted = false;
 	$scope.responseMessage = "";
 	
-	$scope.showJob = function() {	
+	//Shows Latest Jobs
+	$scope.latestJob = function() {	
+		alert("Latest Jobs");
 		
-		restservice.get( '', "api/v1/job/showjob").then(function(response) {
+		restservice.get( '', "api/v1/job/latestjob").then(function(response) {
 			if (response != null) {
 				$scope.job = response;	
         	} else {
@@ -205,7 +207,64 @@ Controllers.controller("jobCtrl", function($scope, $rootScope, restservice, $coo
         });
 	
     };
-    $scope.showJob();
+    $scope.latestJob();
+    
+    //Shows Best Paid Jobs 
+    $scope.bestPaidJob = function() {	
+		alert("Best Paid Jobs");
+		
+		restservice.get( '', "api/v1/job/bestpaidjob").then(function(response) {
+			if (response != null) {
+				$scope.job = response;	
+        	} else {
+        		$scope.responseMessage = response.message;	
+        	}
+        });
+	
+    };
+    
+    //Shows Shortest Time Jobs 
+    $scope.shortestTimeJob = function() {	
+		alert("Shortest Time Jobs");
+		
+		restservice.get( '', "api/v1/job/shortesttimejob").then(function(response) {
+			if (response != null) {
+				$scope.job = response;	
+        	} else {
+        		$scope.responseMessage = response.message;	
+        	}
+        });
+	
+    };
+    
+    //Shows Earliest deadline Jobs 
+    $scope.earliestDeadlineJob = function() {	
+		alert("Earliest deadline Jobs");
+		
+		restservice.get( '', "api/v1/job/earliestdeadlinejob").then(function(response) {
+			if (response != null) {
+				$scope.job = response;	
+        	} else {
+        		$scope.responseMessage = response.message;	
+        	}
+        });
+	
+    };
+    
+    //Shows Nearest You Jobs 
+    $scope.nearestJob = function() {	
+		alert("Nearest You Jobs");
+		
+		restservice.get( '', "api/v1/job/nearestjob").then(function(response) {
+			if (response != null) {
+				$scope.job = response;	
+        	} else {
+        		$scope.responseMessage = response.message;	
+        	}
+        });
+	
+    };
+    
     
 	$scope.addJob = function(isValid) {
 		if(!isValid) return;

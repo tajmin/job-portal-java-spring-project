@@ -1,7 +1,6 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <ui:composition template="templates/angular-template.xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core">
-
 	<ui:define name="content">
 		<div class="row wrapper-content" ng-controller="jobCtrl">
 			<div class="medium-7 medium-centered columns" ng-if="!isproceed">
@@ -47,7 +46,7 @@
 							<label><h4>Where do you need help?</h4></label>
 							<div class="input-group">
 								<span class="input-group-label" style="font-size: 20px;"><i class="fi-marker"></i></span>
-								<input type="text" class="input-group-field" placeholder="Enter your street address"  ng-model="job.addressLine1"/>
+								<input type="text" size="50" id="placesearch" class="input-group-field" placeholder="Enter your street address"  ng-model="job.addressLine1"/>
 							</div>
 							<div ng-messages="formSubmitted &amp;&amp; jobPostingForm.addressLine1.$error">
 	                            <div ng-message="required" class="error">AddressLine1 is required</div>
@@ -96,6 +95,15 @@
 				</div>					
 			</div>
 		</div>
+		<script type="text/javascript">
+		function initialize() {
+			var searchBox = document.getElementById('placesearch');
+			var autocomplete =	new google.maps.places.SearchBox(searchBox);
+		}
+		google.maps.event.addDomListener(window, 'load', initialize);
+			
+			
+    	</script>
 		
 		<ui:insert name="login-modal"></ui:insert>
 		<ui:insert name="forgot-password-modal"></ui:insert>

@@ -64,8 +64,8 @@ public class JobController extends AbstractController implements Serializable {
 		return new ResponseEntity<RestResponse>(convertToRestGoodResponse(job), HttpStatus.BAD_REQUEST);
 	}
 	
-	@RequestMapping(value = "/showjob", method = RequestMethod.GET, produces = "application/json")
-	public ResponseEntity<RestResponse> showJob() {
+	@RequestMapping(value = "/latestjob", method = RequestMethod.GET, produces = "application/json")
+	public ResponseEntity<RestResponse> latestJob() {
 		RestResponse restResponse = null;
 		if (log.isDebugEnabled()) log.debug("Job Info");		
 		try {
@@ -83,4 +83,79 @@ public class JobController extends AbstractController implements Serializable {
 		return new ResponseEntity<RestResponse>( restResponse, HttpStatus.OK);
 	}
 	
+	@RequestMapping(value = "/bestpaidjob", method = RequestMethod.GET, produces = "application/json")
+	public ResponseEntity<RestResponse> bestPaidJob() {
+		RestResponse restResponse = null;
+		if (log.isDebugEnabled()) log.debug("Job Info");
+		
+		try {
+			JobService jobService = ApplicationBeanFactory.getBean(JobService.class);			
+			Job job = jobService.showBestPaidJob();
+			JobModel jobModel = new JobModel(job);
+
+			return new ResponseEntity<RestResponse>( convertToRestGoodResponse(jobModel, LocalizationUtil.findLocalizedString("signupsuccess.text")),HttpStatus.OK);
+		} catch (AuthenticationFailedException t) {
+			restResponse = convertToRestBadResponse("", t.getLocalizedMessage());
+		} catch (Exception t) {
+			restResponse = convertToRestBadResponse("", t.getLocalizedMessage());
+		}
+		return new ResponseEntity<RestResponse>( restResponse, HttpStatus.OK);
+	}
+	
+	@RequestMapping(value = "/shortesttimejob", method = RequestMethod.GET, produces = "application/json")
+	public ResponseEntity<RestResponse> shortestTimeJob() {
+		RestResponse restResponse = null;
+		if (log.isDebugEnabled()) log.debug("Job Info");
+		
+		try {
+			JobService jobService = ApplicationBeanFactory.getBean(JobService.class);			
+			Job job = jobService.showBestPaidJob();
+			JobModel jobModel = new JobModel(job);
+
+			return new ResponseEntity<RestResponse>( convertToRestGoodResponse(jobModel, LocalizationUtil.findLocalizedString("signupsuccess.text")),HttpStatus.OK);
+		} catch (AuthenticationFailedException t) {
+			restResponse = convertToRestBadResponse("", t.getLocalizedMessage());
+		} catch (Exception t) {
+			restResponse = convertToRestBadResponse("", t.getLocalizedMessage());
+		}
+		return new ResponseEntity<RestResponse>( restResponse, HttpStatus.OK);
+	}
+	
+	@RequestMapping(value = "/earliestdeadlinejob", method = RequestMethod.GET, produces = "application/json")
+	public ResponseEntity<RestResponse> earliestDeadlineJob() {
+		RestResponse restResponse = null;
+		if (log.isDebugEnabled()) log.debug("Job Info");
+		
+		try {
+			JobService jobService = ApplicationBeanFactory.getBean(JobService.class);			
+			Job job = jobService.showBestPaidJob();
+			JobModel jobModel = new JobModel(job);
+
+			return new ResponseEntity<RestResponse>( convertToRestGoodResponse(jobModel, LocalizationUtil.findLocalizedString("signupsuccess.text")),HttpStatus.OK);
+		} catch (AuthenticationFailedException t) {
+			restResponse = convertToRestBadResponse("", t.getLocalizedMessage());
+		} catch (Exception t) {
+			restResponse = convertToRestBadResponse("", t.getLocalizedMessage());
+		}
+		return new ResponseEntity<RestResponse>( restResponse, HttpStatus.OK);
+	}
+	
+	@RequestMapping(value = "/nearestjob", method = RequestMethod.GET, produces = "application/json")
+	public ResponseEntity<RestResponse> nearestJob() {
+		RestResponse restResponse = null;
+		if (log.isDebugEnabled()) log.debug("Job Info");
+		
+		try {
+			JobService jobService = ApplicationBeanFactory.getBean(JobService.class);			
+			Job job = jobService.showBestPaidJob();
+			JobModel jobModel = new JobModel(job);
+
+			return new ResponseEntity<RestResponse>( convertToRestGoodResponse(jobModel, LocalizationUtil.findLocalizedString("signupsuccess.text")),HttpStatus.OK);
+		} catch (AuthenticationFailedException t) {
+			restResponse = convertToRestBadResponse("", t.getLocalizedMessage());
+		} catch (Exception t) {
+			restResponse = convertToRestBadResponse("", t.getLocalizedMessage());
+		}
+		return new ResponseEntity<RestResponse>( restResponse, HttpStatus.OK);
+	}
 }

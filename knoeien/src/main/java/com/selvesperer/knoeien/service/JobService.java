@@ -10,4 +10,7 @@ public interface JobService {
 	public Job saveJob(JobModel jobModel);
 
 	public Job showJobInfo(String id);
+	
+	public Job showBestPaidJob();
+	
 }

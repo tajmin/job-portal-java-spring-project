@@ -20,4 +20,8 @@ public interface Constants {
 	public static final String CURRENT_COMPANY_ID = "companyId";
 	public static final String CURRENT_USER_NAME = "userName";
 	public static final int TOKEN_EXPIRES_IN_MINUTES = 10;
+	
+	//Database keys
+	public static final int RESULT_LIMIT = 4;
+	public static final int RESULT_OFFSET = 10;
 }
