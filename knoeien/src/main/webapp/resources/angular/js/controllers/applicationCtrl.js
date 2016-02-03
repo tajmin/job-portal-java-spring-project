@@ -221,16 +221,16 @@ Controllers.controller("editProfileCtrl", function($scope, $rootScope,
 
 
 //@author SHIFAT controller for BALANCE
-Controllers.controller("balanceCtrl", function($scope, $rootScope,restservice, $cookies) {
+Controllers.controller("transactionCtrl", function($scope, $rootScope,restservice, $cookies) {
 	
 	$scope.isproceed = false;
 	$scope.transactionHistory = {};
 	$scope.formSubmitted = false;
 	$scope.responseMessage = "";
 
-	$scope.balanceInfo = function() {
-		console.log("loading user balance");
-		restservice.get('', "api/v1/balance/balanceInfo").then(function(response) {
+	$scope.transactionInfo = function() {
+		console.log("loading user transaction");
+		restservice.get('', "api/v1/transaction/transactionInfo").then(function(response) {
 			if (response != null) {
 				$scope.transactionHistory = response;
 			} else {
@@ -239,7 +239,7 @@ Controllers.controller("balanceCtrl", function($scope, $rootScope,restservice, $
 		});
 
 	};
-	$scope.balanceInfo();
+	$scope.transactionInfo();
 });
 
 //@author SHIFAT ends

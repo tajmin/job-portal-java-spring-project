@@ -1,5 +1,7 @@
 package com.selvesperer.knoeien.data.repository;
 
+import java.util.List;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -14,7 +16,8 @@ public interface TransactionHistoryRepository extends JpaRepository<TransactionH
 	@Query("from TransactionHistory t where t.id = :id")
 	TransactionHistory findTransactionHistoryById(@Param("id") String id);
 	
-//	@Query("select t from TransactionHistory t")	
-//	List<TransactionHistory> findAllTransactionHistory(@Param("id")String id,@Param("amount")String amount, @Param("jobId")String jobId,@Param("toUserId")String to_user_id);
+	@Query("from TransactionHistory t where t.userId = :id")
+	List<TransactionHistory> findTransactionHistoryByUserId(@Param("id") String id);
+
 	
 }

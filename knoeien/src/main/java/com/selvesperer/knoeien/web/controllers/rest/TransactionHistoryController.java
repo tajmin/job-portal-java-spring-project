@@ -1,6 +1,9 @@
 package com.selvesperer.knoeien.web.controllers.rest;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,7 +24,7 @@ import com.selvesperer.knoeien.web.controllers.model.RestResponse;
 import com.selvesperer.knoeien.web.controllers.model.TransactionHistoryModel;
 
 @Controller
-@RequestMapping(value = "/api/v1/balance")
+@RequestMapping(value = "/api/v1/transaction")
 public class TransactionHistoryController extends AbstractController implements Serializable{
 
 	private static final long serialVersionUID = 4693779095855653551L;
@@ -30,21 +33,26 @@ public class TransactionHistoryController extends AbstractController implements 
 	@RequestMapping(method = RequestMethod.GET, produces = "application/json")
 	@ResponseBody
 	public Integer getData() {
-		System.out.println(" getting data of balance ......");
+		System.out.println(" getting data of transaction ......");
 		return 1;
 	}
 	
 	//@author SHIFAT edited for balance info
-	@RequestMapping(value = "/balanceInfo", method = RequestMethod.GET, produces = "application/json")
+	@RequestMapping(value = "/transactionInfo", method = RequestMethod.GET, produces = "application/json")
 	public ResponseEntity<RestResponse> balanceInfo() {
 		RestResponse restResponse = null;
-		if (log.isDebugEnabled()) log.debug("Balance Info");		
+		if (log.isDebugEnabled()) log.debug("Transaction Info");		
 		try {
-			TransactionHistoryService balanceService = ApplicationBeanFactory.getBean(TransactionHistoryService.class);
-			//String id = SecurityManager.getCurrentUserId();
-			String id="8000000";
-			TransactionHistory transactionHistory = balanceService.showBalanceInfo(id);
-			TransactionHistoryModel transactionHistoryModel = new TransactionHistoryModel(transactionHistory);
+			TransactionHistoryService transactionHistoryService = ApplicationBeanFactory.getBean(TransactionHistoryService.class);
+			String id = SecurityManager.getCurrentUserId();
+			//String id="8000000";
+			List<TransactionHistory> transactionHistory = transactionHistoryService.showTransactionInfo(id);
+			TransactionHistoryModel transactionHistoryModel = new TransactionHistoryModel(transactionHistory.get(0));
+			
+//			for(int i=0;i<transactionHistory.size();i++){
+//			transactionHistoryModel = new TransactionHistoryModel(transactionHistory.get(i));
+//			}
+			
 			System.out.println(id);
 			return new ResponseEntity<RestResponse>( convertToRestGoodResponse(transactionHistoryModel, LocalizationUtil.findLocalizedString("signupsuccess.text")),HttpStatus.OK);
 			
