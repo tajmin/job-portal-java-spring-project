@@ -315,6 +315,39 @@
 	margin-right: 0.5rem;
 	width: 0.2rem;
 }
+/*Forgot Password Modal*/
+#forget-password-modal {
+	max-width: 450px;
+	border-radius: 5px;
+}
+#forgotPassTitle {
+	color: #8A8A8A;
+}
+#forgotPassEmail {
+	border-radius: 5px;
+}
+#fogotPassInstruction {
+	font-size: 1em;
+	color: #8A8A8A;
+}
+#forgotPassLinkBtn {
+	width: 100%;
+	border-radius: 5px;
+}
+#forgotResponseMsg {
+	color: #8A8A8A;
+	margin-left: 12px;
+}
+#forgotPassImg {
+	width: 80px;
+	height: 75px;
+	margin: 18px 0;
+}
+#forgotPassOkBtn {
+	width: 100%;
+	border-radius: 5px;
+}
+/**/
 /* Helper Colours Start */
 .hlpr-color-info {
 	background-color: #3ac5e6;

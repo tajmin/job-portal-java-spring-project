@@ -5,14 +5,17 @@
 		<form name="loginForm">
 			<div class="row">
 				<div class="medium-12 columns">
-					<h4>Login</h4>
+					<a href="" class="button hlpr-color-info" style="width: 100%; margin-top: 15px; border-radius: 5px;">Log in with Facebook</a>
 				</div>
 			</div>
-			
 			<div class="row">
 				<div class="medium-12 columns">
-					<label>Email </label>
-					<input type="text" name="username" placeholder="Enter your email" required="required" ng-model="user.username" />
+					<h4 class="text-center">Or</h4>
+				</div>
+			</div>
+			<div class="row">
+				<div class="medium-12 columns">		
+					<input type="text" name="username" placeholder="Enter your email" required="required" ng-model="user.username" style="width: 100%; border-radius: 5px;"/>
 					<div ng-messages="formSubmitted &amp;&amp; loginForm.username.$error">
                          <div ng-message="required" class="error">Email is required</div>
                      </div>
@@ -20,8 +23,7 @@
 			</div>
 			<div class="row">
 				<div class="medium-12 columns">
-					<label>Password</label>
-					<input type="Password" name="password" placeholder="Enter your password" required="required" ng-model="user.password" />
+					<input type="Password" name="password" placeholder="Enter your password" required="required" ng-model="user.password" style="width: 100%; border-radius: 5px;"/>
 					<div ng-messages="formSubmitted &amp;&amp; loginForm.password.$error">
                          <div ng-message="required" class="error">Password is required</div>
                      </div>
@@ -34,18 +36,29 @@
 			</ul>
 					
 			<div class="row">
-				<fieldset class="medium-12 columns">
-					<a class="float-left" data-toggle="forget-password-modal">Forgot password?</a>
-					<div class="button-group float-right">
-						<a href="javascript:void(0);" ng-click="formSubmitted = true; login(loginForm.$valid);" class="button hlpr-color-info">Login</a>
-						<button class="button hlpr-color-alert modal-close" type="button">Close</button>
+				<fieldset class="medium-12 columns">					
+					<input id="checkbox1" type="checkbox" /><label for="checkbox1">Remember Me</label>
+					<a class="float-right" data-toggle="forget-password-modal">Forgot password?</a>
+				</fieldset>
+			</div>
+			
+			<div class="row">
+				<fieldset class="medium-12 columns">					
+					<div class="button-group">
+						<a href="javascript:void(0);" ng-click="formSubmitted = true; login(loginForm.$valid);" class="button hlpr-color-success" style="width: 100%; border-radius: 5px;">Login</a>					
 					</div>
 				</fieldset>
 			</div>
+			
+			<div class="row">
+				<fieldset class="medium-12 columns">					
+					<div class="button-group">
+						<a href="" class="button hlpr-color-info" style="width: 100%; border-radius: 5px;">Register New User</a>
+					</div>
+				</fieldset>
+			</div>	
 		</form>
-		<button class="close-button modal-close" type="button">
-			<span aria-hidden="true">&#215;</span>
-		</button>
+		
 	</div>
 	<!-- modal / reveal login form ends here -->
 	
