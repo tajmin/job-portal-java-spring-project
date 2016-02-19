@@ -1,7 +1,5 @@
 package com.selvesperer.knoeien.service.impl;
 
-import java.util.List;
-
 import javax.inject.Inject;
 
 import org.slf4j.Logger;
@@ -11,7 +9,6 @@ import org.springframework.stereotype.Service;
 
 import com.selvesperer.knoeien.data.domain.Job;
 import com.selvesperer.knoeien.data.repository.JobRepository;
-import com.selvesperer.knoeien.data.repository.custom.JobRepositoryCustom;
 import com.selvesperer.knoeien.service.JobService;
 import com.selvesperer.knoeien.spring.ScopeType;
 import com.selvesperer.knoeien.web.controllers.model.JobModel;
@@ -24,8 +21,7 @@ public class JobServiceImpl implements JobService {
 
 	@Inject
 	private JobRepository jobRepository;
-	@Inject
-	private JobRepositoryCustom jobRepoCustom;
+	
 	@Override
 	public Job findJobById(String id) {
 		// TODO Auto-generated method stub
@@ -46,9 +42,9 @@ public class JobServiceImpl implements JobService {
 	}
 
 	@Override
-	public List<Job> showBestPaidJob() {
-		List<Job> job = jobRepoCustom.findJobOrderByPayment();
-		return job;
+	public Job showBestPaidJob() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 
