@@ -110,15 +110,51 @@ public class UserServiceImpl implements UserService {
 		emailService.sendEmail(new ForgetPasswordEmail(user, token));
 	}
 
+	
+	// @author SHIFAT save User settings 
 	@Override
-	public void saveUserSetting(UserModel userModel,String id) {
+	public void saveUserSetting(UserModel userModel, String id, String requestField) {
 		// TODO Auto-generated method stub
 		
 		User user=userRepository.findUserById(id);
-		user.setePost(!userModel.isePost());
-		user.setSms(!userModel.isSms());
-		user=userRepository.saveAndFlush(user);			
+		if(requestField.equals("epost")) {
+			user.setePost(userModel.isePost());
+		}
+		
+		if(requestField.equals("sms")){
+			user.setSms(userModel.isSms());
+		}
+		
+		//next
+		if(requestField.equals("message")){
+			user.setMessage(userModel.isMessage());
+		}
+		
+		if(requestField.equals("reports")){
+			user.setReports(userModel.isReports());
+		}
+		
+		if(requestField.equals("assignedJob")){
+			user.setAssignedJob(userModel.isAssignedJob());
+		}
+		
+		if(requestField.equals("confirmJob")){
+			user.setConfirmJob(userModel.isConfirmJob());
+		}
+		
+		if(requestField.equals("hideAddress")){
+			user.setHideAddress(userModel.isHideAddress());
+		}
+		
+		if(requestField.equals("receiveUpdates")){
+			user.setReceiveUpdates(userModel.isReceiveUpdates());
+		}
+		
+	
+		userRepository.saveAndFlush(user);			
 	}
+	
+	// @author SHIFAT ends
 	
 	@Override
 	public void updateUser(UserModel userModel, String id) {
@@ -144,4 +180,45 @@ public class UserServiceImpl implements UserService {
 		
 		return user;
 	}
+
+	//@author SHIFAT edited for settings 
+	@Override
+	public User loadUserSetting(String id) {
+		// TODO Auto-generated method stub
+		User user=userRepository.findUserById(id);
+		if (user == null) {
+			throw new AuthenticationFailedException("error.usernotfound.text");
+		}
+		
+		return user;
+	}
+
+	//@author SHIFAT Service 
+	@Override
+	public User facebookLogin(String fbName, String fbId) {
+		// TODO Auto-generated method stub
+		User fbUser = userRepository.findUserByEmail(fbId);
+		if(fbUser == null){
+			UserModel userModel=new UserModel();
+			userModel.setEmail(fbId);
+			userModel.setFirstName(fbName);
+			userModel.setPassword("123456789");
+			userModel.setAdmin(false);
+			userModel.setLocale("bd");
+			fbUser = new User(userModel);
+			
+			StandardPasswordEncoder encoder = ApplicationBeanFactory.getBean(StandardPasswordEncoder.class);
+			fbUser.setPassword(encoder.encode(userModel.getPassword()));
+			
+			userRepository.saveAndFlush(fbUser);
+		}
+		
+		Subject subject = SecurityUtils.getSubject();
+		subject.login(new UsernamePasswordToken(fbId,"123456789", false));
+		
+		return fbUser;
+	}
+	
+	
+	//@author SHIFAT ends
 }

@@ -93,35 +93,49 @@ public class UserController extends AbstractController implements Serializable {
 	//@author SHIFAT for setting
 	 
 	 
-	 @RequestMapping(value = "/settings", method = RequestMethod.POST, produces = "application/json")
-	 @ResponseBody
-	public ResponseEntity<RestResponse> invite(@RequestBody UserModel userModel) {	
-		 
+	@RequestMapping(value = "/saveUserSetting", method = RequestMethod.POST, produces = "application/json")
+	@ResponseBody
+	public ResponseEntity<RestResponse> saveUserSetting(@RequestBody UserModel userModel, @RequestParam(value="name", required=true) String name) {
+		try {
+			RestResponse restResponse = null;
+			UserService userService = ApplicationBeanFactory.getBean(UserService.class);
+			String id = SecurityManager.getCurrentUserId();
+			userService.saveUserSetting(userModel, id, name);
 
-		 User user=new User();
-	
-	 try {
-		RestResponse restResponse = null;
-		
-		
-		UserService userService = ApplicationBeanFactory.getBean(UserService.class);
-		String id=SecurityManager.getCurrentUserId();	
-		userService.saveUserSetting(userModel, id);
-			
-		return new ResponseEntity<RestResponse>( convertToRestGoodResponse(null, LocalizationUtil.findLocalizedString("")),HttpStatus.OK);
+			return new ResponseEntity<RestResponse>(
+					convertToRestGoodResponse(null, LocalizationUtil.findLocalizedString("")), HttpStatus.OK);
 		} catch (Exception ex) {
 			// Messages.addGlobalError(ex.getMessage());
 		}
-	
-		return new ResponseEntity<RestResponse>(convertToRestGoodResponse(user), HttpStatus.BAD_REQUEST);
+
+		return new ResponseEntity<RestResponse>(convertToRestGoodResponse(userModel), HttpStatus.BAD_REQUEST);
 	}
 	
+ 
+	@RequestMapping(value = "/loadUserSetting", method = RequestMethod.GET, produces = "application/json")
+		public ResponseEntity<RestResponse> loadUserSetting() {
+			RestResponse restResponse = null;
+			if (log.isDebugEnabled()) log.debug("User Setting ");		
+			
+			try {
+				
+				UserService userService = ApplicationBeanFactory.getBean(UserService.class);
+				String id = SecurityManager.getCurrentUserId();
+				System.out.println(id);
+				User user = userService.loadUserSetting(id);
+				UserModel userModel = new UserModel(user);
+				System.out.println(userModel.isePost());
+	
+				return new ResponseEntity<RestResponse>( convertToRestGoodResponse(userModel, LocalizationUtil.findLocalizedString("")),HttpStatus.OK);
+			} catch (AuthenticationFailedException t) {
+				restResponse = convertToRestBadResponse("", t.getLocalizedMessage());
+			} catch (Exception t) {
+				restResponse = convertToRestBadResponse("", t.getLocalizedMessage());
+			}
+			return new ResponseEntity<RestResponse>( restResponse, HttpStatus.OK);
+	}	
 	 
-	 
-	 
-	 
-	 
-	 
+ 
 	 
 	 
 	 //@author SHIFAT ends
