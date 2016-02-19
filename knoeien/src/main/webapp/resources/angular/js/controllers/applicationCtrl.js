@@ -243,3 +243,25 @@ Controllers.controller("transactionCtrl", function($scope, $rootScope,restservic
 });
 
 //@author SHIFAT ends
+
+//@author SHIFAT controller for Facebook connect
+//Controllers.controller("facebookLoginCtrl", function($scope, $rootScope, restservice,
+//		$cookies) {
+//	$scope.isproceed = false;
+//	$scope.user = {};
+//	$scope.formSubmitted = true;
+//	$scope.responseMessage = "";
+//	$scope.facebookLogin = function() {
+//		console.log("bashdbasdjsabdjsabd");
+//		restservice.get('', "api/v1/socialNetwork/auth/facebook").then(
+//				function(response) {
+//					console.log("asdnmkasndmnasmdnmasdasmdnma");
+//					$scope.isproceed = true;
+//					$rootScope.userinfos = response;
+//					console.log($rootScope.userinfos);
+//					window.open("http://localhost:8080/knoeien/home.xhtml",
+//							"_self");
+//				});
+//	};
+//});
+//@author SHIFAT ends

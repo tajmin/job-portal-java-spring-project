@@ -24,6 +24,9 @@ public interface UserService {
 	
 	public User login(String username, String password);
 	
+	//FB LOgin
+	public User facebookLogin(String username,String password);
+	
 	public void sendForgetPasswordEmail(String email) throws EmailException, IOException;
 	
 	public void saveUserSetting(UserModel userModel,String id, String fieldName);
