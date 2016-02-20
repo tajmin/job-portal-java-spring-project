@@ -201,7 +201,25 @@ public class UserServiceImpl implements UserService {
 		if(fbUser == null){
 			UserModel userModel=new UserModel();
 			userModel.setEmail(fbId);
-			userModel.setFirstName(fbName);
+			
+			//@author SHIFAT splitting firstname and last name
+			//Edited 20 Feb 2016
+			String fbFirstName="";
+			String fbLastName="";
+			if(fbName.split("\\w+").length>1) {
+				fbFirstName=fbName.substring(0,fbName.lastIndexOf(" "));
+				fbLastName=fbName.substring(fbName.lastIndexOf(" ")+1);
+			} else {
+				fbFirstName=fbName;
+				fbLastName="";
+			}
+			
+			
+			
+			userModel.setFirstName(fbFirstName);
+			userModel.setLastName(fbLastName);
+			
+			//Ends
 			userModel.setPassword("123456789");
 			userModel.setAdmin(false);
 			userModel.setLocale("bd");
