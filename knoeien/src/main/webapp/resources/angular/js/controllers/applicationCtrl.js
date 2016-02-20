@@ -196,7 +196,6 @@ Controllers.controller("jobCtrl", function($scope, $rootScope, restservice, $coo
 	
 	//Shows Latest Jobs
 	$scope.latestJob = function() {	
-		alert("Latest Jobs");
 		
 		restservice.get( '', "api/v1/job/latestjob").then(function(response) {
 			if (response != null) {
