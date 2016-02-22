@@ -3,7 +3,11 @@ package com.selvesperer.knoeien.web.controllers.model;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
+import java.util.Iterator;
+import java.util.List;
 
 import com.selvesperer.knoeien.data.domain.Job;
 
@@ -50,6 +54,15 @@ public class JobModel implements Serializable{
 		this.setState(job.getState());
 	}
 	
+
+	public List<JobModel> getJobModelList(List<Job> jobList) {
+		List<JobModel> jobModelList = new ArrayList<>();
+		for(Job job : jobList) {
+			JobModel jobModel = new JobModel(job);
+			jobModelList.add(jobModel);
+		}
+		return jobModelList;
+	}
 
 	public String getDescription() {
 		return description;

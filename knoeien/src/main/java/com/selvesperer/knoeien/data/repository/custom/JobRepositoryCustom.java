@@ -6,5 +6,5 @@ import com.selvesperer.knoeien.data.domain.Job;
 
 public interface JobRepositoryCustom {
 
-	//public List<Job> findJobOrderByPaymentDesc();
+//	public List<Job> findJobOrderByPaymentDesc();
 }

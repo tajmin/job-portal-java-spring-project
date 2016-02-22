@@ -49,7 +49,6 @@ Controllers.controller("signupCtrl", function($scope, $rootScope, restservice, $
     };
 });
 
-//@author SHIFAT application controller for sending invitation 
 Controllers.controller("invitationCtrl", function($scope, $rootScope, restservice, $cookies) {
 	$scope.isproceed = false;
 	$scope.user = {};
@@ -66,11 +65,7 @@ Controllers.controller("invitationCtrl", function($scope, $rootScope, restservic
         });
     };
 });
-//@author SHIFAT - Ends
 
-
-
-//@author SHIFAT controller for user settings
 Controllers.controller("settingsCtrl", function($scope, $rootScope, restservice, $cookies) {
 	$scope.isproceed = false;
 	$scope.user = {};
@@ -87,7 +82,6 @@ Controllers.controller("settingsCtrl", function($scope, $rootScope, restservice,
     };
 });
 
-//@author SHIFAT ends
 Controllers.controller("loginCtrl", function($scope, $rootScope, restservice, $cookies) {console.log("isValid:::::::::::::::::: ");
 	$scope.formSubmitted = false;
 	$rootScope.userinfos = {};
@@ -210,11 +204,11 @@ Controllers.controller("jobCtrl", function($scope, $rootScope, restservice, $coo
     
     //Shows Best Paid Jobs 
     $scope.bestPaidJob = function() {	
-		alert("Best Paid Jobs");
 		
 		restservice.get( '', "api/v1/job/bestpaidjob").then(function(response) {
 			if (response != null) {
 				$scope.job = response;	
+				console.log($scope.job);
         	} else {
         		$scope.responseMessage = response.message;	
         	}
@@ -224,7 +218,6 @@ Controllers.controller("jobCtrl", function($scope, $rootScope, restservice, $coo
     
     //Shows Shortest Time Jobs 
     $scope.shortestTimeJob = function() {	
-		alert("Shortest Time Jobs");
 		
 		restservice.get( '', "api/v1/job/shortesttimejob").then(function(response) {
 			if (response != null) {
@@ -238,7 +231,6 @@ Controllers.controller("jobCtrl", function($scope, $rootScope, restservice, $coo
     
     //Shows Earliest deadline Jobs 
     $scope.earliestDeadlineJob = function() {	
-		alert("Earliest deadline Jobs");
 		
 		restservice.get( '', "api/v1/job/earliestdeadlinejob").then(function(response) {
 			if (response != null) {
@@ -252,7 +244,6 @@ Controllers.controller("jobCtrl", function($scope, $rootScope, restservice, $coo
     
     //Shows Nearest You Jobs 
     $scope.nearestJob = function() {	
-		alert("Nearest You Jobs");
 		
 		restservice.get( '', "api/v1/job/nearestjob").then(function(response) {
 			if (response != null) {

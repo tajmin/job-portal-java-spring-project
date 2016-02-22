@@ -1,6 +1,7 @@
 package com.selvesperer.knoeien.web.controllers.rest;
 
 import java.io.Serializable;
+import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
@@ -90,10 +91,11 @@ public class JobController extends AbstractController implements Serializable {
 		
 		try {
 			JobService jobService = ApplicationBeanFactory.getBean(JobService.class);			
-			Job job = jobService.showBestPaidJob();
-			JobModel jobModel = new JobModel(job);
+			List<Job> job = jobService.showBestPaidJob();
+			JobModel jobModel = new JobModel();
+			List<JobModel> jobModelList = jobModel.getJobModelList(job);
 
-			return new ResponseEntity<RestResponse>( convertToRestGoodResponse(jobModel, LocalizationUtil.findLocalizedString("signupsuccess.text")),HttpStatus.OK);
+			return new ResponseEntity<RestResponse>( convertToRestGoodResponse(jobModelList, LocalizationUtil.findLocalizedString("signupsuccess.text")),HttpStatus.OK);
 		} catch (AuthenticationFailedException t) {
 			restResponse = convertToRestBadResponse("", t.getLocalizedMessage());
 		} catch (Exception t) {
@@ -108,11 +110,11 @@ public class JobController extends AbstractController implements Serializable {
 		if (log.isDebugEnabled()) log.debug("Job Info");
 		
 		try {
-			JobService jobService = ApplicationBeanFactory.getBean(JobService.class);			
-			Job job = jobService.showBestPaidJob();
-			JobModel jobModel = new JobModel(job);
+//			JobService jobService = ApplicationBeanFactory.getBean(JobService.class);			
+//			Job job = jobService.showBestPaidJob();
+//			JobModel jobModel = new JobModel(job);
 
-			return new ResponseEntity<RestResponse>( convertToRestGoodResponse(jobModel, LocalizationUtil.findLocalizedString("signupsuccess.text")),HttpStatus.OK);
+			return new ResponseEntity<RestResponse>( convertToRestGoodResponse(null, LocalizationUtil.findLocalizedString("signupsuccess.text")),HttpStatus.OK);
 		} catch (AuthenticationFailedException t) {
 			restResponse = convertToRestBadResponse("", t.getLocalizedMessage());
 		} catch (Exception t) {
@@ -127,11 +129,11 @@ public class JobController extends AbstractController implements Serializable {
 		if (log.isDebugEnabled()) log.debug("Job Info");
 		
 		try {
-			JobService jobService = ApplicationBeanFactory.getBean(JobService.class);			
-			Job job = jobService.showBestPaidJob();
-			JobModel jobModel = new JobModel(job);
+//			JobService jobService = ApplicationBeanFactory.getBean(JobService.class);			
+//			Job job = jobService.showBestPaidJob();
+//			JobModel jobModel = new JobModel(job);
 
-			return new ResponseEntity<RestResponse>( convertToRestGoodResponse(jobModel, LocalizationUtil.findLocalizedString("signupsuccess.text")),HttpStatus.OK);
+			return new ResponseEntity<RestResponse>( convertToRestGoodResponse(null, LocalizationUtil.findLocalizedString("signupsuccess.text")),HttpStatus.OK);
 		} catch (AuthenticationFailedException t) {
 			restResponse = convertToRestBadResponse("", t.getLocalizedMessage());
 		} catch (Exception t) {
@@ -146,11 +148,11 @@ public class JobController extends AbstractController implements Serializable {
 		if (log.isDebugEnabled()) log.debug("Job Info");
 		
 		try {
-			JobService jobService = ApplicationBeanFactory.getBean(JobService.class);			
-			Job job = jobService.showBestPaidJob();
-			JobModel jobModel = new JobModel(job);
+//			JobService jobService = ApplicationBeanFactory.getBean(JobService.class);			
+//			Job job = jobService.showBestPaidJob();
+//			JobModel jobModel = new JobModel(job);
 
-			return new ResponseEntity<RestResponse>( convertToRestGoodResponse(jobModel, LocalizationUtil.findLocalizedString("signupsuccess.text")),HttpStatus.OK);
+			return new ResponseEntity<RestResponse>( convertToRestGoodResponse(null, LocalizationUtil.findLocalizedString("signupsuccess.text")),HttpStatus.OK);
 		} catch (AuthenticationFailedException t) {
 			restResponse = convertToRestBadResponse("", t.getLocalizedMessage());
 		} catch (Exception t) {

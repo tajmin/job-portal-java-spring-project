@@ -1,5 +1,7 @@
 package com.selvesperer.knoeien.data.repository;
 
+import java.util.List;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -10,8 +12,12 @@ import com.selvesperer.knoeien.data.repository.custom.JobRepositoryCustom;
 
 @Repository
 public interface JobRepository extends JpaRepository<Job, String>, JobRepositoryCustom {
+	
 	@Query("from Job j where j.id = :jobID")
 	Job findJobById(@Param("jobID") String jobID);
+	
+	@Query("from Job j Order by j.payment desc")
+	List<Job> findJobOrderByPaymentDesc();
 	
 	
 	

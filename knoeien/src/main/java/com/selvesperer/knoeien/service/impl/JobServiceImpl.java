@@ -1,5 +1,8 @@
 package com.selvesperer.knoeien.service.impl;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.inject.Inject;
 
 import org.slf4j.Logger;
@@ -42,9 +45,9 @@ public class JobServiceImpl implements JobService {
 	}
 
 	@Override
-	public Job showBestPaidJob() {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Job> showBestPaidJob() {
+		List<Job> job = new ArrayList<>(jobRepository.findJobOrderByPaymentDesc());		
+		return job;
 	}
 
 
