@@ -27,6 +27,9 @@ public interface UserService {
 	//FB LOgin
 	public User facebookLogin(String username,String password);
 	
+	//save mobile verification
+	public User saveMobileVerification(String id,String verificationCode);
+	
 	public void sendForgetPasswordEmail(String email) throws EmailException, IOException;
 	
 	public void saveUserSetting(UserModel userModel,String id, String fieldName);

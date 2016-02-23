@@ -331,5 +331,61 @@ public class UserController extends AbstractController implements Serializable {
 			restResponse = convertToRestBadResponse("", t.getLocalizedMessage());
 		}
 		return new ResponseEntity<RestResponse>( restResponse, HttpStatus.OK);
-	}	
+	}
+	
+	//@author Controller for Mobile verification
+	@RequestMapping(value = "/sendMobileVerification")
+	public ResponseEntity<RestResponse> sendMobileVerification() {
+		RestResponse restResponse = null;
+		if (log.isDebugEnabled()) log.debug("send mobile verification");		
+		try {
+			UserService userService = ApplicationBeanFactory.getBean(UserService.class);
+			String id = SecurityManager.getCurrentUserId();
+			//Generating random number
+			long timeCalculate=System.nanoTime();
+			double randomCalculate=Math.random()*1000;
+			long mixingTimeAndRand=(long)(timeCalculate*randomCalculate);
+			String vCodeInString=mixingTimeAndRand+"";
+			String verificationCode=vCodeInString.substring(0,6);
+			//ends
+			//TODO: send this code using SMS API
+			userService.saveMobileVerification(id, verificationCode);
+			
+			//if(u != null) response.sendRedirect("http://localhost:8080/knoeien/home.xhtml");
+			return new ResponseEntity<RestResponse>( convertToRestGoodResponse(null, LocalizationUtil.findLocalizedString("updatesuccess.text")),HttpStatus.OK);
+		} catch (AuthenticationFailedException t) {
+			restResponse = convertToRestBadResponse("", t.getLocalizedMessage());
+		} catch (Exception t) {
+			restResponse = convertToRestBadResponse("", t.getLocalizedMessage());
+		}
+		return new ResponseEntity<RestResponse>( restResponse, HttpStatus.OK);
+	}
+	
+	@RequestMapping(value = "/justifyMobileVerification")
+	public ResponseEntity<RestResponse> justifyMobileVerification(@RequestParam(value="code", required=true) String code) {
+		RestResponse restResponse = null;
+		if (log.isDebugEnabled()) log.debug("justify mobile verification");		
+		try {
+			UserService userService = ApplicationBeanFactory.getBean(UserService.class);
+			String id = SecurityManager.getCurrentUserId();
+			//Generating random number
+			User user = userService.showUserInfo(id);
+			UserModel userModel = new UserModel(user);
+			String sentVerificationCode=userModel.getMobileVerification();
+			String userGivenCode=code;
+			if(sentVerificationCode==userGivenCode){
+				//Add mobile number to profile
+			}
+			
+			//if(u != null) response.sendRedirect("http://localhost:8080/knoeien/home.xhtml");
+			return new ResponseEntity<RestResponse>( convertToRestGoodResponse(null, LocalizationUtil.findLocalizedString("updatesuccess.text")),HttpStatus.OK);
+		} catch (AuthenticationFailedException t) {
+			restResponse = convertToRestBadResponse("", t.getLocalizedMessage());
+		} catch (Exception t) {
+			restResponse = convertToRestBadResponse("", t.getLocalizedMessage());
+		}
+		return new ResponseEntity<RestResponse>( restResponse, HttpStatus.OK);
+	}
+	
+	
 }

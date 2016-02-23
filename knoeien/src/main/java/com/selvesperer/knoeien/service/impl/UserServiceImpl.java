@@ -236,6 +236,15 @@ public class UserServiceImpl implements UserService {
 		
 		return fbUser;
 	}
+
+	@Override
+	public User saveMobileVerification(String id,String verificationCode) {
+		// TODO Auto-generated method stub
+		User user=userRepository.findUserById(id);
+		user.setMobileVerification(verificationCode);
+		userRepository.saveAndFlush(user);
+		return user;
+	}
 	
 	
 	//@author SHIFAT ends

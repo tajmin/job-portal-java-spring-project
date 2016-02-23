@@ -112,8 +112,17 @@ public class User extends AuditableEntity {
 	
 	//@author SHIFAT ends here
 	
+	@Column(name="mobileVerification")
+	private String mobileVerification;
 	
-	
+	public String getMobileVerification() {
+		return mobileVerification;
+	}
+
+	public void setMobileVerification(String mobileVerification) {
+		this.mobileVerification = mobileVerification;
+	}
+
 	public User() {}
 	
 	public User(UserModel userModel) {
@@ -123,8 +132,8 @@ public class User extends AuditableEntity {
 		this.setPreferredName(userModel.getPreferredName());
 		this.setEmail(userModel.getEmail());
 		this.setPassword(userModel.getPassword());
-		this.setPasswordResetToken(userModel.getPasswordResetToken());
-		
+		this.setPasswordResetToken(userModel.getPasswordResetToken());		
+		this.setMobileVerification(userModel.getMobileVerification());
 	}
 	
 	//@author SHIFAT edited for setting 

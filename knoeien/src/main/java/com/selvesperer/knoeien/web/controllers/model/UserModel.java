@@ -49,6 +49,9 @@ public class UserModel implements Serializable {
 
 	private String confirmPassword;
 	
+	// @author SHIFAT edited for Mobile verification
+	private String mobileVerification;
+	
 	//@author SHIFAT settings.xhtml member variable declaration
 	
 	private boolean ePost;
@@ -313,5 +316,14 @@ public class UserModel implements Serializable {
 
 	public void setReceiveUpdates(boolean receiveUpdates) {
 		this.receiveUpdates = receiveUpdates;
+	}
+
+	//@author SHIFAT edited for Mobile verification
+	public String getMobileVerification() {
+		return mobileVerification;
+	}
+
+	public void setMobileVerification(String mobileVerification) {
+		this.mobileVerification = mobileVerification;
 	}	
 }
