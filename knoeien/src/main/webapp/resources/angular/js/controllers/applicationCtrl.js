@@ -1,5 +1,4 @@
-Controllers.controller("UserCtrl", function($scope, $rootScope, restservice,
-		$cookies) {
+Controllers.controller("UserCtrl", function($scope, $rootScope, restservice, $cookies) {
 	$scope.user = {};
 	$scope.addUser = function() {
 		var d = new Date();
@@ -29,15 +28,17 @@ Controllers.controller("UserCtrl", function($scope, $rootScope, restservice,
 	};
 });
 
-Controllers.controller("signupCtrl", function($scope, $rootScope, restservice,
-		$cookies) {
+Controllers.controller("signupCtrl", function($scope, $rootScope, restservice, $cookies) {
 	$scope.isproceed = false;
 	$scope.user = {};
+	$scope.user.day = "";
+	$scope.user.month = "";
+	$scope.user.year = "";
+	$scope.user.dateOfBirth = "";
 	$scope.formSubmitted = false;
 	$scope.responseMessage = "";
 	$scope.signup = function(isValid) {
-		if (!isValid)
-			return;
+		if (!isValid) return;
 
 		restservice.post($scope.user, "api/v1/user/signup").then(
 				function(response) {
@@ -49,9 +50,18 @@ Controllers.controller("signupCtrl", function($scope, $rootScope, restservice,
 	};
 });
 
-// @author SHIFAT application controller for sending invitation
-Controllers.controller("invitationCtrl", function($scope, $rootScope,
-		restservice, $cookies) {
+Controllers.controller("invitationCtrl", function($scope, $rootScope, restservice, $cookies) {
+	if(!isValid) return;
+	$scope.user.dateOfBirth = $scope.user.year + "-" + $scope.user.month + "-" + $scope.user.day;
+	restservice.post( $scope.user, "api/v1/user/signup").then(function(response) {
+		if (response != null && response.success) {
+			$scope.isproceed = true;
+			$scope.responseMessage = response.message;				
+    	}
+    });    
+});
+
+Controllers.controller("invitationCtrl", function($scope, $rootScope, restservice, $cookies) {
 	$scope.isproceed = false;
 	$scope.user = {};
 	$scope.formSubmitted = false;
@@ -69,9 +79,7 @@ Controllers.controller("invitationCtrl", function($scope, $rootScope,
 				});
 	};
 });
-// @author SHIFAT - Ends
 
-// @author SHIFAT controller for user settings
 Controllers.controller("saveUserSettingCtrl", function($scope, $rootScope,restservice, $cookies) {
 		$scope.isproceed = false;
 		$scope.user = {};
@@ -102,10 +110,23 @@ Controllers.controller("saveUserSettingCtrl", function($scope, $rootScope,restse
 
 
 
-// @author SHIFAT ends
-Controllers.controller("loginCtrl", function($scope, $rootScope, restservice,
-		$cookies) {
-	console.log("isValid:::::::::::::::::: ");
+Controllers.controller("settingsCtrl", function($scope, $rootScope, restservice, $cookies) {
+	$scope.isproceed = false;
+	$scope.user = {};
+	$scope.responseMessage = "";
+	$scope.settings = function() {
+		
+		
+		restservice.post( $scope.user, "api/v1/user/settings").then(function(response) {
+			if (response != null && response.success) {
+				$scope.isproceed = true;
+				$scope.responseMessage = response.message;				
+        	}
+        });
+    };
+});
+
+Controllers.controller("loginCtrl", function($scope, $rootScope, restservice, $cookies) {
 	$scope.formSubmitted = false;
 	$rootScope.userinfos = {};
 	$scope.user = {};
@@ -123,8 +144,7 @@ Controllers.controller("loginCtrl", function($scope, $rootScope, restservice,
 	};
 });
 
-Controllers.controller("resetPasswordCtrl", function($scope, $rootScope,
-		restservice, $cookies) {
+Controllers.controller("resetPasswordCtrl", function($scope, $rootScope, restservice, $cookies) {
 	$rootScope.restMessages = {};
 	$scope.isproceed = false;
 	$scope.username = "";
@@ -202,27 +222,35 @@ Controllers.controller("editProfileCtrl", function($scope, $rootScope,
 
 	};
 	$scope.profileInfo();
-
+	
 	$scope.editProfile = function(isValid) {
-		if (!isValid)
-			return;
-
+		if(!isValid) return;
+		
+		restservice.post( $scope.user, "api/v1/user/editProfile").then(function(response) {
+			if (response != null && response.success) {
+				$scope.isproceed = true;
+				$scope.responseMessage = response.message;				
+        	}
+        });
+		
+    };   
+    
+	$scope.editProfile = function(isValid) {
+		if (!isValid) return;
 		restservice.post($scope.user, "api/v1/balance/editProfile").then(
-				function(response) {
-					if (response != null && response.success) {
-						$scope.isproceed = true;
-						$scope.responseMessage = response.message;
-					}
-				});
-
+		function(response) {
+			if (response != null && response.success) {
+				$scope.isproceed = true;
+				$scope.responseMessage = response.message;
+			}
+		});
 	};
 
 });
 
 
 //@author SHIFAT controller for BALANCE
-Controllers.controller("transactionCtrl", function($scope, $rootScope,restservice, $cookies) {
-	
+Controllers.controller("transactionCtrl", function($scope, $rootScope,restservice, $cookies) {	
 	$scope.isproceed = false;
 	$scope.transactionHistory = {};
 	$scope.formSubmitted = false;
@@ -242,26 +270,90 @@ Controllers.controller("transactionCtrl", function($scope, $rootScope,restservic
 	$scope.transactionInfo();
 });
 
-//@author SHIFAT ends
 
-//@author SHIFAT controller for Facebook connect
-//Controllers.controller("facebookLoginCtrl", function($scope, $rootScope, restservice,
-//		$cookies) {
-//	$scope.isproceed = false;
-//	$scope.user = {};
-//	$scope.formSubmitted = true;
-//	$scope.responseMessage = "";
-//	$scope.facebookLogin = function() {
-//		console.log("bashdbasdjsabdjsabd");
-//		restservice.get('', "api/v1/socialNetwork/auth/facebook").then(
-//				function(response) {
-//					console.log("asdnmkasndmnasmdnmasdasmdnma");
-//					$scope.isproceed = true;
-//					$rootScope.userinfos = response;
-//					console.log($rootScope.userinfos);
-//					window.open("http://localhost:8080/knoeien/home.xhtml",
-//							"_self");
-//				});
-//	};
-//});
-//@author SHIFAT ends
+Controllers.controller("jobCtrl", function($scope, $rootScope, restservice, $cookies) {
+	$scope.isproceed = false;
+	$scope.job = {};
+	$scope.formSubmitted = false;
+	$scope.responseMessage = "";
+	
+	//Shows Latest Jobs
+	$scope.latestJob = function() {	
+		
+		restservice.get( '', "api/v1/job/latestjob").then(function(response) {
+			if (response != null) {
+				$scope.job = response;	
+        	} else {
+        		$scope.responseMessage = response.message;	
+        	}
+        });
+	
+    };
+    $scope.latestJob();
+    
+    //Shows Best Paid Jobs 
+    $scope.bestPaidJob = function() {	
+		
+		restservice.get( '', "api/v1/job/bestpaidjob").then(function(response) {
+			if (response != null) {
+				$scope.job = response;	
+				console.log($scope.job);
+        	} else {
+        		$scope.responseMessage = response.message;	
+        	}
+        });
+	
+    };
+    
+    //Shows Shortest Time Jobs 
+    $scope.shortestTimeJob = function() {	
+		
+		restservice.get( '', "api/v1/job/shortesttimejob").then(function(response) {
+			if (response != null) {
+				$scope.job = response;	
+        	} else {
+        		$scope.responseMessage = response.message;	
+        	}
+        });
+	
+    };
+    
+    //Shows Earliest deadline Jobs 
+    $scope.earliestDeadlineJob = function() {	
+		
+		restservice.get( '', "api/v1/job/earliestdeadlinejob").then(function(response) {
+			if (response != null) {
+				$scope.job = response;	
+        	} else {
+        		$scope.responseMessage = response.message;	
+        	}
+        });
+	
+    };
+    
+    //Shows Nearest You Jobs 
+    $scope.nearestJob = function() {	
+		
+		restservice.get( '', "api/v1/job/nearestjob").then(function(response) {
+			if (response != null) {
+				$scope.job = response;	
+        	} else {
+        		$scope.responseMessage = response.message;	
+        	}
+        });
+	
+    };
+    
+    
+	$scope.addJob = function(isValid) {
+		if(!isValid) return;
+				
+		restservice.post( $scope.job, "api/v1/job/addjob").then(function(response) {
+			if (response != null && response.success) {
+				$scope.isproceed = true;
+				$scope.responseMessage = response.message;				
+        	}
+        });
+		
+    };      
+});

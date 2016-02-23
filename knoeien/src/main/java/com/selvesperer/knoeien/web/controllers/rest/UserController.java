@@ -37,7 +37,7 @@ import com.selvesperer.knoeien.utils.Constants;
 import com.selvesperer.knoeien.utils.localization.LocalizationUtil;
 import com.selvesperer.knoeien.web.controllers.model.RestResponse;
 import com.selvesperer.knoeien.web.controllers.model.UserModel;
-import com.selvesperer.knoeien.security.SecurityManager;
+
 
 
 @Controller
@@ -156,6 +156,10 @@ public class UserController extends AbstractController implements Serializable {
 
 			if (!StringUtils.equals(userModel.getPassword(), userModel.getConfirmPassword())) {
 				restResponse = convertToRestBadResponse(restResponse, "", LocalizationUtil.findLocalizedString("error.passwordandconfirmpasswordnotmatch.text"));
+			}
+			
+			if(userModel.getDateOfBirth() == null) {
+				restResponse = convertToRestBadResponse(restResponse, "", LocalizationUtil.findLocalizedString("error.emptydateofbirth.text"));
 			}
 
 			if (restResponse != null) {

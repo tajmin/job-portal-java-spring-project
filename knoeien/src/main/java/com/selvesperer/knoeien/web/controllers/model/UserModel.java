@@ -49,6 +49,8 @@ public class UserModel implements Serializable {
 
 	private String confirmPassword;
 	
+	private Calendar dateOfBirth;
+	
 	//@author SHIFAT settings.xhtml member variable declaration
 	
 	private boolean ePost;
@@ -86,7 +88,7 @@ public class UserModel implements Serializable {
 		this.setHideAddress(user.isHideAddress());
 		this.setReceiveUpdates(user.isReceiveUpdates());
 		
-		//@author SHIFAT ends
+		this.setDateOfBirth(user.getDateOfBirth());
 	}
 	
 	public String getCompanyId() {
@@ -151,6 +153,14 @@ public class UserModel implements Serializable {
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+	
+	public Calendar getDateOfBirth() {
+		return dateOfBirth;
+	}
+	
+	public void setDateOfBirth(Calendar dateOfBirth) {
+		this.dateOfBirth = dateOfBirth;
 	}
 
 	public String getLocation() {

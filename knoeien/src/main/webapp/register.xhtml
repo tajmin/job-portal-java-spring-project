@@ -20,7 +20,7 @@ xmlns:f="http://java.sun.com/jsf/core">
 							<label>First Name </label>
 							<input ng-model="user.firstName" type="text" name="firstName" placeholder="Write your first name" required="required" />							
 	                        <div ng-messages="formSubmitted &amp;&amp; signupForm.firstName.$error">
-	                            <div ng-message="required" class="error">First name name is required</div>
+	                            <div ng-message="required" class="error">First name is required</div>
 	                        </div>
 						</div>
 						
@@ -36,7 +36,7 @@ xmlns:f="http://java.sun.com/jsf/core">
 					<div class="row">
 						<div class="medium-4 columns">
 							<label>Date of birth</label>
-							<select name="dateDay" class="day-select" id="date-day" required="required">
+							<select name="dateDay" class="day-select" id="date-day" required="required" ng-model="user.day">
 								<option value="" disabled="disabled" selected="selected">Day</option>
 							</select>
 							<div ng-messages="formSubmitted &amp;&amp; signupForm.dateDay.$error">
@@ -45,7 +45,7 @@ xmlns:f="http://java.sun.com/jsf/core">
 						</div>
 						<div class="medium-4 columns">
 							<label><span class="hide-for-small-only">&nbsp;</span></label>
-							<select name="dateMonth" class="full-month-select" id="date-month" required="required">
+							<select name="dateMonth" class="full-month-select" id="date-month" required="required" ng-model="user.month">
 								<option value="" disabled="disabled" selected="selected">Month</option>
 							</select>
 							
@@ -56,7 +56,7 @@ xmlns:f="http://java.sun.com/jsf/core">
 						
 						<div class="medium-4 columns">
 							<label><span class="hide-for-small-only">&nbsp;</span></label>
-							<select name="dateYear" class="year-select" id="date-year" required="required">
+							<select name="dateYear" class="year-select" id="date-year" required="required" ng-model="user.year">
 								<option value="" disabled="disabled" selected="selected">Year</option>
 							</select>
 							<div ng-messages="formSubmitted &amp;&amp; signupForm.dateYear.$error">
@@ -84,8 +84,8 @@ xmlns:f="http://java.sun.com/jsf/core">
 						</div>
 						<div class="medium-6 columns">
 							<label>Confirm Password</label>
-							<input name="confirmPassword" type="password" ng-model="user.confirmPassword" placeholder="Retype your password" required="required" data-ng-match="password"/>
-							<span class="error" data-ng-show="signupForm.confirmPassword.$error.match">Passwords do not match.</span>
+							<input name="confirmPassword" type="password" ng-model="user.confirmPassword" placeholder="Retype your password" required="required" ng-match="password"/>
+							<span class="error" ng-show="signupForm.confirmPassword.$error.match">Passwords do not match.</span>
 						</div>
 						<div class="small-12 columns">
 							<p class="help-text" id="password-help-text">Password must be at least 8 characters long.</p>
