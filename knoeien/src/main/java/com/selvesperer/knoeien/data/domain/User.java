@@ -83,6 +83,8 @@ public class User extends AuditableEntity {
 	@Transient
 	private String fullName;
 	
+	@Column(name ="date_of_birth")
+	private Calendar dateOfBirth;
 	
 	//@author SHIFAT member variable for settings.xhtml
 	
@@ -124,6 +126,7 @@ public class User extends AuditableEntity {
 		this.setEmail(userModel.getEmail());
 		this.setPassword(userModel.getPassword());
 		this.setPasswordResetToken(userModel.getPasswordResetToken());
+		this.setDateOfBirth(userModel.getDateOfBirth());
 		
 	}
 	
@@ -266,6 +269,14 @@ public class User extends AuditableEntity {
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+	
+	public Calendar getDateOfBirth() {
+		return dateOfBirth;
+	}
+	
+	public void setDateOfBirth(Calendar dateOfBirth) {
+		this.dateOfBirth = dateOfBirth;
 	}
 
 	public String getLocation() {
