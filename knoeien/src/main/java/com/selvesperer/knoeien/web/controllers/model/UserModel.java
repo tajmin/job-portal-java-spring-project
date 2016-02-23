@@ -53,18 +53,18 @@ public class UserModel implements Serializable {
 	
 	//@author SHIFAT settings.xhtml member variable declaration
 	
-	private boolean ePost = false;
-	private boolean sms = false;
+	private boolean ePost;
+	private boolean sms;
 	
 	
-	private boolean message = false;
-	private boolean reports = false;
-	private boolean assignedJob = false;
-	private boolean confirmJob = false;
+	private boolean message;
+	private boolean reports;
+	private boolean assignedJob;
+	private boolean confirmJob;
 	
 	
-	private boolean hideAddress = false;
-	private boolean receiveUpdates = false;
+	private boolean hideAddress;
+	private boolean receiveUpdates;
 	
 	//settings.xhtml declaration ends here
 	
@@ -77,8 +77,18 @@ public class UserModel implements Serializable {
 		this.setFullName(user.getFullName());
 		this.setLocation(user.getLocation());
 		this.setCountryCode(user.getCountryCode());
+		
+		//@author SHIFAT edited for settings
+		this.setePost(user.isePost());
+		this.setSms(user.isSms());
+		this.setMessage(user.isMessage());
+		this.setReports(user.isReports());
+		this.setAssignedJob(user.isAssignedJob());
+		this.setConfirmJob(user.isConfirmJob());
+		this.setHideAddress(user.isHideAddress());
+		this.setReceiveUpdates(user.isReceiveUpdates());
+		
 		this.setDateOfBirth(user.getDateOfBirth());
-				
 	}
 	
 	public String getCompanyId() {

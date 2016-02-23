@@ -89,28 +89,28 @@ public class User extends AuditableEntity {
 	//@author SHIFAT member variable for settings.xhtml
 	
 	@Column(name = "e_post")
-	private boolean ePost = false; 
+	private boolean ePost; 
 	
 	@Column(name = "sms")
-	private boolean sms = false;
+	private boolean sms;
 	
 	@Column(name = "message")
-	private boolean message = false; 
+	private boolean message; 
 	
 	@Column(name = "reports")
-	private boolean reports = false; 
+	private boolean reports; 
 	
 	@Column(name = "assigned_job")
-	private boolean assignedJob = false;
+	private boolean assignedJob;
 	
 	@Column(name = "confirm_job")
-	private boolean confirmJob = false; 
+	private boolean confirmJob; 
 	
 	@Column(name = "hide_address")
-	private boolean hideAddress = false;
+	private boolean hideAddress;
 	
 	@Column(name = "receive_updates")
-	private boolean receiveUpdates = false;
+	private boolean receiveUpdates;
 	
 	//@author SHIFAT ends here
 	
