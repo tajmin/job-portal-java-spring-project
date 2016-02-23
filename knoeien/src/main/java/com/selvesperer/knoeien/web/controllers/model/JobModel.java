@@ -5,8 +5,6 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Collections;
-import java.util.Iterator;
 import java.util.List;
 
 import com.selvesperer.knoeien.data.domain.Job;
@@ -39,8 +37,12 @@ public class JobModel implements Serializable{
 	
 	public JobModel() {}
 	
-	public JobModel(Job job) {
+	public JobModel(Job job) {		
 		// TODO Auto-generated constructor stub
+		Calendar jobDate = job.getDate();
+		//jobDate.setTime(jobDate.getTime());
+//		jobDate 
+		
 		this.setTitle(job.getTitle());
 		this.setDescription(job.getDescription());
 		this.setAddressLine1(job.getAddressLine1());

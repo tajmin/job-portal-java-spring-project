@@ -19,6 +19,10 @@ public interface JobRepository extends JpaRepository<Job, String>, JobRepository
 	@Query("from Job j Order by j.payment desc")
 	List<Job> findJobOrderByPaymentDesc();
 	
+	@Query("from Job j Order by j.duration asc")
+	List<Job> findJobOrderByDurationAsc();
 	
+	@Query("from Job j Order by j.date asc")
+	List<Job> findJobOrderByDateAsc();
 	
 }

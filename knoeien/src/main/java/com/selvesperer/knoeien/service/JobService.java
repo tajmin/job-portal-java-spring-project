@@ -15,4 +15,8 @@ public interface JobService {
 	
 	public List<Job> showBestPaidJob();
 	
+	public List<Job> showShortestTimeJob();
+	
+	public List<Job> showEarliestDeadlineJob();
+	
 }

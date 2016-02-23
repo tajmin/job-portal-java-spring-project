@@ -103,7 +103,11 @@
 		google.maps.event.addDomListener(window, 'load', initialize);
 		
 		$(function() {
-		    $( "#datepicker" ).datepicker().formatDate( "yyyy-mm-dd");
+		    $( "#datepicker" ).datepicker({
+		        changeYear: true,
+		        changeMonth: true,
+		        dateFormat: 'yy-mm-dd'
+		        });
 		  });
 			
     	</script>

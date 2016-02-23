@@ -59,24 +59,24 @@
 				</div>	
 			</div>
 			<div class="tabs-panel" id="shortestTime">
-				<div class="row search-list">
+				<div class="row search-list" ng-repeat="model in job">
 					<div class="medium-3 columns text-center">
 						<img class="border-radius-7px" width="128" src="#{request.contextPath}/resources/assets/images/job_pic.png" alt="Job Image" />
 					</div>
 					<div class="medium-9 columns">
 						<div class="row">
 							<div class="small-12 columns">
-								<h4 class="job-title"></h4>
+								<h4 class="job-title">{{model.description}}</h4>
 								<h5><small>This job was opened 3 days and 7 hours ago.</small></h5>
 							</div>
 						</div>
 						<div class="row">
-							<div class="medium-6 large-4 columns"><i class="fi-dollar"></i> NOK </div>
-							<div class="medium-6 large-8 columns"><i class="fi-clock"></i> Approximately hours</div>
+							<div class="medium-6 large-4 columns"><i class="fi-dollar"></i> NOK {{model.payment}}</div>
+							<div class="medium-6 large-8 columns"><i class="fi-clock"></i> Approximately {{model.duration}}hours</div>
 						</div>
 						<div class="row">
-							<div class="medium-6 large-4 columns"><i class="fi-calendar"></i></div>
-							<div class="medium-6 large-8 columns"><i class="fi-marker"></i></div>
+							<div class="medium-6 large-4 columns"><i class="fi-calendar"></i>{{model.date}}</div>
+							<div class="medium-6 large-8 columns"><i class="fi-marker"></i>{{model.addressLine1}}</div>
 						</div>
 					</div>
 				</div>	

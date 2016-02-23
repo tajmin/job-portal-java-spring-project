@@ -49,6 +49,16 @@ public class JobServiceImpl implements JobService {
 		List<Job> job = new ArrayList<>(jobRepository.findJobOrderByPaymentDesc());		
 		return job;
 	}
+	
+	public List<Job> showShortestTimeJob() {
+		List<Job> job = new ArrayList<>(jobRepository.findJobOrderByDurationAsc());	
+		return job;
+	}
+	
+	public List<Job> showEarliestDeadlineJob() {
+		List<Job> job = new ArrayList<>(jobRepository.findJobOrderByDateAsc());	
+		return job;
+	}
 
 
 	

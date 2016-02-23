@@ -110,11 +110,12 @@ public class JobController extends AbstractController implements Serializable {
 		if (log.isDebugEnabled()) log.debug("Job Info");
 		
 		try {
-//			JobService jobService = ApplicationBeanFactory.getBean(JobService.class);			
-//			Job job = jobService.showBestPaidJob();
-//			JobModel jobModel = new JobModel(job);
+			JobService jobService = ApplicationBeanFactory.getBean(JobService.class);			
+			List<Job> job = jobService.showShortestTimeJob();
+			JobModel jobModel = new JobModel();
+			List<JobModel> jobModelList = jobModel.getJobModelList(job);
 
-			return new ResponseEntity<RestResponse>( convertToRestGoodResponse(null, LocalizationUtil.findLocalizedString("signupsuccess.text")),HttpStatus.OK);
+			return new ResponseEntity<RestResponse>( convertToRestGoodResponse(jobModelList, LocalizationUtil.findLocalizedString("signupsuccess.text")),HttpStatus.OK);
 		} catch (AuthenticationFailedException t) {
 			restResponse = convertToRestBadResponse("", t.getLocalizedMessage());
 		} catch (Exception t) {
@@ -129,11 +130,12 @@ public class JobController extends AbstractController implements Serializable {
 		if (log.isDebugEnabled()) log.debug("Job Info");
 		
 		try {
-//			JobService jobService = ApplicationBeanFactory.getBean(JobService.class);			
-//			Job job = jobService.showBestPaidJob();
-//			JobModel jobModel = new JobModel(job);
+			JobService jobService = ApplicationBeanFactory.getBean(JobService.class);			
+			List<Job> job = jobService.showEarliestDeadlineJob();
+			JobModel jobModel = new JobModel();
+			List<JobModel> jobModelList = jobModel.getJobModelList(job);
 
-			return new ResponseEntity<RestResponse>( convertToRestGoodResponse(null, LocalizationUtil.findLocalizedString("signupsuccess.text")),HttpStatus.OK);
+			return new ResponseEntity<RestResponse>( convertToRestGoodResponse(jobModelList, LocalizationUtil.findLocalizedString("signupsuccess.text")),HttpStatus.OK);
 		} catch (AuthenticationFailedException t) {
 			restResponse = convertToRestBadResponse("", t.getLocalizedMessage());
 		} catch (Exception t) {
