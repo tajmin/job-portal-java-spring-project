@@ -11,6 +11,7 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.selvesperer.knoeien.utils.DateFormatUtils;
 import com.selvesperer.knoeien.web.controllers.model.JobModel;
 
 /**
@@ -67,7 +68,7 @@ public class Job extends AuditableEntity {
 		this.setDescription(jobModel.getDescription());
 		this.setDuration(jobModel.getDuration());
 		this.setPayment(jobModel.getPayment());
-		this.setDate(jobModel.getDate());
+		this.setDate(DateFormatUtils.getDBCalendarFromString(jobModel.getDate()));
 		this.setAddressLine1(jobModel.getAddressLine1());
 		this.setAddressLine2(jobModel.getAddressLine2());
 		this.setAddressLine3(jobModel.getAddressLine3());

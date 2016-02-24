@@ -3,11 +3,13 @@ package com.selvesperer.knoeien.web.controllers.model;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
 import com.selvesperer.knoeien.data.domain.Job;
+import com.selvesperer.knoeien.utils.DateFormatUtils;
 
 public class JobModel implements Serializable{
 
@@ -29,7 +31,7 @@ public class JobModel implements Serializable{
 	
 	private String description;
 	
-	private Calendar date;
+	private String date;
 	
 	private Integer duration;
 	
@@ -38,11 +40,6 @@ public class JobModel implements Serializable{
 	public JobModel() {}
 	
 	public JobModel(Job job) {		
-		// TODO Auto-generated constructor stub
-		Calendar jobDate = job.getDate();
-		//jobDate.setTime(jobDate.getTime());
-//		jobDate 
-		
 		this.setTitle(job.getTitle());
 		this.setDescription(job.getDescription());
 		this.setAddressLine1(job.getAddressLine1());
@@ -51,7 +48,7 @@ public class JobModel implements Serializable{
 		this.setCity(job.getCity());
 		this.setDuration(job.getDuration());
 		this.setPayment(job.getPayment());
-		this.setDate(job.getDate());
+		this.setDate(DateFormatUtils.getDBFormattedDateString(job.getDate()));
 		this.setZip(job.getZip());
 		this.setState(job.getState());
 	}
@@ -130,11 +127,11 @@ public class JobModel implements Serializable{
 		this.title = title;
 	}
 
-	public Calendar getDate() {
+	public String getDate() {
 		return date;
 	}
 
-	public void setDate(Calendar date) {
+	public void setDate(String date) {
 		this.date = date;
 	}
 
