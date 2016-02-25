@@ -16,6 +16,8 @@
 	<link rel="stylesheet" type="text/css" href="#{request.contextPath}/resources/assets/css/foundation-icons.css?#{msg['vrsn']}" />
 	<link rel="stylesheet" type="text/css" href="#{request.contextPath}/resources/assets/css/application.css?#{msg['vrsn']}" />
 	<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css" />
+	<link rel="stylesheet" type="text/css" href="#{request.contextPath}/resources/assets/css/foundation-datepicker.css?#{msg['vrsn']}" />
+	
 		
 	<script type="text/javascript" src="#{request.contextPath}/resources/assets/js/head.js?#{msg['vrsn']}"></script>
 	<script type="text/javascript" src="#{request.contextPath}/resources/angular/lib/angular/angular.min.js?#{msg['vrsn']}"></script>
@@ -33,8 +35,8 @@
 	<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js"></script>
 	<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAjAJgul5TdZNsTAo_WTXxtQb8C3jFPXwo&amp;libraries=places"></script>
 	<script type="text/javascript" src="//code.jquery.com/jquery-1.10.2.js"></script>
-	<script type="text/javascript" src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
-	
+	<script type="text/javascript" src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>	
+	<script type="text/javascript" src="#{request.contextPath}/resources/assets/js/foundation-datepicker.js"></script>
 	<ui:insert name="head"></ui:insert>
 </head>
 <body>
@@ -61,12 +63,14 @@
 				<li>
 					<!-- menu button goes here -->
 					<div class="text-center">
-						<a data-toggle="not-logedin-modal" class="hlpr-color-success button">Find work</a>
+						<a data-toggle="not-logedin-modal" class="hlpr-color-success button" style="display:#{authorizationBean.canView()?'none':''}">Find work</a>
+						<a class="hollow hlpr-color-white button float-right" style="display:#{authorizationBean.canView()?'':'none'}">Login</a>
+						<a class="hollow hlpr-color-white button float-right" style="display:#{authorizationBean.canView()?'':'none'}">Login</a>
 					</div>
 				</li>
 				<li class="home-buttons clearfix">
 					<!-- menu button goes here -->
-					<a data-toggle="not-logedin-modal" class="hollow hlpr-color-white button float-right">My page</a>					
+					<a data-toggle="not-logedin-modal" class="hollow hlpr-color-white button float-right" style="display:#{authorizationBean.canView()?'':'none'}">My page</a>					
 					<a data-toggle="login-modal" class="hollow hlpr-color-white button float-right" style="display:#{authorizationBean.canView()?'none':''}">Login</a>
 				</li>
 				 
