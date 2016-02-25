@@ -37,9 +37,10 @@ Controllers.controller("signupCtrl", function($scope, $rootScope, restservice, $
 	$scope.user.dateOfBirth = "";
 	$scope.formSubmitted = false;
 	$scope.responseMessage = "";
+	
 	$scope.signup = function(isValid) {
 		if (!isValid) return;
-
+		$scope.user.dateOfBirth = $scope.user.year + "-" + $scope.user.month + "-" + $scope.user.day;
 		restservice.post($scope.user, "api/v1/user/signup").then(
 				function(response) {
 					if (response != null && response.success) {
@@ -50,16 +51,16 @@ Controllers.controller("signupCtrl", function($scope, $rootScope, restservice, $
 	};
 });
 
-Controllers.controller("invitationCtrl", function($scope, $rootScope, restservice, $cookies) {
-	if(!isValid) return;
-	$scope.user.dateOfBirth = $scope.user.year + "-" + $scope.user.month + "-" + $scope.user.day;
-	restservice.post( $scope.user, "api/v1/user/signup").then(function(response) {
-		if (response != null && response.success) {
-			$scope.isproceed = true;
-			$scope.responseMessage = response.message;				
-    	}
-    });    
-});
+//Controllers.controller("invitationCtrl", function($scope, $rootScope, restservice, $cookies) {
+//	if(!isValid) return;
+//	
+//	restservice.post( $scope.user, "api/v1/user/signup").then(function(response) {
+//		if (response != null && response.success) {
+//			$scope.isproceed = true;
+//			$scope.responseMessage = response.message;				
+//    	}
+//    });    
+//});
 
 Controllers.controller("invitationCtrl", function($scope, $rootScope, restservice, $cookies) {
 	$scope.isproceed = false;

@@ -34,7 +34,7 @@
 							<div class="row">
 								<div class="medium-4 columns">
 									<label id="dobLabel">Date of Birth</label>
-									<select name="dateDay" class="day-select" id="date-day" required="required">
+									<select name="dateDay" class="day-select" id="date-day" required="required" ng-model="user.day">
 										<option value="" disabled="disabled" selected="selected">Day</option>
 									</select>
 									<div ng-messages="formSubmitted &amp;&amp; signupForm.dateDay.$error">
@@ -43,7 +43,7 @@
 								</div>
 								<div class="medium-4 columns">
 									<label><span class="hide-for-small-only">&#160;</span></label>
-									<select name="dateMonth" class="full-month-select" id="date-month" required="required">
+									<select name="dateMonth" class="full-month-select" id="date-month" required="required" ng-model="user.month">
 										<option value="" disabled="disabled" selected="selected">Month</option>
 									</select>
 									
@@ -54,7 +54,7 @@
 								
 								<div class="medium-4 columns">
 									<label><span class="hide-for-small-only">&#160;</span></label>
-									<select name="dateYear" class="year-select" id="date-year" required="required">
+									<select name="dateYear" class="year-select" id="date-year" required="required" ng-model="user.year">
 										<option value="" disabled="disabled" selected="selected">Year</option>
 									</select>
 									<div ng-messages="formSubmitted &amp;&amp; signupForm.dateYear.$error">
@@ -105,7 +105,7 @@
 						</div>
 						<div class="row">
 							<div class="medium-12 columns">
-								<input name="phone" ng-model="user.contact" type="text" id="phone" placeholder="Your Phone Number" required="required" />
+								<input name="phone" ng-model="user.contact" type="text" id="phone" placeholder="Your Phone Number"  />
 								<div ng-messages="formSubmitted &amp;&amp; signupForm.email.$error">
 		                        	<div ng-message="required" class="error">Phone Number is required.</div>
 		                        </div>
@@ -120,7 +120,7 @@
 						</div>
 						<div class="row">
 							<div class="medium-12 columns">
-								<input name="verificationCode" ng-model="user.verificationCode" type="text" id="verificationCode" placeholder="Enter Verification Code Here" required="required" />
+								<input name="verificationCode" ng-model="user.verificationCode" type="text" id="verificationCode" placeholder="Enter Verification Code Here"  />
 								<div ng-messages="formSubmitted &amp;&amp; signupForm.email.$error">
 		                        	<div ng-message="required" class="error">Verification Code is required.</div>
 		                        </div>
@@ -129,7 +129,7 @@
 						<div class="row">
 							<fieldset class="medium-12 columns">					
 								<div class="button-group">
-									<a href="" class="button hlpr-color-success" style="width: 100%; border-radius: 5px;">Finish Registration</a>
+									<a href="javascript:void(0);" ng-click="formSubmitted = true; signup(signupForm.$valid);" class="button hlpr-color-success" style="width: 100%; border-radius: 5px;">Finish Registration</a>
 								</div>
 							</fieldset>
 						</div>
@@ -150,12 +150,12 @@
 			</div>
 		
 			<div class="medium-6 medium-centered columns" ng-if="isproceed">
-				<div style="height:300px;">
-					<span>{{responseMessage}} </span>
+				<div style="height:300px; max-width: 400px;">
+					<p style="margin-top: 20px; color: #8A8A8A">{{responseMessage}} </p>
 					<div class="row" style="text-align:center">
 						<fieldset class="medium-12 columns">
-							<div class="button-group float-right">
-								<a href="javascript:void(0);" class="button hlpr-color-info" >Ok</a>
+							<div class="button-group">
+								<a href="javascript:void(0);" class="button hlpr-color-info" style="width: 100%">Ok</a>
 							</div>
 						</fieldset>
 					</div>

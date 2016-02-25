@@ -326,11 +326,13 @@
 	width: 100%; 
 	margin-top: 15px; 
 	border-radius: 5px;
+	font-size: 0.95em;
+	text-align: left;
 }
 #loginFbIcon {
-	font-size: 1.9em;
-	margin: -7px 0px 39px -40px;
-	position: absolute;
+	font-size: 1.3em;
+	margin-right: 50px;
+	
 }
 #loginOr {
 	color: #8A8A8A;
@@ -400,6 +402,7 @@
 #registerForm p {
 	font-size: 0.75em;
 	color: #8A8A8A;
+	margin-top: 20px;
 }
 /*Register Modal Ends*/
 
