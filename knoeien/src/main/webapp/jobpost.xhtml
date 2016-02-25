@@ -103,13 +103,11 @@
 		google.maps.event.addDomListener(window, 'load', initialize);
 		
 		$(function() {
-		    $( "#datepicker" ).datetimepicker({
-		        changeYear: true,
-		        changeMonth: true,
-		        dateFormat: 'yy-mm-dd',
-		        timeFormat: 'HH:mm:ss'
-		        addSliderAccess: true, 
-		        sliderAccessArgs: { touchonly: false }
+		    $( "#datepicker" ).fdatepicker({
+		    	format: 'yyyy-mm-dd hh:mm:ss',
+		    	pickTime: true,
+		        weekStart: 0,
+		        
 		        });
 		  });
 			
