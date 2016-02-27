@@ -2,8 +2,11 @@ package com.selvesperer.knoeien.utils;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Locale;
 import java.util.TimeZone;
+
+import org.apache.commons.lang3.StringUtils;
 
 public class DateFormatUtils {
 	
@@ -287,5 +290,27 @@ public class DateFormatUtils {
 //	z	time zone	Text	Pacific Standard Time
 //	'	escape for text	Delimiter	(none)
 //	'	single quote	Literal	'
+	
+	public static String getDBFormattedDateString(Calendar date){
+		String dateString = "";
+		if(date != null){
+			dateString = dbFormat.format(date.getTime());
+		}
+		return dateString;
+	}
+	
+	public static Calendar getDBCalendarFromString(String date){
+		Calendar calender = null;
+		try{
+			if(StringUtils.isNotBlank(date)){
+				calender = Calendar.getInstance();
+				calender.setTime(dbFormat.parse(date));
+			}
+		}catch(Throwable t){
+			calender = null;
+		}
+		return calender;
+	}
+	
 
 }

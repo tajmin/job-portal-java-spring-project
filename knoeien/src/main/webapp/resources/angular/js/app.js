@@ -28,6 +28,8 @@ ppApp.config(
 
 ppApp.run(function($rootScope, $location, authService, restservice) {
     authService.setServiceBaseUrl(Settings.serviceBaseUrl);
+    
+    console.log("this is just a test........");
    
     $rootScope.getParameterByName = function(sname) {    
     	var params = location.search.substr(location.search.indexOf("?")+1);

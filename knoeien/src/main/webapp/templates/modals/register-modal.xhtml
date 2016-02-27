@@ -1,0 +1,166 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets">
+	<!-- modal / reveal forget password starts here -->
+	<div class="reveal fast ease-in" id="register-modal" data-reveal="data-reveal"
+		data-close-on-click="true" data-animation-in="wiggle" data-animation-out="slide-out-right" ng-controller="signupCtrl">
+			<div class="medium-12 medium-centered columns" id="registerForm" ng-if="!isproceed">
+				<div class="row">
+					<form name="signupForm">
+						<div class="medium-6 medium columns">
+							<!-- Foundation "abide" plug-in used for validation  -->
+							<div class="row">
+								<div class="medium-12 columns text-center">
+									<h4>Register as New User</h4>
+								</div>
+								<div class="medium-12 columns text-center">
+									<h5>Register with <a href="/knoeien/api/v1/socialNetwork/auth/facebook" id="registerFb">Facebook</a></h5>
+								</div>
+							</div>
+							<div class="row">
+								<div class="medium-6 columns">
+									<input ng-model="user.firstName" type="text" name="firstName" placeholder="Write Firstname" required="required" />							
+			                        <div ng-messages="formSubmitted &amp;&amp; signupForm.firstName.$error">
+			                            <div ng-message="required" class="error">First name name is required</div>
+			                        </div>
+								</div>
+								
+								<div class="medium-6 columns">
+									<input ng-model="user.lastName" type="text" name="lastName" placeholder="Write lastname" required="required"/>
+									<div ng-messages="formSubmitted &amp;&amp; signupForm.lastName.$error">
+		                            	<div ng-message="required" class="error">Last name name is required</div>
+		                        	</div>							
+								</div>
+							</div>
+							
+							<div class="row">
+								<div class="medium-4 columns">
+									<label id="dobLabel">Date of Birth</label>
+									<select name="dateDay" class="day-select" id="date-day" required="required" ng-model="user.day">
+										<option value="" disabled="disabled" selected="selected">Day</option>
+									</select>
+									<div ng-messages="formSubmitted &amp;&amp; signupForm.dateDay.$error">
+		                            	<div ng-message="required" class="error">Day is required.</div>
+		                        	</div>							
+								</div>
+								<div class="medium-4 columns">
+									<label><span class="hide-for-small-only">&#160;</span></label>
+									<select name="dateMonth" class="full-month-select" id="date-month" required="required" ng-model="user.month">
+										<option value="" disabled="disabled" selected="selected">Month</option>
+									</select>
+									
+									<div ng-messages="formSubmitted &amp;&amp; signupForm.dateMonth.$error">
+		                            	<div ng-message="required" class="error">Month is required.</div>
+		                        	</div>							
+								</div>
+								
+								<div class="medium-4 columns">
+									<label><span class="hide-for-small-only">&#160;</span></label>
+									<select name="dateYear" class="year-select" id="date-year" required="required" ng-model="user.year">
+										<option value="" disabled="disabled" selected="selected">Year</option>
+									</select>
+									<div ng-messages="formSubmitted &amp;&amp; signupForm.dateYear.$error">
+		                            	<div ng-message="required" class="error">Year is required.</div>
+		                        	</div>
+								</div>
+							</div>
+							<div class="row">
+								<div class="medium-12 columns">
+									<input name="email" ng-model="user.email" type="text" id="email" placeholder="Provide your email" required="required" />
+									<div ng-messages="formSubmitted &amp;&amp; signupForm.email.$error">
+		                            	<div ng-message="required" class="error">Email is required.</div>
+		                        	</div>
+								</div>
+							</div>
+							<div class="row">
+								<div class="medium-12 columns">
+									<input name="password" ng-model="user.password" type="password" id="password" placeholder="Enter a password" aria-describedby="password-help-text" required="required" />	
+									<div ng-messages="formSubmitted &amp;&amp; signupForm.password.$error">
+		                            	<div ng-message="required" class="error">Password is required.</div>
+		                        	</div>
+								</div>
+								<div class="medium-12 columns">
+									<input name="confirmPassword" type="password" ng-model="user.confirmPassword" placeholder="Retype your password" required="required" data-ng-match="password"/>
+									<span class="error" data-ng-show="signupForm.confirmPassword.$error.match">Passwords do not match.</span>
+								</div>
+								<div class="small-12 columns">
+									<p class="help-text" id="password-help-text">Password must be at least 8 characters long.</p>
+								</div>
+							</div>
+							<div class="row">
+								<div class="medium-12 columns">					
+									<input id="newsLetter" type="checkbox" /><label for="newsLetter" id="newsLetterLabel"> I want news letter. </label>
+								</div>
+							</div>
+							<ul class="global-message" style="white-space:normal">
+								<span ng-repeat="m in restMessages"> 
+									<li class="info-text info-modal">{{m.message}}</li>
+								</span>								
+							</ul>						
+					  </div>
+					  <div class="medium-6 medium columns">
+					  
+					  	<div class="row">
+							<div class="medium-12 columns text-center">
+								<h4 id="verifyTitle">Verify Your Phone</h4>
+							</div>
+						</div>
+						<div class="row">
+							<div class="medium-12 columns">
+								<input name="phone" ng-model="user.contact" type="text" id="phone" placeholder="Your Phone Number"  />
+								<div ng-messages="formSubmitted &amp;&amp; signupForm.email.$error">
+		                        	<div ng-message="required" class="error">Phone Number is required.</div>
+		                        </div>
+							</div>
+						</div>
+						<div class="row">
+							<fieldset class="medium-12 columns">					
+								<div class="button-group">
+									<a href="" class="button hlpr-color-info" style="width: 100%; border-radius: 5px;">Send Verification Code</a>
+								</div>
+							</fieldset>
+						</div>
+						<div class="row">
+							<div class="medium-12 columns">
+								<input name="verificationCode" ng-model="user.verificationCode" type="text" id="verificationCode" placeholder="Enter Verification Code Here"  />
+								<div ng-messages="formSubmitted &amp;&amp; signupForm.email.$error">
+		                        	<div ng-message="required" class="error">Verification Code is required.</div>
+		                        </div>
+							</div>
+						</div>
+						<div class="row">
+							<fieldset class="medium-12 columns">					
+								<div class="button-group">
+									<a href="javascript:void(0);" ng-click="formSubmitted = true; signup(signupForm.$valid);" class="button hlpr-color-success" style="width: 100%; border-radius: 5px;">Finish Registration</a>
+								</div>
+							</fieldset>
+						</div>
+						<div class="row">
+							<div class="medium-12 columns text-left">
+								<p>I agree with the <a href="privacy.xhtml">Terms and Privacy Policy</a> of Helper.</p>
+							</div>
+						</div>
+						<div class="row">
+							<div class="medium-12 columns text-left">
+								<h5>Already registered? <a data-toggle="login-modal" >Log In</a></h5>
+							</div>
+						</div>
+					  </div>
+					  <!-- Sign up form ends here -->
+					</form>
+				</div>				
+			</div>
+		
+			<div class="medium-6 medium-centered columns" ng-if="isproceed">
+				<div style="height:300px; max-width: 400px;">
+					<p style="margin-top: 20px; color: #8A8A8A">{{responseMessage}} </p>
+					<div class="row" style="text-align:center">
+						<fieldset class="medium-12 columns">
+							<div class="button-group">
+								<a href="javascript:void(0);" class="button hlpr-color-info" style="width: 100%">Ok</a>
+							</div>
+						</fieldset>
+					</div>
+				</div>					
+			</div>
+	</div>
+	<!-- modal / reveal forget password ends here -->
+</ui:composition>

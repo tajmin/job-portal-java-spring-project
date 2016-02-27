@@ -5,8 +5,6 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 @Entity
 @Table(name="preference")
 public class Preference extends AuditableEntity {

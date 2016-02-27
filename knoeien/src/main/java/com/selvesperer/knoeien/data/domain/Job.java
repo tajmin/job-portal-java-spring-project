@@ -11,6 +11,8 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.selvesperer.knoeien.utils.DateFormatUtils;
+import com.selvesperer.knoeien.web.controllers.model.JobModel;
 
 /**
  * Company Object to store the company data of a user.
@@ -23,7 +25,7 @@ public class Job extends AuditableEntity {
 
 	private static final long serialVersionUID = 8120068076551599301L;
 
-	@Column(name = "title", nullable = false, length = 100)
+	@Column(name = "title", nullable = true, length = 100)
 	private String title;
 	
 	@Column(name = "description", nullable = false, length = 250)
@@ -58,8 +60,21 @@ public class Job extends AuditableEntity {
 	@Column(name = "zip", length = 10)
 	private String zip;
 	
-	public Job() {
+	public Job() {}
+	
+	public Job(JobModel jobModel) {
 		super();
+		this.setTitle(jobModel.getTitle());
+		this.setDescription(jobModel.getDescription());
+		this.setDuration(jobModel.getDuration());
+		this.setPayment(jobModel.getPayment());
+		this.setDate(DateFormatUtils.getDBCalendarFromString(jobModel.getDate()));
+		this.setAddressLine1(jobModel.getAddressLine1());
+		this.setAddressLine2(jobModel.getAddressLine2());
+		this.setAddressLine3(jobModel.getAddressLine3());
+		this.setCity(jobModel.getCity());
+		this.setState(jobModel.getState());
+		this.setZip(jobModel.getZip());
 	}
 	
 	public String getTitle() {

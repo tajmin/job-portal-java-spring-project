@@ -3,8 +3,10 @@
 <ui:composition template="templates/angular-template.xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core">
 
 	<ui:define name="content">
-		<div class="row wrapper-content">
+		<div class="row wrapper-content" ng-controller="transactionCtrl">
 			<div class="medium-10 medium-centered columns">
+			
+			<form name="transactionForm" ng-if="!isproceed">
 				<div class="row">
 					<div class="columns text-center">
 						<h2>Your Payments and Transfers</h2>
@@ -26,9 +28,9 @@
 								</thead>
 								<tbody>
 									<tr>
-										<td>$500</td>
-										<td>Mowing</td>
-										<td>$550</td>
+										<td>{{transactionHistory.amount}}</td>
+										<td>{{transactionHistory.jobId}}</td>
+										<td>{{transactionHistory.toUserId}}</td>
 									</tr>
 								</tbody>
 							</table>
@@ -60,6 +62,7 @@
 						</div>
 					</div>
 				</div>
+				</form>
 			</div>
 		</div>
 	</ui:define>

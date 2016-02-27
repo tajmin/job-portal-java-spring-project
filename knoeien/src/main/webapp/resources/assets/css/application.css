@@ -315,6 +315,188 @@
 	margin-right: 0.5rem;
 	width: 0.2rem;
 }
+
+/*Login Modal Starts*/
+#login-modal {
+	max-width: 400px;
+	border-radius: 5px;
+}
+#loginFbBtn {
+	background-color: #3A5795;
+	width: 100%; 
+	margin-top: 15px; 
+	border-radius: 5px;
+	font-size: 0.95em;
+	text-align: left;
+}
+#loginFbIcon {
+	font-size: 1.3em;
+	margin-right: 50px;
+	
+}
+#loginOr {
+	color: #8A8A8A;
+	font-size: 0.95em;
+}
+#loginForgot {
+	color: #8A8A8A;
+}
+#loginRegisterBtn {
+	
+}
+#loginBtn {
+	width: 100%; 
+	border-radius: 5px;
+}
+#loginRememberLabel {
+	color: #8A8A8A;
+	font-size: 1em;
+}
+#login-modal input[type="text"], input[type="password"] {
+	width: 100%; 
+	border-radius: 5px;
+}
+/*Login Modal Ends*/
+
+/*Register Modal Starts*/
+#register-modal {
+	border-radius: 5px;
+}
+#registerForm h4 {
+	color: #8A8A8A;
+	font-size: 1.0em;
+    text-transform: uppercase;
+    font-weight: bold;
+    margin-top: 15px;
+}
+#registerForm h5 {
+	color: #8A8A8A;
+	font-size: 0.95em;
+	margin: 5px 0 15px;
+}
+#dobLabel {
+	color: #8A8A8A;
+	font-weight: bold;
+}
+#registerForm input[type="text"], input[type="password"] {
+	border-radius: 5px;
+}
+#registerForm select {
+	border-radius: 5px;
+	color: #8A8A8A;
+}
+#newsLetter {
+	width: 20px;
+	height: 15px;	
+}
+#newsLetterLabel {
+	margin: 0 7px;
+	vertical-align: middle;
+    padding-bottom: 6px;
+    color: #8A8A8A;
+    
+}
+#verifyTitle {
+	margin: 0 0 47px;
+}
+#registerForm p {
+	font-size: 0.75em;
+	color: #8A8A8A;
+	margin-top: 20px;
+}
+/*Register Modal Ends*/
+
+/*Change Password Modal Starts*/
+#change-password-modal {
+	max-width: 400px;
+	border-radius: 5px;
+}
+#change-password-modal h4 {
+	color: #8A8A8A;
+	font-size: 1.40em;
+    font-weight: 600;
+    margin: 10px 0 20px;
+}
+#change-password-modal h5 {
+	color: #8A8A8A;
+	font-size: 0.95em;
+    margin: 0 0 15px;
+}
+#change-password-modal a {
+	width: 100%;
+	border-radius: 5px;
+}
+/*Change Password Modal Ends*/
+
+/*Forgot Password Modal Starts*/
+#forget-password-modal {
+	max-width: 400px;
+	border-radius: 5px;
+}
+#forgotPassTitle {
+	color: #8A8A8A;
+}
+#forgotPassEmail {
+	border-radius: 5px;
+}
+#fogotPassInstruction {
+	font-size: 1em;
+	color: #8A8A8A;
+}
+#forgotPassLinkBtn {
+	width: 100%;
+	border-radius: 5px;
+}
+#forgotResponseMsg {
+	color: #8A8A8A;
+	font-size: 1em;
+	padding-top: 13px;
+}
+#forgotPassImg {
+	width: 80px;
+	height: 75px;
+	margin: 18px 0;
+}
+#forgotPassOkBtn {
+	width: 100%;
+	border-radius: 5px;
+}
+/*Forgot Password Modal Ends*/
+
+/*phone-verification-modal Starts*/
+#phone-verification-modal {
+	max-width: 400px;
+	border-radius: 5px;
+}
+#phone-verification-modal h4{
+	color: #8A8A8A;
+}
+#phone-verification-modal intput=[type="text"] {
+	border-radius: 5px;
+}
+#phone-verification-modal p {
+	font-size: 1em;
+	color: #8A8A8A;
+}
+#phoneVerifyCodeBtn {
+	width: 100%;
+	border-radius: 5px;
+}
+#forgotResponseMsg {
+	color: #8A8A8A;
+	font-size: 1em;
+}
+#phoneVerifyImg {
+	width: 80px;
+	height: 75px;
+	margin: 18px 0;
+}
+#phoneVerifyOkBtn {
+	width: 100%;
+	border-radius: 5px;
+}
+/*phone-verification-modal Ends*/
+
 /* Helper Colours Start */
 .hlpr-color-info {
 	background-color: #3ac5e6;
@@ -406,6 +588,12 @@
 		padding: 0.6em 2.6em;
 	}
 }
+/*Min width 800px*/
+@media screen and (min-width: 50em) {
+	#register-modal {
+		min-width: 800px;
+	}
+}
 /* Large and up */
 @media screen and (min-width: 64em) {
 	.hero .intro {
@@ -431,6 +619,9 @@
 	}
 	.wrapper-content {
 		/*margin-top: 64px;*/
+	}
+	#register-modal {
+		width: 800px;
 	}
 }
 /* Small only */
