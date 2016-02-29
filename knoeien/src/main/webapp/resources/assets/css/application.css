@@ -86,17 +86,17 @@
 	text-align: center;
 }
 ::-webkit-input-placeholder {
-	text-align: center;
+	text-align: left;
 }
 ::-moz-placeholder { /* Firefox 19+ */
-	text-align: center;
+	text-align: left;
 	color: #555;
 }
 :-ms-input-placeholder {
-	text-align: center;
+	text-align: left;
 }
 :-moz-placeholder { /* Firefox 18- */
-	text-align: center;
+	text-align: left;
 }
 .off-canvas-wrapper, .off-canvas{
 	background-color: rgba(43,42,41,0.9);		/* #2b2a29 */
@@ -358,6 +358,34 @@
 }
 /*Login Modal Ends*/
 
+/*Job Confirmation Modal Starts*/
+#job-confirmation-modal {
+	border-radius: 8px;
+}
+#jobConfirmation {
+	padding: 0 25px;
+}
+#job-confirmation-modal h4 {
+	font-size: 1.25em;
+    margin: 20px 0 40px 0;
+}
+#job-confirmation-modal img {
+	display: block;
+	margin: 0 auto 30px;
+	width: 196px;
+}
+#job-confirmation-modal a {
+	width: 32%;
+	border-radius: 8px;
+	padding: 15px 0;
+}
+#job-confirmation-modal p {
+	font-size: 0.60em;
+	font-weight: 600;
+	margin: 15px 20px 5px;
+}
+/*Job Confirmation Modal Ends*/
+
 /*Register Modal Starts*/
 #register-modal {
 	border-radius: 5px;
@@ -592,6 +620,9 @@
 @media screen and (min-width: 50em) {
 	#register-modal {
 		min-width: 800px;
+	}
+	#job-confirmation-modal {
+		width: 730px;
 	}
 }
 /* Large and up */
