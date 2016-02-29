@@ -8,11 +8,11 @@
 						<div class="medium-6 medium columns">
 							<!-- Foundation "abide" plug-in used for validation  -->
 							<div class="row">
-								<div class="medium-12 columns text-center">
+								<div class="medium-12 columns text-left">
 									<h4>Register as New User</h4>
 								</div>
-								<div class="medium-12 columns text-center">
-									<h5>Register with <a href="/knoeien/api/v1/socialNetwork/auth/facebook" id="registerFb">Facebook</a></h5>
+								<div class="medium-12 columns text-left">
+									<h5>Register with <a href="/knoeien/api/v1/socialNetwork/auth/facebook" id="registerFb" style="color: #76BD6A">Facebook</a></h5>
 								</div>
 							</div>
 							<div class="row">
@@ -30,10 +30,33 @@
 		                        	</div>							
 								</div>
 							</div>
-							
 							<div class="row">
-								<div class="medium-4 columns">
-									<label id="dobLabel">Date of Birth</label>
+								<div class="medium-12 columns">
+									<input name="email" ng-model="user.email" type="text" id="email" placeholder="Provide your email" required="required" />
+									<div ng-messages="formSubmitted &amp;&amp; signupForm.email.$error">
+		                            	<div ng-message="required" class="error">Email is required.</div>
+		                        	</div>
+								</div>
+							</div>
+							<div class="row">
+								<div class="medium-12 columns">
+									<input name="password" ng-model="user.password" type="password" id="password" placeholder="Enter a password" aria-describedby="password-help-text" required="required" />	
+									<div ng-messages="formSubmitted &amp;&amp; signupForm.password.$error">
+		                            	<div ng-message="required" class="error">Password is required.</div>
+		                        	</div>
+								</div>
+								<div class="medium-12 columns">
+									<input name="confirmPassword" type="password" ng-model="user.confirmPassword" placeholder="Retype your password" required="required" data-ng-match="password"/>
+									<span class="error" data-ng-show="signupForm.confirmPassword.$error.match">Passwords do not match.</span>
+								</div>
+								<div class="small-12 columns">
+									<p class="help-text" id="password-help-text" style="margin-top: 0">Password must be at least 8 characters long.</p>
+								</div>
+							</div>
+							
+							<div class="row">	
+								<div class="medium-4 columns">	
+									<label id="dobLabel">Date of Birth</label>								
 									<select name="dateDay" class="day-select" id="date-day" required="required" ng-model="user.day">
 										<option value="" disabled="disabled" selected="selected">Day</option>
 									</select>
@@ -60,29 +83,6 @@
 									<div ng-messages="formSubmitted &amp;&amp; signupForm.dateYear.$error">
 		                            	<div ng-message="required" class="error">Year is required.</div>
 		                        	</div>
-								</div>
-							</div>
-							<div class="row">
-								<div class="medium-12 columns">
-									<input name="email" ng-model="user.email" type="text" id="email" placeholder="Provide your email" required="required" />
-									<div ng-messages="formSubmitted &amp;&amp; signupForm.email.$error">
-		                            	<div ng-message="required" class="error">Email is required.</div>
-		                        	</div>
-								</div>
-							</div>
-							<div class="row">
-								<div class="medium-12 columns">
-									<input name="password" ng-model="user.password" type="password" id="password" placeholder="Enter a password" aria-describedby="password-help-text" required="required" />	
-									<div ng-messages="formSubmitted &amp;&amp; signupForm.password.$error">
-		                            	<div ng-message="required" class="error">Password is required.</div>
-		                        	</div>
-								</div>
-								<div class="medium-12 columns">
-									<input name="confirmPassword" type="password" ng-model="user.confirmPassword" placeholder="Retype your password" required="required" data-ng-match="password"/>
-									<span class="error" data-ng-show="signupForm.confirmPassword.$error.match">Passwords do not match.</span>
-								</div>
-								<div class="small-12 columns">
-									<p class="help-text" id="password-help-text">Password must be at least 8 characters long.</p>
 								</div>
 							</div>
 							<div class="row">
@@ -114,7 +114,7 @@
 						<div class="row">
 							<fieldset class="medium-12 columns">					
 								<div class="button-group">
-									<a href="" class="button hlpr-color-info" style="width: 100%; border-radius: 5px;">Send Verification Code</a>
+									<a href="" class="button hlpr-color-info" style="width: 100%; border-radius: 8px;">Send Verification Code</a>
 								</div>
 							</fieldset>
 						</div>
@@ -129,18 +129,18 @@
 						<div class="row">
 							<fieldset class="medium-12 columns">					
 								<div class="button-group">
-									<a href="javascript:void(0);" ng-click="formSubmitted = true; signup(signupForm.$valid);" class="button hlpr-color-success" style="width: 100%; border-radius: 5px;">Finish Registration</a>
+									<a href="javascript:void(0);" ng-click="formSubmitted = true; signup(signupForm.$valid);" class="button hlpr-color-success" style="width: 100%; border-radius: 8px;">Finish Registration</a>
 								</div>
 							</fieldset>
 						</div>
 						<div class="row">
 							<div class="medium-12 columns text-left">
-								<p>I agree with the <a href="privacy.xhtml">Terms and Privacy Policy</a> of Helper.</p>
+								<p>I agree with the <a href="privacy.xhtml" style="color: #76BD6A">Terms and Privacy Policy</a> of Helper.</p>
 							</div>
 						</div>
 						<div class="row">
 							<div class="medium-12 columns text-left">
-								<h5>Already registered? <a data-toggle="login-modal" >Log In</a></h5>
+								<h5>Already registered? <a data-toggle="login-modal" style="color: #76BD6A">Log In</a></h5>
 							</div>
 						</div>
 					  </div>
