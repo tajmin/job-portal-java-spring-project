@@ -13,14 +13,17 @@
 		
 		<!-- search bar starts here -->
 		<div class="row home-search">
-			<div class="medium-centered medium-8 large-6 columns">
+			<div class="medium-centered medium-9 large-7 columns">
 				<form>
 					<div class="row collapse">
-						<div class="medium-9 large-10 columns">
+						<div class="medium-6 large-8 columns">
 							<input class="search-bar" type="text" placeholder="Search Text" />
 						</div>
 						<div class="medium-3 large-2 columns">
-							<button type="submit" class="hlpr-color-info expanded button">Search</button>
+							<button type="submit" class="hlpr-color-info expanded button">Post</button>
+						</div>
+						<div class="medium-3 large-2 columns">
+							<button type="submit" class="hlpr-color-success expanded button">Search</button>
 						</div>
 					</div>
 				</form>
@@ -28,6 +31,58 @@
 		</div>
 	</div>
 	<!-- hero section ends here -->
+	
+	<!-- job description starts here -->
+	<div class="expanded row collapse medium-up-2 hlpr-color-info helper-job-detail">
+		<div class="columns">
+			<div class="container-img img-tidfordegogdine"></div>
+		</div>
+		<div class="columns job-detail-container">
+			<div class="job-detail">
+				<h3>More time for the important things in life</h3>
+				<p>There are always things that should have been done, find the perfect helper for you</p>
+				<div class="job-detail-button text-center">
+					<a data-toggle="not-logedin-modal" class="hollow hlpr-color-white wide button">Post your job</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<div class="expanded row collapse medium-up-2 hlpr-color-alert helper-job-detail">
+		<div class="columns job-detail-container">
+			<div class="job-detail">
+				<h3>Need bigger income or a quick buck?</h3>
+				<p>There are always things that should have been done, find the perfect job for you</p>
+				<div class="job-detail-button text-center">
+					<a data-toggle="not-logedin-modal" class="hollow hlpr-color-white wide button">Find work</a>
+				</div>
+			</div>
+		</div>
+		<div class="columns">
+			<div class="container-img img-rydde"></div>
+		</div>
+	</div>
+	<!-- job description ends here -->
+	
+	<!-- store section starts here -->
+	<div class="expanded row collapse medium-up-2 helper-store">
+		<div class="columns">
+			<div class="container-img">
+				<img class="float-center" src="#{request.contextPath}/resources/assets/images/iPhone.png" />
+			</div>
+		</div>
+		<div class="columns store-container">
+			<div class="store-detail">
+				<h3>Download app for iPhone and Android</h3>
+				<p>Keep Helpers right in your pocket, and stay updated on new work and your published work.</p>
+				<div class="store-button text-center">
+					<a type="#"><img src="#{request.contextPath}/resources/assets/images/apple_app_store.png"></img></a>
+					<a type="#"><img src="#{request.contextPath}/resources/assets/images/android_play_store.png"></img></a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- store section ends here -->
 	
 	<!-- job type starts here -->
 	<div class="expanded row collapse small-up-2 large-up-4">
@@ -88,56 +143,4 @@
 		</div>
 	</div>
 	<!-- user comment ends here -->
-	
-	<!-- store section starts here -->
-	<div class="expanded row collapse medium-up-2 helper-store">
-		<div class="columns">
-			<div class="container-img">
-				<img class="float-center" src="#{request.contextPath}/resources/assets/images/iPhone.png" />
-			</div>
-		</div>
-		<div class="columns store-container">
-			<div class="store-detail">
-				<h3>Download app for iPhone and Android</h3>
-				<p>Keep Helpers right in your pocket, and stay updated on new work and your published work.</p>
-				<div class="store-button text-center">
-					<a type="#"><img src="#{request.contextPath}/resources/assets/images/apple_app_store.png"></img></a>
-					<a type="#"><img src="#{request.contextPath}/resources/assets/images/android_play_store.png"></img></a>
-				</div>
-			</div>
-		</div>
-	</div>
-	<!-- store section ends here -->
-	
-	<!-- job description starts here -->
-	<div class="expanded row collapse medium-up-2 hlpr-color-info helper-job-detail">
-		<div class="columns">
-			<div class="container-img img-tidfordegogdine"></div>
-		</div>
-		<div class="columns job-detail-container">
-			<div class="job-detail">
-				<h3>More time for the important things in life</h3>
-				<p>There are always things that should have been done, find the perfect helper for you</p>
-				<div class="job-detail-button text-center">
-					<a data-toggle="not-logedin-modal" class="hollow hlpr-color-white wide button">Post your job</a>
-				</div>
-			</div>
-		</div>
-	</div>
-	
-	<div class="expanded row collapse medium-up-2 hlpr-color-alert helper-job-detail">
-		<div class="columns job-detail-container">
-			<div class="job-detail">
-				<h3>Need bigger income or a quick buck?</h3>
-				<p>There are always things that should have been done, find the perfect job for you</p>
-				<div class="job-detail-button text-center">
-					<a data-toggle="not-logedin-modal" class="hollow hlpr-color-white wide button">Find work</a>
-				</div>
-			</div>
-		</div>
-		<div class="columns">
-			<div class="container-img img-rydde"></div>
-		</div>
-	</div>
-	<!-- job description ends here -->
 </ui:composition>
