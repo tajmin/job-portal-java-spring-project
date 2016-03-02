@@ -47,6 +47,8 @@
 							<div class="input-group">
 								<span class="input-group-label" style="font-size: 20px;"><i class="fi-marker"></i></span>
 								<input type="text" size="50" id="placesearch" class="input-group-field" placeholder="Enter your street address"  ng-model="job.addressLine1"/>
+								<input type="hidden" id="latitude" name="latitude" ng-model="job.latitude"/>
+								<input type="hidden" id="longitude" name="longitude" ng-model="job.longitude"/> 
 							</div>
 							<div ng-messages="formSubmitted &amp;&amp; jobPostingForm.addressLine1.$error">
 	                            <div ng-message="required" class="error">AddressLine1 is required</div>
@@ -98,9 +100,29 @@
 		<script type="text/javascript">
 		function initialize() {
 			var searchBox = document.getElementById('placesearch');
-			var autocomplete =	new google.maps.places.SearchBox(searchBox);
+			var autocomplete =	new google.maps.places.Autocomplete(searchBox);
+			var latitude;
+			var longitude
+			
+			google.maps.event.addListener(autocomplete, 'place_changed', function () {
+	            var place = autocomplete.getPlace();
+	            latitude = place.geometry.location.lat();
+	            longitude = place.geometry.location.lng();
+	            alert("This function is working!");
+	            alert(latitude);
+	            document.getElementById('latitude').value = place.geometry.location.lat();
+	            document.getElementById('longitude').value = place.geometry.location.lng();
+	            //alert(place.address_components[0].long_name);
+	            //console.log(latitude);
+
+	        });
+			console.log(latitude);
+			console.log("www");
+			
 		}
 		google.maps.event.addDomListener(window, 'load', initialize);
+		
+		
 		
 		$(function() {
 		    $( "#datepicker" ).fdatepicker({

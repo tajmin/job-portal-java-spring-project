@@ -86,8 +86,6 @@ public class User extends AuditableEntity {
 	@Column(name ="date_of_birth")
 	private Calendar dateOfBirth;
 	
-	//@author SHIFAT member variable for settings.xhtml
-	
 	@Column(name = "e_post")
 	private boolean ePost; 
 	
@@ -112,10 +110,6 @@ public class User extends AuditableEntity {
 	@Column(name = "receive_updates")
 	private boolean receiveUpdates;
 	
-	//@author SHIFAT ends here
-	
-	
-	
 	public User() {}
 	
 	public User(UserModel userModel) {
@@ -130,8 +124,6 @@ public class User extends AuditableEntity {
 		
 	}
 	
-	//@author SHIFAT edited for setting 
-
 	public boolean isePost() {
 		return ePost;
 	}
@@ -195,18 +187,12 @@ public class User extends AuditableEntity {
 	public void setReceiveUpdates(boolean receiveUpdates) {
 		this.receiveUpdates = receiveUpdates;
 	}
-	
-	
-	//settings ends
-	
-	
+		
 	public String getFullName() {					
 		fullName = firstName + " " + lastName;
 		return fullName;
 	}
 	
-
-
 	public String getCompanyId() {
 		return companyId;
 	}

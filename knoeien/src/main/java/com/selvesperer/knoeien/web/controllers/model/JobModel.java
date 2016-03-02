@@ -37,6 +37,14 @@ public class JobModel implements Serializable{
 	
 	private BigDecimal payment = BigDecimal.ZERO.setScale(2, RoundingMode.HALF_UP);
 	
+	private boolean draft;
+	
+	private String imageUrl;
+	
+	private BigDecimal latitude = BigDecimal.ZERO.setScale(6, RoundingMode.HALF_UP);
+	
+	private BigDecimal longitude = BigDecimal.ZERO.setScale(6, RoundingMode.HALF_UP);
+	
 	public JobModel() {}
 	
 	public JobModel(Job job) {		
@@ -51,6 +59,10 @@ public class JobModel implements Serializable{
 		this.setDate(DateFormatUtils.getDBFormattedDateString(job.getDate()));
 		this.setZip(job.getZip());
 		this.setState(job.getState());
+		this.setDraft(job.isDraft());
+		this.setImageUrl(job.getImageUrl());
+		this.setLatitude(job.getLatitude());
+		this.setLongitude(job.getLongitude());
 	}
 	
 
@@ -149,6 +161,38 @@ public class JobModel implements Serializable{
 
 	public void setPayment(BigDecimal payment) {
 		this.payment = payment;
+	}
+
+	public boolean isDraft() {
+		return draft;
+	}
+
+	public void setDraft(boolean draft) {
+		this.draft = draft;
+	}
+
+	public String getImageUrl() {
+		return imageUrl;
+	}
+
+	public void setImageUrl(String imageUrl) {
+		this.imageUrl = imageUrl;
+	}
+
+	public BigDecimal getLatitude() {
+		return latitude;
+	}
+
+	public void setLatitude(BigDecimal latitude) {
+		this.latitude = latitude;
+	}
+
+	public BigDecimal getLongitude() {
+		return longitude;
+	}
+
+	public void setLongitude(BigDecimal longitude) {
+		this.longitude = longitude;
 	}
 
 }

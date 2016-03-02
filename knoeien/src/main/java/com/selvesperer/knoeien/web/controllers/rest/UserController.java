@@ -83,14 +83,6 @@ public class UserController extends AbstractController implements Serializable {
 		return new ResponseEntity<RestResponse>(convertToRestGoodResponse(user), HttpStatus.BAD_REQUEST);
 	}
 	
-	
-	
-	//@author SHIFAT ends
-	
-	 
-	 
-	 
-	//@author SHIFAT for setting
 	 
 	 
 	@RequestMapping(value = "/saveUserSetting", method = RequestMethod.POST, produces = "application/json")
