@@ -112,7 +112,9 @@
 					<li ng-controller="logoutCtrl"> <a href="javascript:void(0);" ng-click="logout();">Log out</a> </li>
 				</ul>
 			</div>
-			
+			<div style="display: none">
+			<button id="changePassLoad" data-toggle="change-password-modal">CLick me !!!</button>
+			</div>
 			<div class="off-canvas-content" data-off-canvas-content = "true">
 				<!-- content starts here -->
 				<section id="body-wrapper">
@@ -135,7 +137,11 @@
 	<script type="text/javascript" src="#{request.contextPath}/resources/assets/js/application.js?#{msg['vrsn']}"></script>
 	<script type="text/javascript">
 		var Settings = {};
-		Settings.serviceBaseUrl='#{request.contextPath}';			
+		Settings.serviceBaseUrl='#{request.contextPath}';	
+		
+		jQuery(document).ready( function( ) {
+			$('#changePassLoad').click();	 } 
+		);	
 	</script>
 </body>
 </html>
