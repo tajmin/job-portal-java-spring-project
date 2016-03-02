@@ -362,6 +362,21 @@
 }
 /*Login Modal Ends*/
 
+/*Find Job Starts*/
+.jobToggle {
+	display: block;
+	 -webkit-transition: all 1s ease;
+     -moz-transition: all 1s ease;
+       -o-transition: all 1s ease;
+      -ms-transition: all 1s ease;
+          transition: all 1s ease;
+}
+.whatever :hover {
+  -webkit-filter: grayscale(100%);
+  background: #ccc;
+}
+/*Find Job Ends*/
+
 /*Job Confirmation Modal Starts*/
 #job-confirmation-modal {
 	border-radius: 8px;
@@ -431,6 +446,12 @@
 }
 #verifyTitle {
 	margin: 0 0 47px;
+}
+#verificationCode {
+	background: url(../images/success.png) no-repeat;
+    background-size: 36px 32px;
+    padding: 5px 5px;
+    background-position: 95% 70%;
 }
 #registerForm p {
 	font-size: 0.75em;
