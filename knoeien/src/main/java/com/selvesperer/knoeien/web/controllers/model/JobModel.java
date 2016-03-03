@@ -45,6 +45,18 @@ public class JobModel implements Serializable{
 	
 	private BigDecimal longitude = BigDecimal.ZERO.setScale(6, RoundingMode.HALF_UP);
 	
+	
+	//New
+	private String assignedUserId;
+	
+	private String createdByUserId;
+	
+	
+	//Message and rating
+	
+	private Integer rating;
+	private String reviewMessage;
+	
 	public JobModel() {}
 	
 	public JobModel(Job job) {		
@@ -63,8 +75,47 @@ public class JobModel implements Serializable{
 		this.setImageUrl(job.getImageUrl());
 		this.setLatitude(job.getLatitude());
 		this.setLongitude(job.getLongitude());
+		
+		
+		this.setAssignedUserId(job.getAssignedUserId());
+		this.setCreatedByUserId(job.getCreatedByUserId());
+		
+		this.setReviewMessage(job.getReviewMessage());
+		this.setRating(job.getRating());
 	}
 	
+
+	public String getAssignedUserId() {
+		return assignedUserId;
+	}
+
+	public void setAssignedUserId(String assignedUserId) {
+		this.assignedUserId = assignedUserId;
+	}
+
+	public String getCreatedByUserId() {
+		return createdByUserId;
+	}
+
+	public void setCreatedByUserId(String createdByUserId) {
+		this.createdByUserId = createdByUserId;
+	}
+
+	public Integer getRating() {
+		return rating;
+	}
+
+	public void setRating(Integer rating) {
+		this.rating = rating;
+	}
+
+	public String getReviewMessage() {
+		return reviewMessage;
+	}
+
+	public void setReviewMessage(String reviewMessage) {
+		this.reviewMessage = reviewMessage;
+	}
 
 	public List<JobModel> getJobModelList(List<Job> jobList) {
 		List<JobModel> jobModelList = new ArrayList<>();

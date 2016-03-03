@@ -19,4 +19,7 @@ public interface JobService {
 	
 	public List<Job> showEarliestDeadlineJob();
 	
+	public List<Job> findJobByAssignedUserId(String assignedUserId);
+	public List<Job> findJobByCreatedUserId(String createdByUserId);
+	
 }

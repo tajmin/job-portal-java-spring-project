@@ -25,4 +25,11 @@ public interface JobRepository extends JpaRepository<Job, String>, JobRepository
 	@Query("from Job j Order by j.date asc")
 	List<Job> findJobOrderByDateAsc();
 	
+	@Query("from Job j where j.assignedUserId = :assignedUserId")
+	List<Job> findJobByAssignedUserId(@Param("assignedUserId") String assignedUserID);
+	
+	
+	@Query("from Job j where j.createdByUserId = :createdByUserId")
+	List<Job> findJobByCreatedUserId(@Param("createdByUserId") String createdByUserId);
+	
 }
