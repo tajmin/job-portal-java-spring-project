@@ -1,11 +1,20 @@
 package com.selvesperer.knoeien.web.controllers.rest;
-
+import java.awt.Image;
+import java.io.BufferedOutputStream;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Serializable;
+import java.io.Writer;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
+import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -23,7 +32,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
+import com.selvesperer.knoeien.data.domain.Notification;
 import com.selvesperer.knoeien.data.domain.User;
 import com.selvesperer.knoeien.data.repository.UserRepository;
 import com.selvesperer.knoeien.emails.ActivationEmail;
@@ -31,13 +43,13 @@ import com.selvesperer.knoeien.emails.InvitationFriendEmail;
 import com.selvesperer.knoeien.exception.AuthenticationFailedException;
 import com.selvesperer.knoeien.security.SecurityManager;
 import com.selvesperer.knoeien.service.EmailService;
+
 import com.selvesperer.knoeien.service.UserService;
 import com.selvesperer.knoeien.spring.utils.ApplicationBeanFactory;
 import com.selvesperer.knoeien.utils.Constants;
 import com.selvesperer.knoeien.utils.localization.LocalizationUtil;
 import com.selvesperer.knoeien.web.controllers.model.RestResponse;
 import com.selvesperer.knoeien.web.controllers.model.UserModel;
-
 
 
 @Controller
@@ -327,5 +339,43 @@ public class UserController extends AbstractController implements Serializable {
 			restResponse = convertToRestBadResponse("", t.getLocalizedMessage());
 		}
 		return new ResponseEntity<RestResponse>( restResponse, HttpStatus.OK);
-	}	
+	}
+	
+	
+	@RequestMapping(value = "/doUpload", headers = ("content-type=multipart/*"), method = RequestMethod.POST)
+	public String handleFileUpload(HttpServletRequest request,
+			@RequestParam(value = "file", required = true) CommonsMultipartFile[] file) throws Exception {
+		String saveDirectory = "E:/";
+		System.out.println("loading image" + file);
+		String imageName = SecurityManager.getCurrentUserId();
+		List<String> list = new ArrayList<String>();
+
+		String desc = request.getParameter("description");
+		System.out.println("description: " + desc);
+
+		if (file != null && file.length > 0) {
+			for (CommonsMultipartFile aFile : file) {
+
+				System.out.println("Saving file: " + aFile.getOriginalFilename());
+
+				if (!aFile.getOriginalFilename().equals("")) {
+					// aFile.transferTo(new File(saveDirectory
+					// + aFile.getOriginalFilename()));
+
+					aFile.transferTo(new File(saveDirectory + imageName + ".jpg"));
+					// ************************
+					list.add(aFile.getOriginalFilename());
+					// ************************
+				}
+			}
+		}
+
+		// read using local directory
+		File sourceimage = new File("E:/" + imageName + ".jpg");
+		Image image = ImageIO.read(sourceimage);
+		System.out.println("Image obj  " + image);
+
+		return "Success";
+	}
+
 }

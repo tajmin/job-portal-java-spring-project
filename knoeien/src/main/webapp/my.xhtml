@@ -75,6 +75,29 @@
 						</fieldset>
 					</div>
 				</form>
+				
+							<form name="mobileVerificationForm" method="post" action="/knoeien/api/v1/user/verifyNumber">
+				
+					<div class="row">
+						<div class="medium-12 columns">
+							<label>Verify Number</label> <input ng-model="user.mobileNumber"
+								type="text" name="mobileNumber" placeholder="Write your phone number" />
+						</div>
+					</div>
+					
+						<div class="row">
+						<fieldset class="medium-12 columns">
+							<div class="button-group float-right">
+								<button  type="Submit">Send Verification Code</button>
+							</div>
+						</fieldset>
+					</div>
+					
+				
+				</form>
+				
+				
+				
 				<!-- Profile form ends here -->
 			</div>
 			<div class="medium-7 medium-centered columns" ng-if="isproceed" style="height: 300px;">
