@@ -377,5 +377,60 @@ public class UserController extends AbstractController implements Serializable {
 
 		return "Success";
 	}
+	
+	@RequestMapping(value = "/verifyNumber", method = RequestMethod.POST, produces = "application/json")
+	@ResponseBody
+	public ResponseEntity<RestResponse> verifyNumber(
+			@RequestParam(value = "mobileNumber", required = true) String mobileNumber)
+					throws EmailException, IOException {
+
+		UserService userService = ApplicationBeanFactory.getBean(UserService.class);
+		final String username = "maxwork1";
+		final String password = "akertha1";
+
+		try {
+			System.out.println(mobileNumber);
+
+			// Generating verification Code(Random Number)
+			long timeCalculate = System.nanoTime();
+			double randomCalculate = Math.random() * 1000;
+			long mixingTimeAndRand = (long) (timeCalculate * randomCalculate);
+			String s1 = mixingTimeAndRand + "";
+			String verificationCode = s1.substring(0, 6);
+
+			// Numeric ID, must be unique within one XML document/session
+
+			System.out.println(verificationCode);
+
+			// 6 digit code
+
+			// random number as verification code, Message can't exceed 160
+			// character
+			String myMessage = verificationCode;
+
+			// sender
+			String sender = "+8801676431121";
+
+			// receiver is given number from view
+			String receiver = mobileNumber;
+
+			String xml = "<?xml version=\"1.0\"?><SESSION><CLIENT>" + username + "</CLIENT><PW>" + password
+					+ "</PW><RCPREQ>Y</RCPREQ><MSGLST><MSG><TEXT>" + myMessage + "</TEXT><SND>" + sender + "</SND><RCV>"
+					+ receiver + "</RCV></MSG></MSGLST></SESSION>";
+
+			String gatewayResponse = userService.sendVerificationCode("http://sms3.pswin.com/sms", xml);
+			System.out.println(gatewayResponse);
+
+			return new ResponseEntity<RestResponse>(
+					convertToRestGoodResponse(null, LocalizationUtil.findLocalizedString("invitationsuccess.text")),
+					HttpStatus.OK);
+		} catch (Exception ex) {
+			// Messages.addGlobalError(ex.getMessage());
+		}
+
+		return new ResponseEntity<RestResponse>(convertToRestGoodResponse(null), HttpStatus.BAD_REQUEST);
+	}
+
+
 
 }
