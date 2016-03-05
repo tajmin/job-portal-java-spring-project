@@ -59,6 +59,19 @@ public class JobServiceImpl implements JobService {
 		return job;
 	}
 
+	@Override
+	public List<Job> findJobByAssignedUserId(String assignedUserId) {
+		// TODO Auto-generated method stub
+		
+		List<Job> job=new ArrayList<>(jobRepository.findJobByAssignedUserId(assignedUserId));
+		return job;
+	}
 
+	@Override
+	public List<Job> findJobByCreatedUserId(String createdByUserId) {
+		// TODO Auto-generated method stub
+		List<Job> job=new ArrayList<>(jobRepository.findJobByCreatedUserId(createdByUserId));
+		return job;
+	}
 	
 }
