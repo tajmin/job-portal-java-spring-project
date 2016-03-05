@@ -1,3 +1,8 @@
+Controllers.controller("JobLookupCtrl", function($scope, $rootScope, restservice, $cookies) {
+	$scope.filter = {};
+	$scope.filter.searchText = "";
+});
+
 Controllers.controller("UserCtrl", function($scope, $rootScope, restservice, $cookies) {
 	$scope.user = {};
 	$scope.addUser = function() {
