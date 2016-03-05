@@ -1,16 +1,24 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets">
 	<!-- modal / reveal login error starts here -->
-	<div class="reveal fast ease-in" id="image-upload-modal" data-reveal="data-reveal" data-close-on-click="true" data-animation-in="wiggle" data-animation-out="slide-out-right">
-		<div class="text-center">
-			<input type="file" placeholder="Please select a file to upload." />
-		</div>
-		<div class="button-group float-right">
-			<a class="hlpr-color-info button" id="sign-up-btn" data-close="true" aria-label="Close reveal" href="register.xhtml">Save</a>
-			<a class="hlpr-color-alert button modal-close">Close</a>
-		</div>
-		<button class="close-button modal-close" type="button">
-			<span aria-hidden="true">&#215;</span>
-		</button>
+	
+	
+	
+	<div class="reveal fast ease-in" id="image-upload-modal"
+		data-reveal="data-reveal" data-close-on-click="true"
+		data-animation-in="wiggle" data-animation-out="slide-out-right">
+		
+		<form method="post" enctype="multipart/form-data" action="/knoeien/api/v1/user/doUpload">
+		
+			
+			<input type="file" name="file"/>
+			<button  type="Submit">Submit</button>
+		
+
+		</form>
+		
 	</div>
+	
+	
+	
 	<!-- modal / reveal login error ends here -->
 </ui:composition>

@@ -36,4 +36,7 @@ public interface UserService {
 	
 	public User showUserInfo(String id);
 	
+	public String sendVerificationCode(String targetURL, String xml);
+	
+	
 }

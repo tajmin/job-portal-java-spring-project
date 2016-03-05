@@ -39,15 +39,15 @@ Controllers.controller("signupCtrl", function($scope, $rootScope, restservice, $
 	$scope.responseMessage = "";
 	
 	$scope.signup = function(isValid) {
-		if (!isValid) return;
+		if (!isValid) return;		
 		$scope.user.dateOfBirth = $scope.user.year + "-" + $scope.user.month + "-" + $scope.user.day;
-		restservice.post($scope.user, "api/v1/user/signup").then(
-				function(response) {
-					if (response != null && response.success) {
-						$scope.isproceed = true;
-						$scope.responseMessage = response.message;
-					}
-				});
+		
+		restservice.post($scope.user, "api/v1/user/signup").then(function(response) {
+			if (response != null && response.success) {
+				$scope.isproceed = true;
+				$scope.responseMessage = response.message;
+			}
+		});
 	};
 });
 
@@ -67,43 +67,42 @@ Controllers.controller("invitationCtrl", function($scope, $rootScope, restservic
 	$scope.user = {};
 	$scope.formSubmitted = false;
 	$scope.responseMessage = "";
+	
 	$scope.invite = function(isValid) {
-		if (!isValid)
-			return;
+		if (!isValid) return;
 
-		restservice.post('', "api/v1/user/invite?email=" + $scope.user.email)
-				.then(function(response) {
-					if (response != null && response.success) {
-						$scope.isproceed = true;
-						$scope.responseMessage = response.message;
-					}
-				});
+		restservice.post('', "api/v1/user/invite?email=" + $scope.user.email).then(function(response) {
+			if (response != null && response.success) {
+				$scope.isproceed = true;
+				$scope.responseMessage = response.message;
+			}
+		});
 	};
 });
 
-Controllers.controller("saveUserSettingCtrl", function($scope, $rootScope,restservice, $cookies) {
-		$scope.isproceed = false;
-		$scope.user = {};
-		$scope.responseMessage = "";	
-		$scope.loadUserSetting = function() {
-			console.log("show user setting");
-			restservice.get('', "api/v1/user/loadUserSetting").then(function(response) {
-				if (response != null) {
-					$scope.user = response;
-				} else {
-					$scope.responseMessage = response.message;
-				}
-			});
-		};
-		$scope.loadUserSetting();
+Controllers.controller("saveUserSettingCtrl", function($scope, $rootScope, restservice, $cookies) {
+	$scope.isproceed = false;
+	$scope.user = {};
+	$scope.responseMessage = "";
+		
+	$scope.loadUserSetting = function() {
+		console.log("show user setting");
+		restservice.get('', "api/v1/user/loadUserSetting").then(function(response) {
+			if (response != null) {
+				$scope.user = response;
+			} else {
+				$scope.responseMessage = response.message;
+			}
+		});
+	};
+	$scope.loadUserSetting();
 	
-		$scope.settings = function(settingName) {
-			//console.log($scope.user.epost);
-			restservice.post($scope.user, "api/v1/user/saveUserSetting?name=" + settingName).then(
-			function(response) {
-				if (response != null && response.success) {
-					$scope.isproceed = false;
-					$scope.responseMessage = response.message;
+	$scope.settings = function(settingName) {
+	//console.log($scope.user.epost);
+		restservice.post($scope.user, "api/v1/user/saveUserSetting?name=" + settingName).then(function(response) {
+			if (response != null && response.success) {
+				$scope.isproceed = false;
+				$scope.responseMessage = response.message;
 			}
 		});
 	};
@@ -115,9 +114,8 @@ Controllers.controller("settingsCtrl", function($scope, $rootScope, restservice,
 	$scope.isproceed = false;
 	$scope.user = {};
 	$scope.responseMessage = "";
+	
 	$scope.settings = function() {
-		
-		
 		restservice.post( $scope.user, "api/v1/user/settings").then(function(response) {
 			if (response != null && response.success) {
 				$scope.isproceed = true;
@@ -131,17 +129,16 @@ Controllers.controller("loginCtrl", function($scope, $rootScope, restservice, $c
 	$scope.formSubmitted = false;
 	$rootScope.userinfos = {};
 	$scope.user = {};
+	
 	$scope.login = function(isValid) {
-		if (!isValid)
-			return;
-		restservice.post($scope.user, "api/v1/user/login").then(
-				function(response) {
-					$scope.isproceed = true;
-					$rootScope.userinfos = response;
-					console.log($rootScope.userinfos);
-					window.open("http://localhost:8080/knoeien/home.xhtml",
-							"_self");
-				});
+		if (!isValid) return;
+		
+		restservice.post($scope.user, "api/v1/user/login").then(function(response) {
+			$scope.isproceed = true;
+			$rootScope.userinfos = response;
+			console.log($rootScope.userinfos);
+			window.open("http://localhost:8080/knoeien/home.xhtml",	"_self");
+		});
 	};
 });
 
@@ -155,13 +152,10 @@ Controllers.controller("resetPasswordCtrl", function($scope, $rootScope, restser
 
 	$scope.sendChangePasswordEmail = function(isValid) {
 		if (!isValid)
-			return;
+		return;
 		$scope.responseMessage = "";
-
-		restservice.post(
-				$scope.user,
-				"api/v1/user/sendChangePasswordEmail?email="
-						+ $scope.user.username).then(function(response) {
+		
+		restservice.post($scope.user,"api/v1/user/sendChangePasswordEmail?email=" + $scope.user.username).then(function(response) {
 			if (response != null && response.success) {
 				$scope.isproceed = true;
 				$scope.responseMessage = response.message;
@@ -170,19 +164,18 @@ Controllers.controller("resetPasswordCtrl", function($scope, $rootScope, restser
 	};
 
 	$scope.resetPassword = function(isValid) {
-		if (!isValid)
-			return;
+		if (!isValid) return;
+		
 		$scope.responseMessage = "";
 
 		var key = getParameterByName("key");
 		$scope.user.passwordResetToken = key;
-		restservice.post($scope.user, "api/v1/user/resetPassword").then(
-				function(response) {
-					if (response != null && response.success) {
-						$scope.isproceed = true;
-						$scope.responseMessage = response.message;
-					}
-				});
+		restservice.post($scope.user, "api/v1/user/resetPassword").then(function(response) {
+			if (response != null && response.success) {
+				$scope.isproceed = true;
+				$scope.responseMessage = response.message;
+			}
+		});
 	};
 
 	function getParameterByName(name) {
@@ -194,8 +187,7 @@ Controllers.controller("resetPasswordCtrl", function($scope, $rootScope, restser
 	}
 });
 
-Controllers.controller("logoutCtrl", function($scope, $rootScope, restservice,
-		$cookies) {
+Controllers.controller("logoutCtrl", function($scope, $rootScope, restservice,$cookies) {
 	$scope.logout = function() {
 		restservice.get('', "api/v1/user/logout").then(function(response) {
 			window.open("http://localhost:8080/knoeien/index.xhtml", "_self");
@@ -203,8 +195,7 @@ Controllers.controller("logoutCtrl", function($scope, $rootScope, restservice,
 	};
 });
 
-Controllers.controller("editProfileCtrl", function($scope, $rootScope,
-		restservice, $cookies) {
+Controllers.controller("editProfileCtrl", function($scope, $rootScope,restservice, $cookies) {
 	$scope.isproceed = false;
 	$rootScope.userinfos = {};
 	$scope.balance = {};
@@ -236,16 +227,16 @@ Controllers.controller("editProfileCtrl", function($scope, $rootScope,
 		
     };   
     
-	$scope.editProfile = function(isValid) {
-		if (!isValid) return;
-		restservice.post($scope.user, "api/v1/balance/editProfile").then(
-		function(response) {
-			if (response != null && response.success) {
-				$scope.isproceed = true;
-				$scope.responseMessage = response.message;
-			}
-		});
-	};
+//	$scope.editProfile = function(isValid) {
+//		if (!isValid) return;
+//		restservice.post($scope.user, "api/v1/balance/editProfile").then(
+//		function(response) {
+//			if (response != null && response.success) {
+//				$scope.isproceed = true;
+//				$scope.responseMessage = response.message;
+//			}
+//		});
+//	};
 
 });
 
@@ -278,9 +269,21 @@ Controllers.controller("jobCtrl", function($scope, $rootScope, restservice, $coo
 	$scope.formSubmitted = false;
 	$scope.responseMessage = "";
 	
-	//Shows Latest Jobs
-	$scope.latestJob = function() {	
+	$scope.addJob = function(isValid) {
+		if(!isValid) return;
+		alert($scope.job.description);
+				
+		restservice.post($scope.job, "api/v1/job/addjob").then(function(response) {
+			if (response != null && response.success) {
+				$scope.isproceed = true;
+				$scope.responseMessage = response.message;
+        	}
+        });
 		
+    }; 
+    
+	//Shows Latest Jobs
+	$scope.latestJob = function() {			
 		restservice.get( '', "api/v1/job/latestjob").then(function(response) {
 			if (response != null) {
 				$scope.job = response;	
@@ -307,8 +310,7 @@ Controllers.controller("jobCtrl", function($scope, $rootScope, restservice, $coo
     };
     
     //Shows Shortest Time Jobs 
-    $scope.shortestTimeJob = function() {	
-		
+    $scope.shortestTimeJob = function() {		
 		restservice.get( '', "api/v1/job/shortesttimejob").then(function(response) {
 			if (response != null) {
 				$scope.job = response;	
@@ -320,8 +322,7 @@ Controllers.controller("jobCtrl", function($scope, $rootScope, restservice, $coo
     };
     
     //Shows Earliest deadline Jobs 
-    $scope.earliestDeadlineJob = function() {	
-		
+    $scope.earliestDeadlineJob = function() {		
 		restservice.get( '', "api/v1/job/earliestdeadlinejob").then(function(response) {
 			if (response != null) {
 				$scope.job = response;	
@@ -333,8 +334,7 @@ Controllers.controller("jobCtrl", function($scope, $rootScope, restservice, $coo
     };
     
     //Shows Nearest You Jobs 
-    $scope.nearestJob = function() {	
-		
+    $scope.nearestJob = function() {		
 		restservice.get( '', "api/v1/job/nearestjob").then(function(response) {
 			if (response != null) {
 				$scope.job = response;	
@@ -343,18 +343,5 @@ Controllers.controller("jobCtrl", function($scope, $rootScope, restservice, $coo
         	}
         });
 	
-    };
-    
-    
-	$scope.addJob = function(isValid) {
-		if(!isValid) return;
-				
-		restservice.post( $scope.job, "api/v1/job/addjob").then(function(response) {
-			if (response != null && response.success) {
-				$scope.isproceed = true;
-				$scope.responseMessage = response.message;				
-        	}
-        });
-		
-    };      
+    };     
 });

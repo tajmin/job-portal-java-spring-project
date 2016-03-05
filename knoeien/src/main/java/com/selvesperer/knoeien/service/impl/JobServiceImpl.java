@@ -38,9 +38,8 @@ public class JobServiceImpl implements JobService {
 	}
 
 	@Override
-	public Job showJobInfo(String id) {
-		// TODO Auto-generated method stub
-		Job job = jobRepository.findJobById(id);
+	public List<Job> showLatestJob() {
+		List<Job> job = new ArrayList<>(jobRepository.findJobOrderByCreatedDateDesc());
 		return job;
 	}
 
@@ -60,6 +59,19 @@ public class JobServiceImpl implements JobService {
 		return job;
 	}
 
+	@Override
+	public List<Job> findJobByAssignedUserId(String assignedUserId) {
+		// TODO Auto-generated method stub
+		
+		List<Job> job=new ArrayList<>(jobRepository.findJobByAssignedUserId(assignedUserId));
+		return job;
+	}
 
+	@Override
+	public List<Job> findJobByCreatedUserId(String createdByUserId) {
+		// TODO Auto-generated method stub
+		List<Job> job=new ArrayList<>(jobRepository.findJobByCreatedUserId(createdByUserId));
+		return job;
+	}
 	
 }
