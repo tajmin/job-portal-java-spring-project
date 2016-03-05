@@ -38,7 +38,7 @@ public class JobController extends AbstractController implements Serializable {
 		return 1;
 	}
 	
-	@RequestMapping(value = "/addjob", method = RequestMethod.POST, produces = "application/json", consumes = "application/json")
+	@RequestMapping(value = "/addjob", method = RequestMethod.POST, produces = "application/json")
 	@ResponseBody
 	public ResponseEntity<RestResponse> addJob(@RequestBody JobModel jobModel) {
 		Job job = null;
@@ -71,11 +71,11 @@ public class JobController extends AbstractController implements Serializable {
 		if (log.isDebugEnabled()) log.debug("Job Info");		
 		try {
 			JobService jobService = ApplicationBeanFactory.getBean(JobService.class);
-			String id = "90000-244-344";
-			Job job = jobService.showJobInfo(id);
-			JobModel jobModel = new JobModel(job);
+			List<Job> job = jobService.showLatestJob();
+			JobModel jobModel = new JobModel();
+			List<JobModel> jobModelList = jobModel.getJobModelList(job);
 
-			return new ResponseEntity<RestResponse>( convertToRestGoodResponse(jobModel, LocalizationUtil.findLocalizedString("signupsuccess.text")),HttpStatus.OK);
+			return new ResponseEntity<RestResponse>( convertToRestGoodResponse(jobModelList, LocalizationUtil.findLocalizedString("signupsuccess.text")),HttpStatus.OK);
 		} catch (AuthenticationFailedException t) {
 			restResponse = convertToRestBadResponse("", t.getLocalizedMessage());
 		} catch (Exception t) {
@@ -111,7 +111,7 @@ public class JobController extends AbstractController implements Serializable {
 		
 		try {
 			JobService jobService = ApplicationBeanFactory.getBean(JobService.class);			
-			List<Job> job = jobService.showShortestTimeJob();
+			List<Job> job = jobService.showEarliestDeadlineJob();
 			JobModel jobModel = new JobModel();
 			List<JobModel> jobModelList = jobModel.getJobModelList(job);
 

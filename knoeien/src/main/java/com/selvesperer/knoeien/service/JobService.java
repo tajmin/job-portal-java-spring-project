@@ -10,12 +10,10 @@ public interface JobService {
 	public Job findJobById(String id);
 
 	public Job saveJob(JobModel jobModel);
-
-	public Job showJobInfo(String id);
+	
+	public List<Job> showLatestJob();
 	
 	public List<Job> showBestPaidJob();
-	
-	public List<Job> showShortestTimeJob();
 	
 	public List<Job> showEarliestDeadlineJob();
 	
