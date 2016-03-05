@@ -263,22 +263,69 @@ Controllers.controller("transactionCtrl", function($scope, $rootScope,restservic
 });
 
 
+Controllers.controller("addJobCtrl", function($scope, $rootScope, restservice, $cookies, utilservice) {
+	$scope.isproceed = false;
+	$scope.job = {};
+	$scope.formSubmitted = false;
+	$scope.responseMessage = "";
+	
+	var title = utilservice.getParameterByName("title");
+	if(!utilservice.isUndefinedOrNull(title)){
+		$scope.job.title = title;
+	}
+	
+	
+	$scope.draftJob = function(isValid) {
+		if(!isValid) return;
+		//alert("draft");
+		
+		$scope.job.draft = true;
+		//console.log($scope.job);
+				
+		restservice.post($scope.job, "api/v1/job/addjob").then(function(response) {
+			if (response != null) {
+				$scope.job = response;
+				//$scope.isproceed = true;
+				//$scope.responseMessage = response.message;
+        	}
+        });
+		
+    };
+    
+    $scope.postJob = function(isValid) {
+		if(!isValid) return;
+		alert($scope.job.description);
+				
+//		restservice.post($scope.job, "api/v1/job/addjob").then(function(response) {
+//			if (response != null && response.success) {
+//				$scope.isproceed = true;
+//				$scope.responseMessage = response.message;
+//        	}
+//        });
+		
+    };
+	
+});
+
 Controllers.controller("jobCtrl", function($scope, $rootScope, restservice, $cookies) {
 	$scope.isproceed = false;
 	$scope.job = {};
 	$scope.formSubmitted = false;
 	$scope.responseMessage = "";
 	
+	var param1 = $rootScope.getParameterByName("title");
+	alert(decodeURI(param1));
+	
 	$scope.addJob = function(isValid) {
 		if(!isValid) return;
 		alert($scope.job.description);
 				
-		restservice.post($scope.job, "api/v1/job/addjob").then(function(response) {
-			if (response != null && response.success) {
-				$scope.isproceed = true;
-				$scope.responseMessage = response.message;
-        	}
-        });
+//		restservice.post($scope.job, "api/v1/job/addjob").then(function(response) {
+//			if (response != null && response.success) {
+//				$scope.isproceed = true;
+//				$scope.responseMessage = response.message;
+//        	}
+//        });
 		
     }; 
     
@@ -293,7 +340,7 @@ Controllers.controller("jobCtrl", function($scope, $rootScope, restservice, $coo
         });
 	
     };
-    $scope.latestJob();
+    //$scope.latestJob();
     
     //Shows Best Paid Jobs 
     $scope.bestPaidJob = function() {	

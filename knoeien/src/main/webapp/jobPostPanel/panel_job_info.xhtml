@@ -1,0 +1,104 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets">
+	<div class="medium-7 medium-centered columns" ng-if="!isproceed">
+		
+			<div class="row" style="margin-top: 40px;">
+				<div class="small-12 columns">
+					<div class="row">
+						<div class="small-5 columns">
+							<div class="input-group">
+								<input type="text" class="input-group-field"  placeholder="Job title" ng-model="job.title" /> 
+								<span class="input-group-label"><i class="icon fi-pencil"></i></span>
+							</div>
+							<div ng-messages="formSubmitted &amp;&amp; jobPostingForm.title.$error">
+								<div ng-message="required" class="error">Title is required</div>
+							</div>
+						</div>
+						<div class="small-7 columns">
+							<div class="row">
+								<div class="small-6 columns text-right no-padding" style="padding: 0;">
+									<label for="jobImageFileUpload" class="middle" style="color: #6bbe54; font-weight: bold; cursor: pointer;">+ Add photo / switch image</label>
+									<input type="file" id="jobImageFileUpload" class="show-for-sr" />
+								</div>
+								<div class="small-6 columns">
+									<input  type="text" id="right-label" />
+								</div>
+							</div>
+							
+						</div>
+					</div>					
+				</div>
+				<div class="small-12 columns">
+					<label><h4>Job Details</h4></label>
+					<textarea rows="3" placeholder="Write your details job description" ng-model="job.description" />
+					<div
+						ng-messages="formSubmitted &amp;&amp; jobPostingForm.description.$error">
+						<div ng-message="required" class="error">Description is required</div>
+					</div>
+				</div>
+				<div class="small-12 columns">
+					<label><h4>Have you been awarded a sales code, put it here</h4></label>
+					<div class="input-group">
+						<input type="text" class="input-group-field" placeholder="Write your sales code" ng-model="job.salesPromoCode" />
+					</div>
+					<div ng-messages="formSubmitted &amp;&amp; jobPostingForm.description.$error">
+						<div ng-message="required" class="error">Description is required</div>
+					</div>
+				</div>
+
+				
+
+				<div class="small-12 columns">
+					<label><h4>Where do you need help?</h4></label>
+					<div class="input-group">
+						<span class="input-group-label" style="font-size: 20px;"><i class="fi-marker"></i></span> 
+						<input type="text" size="50" id="placesearch" class="input-group-field" placeholder="Enter your street address" ng-model="job.addressLine1" /> 
+						<input type="hidden" id="latitude" name="latitude" ng-model="job.latitude" /> 
+						<input type="hidden" id="longitude" name="longitude" ng-model="job.longitude" />
+					</div>
+					<div
+						ng-messages="formSubmitted &amp;&amp; jobPostingForm.addressLine1.$error">
+						<div ng-message="required" class="error">AddressLine1 is required</div>
+					</div>
+				</div>
+				<script type="text/javascript">
+					function initialize() {
+						var searchBox = document.getElementById('placesearch');
+						var autocomplete =	new google.maps.places.Autocomplete(searchBox);
+						var latitude;
+						var longitude;
+						
+						google.maps.event.addListener(autocomplete, 'place_changed', function () {
+				            var place = autocomplete.getPlace();
+				            
+				            latitude = place.geometry.location.lat();
+				            longitude = place.geometry.location.lng();
+				            //alert("This function is working!");
+				            //alert(latitude);
+				            document.getElementById('latitude').value = place.geometry.location.lat();
+				            document.getElementById('longitude').value = place.geometry.location.lng();
+				            //alert(place.address_components[0].long_name);
+				            //console.log(latitude);
+			
+				        });
+						console.log(latitude);
+						console.log("www");
+						
+					}
+					google.maps.event.addDomListener(window, 'load', initialize);
+					
+					
+					
+					$(function() {
+					    $( "#datepicker" ).fdatepicker({
+					    	format: 'yyyy-mm-dd hh:mm:ss',
+					    	pickTime: true,
+					        weekStart: 0,
+					        
+					        });
+					  });
+						
+			    	</script>
+			</div>			
+		
+	</div>
+</ui:composition>
