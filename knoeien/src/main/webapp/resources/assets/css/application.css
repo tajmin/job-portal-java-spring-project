@@ -708,3 +708,40 @@
 		margin-bottom: 0;
 	}
 }
+.cover {
+	position: relative;
+	height: 300px;
+}
+.cover .profile-img {
+	position: absolute;
+	top:0;
+	width: 100%;
+}
+.cover .profile-img .thumbnail {	
+	transform: translateY(140px);
+	-webkit-transform: translateY(140px);
+	-moz-transform: translateY(140px);
+	-ms-transform: translateY(140px);
+	-o-transform: translateY(140px);
+}
+.cover .profile-img img{
+	z-index: 10;
+	width: 100%;
+	height: 100%;
+}
+.cover-image {
+	display: block;
+	/* position: absolute;
+	top: 0;
+	left: 0; */
+	height: inherit;
+	width:100%;
+	background-repeat: no-repeat;
+	background-position: center center;
+	background-size: cover;
+	filter: blur(10px);
+	-webkit-filter: blur(5px);
+	-moz-filter: blur(5px);
+	-ms-filter: blur(5px);
+	-o-filter: blur(5px);
+}

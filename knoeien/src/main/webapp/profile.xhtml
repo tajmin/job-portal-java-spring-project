@@ -1,8 +1,23 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <ui:composition template="templates/angular-template.xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core">
-	<ui:param name="leftMenu" value="show"></ui:param>
 	<ui:define name="content">
+		<ui:include src="templates/profile-cover.xhtml" />
+		<ul class="tabs row expanded" data-tabs="data-tabs" id="example-tabs">
+			<li class="tabs-title is-active medium-3 columns"><a href="#panel1" aria-selected="true">Tab 1</a></li>
+		  	<li class="tabs-title medium-3 columns"><a href="#panel2">Tab 2</a></li>
+		  	<li class="tabs-title medium-3 columns"><a href="#panel3">Tab 3</a></li>
+		  	<li class="tabs-title medium-3 columns"><a href="#panel4">Tab 4</a></li>
+		</ul>
+		<div class="tabs-content" data-tabs-content="example-tabs">
+		  <div class="tabs-panel is-active" id="panel1">
+		    <ui:include src="profile/my-profile.xhtml"></ui:include>
+		  </div>
+		  <div class="tabs-panel" id="panel2">
+		    <ui:include src="profile/billiing-info.xhtml"></ui:include>
+		  </div>
+		</div>
+		
 		<div class="row wrapper-content">
 			<div class="medium-8 medium-centered columns" ng-if="!isproceed">
 				<!-- Foundation "abide" plug-in used for validation  -->
