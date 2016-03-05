@@ -66,8 +66,6 @@
 					<div class="text-center">
 						<a data-toggle="not-logedin-modal" class="hlpr-color-info button" style="color: #fff !important;">Post Job</a>
 						<a data-toggle="not-logedin-modal" class="hlpr-color-success button">Find work</a>
-						<a class="hollow hlpr-color-white button float-right" style="display:#{authorizationBean.canView()?'':'none'}">Login</a>
-						<a class="hollow hlpr-color-white button float-right" style="display:#{authorizationBean.canView()?'':'none'}">Login</a>
 					</div>
 				</li>
 				<li class="home-buttons clearfix">
@@ -76,10 +74,16 @@
 					<a data-toggle="login-modal" class="hollow hlpr-color-white button float-right" style="display:#{authorizationBean.canView()?'none':''}">Login</a>
 				</li>
 				 
-				<li class="clearfix" style="display:#{authorizationBean.canView()?'':'none'}">			
+				<li class="clearfix" style="display:#{authorizationBean.canView()?'':''}">			
 					<a href="my.xhtml" id="profile-pic" class="float-right">
 						<img class="circular-img" width="64" alt="My Profile" src="#{request.contextPath}/resources/assets/images/profile_pic.png" />
 					</a>
+					<a href="#" id="notification" class="float-right" data-toggle="notification-list">
+						<img alt="My Notification" width="48" src="#{request.contextPath}/resources/assets/images/bell.png" />
+					</a>
+					<div id="notification-list" class="dropdown-pane bottom" data-dropdown="data-dropdown" data-hover="true" data-hover-pane="true">
+  						Some notification will apear.
+					</div>
 				</li>
 			</ul>
 			<!-- menu for large device ends here -->
