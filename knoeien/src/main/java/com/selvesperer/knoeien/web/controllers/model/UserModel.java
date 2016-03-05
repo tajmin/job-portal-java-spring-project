@@ -51,22 +51,21 @@ public class UserModel implements Serializable {
 	
 	private Calendar dateOfBirth;
 	
-	//@author SHIFAT settings.xhtml member variable declaration
-	
 	private boolean ePost;
+	
 	private boolean sms;
 	
-	
 	private boolean message;
+	
 	private boolean reports;
+	
 	private boolean assignedJob;
+	
 	private boolean confirmJob;
-	
-	
+
 	private boolean hideAddress;
+
 	private boolean receiveUpdates;
-	
-	//settings.xhtml declaration ends here
 	
 	public UserModel() {}
 	
@@ -77,8 +76,6 @@ public class UserModel implements Serializable {
 		this.setFullName(user.getFullName());
 		this.setLocation(user.getLocation());
 		this.setCountryCode(user.getCountryCode());
-		
-		//@author SHIFAT edited for settings
 		this.setePost(user.isePost());
 		this.setSms(user.isSms());
 		this.setMessage(user.isMessage());
@@ -86,8 +83,7 @@ public class UserModel implements Serializable {
 		this.setAssignedJob(user.isAssignedJob());
 		this.setConfirmJob(user.isConfirmJob());
 		this.setHideAddress(user.isHideAddress());
-		this.setReceiveUpdates(user.isReceiveUpdates());
-		
+		this.setReceiveUpdates(user.isReceiveUpdates());		
 		this.setDateOfBirth(user.getDateOfBirth());
 	}
 	
@@ -258,8 +254,6 @@ public class UserModel implements Serializable {
 	public void setConfirmPassword(String confirmPassword) {
 		this.confirmPassword = confirmPassword;
 	}
-	
-	//settings.xhtml getter setter method
 	
 	public boolean isePost() {
 		return ePost;
