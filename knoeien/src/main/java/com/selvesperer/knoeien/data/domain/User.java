@@ -110,6 +110,17 @@ public class User extends AuditableEntity {
 	@Column(name = "receive_updates")
 	private boolean receiveUpdates;
 	
+	@Column(name = "sales_promocode", length = 100)
+	private String salesPromocode;
+	
+	public String getSalesPromocode() {
+		return salesPromocode;
+	}
+
+	public void setSalesPromocode(String salesPromocode) {
+		this.salesPromocode = salesPromocode;
+	}
+
 	public User() {}
 	
 	public User(UserModel userModel) {
@@ -121,6 +132,8 @@ public class User extends AuditableEntity {
 		this.setPassword(userModel.getPassword());
 		this.setPasswordResetToken(userModel.getPasswordResetToken());
 		this.setDateOfBirth(userModel.getDateOfBirth());
+		
+		this.setSalesPromocode(userModel.getSalesPromocode());
 		
 	}
 	

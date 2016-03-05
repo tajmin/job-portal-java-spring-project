@@ -22,6 +22,7 @@ import com.selvesperer.knoeien.emails.ForgetPasswordEmail;
 import com.selvesperer.knoeien.exception.AuthenticationFailedException;
 import com.selvesperer.knoeien.exception.SelvEspererException;
 import com.selvesperer.knoeien.exception.UnauthorizedActionException;
+import com.selvesperer.knoeien.security.SecurityManager;
 import com.selvesperer.knoeien.service.EmailService;
 import com.selvesperer.knoeien.service.UserService;
 import com.selvesperer.knoeien.spring.ScopeType;
@@ -110,6 +111,18 @@ public class UserServiceImpl implements UserService {
 		emailService.sendEmail(new ForgetPasswordEmail(user, token));
 	}
 
+	@Override
+	public User saveUserPromocode(String id,String salesPromocode) {
+		User userPromocode=userRepository.findUserById(id);
+		//UserModel userModel=new UserModel();
+		//UserModel userModel = new UserModel();
+		//userModel.setSalesPromocode(salesPromocode);
+		//userPromocode=new User(userModel);
+		userPromocode.setSalesPromocode(salesPromocode);
+		userRepository.saveAndFlush(userPromocode);
+		return userPromocode;
+	}
+	
 	
 	// @author SHIFAT save User settings 
 	@Override

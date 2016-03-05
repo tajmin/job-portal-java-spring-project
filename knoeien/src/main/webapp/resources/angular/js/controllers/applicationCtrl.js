@@ -51,6 +51,34 @@ Controllers.controller("signupCtrl", function($scope, $rootScope, restservice, $
 	};
 });
 
+Controllers.controller("promocodeCtrl", function($scope, $rootScope, restservice, $cookies) {
+
+	$rootScope.restMessages = {};
+	$scope.isproceed = false;
+	$scope.username = "";
+	$scope.formSubmitted = false;
+	$scope.responseMessage = "";
+	$scope.user = {};
+
+	$scope.saveSalesPromocode = function(isValid) {
+		if (!isValid)
+			return;
+		$scope.responseMessage = "";
+
+		restservice.post(
+				$scope.user,
+				"api/v1/user/salesPromocode?salesPromocode="
+						+ $scope.user.salesPromocode).then(function(response) {
+			if (response != null && response.success) {
+				$scope.isproceed = true;
+				$scope.responseMessage = response.message;
+			}
+						});
+					};
+});		
+
+
+
 //Controllers.controller("invitationCtrl", function($scope, $rootScope, restservice, $cookies) {
 //	if(!isValid) return;
 //	

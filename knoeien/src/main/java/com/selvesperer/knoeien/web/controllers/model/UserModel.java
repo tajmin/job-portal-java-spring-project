@@ -65,9 +65,17 @@ public class UserModel implements Serializable {
 	
 	private boolean hideAddress;
 	private boolean receiveUpdates;
-	
+	private String salesPromocode;
 	//settings.xhtml declaration ends here
 	
+	public String getSalesPromocode() {
+		return salesPromocode;
+	}
+
+	public void setSalesPromocode(String salesPromocode) {
+		this.salesPromocode = salesPromocode;
+	}
+
 	public UserModel() {}
 	
 	public UserModel(User user) {
@@ -89,6 +97,8 @@ public class UserModel implements Serializable {
 		this.setReceiveUpdates(user.isReceiveUpdates());
 		
 		this.setDateOfBirth(user.getDateOfBirth());
+		
+		this.setSalesPromocode(user.getSalesPromocode());
 	}
 	
 	public String getCompanyId() {

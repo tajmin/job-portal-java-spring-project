@@ -190,6 +190,10 @@ public class UserController extends AbstractController implements Serializable {
 		}
 		return new ResponseEntity<RestResponse>(convertToRestGoodResponse(user), HttpStatus.OK);
 	}
+	
+	
+	
+	
 
 	@RequestMapping(value = "/login", method = RequestMethod.POST, produces = "application/json")
 	public ResponseEntity<RestResponse> login(@RequestBody Map<String, String> requestObject, HttpServletRequest request, HttpServletResponse response) {
@@ -327,5 +331,25 @@ public class UserController extends AbstractController implements Serializable {
 			restResponse = convertToRestBadResponse("", t.getLocalizedMessage());
 		}
 		return new ResponseEntity<RestResponse>( restResponse, HttpStatus.OK);
-	}	
+	}
+	
+	
+	@RequestMapping(value = "/salesPromocode", method = RequestMethod.POST, produces = "application/json")
+	public ResponseEntity<RestResponse> saveSalesPromocode(@RequestParam(value="salesPromocode", required=true) String salesPromocode) {
+		RestResponse restResponse = null;
+		if (log.isDebugEnabled()) log.debug("Sales Promocode");	
+		UserService userService = ApplicationBeanFactory.getBean(UserService.class);
+		User user=null;
+		try {
+			String id = SecurityManager.getCurrentUserId();
+			user=userService.saveUserPromocode(id,salesPromocode);
+			return new ResponseEntity<RestResponse>( convertToRestGoodResponse(user, LocalizationUtil.findLocalizedString("signupsuccess.text")),HttpStatus.OK);
+
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		return new ResponseEntity<RestResponse>(restResponse, HttpStatus.OK);
+	}
+	
+	
 }

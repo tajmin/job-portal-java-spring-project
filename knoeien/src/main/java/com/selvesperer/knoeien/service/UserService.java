@@ -36,4 +36,6 @@ public interface UserService {
 	
 	public User showUserInfo(String id);
 	
+	public User saveUserPromocode(String id,String salesPromocode);
+	
 }

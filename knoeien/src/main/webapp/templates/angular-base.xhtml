@@ -65,6 +65,7 @@
 					<!-- menu button goes here -->
 					<div class="text-center">
 						<a data-toggle="not-logedin-modal" class="hlpr-color-info button" style="color: #fff !important;">Post Job</a>
+						
 						<a data-toggle="not-logedin-modal" class="hlpr-color-success button">Find work</a>
 						<a class="hollow hlpr-color-white button float-right" style="display:#{authorizationBean.canView()?'':'none'}">Login</a>
 						<a class="hollow hlpr-color-white button float-right" style="display:#{authorizationBean.canView()?'':'none'}">Login</a>
@@ -75,7 +76,7 @@
 					<a data-toggle="not-logedin-modal" class="hollow hlpr-color-white button float-right" style="display:#{authorizationBean.canView()?'':'none'}">My page</a>					
 					<a data-toggle="login-modal" class="hollow hlpr-color-white button float-right" style="display:#{authorizationBean.canView()?'none':''}">Login</a>
 				</li>
-				 
+				
 				<li class="clearfix" style="display:#{authorizationBean.canView()?'':'none'}">			
 					<a href="my.xhtml" id="profile-pic" class="float-right">
 						<img class="circular-img" width="64" alt="My Profile" src="#{request.contextPath}/resources/assets/images/profile_pic.png" />
@@ -99,9 +100,11 @@
 				<hr /> -->
 				<ul class="off-canvas-list home-buttons">
 					<li> <a  data-toggle="not-logedin-modal">Find work</a> </li>
+					
 					<li> <a data-toggle="login-modal">Login</a> </li>
 					<li> <a data-toggle="not-logedin-modal">My page</a> </li>
 					<li> <a data-toggle="phone-verification-modal"> Phone Verification </a> </li>
+					<li> <a data-toggle="sales-promocode-modal"> Promocode </a> </li>
 				</ul>
 				<ul class="off-canvas-list loggedin-buttons">
 					<li> <a href="profile.xhtml">My profile</a> </li>
@@ -115,6 +118,11 @@
 			<div style="display: none">
 			<button id="changePassLoad" data-toggle="change-password-modal">CLick me !!!</button>
 			</div>
+			
+			<div style="display: none">
+			<button id="changePassLoad" data-toggle="sales-promocode-modal">CLick me !!!</button>
+			</div>
+			
 			<div class="off-canvas-content" data-off-canvas-content = "true">
 				<!-- content starts here -->
 				<section id="body-wrapper">

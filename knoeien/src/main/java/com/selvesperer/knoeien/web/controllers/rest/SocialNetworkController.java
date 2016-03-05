@@ -53,7 +53,7 @@ public class SocialNetworkController extends AbstractController implements Seria
 
 	private static final long serialVersionUID = -5529379980137718693L;
 
-	private static final String PROTECTED_RESOURCE_URL = "https://graph.facebook.com/v2.5/me";
+	private static final String PROTECTED_RESOURCE_URL = "https://graph.facebook.com/v2.5/me?fields=id,name,birthday";
 
 	// https://graph.facebook.com/v2.5/oauth/access_token
 	private static final Logger log = (Logger) LoggerFactory.getLogger(SocialNetworkController.class);
@@ -67,7 +67,7 @@ public class SocialNetworkController extends AbstractController implements Seria
 
 	private final OAuth20Service service = new ServiceBuilder().apiKey(apiKey).apiSecret(apiSecret).state(secretState)
 			.callback(applicationHost + "/auth/facebook/callback").build(FacebookApi.instance());
-	private final String authorizationUrl = service.getAuthorizationUrl();
+	private final String authorizationUrl = service.getAuthorizationUrl()+"&scope=user_about_me%2Cuser_birthday%2Cuser_location%2Cuser_relationships%2Cemail";
 
 	@RequestMapping(value = "/auth/facebook", method = RequestMethod.GET)
 	public ResponseEntity<Object> facebookLogin(HttpServletResponse response)
