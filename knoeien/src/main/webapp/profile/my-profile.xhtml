@@ -1,3 +1,94 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets">
-My Profile
+ <div class="row wrapper-content" >
+	<div class="medium-12 columns" >
+			<div class="row">
+				<div class="medium-6 columns">
+					<div class="row">
+				        <div class="medium-3 columns">
+				          <label for="first-name" class="right inline">Name</label>
+				        </div>
+				        <div class="medium-9 columns">
+				          <div class="row">
+				          	<div class="small-6 columns">
+				          		<input type="text" id="first-name" class="profile-name" placeholder="First Name" ng-model="user.firstName" />
+				          	</div>
+				          	<div class="small-6 columns">
+				          		<input type="text" id="" class="profile-name" placeholder="Last Name" ng-model="user.lastName" />
+				          	</div>
+				          </div>
+				        </div>
+			      	</div>
+			      	<div class="row">
+						<div class="medium-3 columns">
+					    	<label for="right-label" class="right inline">Telephone</label>
+						</div>
+						<div class="medium-9 columns">
+					    	<input type="text" class="" placeholder="Telephone Number" ng-model="user.phone" />
+					    	<div class="row">
+					        	<div class="medium-6 columns">
+						        	<label for="right-label" class="right inline">Verification Code</label>
+						    	</div>
+						    	<div class="medium-6 columns">
+						        	<a href="" class="button hlpr-color-info" id="codeBtn">Send Verification Code</a>
+						    	</div>
+					       	</div>
+						</div>
+			     	</div>
+			      	<div class="row">
+				  		<div class="medium-3 columns">
+				    		<label for="e-post" class="right inline">E-Post</label>
+				 		</div>
+				    	<div class="medium-9 columns">
+				    		<input type="text" id="e-post" class="" placeholder=" e-mail Address" ng-model="user.email" />
+				    	</div>
+			      	</div>
+			      	<div class="row">
+				  		<div class="medium-3 columns">
+				    		<label for="" class="right inline">Address</label>
+				 		</div>
+				    	<div class="medium-9 columns">
+				    		<div class="row">
+				    			<div class="small-7 columns">
+				    				<input type="text" id="" class="" placeholder=" Address" ng-model="user.location" />
+				    			</div>
+				    			<div class="small-1 columns">
+				    				<label for="houseNo" class="right inline">Nr</label>
+				    			</div>
+				    			<div class="small-4 columns">
+				    				<input type="text" id="houseNo" class="" placeholder=" House No" />
+				    			</div>
+				    		</div>
+				    	</div>
+			      	</div>	      
+				</div>				
+				
+				<div class="medium-6 columns">
+					<div class="row">
+				  		<div class="small-3 columns">
+				    		<label for="" class="right inline">Post Code</label>
+				 		</div>
+				    	<div class="small-9 columns">
+				    		<input type="text" id="" class="" placeholder=" Post Code " />
+				    	</div>
+			      	</div>
+			      	<div class="row">
+				  		<div class="small-3 columns">
+				    		<label for="" class="right inline">Place</label>
+				 		</div>
+				    	<div class="small-9 columns">
+				    		<input type="text" id="" class="" placeholder=" Place " />
+				    	</div>
+			      	</div>
+			      	<div class="row">
+    					<div class="large-12 columns">
+      						<label>A Brief Description of Yourself
+        						<textarea placeholder="small-12.columns" style="height: 126px"></textarea>
+      						</label>
+    					</div>
+  					</div>
+				</div>
+			</div>
+		
+	</div>
+</div>
 </ui:composition>

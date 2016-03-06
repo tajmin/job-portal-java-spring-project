@@ -200,9 +200,10 @@ Controllers.controller("logoutCtrl", function($scope, $rootScope, restservice,$c
 	};
 });
 
-Controllers.controller("editProfileCtrl", function($scope, $rootScope,restservice, $cookies) {
+Controllers.controller("editProfileCtrl", function($scope, $rootScope, restservice, $cookies) {
 	$scope.isproceed = false;
 	$rootScope.userinfos = {};
+	$scope.user = {};
 	$scope.balance = {};
 	$scope.formSubmitted = false;
 	$scope.responseMessage = "";
