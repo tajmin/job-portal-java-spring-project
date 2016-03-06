@@ -41,6 +41,10 @@ ppApp.run(function($rootScope, $location, authService, restservice) {
 		         var temp = params[i].split("=");
 		         if ( [temp[0]] == sname ) { sval = temp[1]; }
 		       }
-		  return sval;
+		  return decodeURI(sval);
+	}
+    
+    $rootScope.isUndefinedOrNull = function(val) {
+	    return angular.isUndefined(val) || val === null 
 	}
 });

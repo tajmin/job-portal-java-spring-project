@@ -13,14 +13,14 @@
 		
 		<!-- search bar starts here -->
 		<div class="row home-search">
-			<div class="medium-centered medium-9 large-7 columns">
+			<div class="medium-centered medium-9 large-7 columns" ng-controller="JobLookupCtrl">
 				<form>
 					<div class="row collapse">
 						<div class="medium-6 large-8 columns">
-							<input class="search-bar" type="text" placeholder="Search Text" />
+							<input class="search-bar" type="text" placeholder="Search Text" ng-model="filter.searchText"/>
 						</div>
 						<div class="medium-3 large-2 columns">
-							<button type="submit" class="hlpr-color-info expanded button">Post</button>
+							<a type="submit" class="hlpr-color-info expanded button" href="jobpost.xhtml?title={{filter.searchText}}">Post</a>
 						</div>
 						<div class="medium-3 large-2 columns">
 							<button type="submit" class="hlpr-color-success expanded button">Search</button>

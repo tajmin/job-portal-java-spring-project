@@ -84,11 +84,15 @@ public class Job extends AuditableEntity {
 
 	@Column(name = "review_message", length = 50)
 	private String reviewMessage;
+	
+	@Column(name = "sales_promo_code", length = 50)
+	private String salesPromoCode;
 
 	public Job() {}
 
 	public Job(JobModel jobModel) {
 		super();
+		this.setId(jobModel.getId());
 		this.setTitle(jobModel.getTitle());
 		this.setDescription(jobModel.getDescription());
 		this.setDuration(jobModel.getDuration());
@@ -111,7 +115,7 @@ public class Job extends AuditableEntity {
 		
 		this.setReviewMessage(jobModel.getReviewMessage());
 		this.setRating(jobModel.getRating());
-		
+		this.setSalesPromoCode(jobModel.getSalesPromoCode());
 	}
 
 	public String getAssignedUserId() {
@@ -264,5 +268,13 @@ public class Job extends AuditableEntity {
 
 	public void setLongitude(BigDecimal longitude) {
 		this.longitude = longitude;
+	}
+
+	public String getSalesPromoCode() {
+		return salesPromoCode;
+	}
+
+	public void setSalesPromoCode(String salesPromoCode) {
+		this.salesPromoCode = salesPromoCode;
 	}
 }

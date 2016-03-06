@@ -43,7 +43,6 @@ public class JobController extends AbstractController implements Serializable {
 	@ResponseBody
 	public ResponseEntity<RestResponse> addJob(@RequestBody JobModel jobModel) {
 		Job job = null;
-		System.out.println(jobModel.getDescription());
 		
 		try {
 			RestResponse restResponse = null;
@@ -58,7 +57,7 @@ public class JobController extends AbstractController implements Serializable {
 
 			JobService jobService = ApplicationBeanFactory.getBean(JobService.class);
 			job = jobService.saveJob(jobModel);		
-			return new ResponseEntity<RestResponse>( convertToRestGoodResponse(null, LocalizationUtil.findLocalizedString("jobpostsuccess.text")),HttpStatus.OK);
+			return new ResponseEntity<RestResponse>( convertToRestGoodResponse(new JobModel(job), LocalizationUtil.findLocalizedString("jobpostsuccess.text")),HttpStatus.OK);
 		} catch (Exception ex) {
 			ex.printStackTrace();
 			// Messages.addGlobalError(ex.getMessage());

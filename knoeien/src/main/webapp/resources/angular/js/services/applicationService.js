@@ -90,3 +90,27 @@ Services.factory('restservice', function(authService) {
 	
 	return service
 });
+
+Services.factory('utilservice', function() {
+	var service;
+	service = {};
+	
+	service.isUndefinedOrNull = function(val) {
+	    return angular.isUndefined(val) || val === null 
+	}
+	
+	service.getParameterByName = function(sname) {
+		var params = location.search.substr(location.search.indexOf("?")+1);
+		var sval = "";
+		params = params.split("&");
+	    for (var i=0; i<params.length; i++)
+	    {
+	    	var temp = params[i].split("=");
+	    	if ( [temp[0]] == sname ) { sval = temp[1]; }
+	    }
+	    return decodeURI(sval);
+	}
+	
+	
+	return service
+});

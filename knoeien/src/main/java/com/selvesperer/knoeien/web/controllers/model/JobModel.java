@@ -15,6 +15,8 @@ public class JobModel implements Serializable{
 
 	private static final long serialVersionUID = 1348771858514768261L;
 	
+	private String id;
+	
 	private String addressLine1;
 	
 	private String addressLine2;
@@ -57,9 +59,12 @@ public class JobModel implements Serializable{
 	private Integer rating;
 	private String reviewMessage;
 	
+	private String salesPromoCode;
+	
 	public JobModel() {}
 	
-	public JobModel(Job job) {		
+	public JobModel(Job job) {
+		this.setId(job.getId());
 		this.setTitle(job.getTitle());
 		this.setDescription(job.getDescription());
 		this.setAddressLine1(job.getAddressLine1());
@@ -82,8 +87,16 @@ public class JobModel implements Serializable{
 		
 		this.setReviewMessage(job.getReviewMessage());
 		this.setRating(job.getRating());
+		this.setSalesPromoCode(job.getSalesPromoCode());
 	}
 	
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
 
 	public String getAssignedUserId() {
 		return assignedUserId;
@@ -246,4 +259,11 @@ public class JobModel implements Serializable{
 		this.longitude = longitude;
 	}
 
+	public String getSalesPromoCode() {
+		return salesPromoCode;
+	}
+
+	public void setSalesPromoCode(String salesPromoCode) {
+		this.salesPromoCode = salesPromoCode;
+	}
 }
