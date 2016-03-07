@@ -5,18 +5,18 @@
 		<div ng-controller="addJobCtrl">
 			<form name="jobPostingForm" data-abide="data-abide" novalidate="novalidate">
 				<div class="cover">
-					<!-- <canvas class="cover-image" style="background-image: url('#{request.contextPath}/resources/assets/images/postjob/default_job.png;')"></canvas> -->
-					<canvas class="cover-image" style=""></canvas>
+					<canvas id="job_cover_image" class="cover-image" style="background-image: url('#{request.contextPath}/resources/assets/images/postjob/{{job.cover_image};')"></canvas>
+					<!-- <canvas class="cover-image" style=""></canvas> -->
 					<div class="row expanded profile-img">
 						<div class="small-2 small-centered columns">
 							<div class="thumbnail">
-								<img src="#{request.contextPath}/resources/assets/images/postjob/default_job.png" alt="Profile" />
+								<img id="job_thumbnail_image" src="#{request.contextPath}/resources/assets/images/postjob/default_job.png" alt="Profile" />
 							</div>
 						</div>
 					</div>
 				</div>
 				<ul class="tabs row expanded" data-tabs="data-tabs" id="job-post-tabs">
-					<li class="tabs-title medium-3 columns"><a href="#">Post your job</a></li>
+					<li class="tabs-title medium-3 columns" ><a href="#" onclick="return false;">Post your job</a></li>
 				  	<li class="tabs-title is-active medium-3 columns"><a href="#panel_job_info" aria-selected="true">Info on the job</a></li>
 				  	<li class="tabs-title medium-3 columns"><a href="#panel_job_details">job details</a></li>
 				  	<li class="tabs-title medium-3 columns"><a href="#panel_job_approved">approved</a></li>

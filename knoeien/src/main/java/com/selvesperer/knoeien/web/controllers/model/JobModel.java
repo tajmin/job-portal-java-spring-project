@@ -1,93 +1,87 @@
 package com.selvesperer.knoeien.web.controllers.model;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
-import java.math.RoundingMode;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 
 import com.selvesperer.knoeien.data.domain.Job;
+import com.selvesperer.knoeien.utils.AppsUtil;
 import com.selvesperer.knoeien.utils.DateFormatUtils;
+import com.selvesperer.knoeien.utils.SelvEDate;
 
 public class JobModel implements Serializable{
 
 	private static final long serialVersionUID = 1348771858514768261L;
 	
 	private String id;
-	
 	private String addressLine1;
-	
 	private String addressLine2;
-	
 	private String addressLine3;
-	
 	private String city;
-	
 	private String state;
-	
 	private String zip;
-	
 	private String title;
-	
 	private String description;
-	
-	private String date;
-	
-	private Integer duration;
-	
-	private BigDecimal payment = BigDecimal.ZERO.setScale(2, RoundingMode.HALF_UP);
-	
 	private boolean draft;
-	
 	private String imageUrl;
-	
-	private BigDecimal latitude = BigDecimal.ZERO.setScale(6, RoundingMode.HALF_UP);
-	
-	private BigDecimal longitude = BigDecimal.ZERO.setScale(6, RoundingMode.HALF_UP);
-	
-	
-	//New
+	private String latitude;
+	private String longitude;
 	private String assignedUserId;
-	
-	private String createdByUserId;
-	
-	
-	//Message and rating
-	
 	private Integer rating;
 	private String reviewMessage;
-	
 	private String salesPromoCode;
+	
+	private int deadlineMonth;
+	private int deadlineDay;
+	private String deadlineTime;
+	private String deadline;
+	
+	private String hours;
+	private String minutes;
+	private String seconds;
+	private String duration;
+	
+	
+	private String price;
+	private String percent;
+	private String totalPrice;
+	
+	
 	
 	public JobModel() {}
 	
 	public JobModel(Job job) {
 		this.setId(job.getId());
-		this.setTitle(job.getTitle());
-		this.setDescription(job.getDescription());
 		this.setAddressLine1(job.getAddressLine1());
 		this.setAddressLine2(job.getAddressLine2());
 		this.setAddressLine3(job.getAddressLine3());
 		this.setCity(job.getCity());
-		this.setDuration(job.getDuration());
-		this.setPayment(job.getPayment());
-		this.setDate(DateFormatUtils.getDBFormattedDateString(job.getDate()));
-		this.setZip(job.getZip());
 		this.setState(job.getState());
+		this.setZip(job.getZip());
+		this.setTitle(job.getTitle());
+		this.setDescription(job.getDescription());
 		this.setDraft(job.isDraft());
 		this.setImageUrl(job.getImageUrl());
 		this.setLatitude(job.getLatitude());
 		this.setLongitude(job.getLongitude());
-		
-		
 		this.setAssignedUserId(job.getAssignedUserId());
-		this.setCreatedByUserId(job.getCreatedByUserId());
-		
-		this.setReviewMessage(job.getReviewMessage());
 		this.setRating(job.getRating());
+		this.setReviewMessage(job.getReviewMessage());
 		this.setSalesPromoCode(job.getSalesPromoCode());
+		
+		this.setDeadlineMonth(SelvEDate.diffInMonths(job.getCreatedDate(), job.getDeadline()));
+		this.setDeadlineDay(SelvEDate.diffInDays(job.getCreatedDate(), job.getDeadline()));
+		this.setDeadlineTime("");
+		this.setDeadline(DateFormatUtils.getDBFormattedDateString(job.getDeadline()));
+		
+		this.setHours("");
+		this.setMinutes("");
+		this.setSeconds("");
+		this.setDuration(job.getDuration().toString());
+		
+		this.setPrice(AppsUtil.doubleToString(job.getPrice()));
+		this.setPercent(AppsUtil.doubleToString(job.getPercent()));
+		this.setTotalPrice(AppsUtil.doubleToString(job.getTotalPrice()));
 	}
 	
 	public String getId() {
@@ -104,14 +98,6 @@ public class JobModel implements Serializable{
 
 	public void setAssignedUserId(String assignedUserId) {
 		this.assignedUserId = assignedUserId;
-	}
-
-	public String getCreatedByUserId() {
-		return createdByUserId;
-	}
-
-	public void setCreatedByUserId(String createdByUserId) {
-		this.createdByUserId = createdByUserId;
 	}
 
 	public Integer getRating() {
@@ -203,30 +189,6 @@ public class JobModel implements Serializable{
 		this.title = title;
 	}
 
-	public String getDate() {
-		return date;
-	}
-
-	public void setDate(String date) {
-		this.date = date;
-	}
-
-	public Integer getDuration() {
-		return duration;
-	}
-
-	public void setDuration(Integer duration) {
-		this.duration = duration;
-	}
-
-	public BigDecimal getPayment() {
-		return payment;
-	}
-
-	public void setPayment(BigDecimal payment) {
-		this.payment = payment;
-	}
-
 	public boolean isDraft() {
 		return draft;
 	}
@@ -243,27 +205,115 @@ public class JobModel implements Serializable{
 		this.imageUrl = imageUrl;
 	}
 
-	public BigDecimal getLatitude() {
-		return latitude;
-	}
-
-	public void setLatitude(BigDecimal latitude) {
-		this.latitude = latitude;
-	}
-
-	public BigDecimal getLongitude() {
-		return longitude;
-	}
-
-	public void setLongitude(BigDecimal longitude) {
-		this.longitude = longitude;
-	}
-
 	public String getSalesPromoCode() {
 		return salesPromoCode;
 	}
 
 	public void setSalesPromoCode(String salesPromoCode) {
 		this.salesPromoCode = salesPromoCode;
+	}
+
+	public String getPrice() {
+		return price;
+	}
+
+	public void setPrice(String price) {
+		this.price = price;
+	}
+
+	public String getPercent() {
+		return percent;
+	}
+
+	public void setPercent(String percent) {
+		this.percent = percent;
+	}
+
+	public String getDeadline() {
+		return deadline;
+	}
+
+	public void setDeadline(String deadline) {
+		this.deadline = deadline;
+	}
+
+	public String getDuration() {
+		return duration;
+	}
+
+	public void setDuration(String duration) {
+		this.duration = duration;
+	}
+
+	public String getTotalPrice() {
+		return totalPrice;
+	}
+
+	public void setTotalPrice(String totalPrice) {
+		this.totalPrice = totalPrice;
+	}
+
+	public String getLatitude() {
+		return latitude;
+	}
+
+	public void setLatitude(String latitude) {
+		this.latitude = latitude;
+	}
+
+	public String getLongitude() {
+		return longitude;
+	}
+
+	public void setLongitude(String longitude) {
+		this.longitude = longitude;
+	}
+
+	public int getDeadlineMonth() {
+		return deadlineMonth;
+	}
+
+	public void setDeadlineMonth(int deadlineMonth) {
+		this.deadlineMonth = deadlineMonth;
+	}
+
+	public int getDeadlineDay() {
+		return deadlineDay;
+	}
+
+	public void setDeadlineDay(int deadlineDay) {
+		this.deadlineDay = deadlineDay;
+	}
+
+	public String getDeadlineTime() {
+		return deadlineTime;
+	}
+
+	public void setDeadlineTime(String deadlineTime) {
+		this.deadlineTime = deadlineTime;
+	}
+
+	public String getHours() {
+		return hours;
+	}
+
+	public void setHours(String hours) {
+		this.hours = hours;
+	}
+
+	public String getMinutes() {
+		return minutes;
+	}
+
+	public void setMinutes(String minutes) {
+		this.minutes = minutes;
+	}
+
+	public String getSeconds() {
+		return seconds;
+	}
+
+	public void setSeconds(String seconds) {
+		this.seconds = seconds;
 	}
 }

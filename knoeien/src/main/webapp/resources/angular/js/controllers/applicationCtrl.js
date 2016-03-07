@@ -274,6 +274,7 @@ Controllers.controller("addJobCtrl", function($scope, $rootScope, restservice, $
 	$scope.job = {};
 	$scope.formSubmitted = false;
 	$scope.responseMessage = "";
+	$scope.cover_image = "";
 	
 	var title = utilservice.getParameterByName("title");
 	if(!utilservice.isUndefinedOrNull(title)){
@@ -309,6 +310,17 @@ Controllers.controller("addJobCtrl", function($scope, $rootScope, restservice, $
 //        	}
 //        });
 		
+    };
+    
+    $scope.readURL = function(input){
+    	if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                $('#job_thumbnail_image').attr('src', e.target.result);
+                $('#job_cover_image').css('background-image', "url(" + e.target.result + ")");
+            };
+            reader.readAsDataURL(input.files[0]);
+        }
     };
 	
 });
