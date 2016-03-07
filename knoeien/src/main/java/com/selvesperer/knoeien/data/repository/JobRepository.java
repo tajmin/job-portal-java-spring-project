@@ -16,13 +16,13 @@ public interface JobRepository extends JpaRepository<Job, String>, JobRepository
 	@Query("from Job j where j.id = :jobID")
 	Job findJobById(@Param("jobID") String jobID);
 	
-	@Query("from Job j Order by j.payment desc")
+	@Query("from Job j Order by j.totalPrice desc")
 	List<Job> findJobOrderByPaymentDesc();
 	
 	@Query("from Job j Order by j.duration asc")
 	List<Job> findJobOrderByDurationAsc();
 	
-	@Query("from Job j Order by j.date asc")
+	@Query("from Job j Order by j.deadline asc")
 	List<Job> findJobOrderByDateAsc();
 	
 	@Query("from Job j Where j.draft=false Order by j.createdDate desc")
@@ -32,8 +32,8 @@ public interface JobRepository extends JpaRepository<Job, String>, JobRepository
 	List<Job> findJobByAssignedUserId(@Param("assignedUserId") String assignedUserID);
 	
 	
-	@Query("from Job j where j.createdByUserId = :createdByUserId")
-	List<Job> findJobByCreatedUserId(@Param("createdByUserId") String createdByUserId);
+	@Query("from Job j where j.createdByID = :createdByID")
+	List<Job> findJobByCreatedUserId(@Param("createdByID") String createdByUserId);
 
 	
 }

@@ -1,7 +1,5 @@
 package com.selvesperer.knoeien.data.domain;
 
-import java.math.BigDecimal;
-import java.math.RoundingMode;
 import java.util.Calendar;
 
 import javax.persistence.Column;
@@ -11,6 +9,7 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.selvesperer.knoeien.utils.AppsUtil;
 import com.selvesperer.knoeien.utils.DateFormatUtils;
 import com.selvesperer.knoeien.web.controllers.model.JobModel;
 
@@ -24,27 +23,7 @@ import com.selvesperer.knoeien.web.controllers.model.JobModel;
 public class Job extends AuditableEntity {
 
 	private static final long serialVersionUID = 8120068076551599301L;
-
-	@Column(name = "title", nullable = true, length = 100)
-	private String title;
-
-	@Column(name = "description", nullable = false, length = 250)
-	private String description;
-
-	@Column(name = "duration", nullable = false)
-	private Integer duration;
-
-	@Column(name = "payment", nullable = false)
-	private BigDecimal payment = BigDecimal.ZERO.setScale(2, RoundingMode.HALF_UP);
-
-	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "date")
-	@JsonIgnore
-	private Calendar date;
-
-	@Column(name = "image_url", length = 300)
-	private String imageUrl;
-
+	
 	@Column(name = "address_line_1", length = 100)
 	private String addressLine1;
 
@@ -53,7 +32,7 @@ public class Job extends AuditableEntity {
 
 	@Column(name = "address_line_3", length = 100)
 	private String addressLine3;
-
+	
 	@Column(name = "city", length = 100)
 	private String city;
 
@@ -62,23 +41,28 @@ public class Job extends AuditableEntity {
 
 	@Column(name = "zip", length = 10)
 	private String zip;
+	
+	@Column(name = "title", nullable = true, length = 100)
+	private String title;
 
+	@Column(name = "description", nullable = false, length = 250)
+	private String description;
+	
 	@Column(name = "draft")
 	private boolean draft;
+	
+	@Column(name = "image_url", length = 300)
+	private String imageUrl;
 
-	@Column(name = "latitude", nullable = false)
-	private BigDecimal latitude = BigDecimal.ZERO.setScale(6, RoundingMode.HALF_UP);
+	@Column(name = "latitude", length = 30)
+	private String latitude;
 
-	@Column(name = "longitude", nullable = false)
-	private BigDecimal longitude = BigDecimal.ZERO.setScale(6, RoundingMode.HALF_UP);
-
+	@Column(name = "longitude", length = 30)
+	private String longitude;
+	
 	@Column(name = "assigned_user_id", length = 50)
 	private String assignedUserId;
 
-	@Column(name = "created_by_user_id", length = 50)
-	private String createdByUserId;
-
-	// Message review and rating
 	@Column(name = "rating", nullable = false)
 	private Integer rating;
 
@@ -87,35 +71,51 @@ public class Job extends AuditableEntity {
 	
 	@Column(name = "sales_promo_code", length = 50)
 	private String salesPromoCode;
+	
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name = "deadline")
+	@JsonIgnore
+	private Calendar deadline;
+
+	@Column(name = "duration")
+	private Integer duration;
+
+	@Column(name = "price")
+	private Double price;
+
+	@Column(name = "percent")
+	private Double percent;
+	
+	@Column(name = "total_price")
+	private Double totalPrice;
 
 	public Job() {}
 
 	public Job(JobModel jobModel) {
 		super();
-		this.setId(jobModel.getId());
-		this.setTitle(jobModel.getTitle());
-		this.setDescription(jobModel.getDescription());
-		this.setDuration(jobModel.getDuration());
-		this.setPayment(jobModel.getPayment());
-		this.setDate(DateFormatUtils.getDBCalendarFromString(jobModel.getDate()));
 		this.setAddressLine1(jobModel.getAddressLine1());
 		this.setAddressLine2(jobModel.getAddressLine2());
 		this.setAddressLine3(jobModel.getAddressLine3());
 		this.setCity(jobModel.getCity());
 		this.setState(jobModel.getState());
 		this.setZip(jobModel.getZip());
+		this.setTitle(jobModel.getTitle());
+		this.setDescription(jobModel.getDescription());
 		this.setDraft(jobModel.isDraft());
 		this.setImageUrl(jobModel.getImageUrl());
 		this.setLatitude(jobModel.getLatitude());
 		this.setLongitude(jobModel.getLongitude());
-		
-		
-		this.setCreatedByUserId(jobModel.getCreatedByUserId());
 		this.setAssignedUserId(jobModel.getAssignedUserId());
-		
-		this.setReviewMessage(jobModel.getReviewMessage());
 		this.setRating(jobModel.getRating());
+		this.setReviewMessage(jobModel.getReviewMessage());
 		this.setSalesPromoCode(jobModel.getSalesPromoCode());
+		
+		this.setDeadline(DateFormatUtils.getDBCalendarFromString(jobModel.getDeadline()));
+		this.setDuration(AppsUtil.stringToInt(jobModel.getDuration()));
+		
+		this.setPrice(AppsUtil.stringToDouble(jobModel.getPrice()));
+		this.setPercent(AppsUtil.stringToDouble(jobModel.getPercent()));
+		this.setTotalPrice(AppsUtil.stringToDouble(jobModel.getTotalPrice()));
 	}
 
 	public String getAssignedUserId() {
@@ -124,14 +124,6 @@ public class Job extends AuditableEntity {
 
 	public void setAssignedUserId(String assignedUserId) {
 		this.assignedUserId = assignedUserId;
-	}
-
-	public String getCreatedByUserId() {
-		return createdByUserId;
-	}
-
-	public void setCreatedByUserId(String createdByUserId) {
-		this.createdByUserId = createdByUserId;
 	}
 
 	public Integer getRating() {
@@ -172,22 +164,6 @@ public class Job extends AuditableEntity {
 
 	public void setDuration(Integer duration) {
 		this.duration = duration;
-	}
-
-	public BigDecimal getPayment() {
-		return payment;
-	}
-
-	public void setPayment(BigDecimal payment) {
-		this.payment = payment;
-	}
-
-	public Calendar getDate() {
-		return date;
-	}
-
-	public void setDate(Calendar date) {
-		this.date = date;
 	}
 
 	public String getImageUrl() {
@@ -254,27 +230,59 @@ public class Job extends AuditableEntity {
 		this.draft = draft;
 	}
 
-	public BigDecimal getLatitude() {
-		return latitude;
-	}
-
-	public void setLatitude(BigDecimal latitude) {
-		this.latitude = latitude;
-	}
-
-	public BigDecimal getLongitude() {
-		return longitude;
-	}
-
-	public void setLongitude(BigDecimal longitude) {
-		this.longitude = longitude;
-	}
-
 	public String getSalesPromoCode() {
 		return salesPromoCode;
 	}
 
 	public void setSalesPromoCode(String salesPromoCode) {
 		this.salesPromoCode = salesPromoCode;
+	}
+
+	public String getLatitude() {
+		return latitude;
+	}
+
+	public void setLatitude(String latitude) {
+		this.latitude = latitude;
+	}
+
+	public String getLongitude() {
+		return longitude;
+	}
+
+	public void setLongitude(String longitude) {
+		this.longitude = longitude;
+	}
+
+	public Calendar getDeadline() {
+		return deadline;
+	}
+
+	public void setDeadline(Calendar deadline) {
+		this.deadline = deadline;
+	}
+
+	public Double getPrice() {
+		return price;
+	}
+
+	public void setPrice(Double price) {
+		this.price = price;
+	}
+
+	public Double getPercent() {
+		return percent;
+	}
+
+	public void setPercent(Double percent) {
+		this.percent = percent;
+	}
+
+	public Double getTotalPrice() {
+		return totalPrice;
+	}
+
+	public void setTotalPrice(Double totalPrice) {
+		this.totalPrice = totalPrice;
 	}
 }

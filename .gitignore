@@ -214,3 +214,5 @@ pip-log.txt
 
 #Mr Developer
 .mr.developer.cfg
+knoeien/src/main/resources/application.conf
+knoeien/src/main/resources/application.conf
