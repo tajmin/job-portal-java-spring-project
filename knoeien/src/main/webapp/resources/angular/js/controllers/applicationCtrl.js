@@ -269,12 +269,14 @@ Controllers.controller("transactionCtrl", function($scope, $rootScope,restservic
 });
 
 
-Controllers.controller("addJobCtrl", function($scope, $rootScope, restservice, $cookies, utilservice) {
+Controllers.controller("addJobCtrl", function($scope, $rootScope, restservice, $cookies, utilservice, $http, authService) {
 	$scope.isproceed = false;
 	$scope.job = {};
 	$scope.formSubmitted = false;
 	$scope.responseMessage = "";
 	$scope.cover_image = "";
+	$scope.imageFile;
+	$scope.tempUploadedFilePath = "";
 	
 	var title = utilservice.getParameterByName("title");
 	if(!utilservice.isUndefinedOrNull(title)){
@@ -284,20 +286,21 @@ Controllers.controller("addJobCtrl", function($scope, $rootScope, restservice, $
 	
 	$scope.draftJob = function(isValid) {
 		if(!isValid) return;
-		//alert("draft");
 		
 		$scope.job.draft = true;
-		//console.log($scope.job);
-				
+		$scope.job.latitude = $("#latitude").val();
+		$scope.job.longitude = $("#longitude").val();
+		$scope.job.addressLine1 = $("#placesearch").val();
+		$scope.job.imageUrl = $scope.tempUploadedFilePath;
+		
 		restservice.post($scope.job, "api/v1/job/addjob").then(function(response) {
 			if (response != null) {
 				$scope.job = response;
-				//$scope.isproceed = true;
-				//$scope.responseMessage = response.message;
         	}
         });
 		
     };
+    
     
     $scope.postJob = function(isValid) {
 		if(!isValid) return;
@@ -312,14 +315,31 @@ Controllers.controller("addJobCtrl", function($scope, $rootScope, restservice, $
 		
     };
     
-    $scope.readURL = function(input){
+    
+    $scope.imageUpload = function(input){
     	if (input.files && input.files[0]) {
             var reader = new FileReader();
             reader.onload = function (e) {
                 $('#job_thumbnail_image').attr('src', e.target.result);
                 $('#job_cover_image').css('background-image', "url(" + e.target.result + ")");
             };
+            $scope.imageFile = input.files[0];
             reader.readAsDataURL(input.files[0]);
+            
+            // save file as temporary
+            var uploadUrl = "api/v1/job/uploadimage";
+            var fd = new FormData();
+            fd.append('file', $scope.imageFile);
+    		 
+            $http.post(uploadUrl, fd, {
+                transformRequest: angular.identity,
+                headers: {'Content-Type': undefined}
+            }).success(function(succResponse){
+            	$rootScope.restMessages = succResponse.message;
+            	$scope.tempUploadedFilePath = succResponse.response
+            }).error(function(errResponse){
+            	$rootScope.restMessages = errResponse.message;
+            });
         }
     };
 	

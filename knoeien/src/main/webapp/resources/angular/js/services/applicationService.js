@@ -21,6 +21,10 @@ Services.factory('authService', function(Restangular, $rootScope, $cookies) {
 				}
 				
 				$rootScope.isGoodResponse = true;
+				if(response.message){
+					$rootScope.restMessages = response.message;
+					console.log($rootScope.restMessages);
+				}
 				if (response.response) {
 					return response.response;
 				}

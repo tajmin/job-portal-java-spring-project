@@ -806,8 +806,13 @@ public class SelvEDate extends GregorianCalendar implements Comparable<Calendar>
 	}
 
 	public static int diffInDays(Calendar thisDate, Calendar thselvEDate) {
-		int diffInDays = (int) diff(thisDate, thselvEDate, true);
-		return (diffInDays < 0 ? (int) Math.floor(diffInDays) : diffInDays);
+		try{
+			int diffInDays = (int) diff(thisDate, thselvEDate, true);
+			return (diffInDays < 0 ? (int) Math.floor(diffInDays) : diffInDays);
+		} catch (Throwable t) {
+
+		}
+		return 0;
 	}
 
 	public static int diffInDays(Date thisDate, Date thselvEDate) {
@@ -847,7 +852,12 @@ public class SelvEDate extends GregorianCalendar implements Comparable<Calendar>
 
 	/** other - this **/
 	public static int diffInMonths(Calendar thisDate, Calendar otherDate) {
-		return ((otherDate.get(YEAR) - thisDate.get(YEAR)) * 12) - thisDate.get(MONTH) + otherDate.get(MONTH);
+		try{
+			return ((otherDate.get(YEAR) - thisDate.get(YEAR)) * 12) - thisDate.get(MONTH) + otherDate.get(MONTH);
+		}catch(Throwable t){
+			
+		}
+		return 0;
 	}
 
 	/** otherDate - thisDate **/

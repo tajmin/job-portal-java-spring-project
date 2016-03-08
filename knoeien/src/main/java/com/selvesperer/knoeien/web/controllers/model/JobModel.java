@@ -7,7 +7,6 @@ import java.util.List;
 import com.selvesperer.knoeien.data.domain.Job;
 import com.selvesperer.knoeien.utils.AppsUtil;
 import com.selvesperer.knoeien.utils.DateFormatUtils;
-import com.selvesperer.knoeien.utils.SelvEDate;
 
 public class JobModel implements Serializable{
 
@@ -36,10 +35,10 @@ public class JobModel implements Serializable{
 	private String deadlineTime;
 	private String deadline;
 	
-	private String hours;
-	private String minutes;
-	private String seconds;
-	private String duration;
+	private int hours;
+	private int minutes;
+	private int seconds;
+	private int duration;
 	
 	
 	private String price;
@@ -69,15 +68,15 @@ public class JobModel implements Serializable{
 		this.setReviewMessage(job.getReviewMessage());
 		this.setSalesPromoCode(job.getSalesPromoCode());
 		
-		this.setDeadlineMonth(SelvEDate.diffInMonths(job.getCreatedDate(), job.getDeadline()));
-		this.setDeadlineDay(SelvEDate.diffInDays(job.getCreatedDate(), job.getDeadline()));
-		this.setDeadlineTime("");
+		this.setDeadlineMonth(job.getDeadlineMonth());
+		this.setDeadlineDay(job.getDeadlineDay());
+		this.setDeadlineTime(job.getDeadlineTime());
 		this.setDeadline(DateFormatUtils.getDBFormattedDateString(job.getDeadline()));
 		
-		this.setHours("");
-		this.setMinutes("");
-		this.setSeconds("");
-		this.setDuration(job.getDuration().toString());
+		this.setHours(job.getHours());
+		this.setMinutes(job.getMinutes());
+		this.setSeconds(job.getSeconds());
+		this.setDuration(job.getDuration());
 		
 		this.setPrice(AppsUtil.doubleToString(job.getPrice()));
 		this.setPercent(AppsUtil.doubleToString(job.getPercent()));
@@ -237,12 +236,24 @@ public class JobModel implements Serializable{
 		this.deadline = deadline;
 	}
 
-	public String getDuration() {
+	public int getDuration() {
 		return duration;
 	}
 
-	public void setDuration(String duration) {
+	public void setDuration(int duration) {
 		this.duration = duration;
+	}
+
+	public void setHours(int hours) {
+		this.hours = hours;
+	}
+
+	public void setMinutes(int minutes) {
+		this.minutes = minutes;
+	}
+
+	public void setSeconds(int seconds) {
+		this.seconds = seconds;
 	}
 
 	public String getTotalPrice() {
@@ -293,27 +304,15 @@ public class JobModel implements Serializable{
 		this.deadlineTime = deadlineTime;
 	}
 
-	public String getHours() {
+	public int getHours() {
 		return hours;
 	}
 
-	public void setHours(String hours) {
-		this.hours = hours;
-	}
-
-	public String getMinutes() {
+	public int getMinutes() {
 		return minutes;
 	}
 
-	public void setMinutes(String minutes) {
-		this.minutes = minutes;
-	}
-
-	public String getSeconds() {
+	public int getSeconds() {
 		return seconds;
-	}
-
-	public void setSeconds(String seconds) {
-		this.seconds = seconds;
-	}
+	}	
 }

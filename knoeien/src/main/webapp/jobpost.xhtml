@@ -32,10 +32,8 @@
 				    <ui:include src="jobPostPanel/panel_job_approved.xhtml"></ui:include>
 				  </div>
 				</div>
-				<ul class="global-message" style="white-space: normal">
-					<span ng-repeat="m in restMessages">
-						<li class="info-text info-modal">{{m.message}}</li>
-					</span>
+				<ul class="global-message" style="white-space: normal; text-align: center;">
+						<li style="list-style: none;" ng-show="restMessages.length>0" class="info-text info-modal">{{restMessages}}</li>
 				</ul>
 	
 				<div class="row text-center">

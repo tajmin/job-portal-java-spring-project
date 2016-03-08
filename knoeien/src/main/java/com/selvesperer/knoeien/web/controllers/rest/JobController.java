@@ -1,7 +1,13 @@
 package com.selvesperer.knoeien.web.controllers.rest;
 
+import java.awt.Image;
+import java.io.File;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
+
+import javax.imageio.ImageIO;
+import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
@@ -14,11 +20,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 import com.selvesperer.knoeien.data.domain.Job;
 import com.selvesperer.knoeien.exception.AuthenticationFailedException;
+import com.selvesperer.knoeien.security.SecurityManager;
 import com.selvesperer.knoeien.service.JobService;
 import com.selvesperer.knoeien.spring.utils.ApplicationBeanFactory;
+import com.selvesperer.knoeien.utils.IdGenerator;
+import com.selvesperer.knoeien.utils.configuration.ConfigurationUtil;
 import com.selvesperer.knoeien.utils.localization.LocalizationUtil;
 import com.selvesperer.knoeien.web.controllers.model.JobModel;
 import com.selvesperer.knoeien.web.controllers.model.RestResponse;
@@ -57,12 +67,37 @@ public class JobController extends AbstractController implements Serializable {
 
 			JobService jobService = ApplicationBeanFactory.getBean(JobService.class);
 			job = jobService.saveJob(jobModel);		
-			return new ResponseEntity<RestResponse>( convertToRestGoodResponse(new JobModel(job), LocalizationUtil.findLocalizedString("jobpostsuccess.text")),HttpStatus.OK);
+			return new ResponseEntity<RestResponse>( convertToRestGoodResponse(new JobModel(job), LocalizationUtil.findLocalizedString((jobModel.isDraft())? "jobdraftsuccess.text" : "jobpostsuccess.text")),HttpStatus.OK);
 		} catch (Exception ex) {
 			ex.printStackTrace();
 			// Messages.addGlobalError(ex.getMessage());
 		}
 		return new ResponseEntity<RestResponse>(convertToRestGoodResponse(job), HttpStatus.BAD_REQUEST);
+	}
+	
+	
+	@RequestMapping(value = "/uploadimage", headers = ("content-type=multipart/*"), method = RequestMethod.POST)
+	public ResponseEntity<RestResponse> uploadImage(HttpServletRequest request, @RequestParam(value = "file", required = true) CommonsMultipartFile[] file) throws Exception {
+		//props.put("mail.smtp.host", ConfigurationUtil.config().getString("smtp.host"));
+		RestResponse restResponse = null;
+		String imagePath = "";
+		try {
+			String saveDirectory = "G:/";
+			String imageName = IdGenerator.generate("jobimage");
+			if (file != null && file.length > 0) {
+				for (CommonsMultipartFile aFile : file) {
+					if (!aFile.getOriginalFilename().equals("")) {
+						String ext = aFile.getFileItem().getName().split("\\.")[1];
+						imagePath = saveDirectory + imageName + "." + ext;
+						aFile.transferTo(new File(imagePath));
+					}
+				}
+			}
+			return new ResponseEntity<RestResponse>( convertToRestGoodResponse(imagePath, LocalizationUtil.findLocalizedString("imageuploadsuccess.text")),HttpStatus.OK);			
+		} catch (Throwable t) {
+			restResponse = convertToRestBadResponse("", t.getLocalizedMessage());
+		}
+		return new ResponseEntity<RestResponse>( restResponse, HttpStatus.OK);
 	}
 	
 	@RequestMapping(value = "/latestjob", method = RequestMethod.GET, produces = "application/json")

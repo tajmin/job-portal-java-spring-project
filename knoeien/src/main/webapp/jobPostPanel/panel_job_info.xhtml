@@ -17,7 +17,7 @@
 							<div class="row">
 								<div class="small-6 columns text-right no-padding" style="padding: 0;">
 									<label for="jobImageFileUpload" class="middle" style="color: #6bbe54; font-weight: bold; cursor: pointer;">+ Add photo / switch image</label>
-									<input type="file" id="jobImageFileUpload" class="show-for-sr" onchange="angular.element(this).scope().readURL(this)" />
+									<input type="file" id="jobImageFileUpload" class="show-for-sr" file-model = "imageFile" onchange="angular.element(this).scope().imageUpload(this)" />
 								</div>
 								<div class="small-6 columns">
 									<input  type="text" id="right-label" />
@@ -74,6 +74,7 @@
 				            longitude = place.geometry.location.lng();
 				            //alert("This function is working!");
 				            //alert(latitude);
+				            console.log($("#placesearch").val());
 				            document.getElementById('latitude').value = place.geometry.location.lat();
 				            document.getElementById('longitude').value = place.geometry.location.lng();
 				            //alert(place.address_components[0].long_name);
