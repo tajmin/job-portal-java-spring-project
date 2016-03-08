@@ -1,89 +1,165 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html>
-<html ng-app="selvesperer" xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:c="http://java.sun.com/jsp/jstl/core"	xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core">
+<html ng-app="selvesperer" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
 <head>
-	<title>Helper<ui:fragment rendered="#{not empty pageTitle}">-#{pageTitle}</ui:fragment></title>
-	<meta charset="utf-8" />
-	<meta name="viewport" content="width=device-width, height=device-height initial-scale=1.0"/>
-	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-	<meta name="HandheldFriendly" content="True" />
-	<link rel="icon" href="#{request.contextPath}/resources/assets/images/favicon.png" type="image/png" />
-	
-	<link rel="stylesheet" type="text/css" href="#{request.contextPath}/resources/assets/css/foundation.css?#{msg['vrsn']}" />
-	
+<title>Helper<ui:fragment rendered="#{not empty pageTitle}">-#{pageTitle}</ui:fragment></title>
+<meta charset="utf-8" />
+<meta name="viewport"
+	content="width=device-width, height=device-height initial-scale=1.0" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="HandheldFriendly" content="True" />
+<link rel="icon"
+	href="#{request.contextPath}/resources/assets/images/favicon.png"
+	type="image/png" />
 
-	<link rel="stylesheet" type="text/css" href="#{request.contextPath}/resources/assets/css/motion-ui.css?#{msg['vrsn']}" />
-	<link rel="stylesheet" type="text/css" href="#{request.contextPath}/resources/assets/css/foundation-icons.css?#{msg['vrsn']}" />
-	<link rel="stylesheet" type="text/css" href="#{request.contextPath}/resources/assets/css/application.css?#{msg['vrsn']}" />
-	<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css" />
-	<link rel="stylesheet" type="text/css" href="#{request.contextPath}/resources/assets/css/foundation-datepicker.css?#{msg['vrsn']}" />
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" />
-	
-		
-	<script type="text/javascript" src="#{request.contextPath}/resources/assets/js/head.js?#{msg['vrsn']}"></script>
-	<script type="text/javascript" src="#{request.contextPath}/resources/angular/lib/angular/angular.min.js?#{msg['vrsn']}"></script>
-    
-    <script type="text/javascript" src="#{request.contextPath}/resources/angular/lib/angular/angular-messages.js?#{msg['vrsn']}"></script>
-	<script type="text/javascript" src="#{request.contextPath}/resources/angular/lib/lodash.js?#{msg['vrsn']}"></script>
-	<script type="text/javascript" src="#{request.contextPath}/resources/assets/js/jquery/jquery.js?#{msg['vrsn']}"></script>
-	<script type="text/javascript" src="#{request.contextPath}/resources/angular/lib/angular-ui/ui-bootstrap-custom-tpls-0.10.0.min.js"></script>
-	<script type="text/javascript" src="#{request.contextPath}/resources/angular/lib/angular/angular-cookies.min.js?#{msg['vrsn']}"></script>
-	<script type="text/javascript" src="#{request.contextPath}/resources/angular/lib/angular/restangular.js?#{msg['vrsn']}"></script>
-	<script type="text/javascript" src="#{request.contextPath}/resources/angular/js/app.js?#{msg['vrsn']}"></script>
-	<script type="text/javascript" src="#{request.contextPath}/resources/angular/js/directives/directives.js?#{msg['vrsn']}"></script>
-	<script type="text/javascript" src="#{request.contextPath}/resources/angular/js/services/applicationService.js?#{msg['vrsn']}"></script>
-	<script type="text/javascript" src="#{request.contextPath}/resources/angular/js/controllers/applicationCtrl.js?#{msg['vrsn']}"></script>
-	<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAjAJgul5TdZNsTAo_WTXxtQb8C3jFPXwo&amp;libraries=places"></script>
-	<script type="text/javascript" src="//code.jquery.com/jquery-1.10.2.js"></script>
-	<script type="text/javascript" src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>	
-	<script type="text/javascript" src="#{request.contextPath}/resources/assets/js/foundation-datepicker.js"></script>
-	<ui:insert name="head"></ui:insert>
+<link rel="stylesheet" type="text/css"
+	href="#{request.contextPath}/resources/assets/css/foundation.css?#{msg['vrsn']}" />
+
+
+<link rel="stylesheet" type="text/css"
+	href="#{request.contextPath}/resources/assets/css/motion-ui.css?#{msg['vrsn']}" />
+<link rel="stylesheet" type="text/css"
+	href="#{request.contextPath}/resources/assets/css/foundation-icons.css?#{msg['vrsn']}" />
+<link rel="stylesheet" type="text/css"
+	href="#{request.contextPath}/resources/assets/css/application.css?#{msg['vrsn']}" />
+<link rel="stylesheet"
+	href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css" />
+<link rel="stylesheet" type="text/css"
+	href="#{request.contextPath}/resources/assets/css/foundation-datepicker.css?#{msg['vrsn']}" />
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" />
+
+
+<script type="text/javascript"
+	src="#{request.contextPath}/resources/assets/js/head.js?#{msg['vrsn']}"></script>
+<script type="text/javascript"
+	src="#{request.contextPath}/resources/angular/lib/angular/angular.min.js?#{msg['vrsn']}"></script>
+
+<script type="text/javascript"
+	src="#{request.contextPath}/resources/angular/lib/angular/angular-messages.js?#{msg['vrsn']}"></script>
+<script type="text/javascript"
+	src="#{request.contextPath}/resources/angular/lib/lodash.js?#{msg['vrsn']}"></script>
+<script type="text/javascript"
+	src="#{request.contextPath}/resources/assets/js/jquery/jquery.js?#{msg['vrsn']}"></script>
+<script type="text/javascript"
+	src="#{request.contextPath}/resources/angular/lib/angular-ui/ui-bootstrap-custom-tpls-0.10.0.min.js"></script>
+<script type="text/javascript"
+	src="#{request.contextPath}/resources/angular/lib/angular/angular-cookies.min.js?#{msg['vrsn']}"></script>
+<script type="text/javascript"
+	src="#{request.contextPath}/resources/angular/lib/angular/restangular.js?#{msg['vrsn']}"></script>
+<script type="text/javascript"
+	src="#{request.contextPath}/resources/angular/js/app.js?#{msg['vrsn']}"></script>
+<script type="text/javascript"
+	src="#{request.contextPath}/resources/angular/js/directives/directives.js?#{msg['vrsn']}"></script>
+<script type="text/javascript"
+	src="#{request.contextPath}/resources/angular/js/services/applicationService.js?#{msg['vrsn']}"></script>
+<script type="text/javascript"
+	src="#{request.contextPath}/resources/angular/js/controllers/applicationCtrl.js?#{msg['vrsn']}"></script>
+<script type="text/javascript"
+	src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAjAJgul5TdZNsTAo_WTXxtQb8C3jFPXwo&amp;libraries=places"></script>
+<script type="text/javascript" src="//code.jquery.com/jquery-1.10.2.js"></script>
+<script type="text/javascript"
+	src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+<script type="text/javascript"
+	src="#{request.contextPath}/resources/assets/js/foundation-datepicker.js"></script>
+<ui:insert name="head"></ui:insert>
 </head>
 <body>
 	<header id="header">
-		<nav class="top-bar  #{(view.viewId == '/index.xhtml') ? 'dark' : 'light'}">
+		<nav
+			class="top-bar  #{(view.viewId == '/index.xhtml') ? 'dark' : 'light'}">
 			<!-- menu for small device starts here -->
-			<ul class="menu expanded sticky hide-for-large  #{(view.viewId == '/index.xhtml') ? 'dark' : 'light'}">
+			<ul
+				class="menu expanded sticky hide-for-large  #{(view.viewId == '/index.xhtml') ? 'dark' : 'light'}">
 				<li>
-					<button class="menu-text title" data-toggle="offCanvasLeft" type="button">
+					<button class="menu-text title" data-toggle="offCanvasLeft"
+						type="button">
 						<i class="fi-list"></i> Helpers
 					</button>
 				</li>
 			</ul>
 			<!-- menu for small device ends here -->
-			
+
 			<!-- menu for large device starts here -->
-			<ul class="menu expanded sticky show-for-large #{(view.viewId == '/index.xhtml') ? 'dark' : 'light'}">
+			<ul
+				class="menu expanded sticky show-for-large #{(view.viewId == '/index.xhtml') ? 'dark' : 'light'}">
 				<li class="" style="width: 25%">
 					<div class="">
 						<!-- site title / logo goes here -->
 						<a href="index.xhtml" class="menu-text title">Helpers</a>
 					</div>
 				</li>
-				<li style="width: 50%">
-					<!-- menu button goes here -->
-					<div class="text-center">
-						<a href="jobpost.xhtml" data-toggle="not-logedin-modal" class="hlpr-color-#{(view.viewId == '/index.xhtml') ? 'info' : 'white hollow'} button">Post Job</a>
-						<a href="findjobs.xhtml" data-toggle="not-logedin-modal" class="hlpr-color-#{(view.viewId == '/index.xhtml') ? 'success' : 'white hollow'} button">Find Job</a>
-						<c:if test="#{view.viewId != '/index.xhtml'}">
-							<a class="hollow hlpr-color-white button" href="#">Overview</a>
+
+				<li class="home-buttons clearfix">
+
+					<div class="text-right menu-last">
+						<c:if test="#{view.viewId == '/index.xhtml'}">
+							<a data-toggle="not-logedin-modal"
+								class="hlpr-color-#{(view.viewId == '/index.xhtml') ? 'info' : 'white hollow'} button"
+								style="display:#{authorizationBean.canView()?'none':''}">Post
+								Job</a>
+
+						</c:if>
+
+						<c:if test="#{authorizationBean.canView()}">
+
+							<a class="hollow hlpr-color-white button" href="jobpost.xhtml"
+								id="post-job">Post Job</a>
+
+						</c:if>
+
+					</div>
+				</li>
+				<li class="home-buttons clearfix">
+					<div class="text-right menu-last">
+						<c:if test="#{view.viewId == '/index.xhtml'}">
+							<a data-toggle="not-logedin-modal"
+								class="hlpr-color-#{(view.viewId == '/index.xhtml') ? 'success' : 'white hollow'} button"
+								style="display:#{authorizationBean.canView()?'none':''}">Find
+								Job</a>
+
+						</c:if>
+
+						<c:if test="#{authorizationBean.canView()}">
+
+							<a class="hollow hlpr-color-white button" href="findjobs.xhtml"
+								id="find-jobs">Find Job</a>
+
 						</c:if>
 					</div>
 				</li>
+
+				<!-- 					Original Code -->
+				<!-- 					<div class="text-center"> -->
+				<!-- 						<a href="jobpost.xhtml" data-toggle="not-logedin-modal" class="hlpr-color-#{(view.viewId == '/index.xhtml') ? 'info' : 'white hollow'} button">Post Job</a> -->
+				<!-- 						<a href="findjobs.xhtml" data-toggle="not-logedin-modal" class="hlpr-color-#{(view.viewId == '/index.xhtml') ? 'success' : 'white hollow'} button">Find Job</a> -->
+				<!-- 						<c:if test="#{view.viewId != '/index.xhtml'}"> -->
+				<!-- 							<a class="hollow hlpr-color-white button" href="#">Overview</a> -->
+				<!-- 						</c:if> -->
+				<!-- 					</div> -->
+
 				<li class="home-buttons clearfix" style="width: 25%">
 					<div class="text-right menu-last">
 						<!-- menu button goes here -->
 						<c:if test="#{view.viewId == '/index.xhtml'}">
-							<a data-toggle="login-modal" class="hollow hlpr-color-white button" style="display:#{authorizationBean.canView()?'none':''}">Login</a>
-							<a data-toggle="not-logedin-modal" class="hollow hlpr-color-white button ">My page</a>					
+							<a data-toggle="login-modal"
+								class="hollow hlpr-color-white button"
+								style="display:#{authorizationBean.canView()?'none':''}">Login</a>
+							<!-- <a data-toggle="not-logedin-modal" class="hollow hlpr-color-white button ">My page</a> -->
 						</c:if>
 						<c:if test="#{authorizationBean.canView()}">
 							<a href="#" id="notification" data-toggle="notification-list">
-								<img alt="My Notification" width="48" src="#{request.contextPath}/resources/assets/images/bell.png" />
+								<img alt="My Notification" width="48"
+								src="#{request.contextPath}/resources/assets/images/bell.png" />
 								<span class="alert badge">2</span>
 							</a>
-							<a href="profile.xhtml" id="profile-pic">
-								<img class="circular-img" width="48" alt="My Profile" src="#{request.contextPath}/resources/assets/images/profile_pic.png" />
+							<a href="profile.xhtml" id="profile-pic"> <img
+								class="circular-img" width="48" alt="My Profile"
+								src="#{request.contextPath}/resources/assets/images/profile_pic.png" />
 							</a>
 						</c:if>
 					</div>
@@ -92,14 +168,15 @@
 			<!-- menu for large device ends here -->
 		</nav>
 	</header>
-	<div id="notification-list" class="dropdown-pane" data-dropdown="data-dropdown" data-auto-focus="true">
+	<div id="notification-list" class="dropdown-pane"
+		data-dropdown="data-dropdown" data-auto-focus="true">
 		<ul class="no-bullet">
-			<li>
-				<a href="#">
+			<li><a href="#">
 					<div class="media-object">
 						<div class="media-object-section">
 							<div class="thumbnail">
-								<img src= "#{request.contextPath}/resources/assets/images/profile/user1.jpg" />
+								<img
+									src="#{request.contextPath}/resources/assets/images/profile/user1.jpg" />
 							</div>
 						</div>
 						<div class="media-object-section main-section">
@@ -107,14 +184,13 @@
 							<p>I'm going to improvise.</p>
 						</div>
 					</div>
-				</a>
-			</li>
-			<li>
-				<a href="#">
+			</a></li>
+			<li><a href="#">
 					<div class="media-object">
 						<div class="media-object-section">
 							<div class="thumbnail">
-								<img src= "#{request.contextPath}/resources/assets/images/profile/user2.jpg" />
+								<img
+									src="#{request.contextPath}/resources/assets/images/profile/user2.jpg" />
 							</div>
 						</div>
 						<div class="media-object-section main-section">
@@ -122,16 +198,20 @@
 							<p>I'm going to improvise.</p>
 						</div>
 					</div>
-				</a>
-			</li>
+			</a></li>
 			<li class="view-more text-center"><a href="#">more</a></li>
 		</ul>
 	</div>
 	<!-- body wrapper starts here -->
 	<div class="off-canvas-wrapper">
-		<div class="off-canvas-wrapper-inner" id="#{(pageLocation == 'index') ? '' : 'main-wrapper'}" data-off-canvas-wrapper="true">
-			<div class="off-canvas position-left #{(leftMenu=='show') ? 'reveal-for-large' : ''}" id="offCanvasLeft" data-off-canvas = "true" style="#{(pageLocation == 'index') ? 'top: 70px;' : ''}">				
-				<button class="close-button" data-close="offCanvasLeft" type="button">
+		<div class="off-canvas-wrapper-inner"
+			id="#{(pageLocation == 'index') ? '' : 'main-wrapper'}"
+			data-off-canvas-wrapper="true">
+			<div
+				class="off-canvas position-left #{(leftMenu=='show') ? 'reveal-for-large' : ''}"
+				id="offCanvasLeft" data-off-canvas="true" style="#{(pageLocation == 'index') ? 'top: 70px;' : ''}">
+				<button class="close-button" data-close="offCanvasLeft"
+					type="button">
 					<span aria-hidden="true">&#215;</span>
 				</button>
 				<!-- < ul class="off-canvas-list">
@@ -140,40 +220,46 @@
 				</ul>
 				<hr /> -->
 				<ul class="off-canvas-list home-buttons">
-					<li> <a  data-toggle="not-logedin-modal">Find work</a> </li>
-					<li> <a data-toggle="login-modal">Login</a> </li>
-					<li> <a data-toggle="not-logedin-modal">My page</a> </li>
-					<li> <a data-toggle="phone-verification-modal"> Phone Verification </a> </li>
+					<li><a data-toggle="not-logedin-modal">Find work</a></li>
+					<li><a data-toggle="login-modal">Login</a></li>
+					<li><a data-toggle="not-logedin-modal">My page</a></li>
+					<li><a data-toggle="phone-verification-modal"> Phone
+							Verification </a></li>
 				</ul>
 				<ul class="off-canvas-list loggedin-buttons">
-					<li> <a href="profile.xhtml">My profile</a> </li>
-					<li> <a href="payment.xhtml">Payment information</a> </li>
-					<li> <a href="balance.xhtml">Balance and payments</a> </li>
-					<li> <a href="settings.xhtml">Settings</a> </li>
-					<li> <a href="invite.xhtml">Invite friends</a> </li>
-					<li ng-controller="logoutCtrl"> <a href="javascript:void(0);" ng-click="logout();">Log out</a> </li>
+					<li><a href="profile.xhtml">My profile</a></li>
+					<li><a href="payment.xhtml">Payment information</a></li>
+					<li><a href="balance.xhtml">Balance and payments</a></li>
+					<li><a href="settings.xhtml">Settings</a></li>
+					<li><a href="invite.xhtml">Invite friends</a></li>
+					<li ng-controller="logoutCtrl"><a href="javascript:void(0);"
+						ng-click="logout();">Log out</a></li>
 				</ul>
 			</div>
-			<div class="off-canvas-content" data-off-canvas-content = "true">
+			<div class="off-canvas-content" data-off-canvas-content="true">
 				<!-- content starts here -->
 				<section id="body-wrapper">
 					<ui:insert name="center-section"></ui:insert>
 				</section>
-				
+
 				<footer id="footer">
 					<ui:insert name="footer"></ui:insert>
-				</footer>				
+				</footer>
 				<!-- content ends here -->
 			</div>
 		</div>
 	</div>
 	<!-- body wrapper ends here -->
-	
-	<script type="text/javascript" src="#{request.contextPath}/resources/assets/js/foundation/motion-ui.js?#{msg['vrsn']}"></script>
-	<script type="text/javascript" src="#{request.contextPath}/resources/assets/js/foundation/foundation.js?#{msg['vrsn']}"></script>
-	
-	<script type="text/javascript" src="#{request.contextPath}/resources/assets/js/foundation/what-input.min.js?#{msg['vrsn']}"></script>
-	<script type="text/javascript" src="#{request.contextPath}/resources/assets/js/application.js?#{msg['vrsn']}"></script>
+
+	<script type="text/javascript"
+		src="#{request.contextPath}/resources/assets/js/foundation/motion-ui.js?#{msg['vrsn']}"></script>
+	<script type="text/javascript"
+		src="#{request.contextPath}/resources/assets/js/foundation/foundation.js?#{msg['vrsn']}"></script>
+
+	<script type="text/javascript"
+		src="#{request.contextPath}/resources/assets/js/foundation/what-input.min.js?#{msg['vrsn']}"></script>
+	<script type="text/javascript"
+		src="#{request.contextPath}/resources/assets/js/application.js?#{msg['vrsn']}"></script>
 	<script type="text/javascript">
 		var Settings = {};
 		Settings.serviceBaseUrl='#{request.contextPath}';	
