@@ -63,9 +63,9 @@
 				<li>
 					<!-- menu button goes here -->
 					<div class="text-center">
-						<a data-toggle="not-logedin-modal" class="hlpr-color-#{(view.viewId == '/index.xhtml') ? 'info' : 'white hollow'} button">Post Job</a>
-						<a data-toggle="not-logedin-modal" class="hlpr-color-#{(view.viewId == '/index.xhtml') ? 'success' : 'white hollow'} button">Find Job</a>
-						<c:if test="authorizationBean.canView()">
+						<a href="jobpost.xhtml" data-toggle="not-logedin-modal" class="hlpr-color-#{(view.viewId == '/index.xhtml') ? 'info' : 'white hollow'} button">Post Job</a>
+						<a href="findjobs.xhtml" data-toggle="not-logedin-modal" class="hlpr-color-#{(view.viewId == '/index.xhtml') ? 'success' : 'white hollow'} button">Find Job</a>
+						<c:if test="#{authorizationBean.canView()}">
 							<a class="hollow hlpr-color-white button" href="#">Overview</a>
 						</c:if>
 					</div>
@@ -82,7 +82,7 @@
 								<img alt="My Notification" width="48" src="#{request.contextPath}/resources/assets/images/bell.png" />
 								<span class="alert badge">2</span>
 							</a>
-							<a href="my.xhtml" id="profile-pic">
+							<a href="profile.xhtml" id="profile-pic">
 								<img class="circular-img" width="48" alt="My Profile" src="#{request.contextPath}/resources/assets/images/profile_pic.png" />
 							</a>
 						</c:if>

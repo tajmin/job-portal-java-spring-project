@@ -353,22 +353,6 @@ Controllers.controller("jobCtrl", function($scope, $rootScope, restservice, $coo
 	$scope.formSubmitted = false;
 	$scope.responseMessage = "";
 	
-	var param1 = $rootScope.getParameterByName("title");
-	alert(decodeURI(param1));
-	
-	$scope.addJob = function(isValid) {
-		if(!isValid) return;
-		alert($scope.job.description);
-				
-//		restservice.post($scope.job, "api/v1/job/addjob").then(function(response) {
-//			if (response != null && response.success) {
-//				$scope.isproceed = true;
-//				$scope.responseMessage = response.message;
-//        	}
-//        });
-		
-    }; 
-    
 	//Shows Latest Jobs
 	$scope.latestJob = function() {			
 		restservice.get( '', "api/v1/job/latestjob").then(function(response) {
@@ -380,7 +364,7 @@ Controllers.controller("jobCtrl", function($scope, $rootScope, restservice, $coo
         });
 	
     };
-    //$scope.latestJob();
+    $scope.latestJob();
     
     //Shows Best Paid Jobs 
     $scope.bestPaidJob = function() {	
