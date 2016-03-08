@@ -54,23 +54,23 @@
 			
 			<!-- menu for large device starts here -->
 			<ul class="menu expanded sticky show-for-large #{(view.viewId == '/index.xhtml') ? 'dark' : 'light'}">
-				<li class="">
-					<div class="medium-6">
+				<li class="" style="width: 25%">
+					<div class="">
 						<!-- site title / logo goes here -->
 						<a href="index.xhtml" class="menu-text title">Helpers</a>
 					</div>
 				</li>
-				<li>
+				<li style="width: 50%">
 					<!-- menu button goes here -->
 					<div class="text-center">
-						<a data-toggle="not-logedin-modal" class="hlpr-color-#{(view.viewId == '/index.xhtml') ? 'info' : 'white hollow'} button">Post Job</a>
-						<a data-toggle="not-logedin-modal" class="hlpr-color-#{(view.viewId == '/index.xhtml') ? 'success' : 'white hollow'} button">Find Job</a>
-						<c:if test="authorizationBean.canView()">
+						<a href="jobpost.xhtml" data-toggle="not-logedin-modal" class="hlpr-color-#{(view.viewId == '/index.xhtml') ? 'info' : 'white hollow'} button">Post Job</a>
+						<a href="findjobs.xhtml" data-toggle="not-logedin-modal" class="hlpr-color-#{(view.viewId == '/index.xhtml') ? 'success' : 'white hollow'} button">Find Job</a>
+						<c:if test="#{view.viewId != '/index.xhtml'}">
 							<a class="hollow hlpr-color-white button" href="#">Overview</a>
 						</c:if>
 					</div>
 				</li>
-				<li class="home-buttons clearfix">
+				<li class="home-buttons clearfix" style="width: 25%">
 					<div class="text-right menu-last">
 						<!-- menu button goes here -->
 						<c:if test="#{view.viewId == '/index.xhtml'}">
@@ -82,7 +82,7 @@
 								<img alt="My Notification" width="48" src="#{request.contextPath}/resources/assets/images/bell.png" />
 								<span class="alert badge">2</span>
 							</a>
-							<a href="my.xhtml" id="profile-pic">
+							<a href="profile.xhtml" id="profile-pic">
 								<img class="circular-img" width="48" alt="My Profile" src="#{request.contextPath}/resources/assets/images/profile_pic.png" />
 							</a>
 						</c:if>
