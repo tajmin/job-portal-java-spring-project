@@ -26,6 +26,10 @@ public class UserModel implements Serializable {
 	private String password;
 	
 	private String location;
+	
+	private String address;
+	
+	private String houseNumber;
 
 	private String countryCode;
 
@@ -69,6 +73,8 @@ public class UserModel implements Serializable {
 	
 	private String postcode;
 	
+	private String aboutMe;
+	
 	public UserModel() {}
 	
 	public UserModel(User user) {
@@ -88,6 +94,11 @@ public class UserModel implements Serializable {
 		this.setReceiveUpdates(user.isReceiveUpdates());		
 		this.setDateOfBirth(user.getDateOfBirth());
 		this.setPostcode(user.getPostcode());
+		this.setFirstName(user.getFirstName());
+		this.setLastName(user.getLastName());
+		this.setAddress(user.getAddress());
+		this.setHouseNumber(user.getHouseNumber());
+		this.setAboutMe(user.getAboutMe());
 	}
 	
 	public String getCompanyId() {
@@ -168,6 +179,22 @@ public class UserModel implements Serializable {
 
 	public void setLocation(String location) {
 		this.location = location;
+	}
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
+	public String getHouseNumber() {
+		return houseNumber;
+	}
+
+	public void setHouseNumber(String houseNumber) {
+		this.houseNumber = houseNumber;
 	}
 
 	public String getCountryCode() {
@@ -328,5 +355,13 @@ public class UserModel implements Serializable {
 
 	public void setPostcode(String postcode) {
 		this.postcode = postcode;
+	}
+
+	public String getAboutMe() {
+		return aboutMe;
+	}
+
+	public void setAboutMe(String aboutMe) {
+		this.aboutMe = aboutMe;
 	}	
 }

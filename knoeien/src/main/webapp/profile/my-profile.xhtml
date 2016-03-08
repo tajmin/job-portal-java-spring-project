@@ -10,10 +10,10 @@
 				        <div class="medium-9 columns end">
 				          <div class="row">
 				          	<div class="small-6 columns">
-				          		<input type="text" class="profile-name" placeholder="First Name" ng-model="user.firstname" />
+				          		<input type="text" class="profile-name" placeholder="First Name" ng-model="user.firstName" />
 				          	</div>
 				          	<div class="small-6 columns">
-				          		<input type="text" id="" class="profile-name" placeholder="Last Name" ng-model="user.lastname" />
+				          		<input type="text" id="" class="profile-name" placeholder="Last Name" ng-model="user.lastName" />
 				          	</div>
 				          </div>
 				        </div>
@@ -49,13 +49,13 @@
 				    	<div class="medium-9 columns end">
 				    		<div class="row">
 				    			<div class="medium-7 columns">
-				    				<input type="text" id="" class="" placeholder=" Address" ng-model="user.location" />
+				    				<input type="text" id="" class="" placeholder=" Address" ng-model="user.address" />
 				    			</div>
 				    			<div class="medium-1 small-3 columns">
 				    				<label for="houseNo" class="right inline">Nr</label>
 				    			</div>
 				    			<div class="medium-4 small-6 columns">
-				    				<input type="text" id="houseNo" class="" placeholder=" House No" />
+				    				<input type="text" id="houseNo" class="" placeholder=" House No" ng-model="user.houseNumber"/>
 				    			</div>
 				    		</div>
 				    	</div>
@@ -76,13 +76,13 @@
 				    		<label for="" class="right inline">Place</label>
 				 		</div>
 				    	<div class="medium-10 small-12 columns">
-				    		<input type="text" id="" class="" placeholder=" Place " />
+				    		<input type="text" id="" class="" placeholder=" Place " ng-model="user.location"/>
 				    	</div>
 			      	</div>
 			      	<div class="row">
     					<div class="large-12 columns">
       						<label>A Brief Description of Yourself
-        						<textarea placeholder=" briefly describe yourself" style="height: 138px; resize: none;"></textarea>
+        						<textarea placeholder=" briefly describe yourself" style="height: 138px; resize: none;" ng-model="user.aboutMe"></textarea>
       						</label>
     					</div>
   					</div>
