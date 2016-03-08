@@ -10,7 +10,6 @@ import javax.persistence.TemporalType;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.selvesperer.knoeien.utils.AppsUtil;
-import com.selvesperer.knoeien.utils.DateFormatUtils;
 import com.selvesperer.knoeien.web.controllers.model.JobModel;
 
 /**
@@ -63,7 +62,7 @@ public class Job extends AuditableEntity {
 	@Column(name = "assigned_user_id", length = 50)
 	private String assignedUserId;
 
-	@Column(name = "rating", nullable = false)
+	@Column(name = "rating")
 	private Integer rating;
 
 	@Column(name = "review_message", length = 50)
@@ -72,10 +71,28 @@ public class Job extends AuditableEntity {
 	@Column(name = "sales_promo_code", length = 50)
 	private String salesPromoCode;
 	
+	@Column(name = "deadline_month")
+	private Integer deadlineMonth;
+	
+	@Column(name = "deadline_day")
+	private Integer deadlineDay;
+	
+	@Column(name = "deadline_time", length = 50)
+	private String deadlineTime;
+	
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "deadline")
 	@JsonIgnore
 	private Calendar deadline;
+	
+	@Column(name = "hours")
+	private Integer hours;
+	
+	@Column(name = "minutes")
+	private Integer minutes;
+	
+	@Column(name = "seconds")
+	private Integer seconds;
 
 	@Column(name = "duration")
 	private Integer duration;
@@ -93,6 +110,7 @@ public class Job extends AuditableEntity {
 
 	public Job(JobModel jobModel) {
 		super();
+		this.setId(jobModel.getId());
 		this.setAddressLine1(jobModel.getAddressLine1());
 		this.setAddressLine2(jobModel.getAddressLine2());
 		this.setAddressLine3(jobModel.getAddressLine3());
@@ -110,12 +128,19 @@ public class Job extends AuditableEntity {
 		this.setReviewMessage(jobModel.getReviewMessage());
 		this.setSalesPromoCode(jobModel.getSalesPromoCode());
 		
-		this.setDeadline(DateFormatUtils.getDBCalendarFromString(jobModel.getDeadline()));
-		this.setDuration(AppsUtil.stringToInt(jobModel.getDuration()));
+		this.setDeadlineMonth(jobModel.getDeadlineMonth());
+		this.setDeadlineDay(jobModel.getDeadlineDay());
+		this.setDeadlineTime(jobModel.getDeadlineTime());
+		this.setDeadline(AppsUtil.getCalenderByAdding(jobModel.getDeadlineMonth(), jobModel.getDeadlineDay(), jobModel.getDeadlineTime()));
+		
+		this.setHours(jobModel.getHours());
+		this.setMinutes(jobModel.getMinutes());
+		this.setSeconds(jobModel.getSeconds());
+		this.setDuration(AppsUtil.getDurationInSecond(jobModel.getHours(), jobModel.getMinutes(), jobModel.getSeconds()));
 		
 		this.setPrice(AppsUtil.stringToDouble(jobModel.getPrice()));
 		this.setPercent(AppsUtil.stringToDouble(jobModel.getPercent()));
-		this.setTotalPrice(AppsUtil.stringToDouble(jobModel.getTotalPrice()));
+		this.setTotalPrice(AppsUtil.addCommision(this.getPrice(), this.getPercent()));
 	}
 
 	public String getAssignedUserId() {
@@ -285,4 +310,53 @@ public class Job extends AuditableEntity {
 	public void setTotalPrice(Double totalPrice) {
 		this.totalPrice = totalPrice;
 	}
+
+	public Integer getDeadlineMonth() {
+		return deadlineMonth;
+	}
+
+	public void setDeadlineMonth(Integer deadlineMonth) {
+		this.deadlineMonth = deadlineMonth;
+	}
+
+	public Integer getDeadlineDay() {
+		return deadlineDay;
+	}
+
+	public void setDeadlineDay(Integer deadlineDay) {
+		this.deadlineDay = deadlineDay;
+	}
+
+	public String getDeadlineTime() {
+		return deadlineTime;
+	}
+
+	public void setDeadlineTime(String deadlineTime) {
+		this.deadlineTime = deadlineTime;
+	}
+
+	public Integer getHours() {
+		return hours;
+	}
+
+	public void setHours(Integer hours) {
+		this.hours = hours;
+	}
+
+	public Integer getMinutes() {
+		return minutes;
+	}
+
+	public void setMinutes(Integer minutes) {
+		this.minutes = minutes;
+	}
+
+	public Integer getSeconds() {
+		return seconds;
+	}
+
+	public void setSeconds(Integer seconds) {
+		this.seconds = seconds;
+	}
+	
 }

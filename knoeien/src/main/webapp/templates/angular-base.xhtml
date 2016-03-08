@@ -154,9 +154,6 @@
 					<li ng-controller="logoutCtrl"> <a href="javascript:void(0);" ng-click="logout();">Log out</a> </li>
 				</ul>
 			</div>
-			<div style="display: none">
-			<button id="changePassLoad" data-toggle="change-password-modal">CLick me !!!</button>
-			</div>
 			<div class="off-canvas-content" data-off-canvas-content = "true">
 				<!-- content starts here -->
 				<section id="body-wrapper">
@@ -181,9 +178,9 @@
 		var Settings = {};
 		Settings.serviceBaseUrl='#{request.contextPath}';	
 		
-		jQuery(document).ready( function( ) {
-			$('#changePassLoad').click();	 } 
-		);	
+		/* jQuery(document).ready( function( ) {
+			$('#change-password-modal').foundation('toggle');
+		}); */
 	</script>
 </body>
 </html>
