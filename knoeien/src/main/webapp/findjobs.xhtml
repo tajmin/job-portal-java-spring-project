@@ -15,12 +15,12 @@
 			<div class="tabs-panel is-active" id="latest">
 				<div class="row search-list" ng-repeat="model in job">
 					<div class="medium-3 columns text-center">
-						<img class="border-radius-7px" src="#{request.contextPath}/resources/assets/images/postjob/1.png" alt="Job Image" />
+						<img class="border-radius-7px" src="/img/{{model.imageUrl}}" alt="Job Image" />
 					</div>
 					<div class="medium-9 columns">
 						<div class="row">
 							<div class="medium-6 columns">
-								<h6 class="bold">Job Title</h6>
+								<h6 class="bold">{{model.title}}</h6>
 							</div>
 							<div class="medium-6 columns text-right">
 								<a href="#">posted | 0.0min</a>
@@ -28,7 +28,7 @@
 						</div>
 						<div class="row">
 							<div class="medium-12 columns">
-								<a>Loren ipsum</a>
+								<a>{{model.addressLine1}}</a>
 							</div>
 						</div>
 					</div>
@@ -38,12 +38,12 @@
 			<div class="tabs-panel" id="bestPaid">
 				<div class="row search-list" ng-repeat="model in job">
 					<div class="medium-3 columns text-center">
-						<img class="border-radius-7px" src="#{request.contextPath}/resources/assets/images/postjob/1.png" alt="Job Image" />
+						<img class="border-radius-7px" src="/img/{{model.imageUrl}}" alt="Job Image" />
 					</div>
 					<div class="medium-9 columns">
 						<div class="row">
 							<div class="medium-6 columns">
-								<h6 class="bold">Job Title</h6>
+								<h6 class="bold">{{model.title}}</h6>
 							</div>
 							<div class="medium-6 columns text-right">
 								<a href="#">posted | 0.0min</a>
@@ -51,7 +51,7 @@
 						</div>
 						<div class="row">
 							<div class="medium-12 columns">
-								<a>Loren ipsum</a>
+								<a>{{model.addressLine1}}</a>
 							</div>
 						</div>
 					</div>
@@ -61,12 +61,12 @@
 			<div class="tabs-panel" id="shortestTime">
 				<div class="row search-list" ng-repeat="model in job">
 					<div class="medium-3 columns text-center">
-						<img class="border-radius-7px" src="#{request.contextPath}/resources/assets/images/postjob/1.png" alt="Job Image" />
+						<img class="border-radius-7px" src="/img/{{model.imageUrl}}" alt="Job Image" />
 					</div>
 					<div class="medium-9 columns">
 						<div class="row">
 							<div class="medium-6 columns">
-								<h6 class="bold">Job Title</h6>
+								<h6 class="bold">{{model.title}}</h6>
 							</div>
 							<div class="medium-6 columns text-right">
 								<a href="#">posted | 0.0min</a>
@@ -74,7 +74,7 @@
 						</div>
 						<div class="row">
 							<div class="medium-12 columns">
-								<a>Loren ipsum</a>
+								<a>{{model.addressLine1}}</a>
 							</div>
 						</div>
 					</div>
@@ -84,12 +84,12 @@
 			<div class="tabs-panel" id="earliestDeadline">
 				<div class="row search-list" ng-repeat="model in job">
 					<div class="medium-3 columns text-center">
-						<img class="border-radius-7px" src="#{request.contextPath}/resources/assets/images/postjob/1.png" alt="Job Image" />
+						<img class="border-radius-7px" src="/img/{{model.imageUrl}}" alt="Job Image" />
 					</div>
 					<div class="medium-9 columns">
 						<div class="row">
 							<div class="medium-6 columns">
-								<h6 class="bold">Job Title</h6>
+								<h6 class="bold">{{model.title}}</h6>
 							</div>
 							<div class="medium-6 columns text-right">
 								<a href="#">posted | 0.0min</a>
@@ -97,7 +97,7 @@
 						</div>
 						<div class="row">
 							<div class="medium-12 columns">
-								<a>Loren ipsum</a>
+								<a>{{model.addressLine1}}</a>
 							</div>
 						</div>
 					</div>
@@ -105,14 +105,14 @@
 			</div>
 			
 			<div class="tabs-panel" id="nearestYou">
-				<div class="row search-list" ng-repeat="model in job">
+				<!-- <div class="row search-list" ng-repeat="model in job">
 					<div class="small-3 columns text-center">
-						<img class="border-radius-7px" src="#{request.contextPath}/resources/assets/images/postjob/1.png" alt="Job Image" />
+						<img class="border-radius-7px" src="/img/{{model.imageUrl}}" alt="Job Image" />
 					</div>
 					<div class="small-9 columns">
 						<div class="row">
 							<div class="small-6 columns">
-								<h6 class="bold">Job Title</h6>
+								<h6 class="bold">{{model.title}}</h6>
 							</div>
 							<div class="small-6 columns text-right">
 								<a href="#">posted | 0.0min</a>
@@ -120,7 +120,7 @@
 						</div>
 						<div class="row">
 							<div class="small-12 columns">
-								<a>Loren ipsum</a>
+								<a>{{model.addressLine1}}</a>
 							</div>
 						</div>
 						<div class="row">
@@ -129,7 +129,7 @@
 							</div>
 						</div>
 					</div>
-				</div>
+				</div> -->
 			</div>
 		</div>
 	</div>

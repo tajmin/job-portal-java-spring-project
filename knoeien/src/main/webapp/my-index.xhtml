@@ -1,5 +1,5 @@
 
-<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:c="http://java.sun.com/jsp/jstl/core">
 	<!-- hero section starts here -->
 	<div class="hero">
 		<!-- hero detail text starts here -->
@@ -19,12 +19,49 @@
 						<div class="medium-6 large-8 columns">
 							<input class="search-bar" type="text" placeholder="Search Text" ng-model="filter.searchText"/>
 						</div>
+						
+						
+						
 						<div class="medium-3 large-2 columns">
-							<a type="submit" class="hlpr-color-info expanded button" href="jobpost.xhtml?title={{filter.searchText}}">Post</a>
+							<c:if test="#{view.viewId == '/index.xhtml'}">			
+							
+							<a data-toggle="not-logedin-modal" 
+							type="submit" class="hlpr-color-info expanded button" 
+							style="display:#{authorizationBean.canView()?'none':''}">Post</a>
+							
+							</c:if>
+							<c:if test="#{authorizationBean.canView()}">
+
+							<a class="hlpr-color-info expanded button" href="jobpost.xhtml"
+								id="post-job1">Post</a>
+
+						</c:if>
+							
 						</div>
+						
+						
 						<div class="medium-3 large-2 columns">
-							<button type="submit" class="hlpr-color-success expanded button">Search</button>
+						
+						<c:if test="#{view.viewId == '/index.xhtml'}">			
+							
+							<a data-toggle="not-logedin-modal" 
+							type="submit" class="hlpr-color-success expanded button" 
+							style="display:#{authorizationBean.canView()?'none':''}">Search</a>
+							
+							</c:if>
+							<c:if test="#{authorizationBean.canView()}">
+
+							<a class="hlpr-color-success expanded button" href="findjobs.xhtml"
+								id="find-job2">Search</a>
+
+						</c:if>
+							
+							
+							
+							
 						</div>
+						
+						
 					</div>
 				</form>
 			</div>

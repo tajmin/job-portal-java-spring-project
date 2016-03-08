@@ -82,14 +82,15 @@ public class JobController extends AbstractController implements Serializable {
 		RestResponse restResponse = null;
 		String imagePath = "";
 		try {
-			String saveDirectory = "G:/";
+			String saveDirectory = ConfigurationUtil.config().getString("document.jobImageDoc");
 			String imageName = IdGenerator.generate("jobimage");
 			if (file != null && file.length > 0) {
 				for (CommonsMultipartFile aFile : file) {
 					if (!aFile.getOriginalFilename().equals("")) {
 						String ext = aFile.getFileItem().getName().split("\\.")[1];
-						imagePath = saveDirectory + imageName + "." + ext;
-						aFile.transferTo(new File(imagePath));
+						saveDirectory = saveDirectory + imageName + "." + ext;
+						imagePath = imageName + "." + ext;
+						aFile.transferTo(new File(saveDirectory));
 					}
 				}
 			}
