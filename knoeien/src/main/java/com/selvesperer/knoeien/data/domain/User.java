@@ -110,6 +110,9 @@ public class User extends AuditableEntity {
 	@Column(name = "receive_updates")
 	private boolean receiveUpdates;
 	
+	@Column(name = "postcode", length = 15)
+	private String postcode;
+	
 	public User() {}
 	
 	public User(UserModel userModel) {
@@ -121,6 +124,7 @@ public class User extends AuditableEntity {
 		this.setPassword(userModel.getPassword());
 		this.setPasswordResetToken(userModel.getPasswordResetToken());
 		this.setDateOfBirth(userModel.getDateOfBirth());
+		this.setPostcode(userModel.getPostcode());
 		
 	}
 	
@@ -343,6 +347,14 @@ public class User extends AuditableEntity {
 
 	public void setRemembermeKey(String remembermeKey) {
 		this.remembermeKey = remembermeKey;
+	}
+	
+	public String getPostcode() {
+		return postcode;
+	}
+
+	public void setPostcode(String postcode) {
+		this.postcode = postcode;
 	}
 
 	@JsonIgnore

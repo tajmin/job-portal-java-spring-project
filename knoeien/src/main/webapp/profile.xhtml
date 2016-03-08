@@ -3,7 +3,7 @@
 <ui:composition template="templates/angular-template.xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core">
 	<ui:define name="content">
 		<div ng-controller="editProfileCtrl">
-			<form name="">
+			<form name="profileEditForm">
 		<ui:include src="templates/profile-cover.xhtml" />
 		<ul class="tabs row expanded" data-tabs="data-tabs" id="example-tabs">
 			<li class="tabs-title is-active medium-3 columns"><a href="#panel1" aria-selected="true">My Profile</a></li>
@@ -31,15 +31,15 @@
 		  <div class="row">
 		  	<div class="medium-6 columns">
 		  		<div class="medium-6 columns text-left">
-		  			<a class="button hlpr-color-success" style="width: 100%">Invite Friends</a>
+		  			<a href="invite.xhtml" class="button hlpr-color-success" style="width: 100%; padding: 14px 10px; border-radius: 7px;">Invite Friends</a>
 		  		</div>
 		  	</div>
 		  	<div class="medium-6 columns">
 		  		<div class="medium-6 columns">
-		  			<a class="button secondary" style="width: 100%">Post Job</a>
+		  			<a class="button secondary" style="width: 100%; padding: 14px 10px; border-radius: 7px;">Post Job</a>
 		  		</div>
 		  		<div class="medium-6 columns">
-		  			<a class="button hlpr-color-success" style="width: 100%">Save changes</a>
+		  			<a href="javascript:void(0);" ng-click="formSubmitted = true; editProfile(profileEditForm.$valid);" class="button hlpr-color-success" style="width: 100%; padding: 14px 10px; border-radius: 7px;">Save changes</a>
 		  		</div>
 		  	</div>
 		  </div>

@@ -67,6 +67,8 @@ public class UserModel implements Serializable {
 
 	private boolean receiveUpdates;
 	
+	private String postcode;
+	
 	public UserModel() {}
 	
 	public UserModel(User user) {
@@ -85,6 +87,7 @@ public class UserModel implements Serializable {
 		this.setHideAddress(user.isHideAddress());
 		this.setReceiveUpdates(user.isReceiveUpdates());		
 		this.setDateOfBirth(user.getDateOfBirth());
+		this.setPostcode(user.getPostcode());
 	}
 	
 	public String getCompanyId() {
@@ -317,5 +320,13 @@ public class UserModel implements Serializable {
 
 	public void setReceiveUpdates(boolean receiveUpdates) {
 		this.receiveUpdates = receiveUpdates;
+	}
+
+	public String getPostcode() {
+		return postcode;
+	}
+
+	public void setPostcode(String postcode) {
+		this.postcode = postcode;
 	}	
 }

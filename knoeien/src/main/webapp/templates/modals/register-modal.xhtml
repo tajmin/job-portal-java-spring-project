@@ -149,17 +149,25 @@
 				</div>				
 			</div>
 		
-			<div class="medium-6 medium-centered columns" ng-if="isproceed">
-				<div style="height:300px; max-width: 400px;">
-					<p style="margin-top: 20px; color: #8A8A8A">{{responseMessage}} </p>
-					<div class="row" style="text-align:center">
-						<fieldset class="medium-12 columns">
-							<div class="button-group">
-								<a href="javascript:void(0);" class="button hlpr-color-info" style="width: 100%">Ok</a>
-							</div>
-						</fieldset>
+			<div class="medium-10 medium-centered columns" ng-if="isproceed" id="registerProceed">
+				<div class="row">
+					<div class="medium-12 medium-centered columns text-center">
+						<p> {{responseMessage}} </p>
 					</div>
-				</div>					
+				</div>
+				<div class="row">
+					<div class="small-4 small-centered columns text-center">
+						<img class="th" id="forgotPassImg" alt="" src="#{request.contextPath}/resources/assets/images/success.png" />
+					</div>				
+				</div>
+				<div class="row">
+					<fieldset class="medium-8 medium-centered columns text-center">
+						<div class="button-group">
+							<a href="javascript:void(0);" class="button hlpr-color-success modal-close">Ok</a>
+						</div>
+					</fieldset>
+				</div>
+								
 			</div>
 	</div>
 	<!-- modal / reveal forget password ends here -->

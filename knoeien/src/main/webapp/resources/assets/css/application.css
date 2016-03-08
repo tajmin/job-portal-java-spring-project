@@ -470,6 +470,23 @@
 	color: #8A8A8A;
 	margin-top: 20px;
 }
+#registerProceed p {
+	margin: 30px auto;
+    color: #8A8A8A;
+    text-align: center;
+    text-rendering: optimizeLegibility;
+    font-size: 1.05em;
+    font-weight: 200;
+    z-index: -5;
+    letter-spacing: 0.02em;
+    word-spacing: 4px;
+}
+#registerProceed img {
+	margin: 10px auto 40px;
+}
+#registerProceed a {
+	width: 100%
+}
 /*Register Modal Ends*/
 
 /*Change Password Modal Starts*/
