@@ -12,14 +12,7 @@ var modules = [
                'ngMessages',	
                'ui.bootstrap'
            ];
-if(window.location.href.indexOf("profile")!=-1)
-	modules.push('angularFileUpload');
-if(window.location.href.indexOf("insight")!=-1)
-	modules.push('angularFileUpload');
-if(window.location.href.indexOf("orgchart-setup")!=-1)
-	modules.push('angularFileUpload');
 var ppApp = angular.module('selvesperer', modules);
-
 ppApp.config(
     function($httpProvider,RestangularProvider) {
         RestangularProvider.setBaseUrl(Settings.serviceBaseUrl);
