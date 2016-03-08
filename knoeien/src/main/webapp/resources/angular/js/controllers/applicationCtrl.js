@@ -210,6 +210,7 @@ Controllers.controller("editProfileCtrl", function($scope, $rootScope, restservi
 
 	$scope.profileInfo = function() {
 		console.log("loading show profile");
+		console.log($scope.user);
 		restservice.get('', "api/v1/user/profileInfo").then(function(response) {
 			if (response != null) {
 				$scope.user = response;
@@ -224,6 +225,7 @@ Controllers.controller("editProfileCtrl", function($scope, $rootScope, restservi
 	$scope.editProfile = function(isValid) {
 		if(!isValid) return;
 		
+		console.log($scope.user.firstname);
 		restservice.post( $scope.user, "api/v1/user/editProfile").then(function(response) {
 			if (response != null && response.success) {
 				$scope.isproceed = true;

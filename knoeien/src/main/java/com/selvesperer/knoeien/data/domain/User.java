@@ -49,6 +49,12 @@ public class User extends AuditableEntity {
 
 	@Column(name = "location", length = 100)
 	private String location;
+	
+	@Column(name = "address", length = 512)
+	private String address;
+	
+	@Column(name = "house_number", length = 50)
+	private String houseNumber;
 
 	@Column(name = "country_code", length = 3)
 	private String countryCode;
@@ -110,6 +116,12 @@ public class User extends AuditableEntity {
 	@Column(name = "receive_updates")
 	private boolean receiveUpdates;
 	
+	@Column(name = "postcode", length = 15)
+	private String postcode;
+	
+	@Column(name = "about_me", length = 1024)
+	private String aboutMe;
+	
 	public User() {}
 	
 	public User(UserModel userModel) {
@@ -121,7 +133,10 @@ public class User extends AuditableEntity {
 		this.setPassword(userModel.getPassword());
 		this.setPasswordResetToken(userModel.getPasswordResetToken());
 		this.setDateOfBirth(userModel.getDateOfBirth());
-		
+		this.setPostcode(userModel.getPostcode());
+		this.setAddress(userModel.getAddress());
+		this.setHouseNumber(userModel.getHouseNumber());
+		this.setAboutMe(userModel.getAboutMe());
 	}
 	
 	public boolean isePost() {
@@ -272,6 +287,22 @@ public class User extends AuditableEntity {
 	public void setLocation(String location) {
 		this.location = location;
 	}
+	
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+	
+	public String getHouseNumber() {
+		return houseNumber;
+	}
+
+	public void setHouseNumber(String houseNumber) {
+		this.houseNumber = houseNumber;
+	}
 
 	public String getCountryCode() {
 		return countryCode;
@@ -343,6 +374,22 @@ public class User extends AuditableEntity {
 
 	public void setRemembermeKey(String remembermeKey) {
 		this.remembermeKey = remembermeKey;
+	}
+	
+	public String getPostcode() {
+		return postcode;
+	}
+
+	public void setPostcode(String postcode) {
+		this.postcode = postcode;
+	}
+	
+	public String getAboutMe() {
+		return aboutMe;
+	}
+
+	public void setAboutMe(String aboutMe) {
+		this.aboutMe = aboutMe;
 	}
 
 	@JsonIgnore
