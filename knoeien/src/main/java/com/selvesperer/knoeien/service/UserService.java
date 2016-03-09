@@ -23,7 +23,6 @@ public interface UserService {
 	
 	public User login(String username, String password);
 	
-	//FB LOgin
 	public User facebookLogin(String username,String password);
 	
 	public void sendForgetPasswordEmail(String email) throws EmailException, IOException;
@@ -36,7 +35,6 @@ public interface UserService {
 	
 	public User showUserInfo(String id);
 	
-	public String sendVerificationCode(String targetURL, String xml);
-	
+	public String sendVerificationCode(String targetURL, String xml);	
 	
 }
