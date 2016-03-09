@@ -55,25 +55,27 @@ public class UserModel implements Serializable {
 	
 	private Calendar dateOfBirth;
 	
-	private boolean ePost;
-	
-	private boolean sms;
-	
-	private boolean message;
-	
-	private boolean reports;
-	
-	private boolean assignedJob;
-	
-	private boolean confirmJob;
-
-	private boolean hideAddress;
-
-	private boolean receiveUpdates;
-	
 	private String postcode;
 	
 	private String aboutMe;
+	
+	private boolean epost;
+	
+	private boolean sms;
+	
+	private boolean pushNotification; 
+	
+	private boolean receiveUpdates; 
+	
+	private boolean receiveMessage;
+	
+	private boolean newJobPost; 
+	
+	private boolean newJobInterest;
+	
+	private boolean assignedJob;
+	
+	private boolean completedJob;
 	
 	public UserModel() {}
 	
@@ -84,14 +86,15 @@ public class UserModel implements Serializable {
 		this.setFullName(user.getFullName());
 		this.setLocation(user.getLocation());
 		this.setCountryCode(user.getCountryCode());
-		this.setePost(user.isePost());
+		this.setEpost(user.isEpost());
 		this.setSms(user.isSms());
-		this.setMessage(user.isMessage());
-		this.setReports(user.isReports());
+		this.setPushNotification(user.isPushNotification());
+		this.setReceiveUpdates(user.isReceiveUpdates());
+		this.setReceiveMessage(user.isReceiveMessage());
+		this.setNewJobPost(user.isNewJobPost());
+		this.setNewJobInterest(user.isNewJobInterest());
 		this.setAssignedJob(user.isAssignedJob());
-		this.setConfirmJob(user.isConfirmJob());
-		this.setHideAddress(user.isHideAddress());
-		this.setReceiveUpdates(user.isReceiveUpdates());		
+		this.setCompletedJob(user.isCompletedJob());
 		this.setDateOfBirth(user.getDateOfBirth());
 		this.setPostcode(user.getPostcode());
 		this.setFirstName(user.getFirstName());
@@ -285,12 +288,12 @@ public class UserModel implements Serializable {
 		this.confirmPassword = confirmPassword;
 	}
 	
-	public boolean isePost() {
-		return ePost;
+	public boolean isEpost() {
+		return epost;
 	}
 
-	public void setePost(boolean ePost) {
-		this.ePost = ePost;
+	public void setEpost(boolean epost) {
+		this.epost = epost;
 	}
 
 	public boolean isSms() {
@@ -301,20 +304,20 @@ public class UserModel implements Serializable {
 		this.sms = sms;
 	}
 
-	public boolean isMessage() {
-		return message;
+	public boolean isPushNotification() {
+		return pushNotification;
 	}
 
-	public void setMessage(boolean message) {
-		this.message = message;
+	public void setPushNotification(boolean pushNotification) {
+		this.pushNotification = pushNotification;
 	}
 
-	public boolean isReports() {
-		return reports;
+	public boolean isReceiveUpdates() {
+		return receiveUpdates;
 	}
 
-	public void setReports(boolean reports) {
-		this.reports = reports;
+	public void setReceiveUpdates(boolean receiveUpdates) {
+		this.receiveUpdates = receiveUpdates;
 	}
 
 	public boolean isAssignedJob() {
@@ -325,28 +328,36 @@ public class UserModel implements Serializable {
 		this.assignedJob = assignedJob;
 	}
 
-	public boolean isConfirmJob() {
-		return confirmJob;
+	public boolean isReceiveMessage() {
+		return receiveMessage;
 	}
 
-	public void setConfirmJob(boolean confirmJob) {
-		this.confirmJob = confirmJob;
+	public void setReceiveMessage(boolean receiveMessage) {
+		this.receiveMessage = receiveMessage;
 	}
 
-	public boolean isHideAddress() {
-		return hideAddress;
+	public boolean isNewJobPost() {
+		return newJobPost;
 	}
 
-	public void setHideAddress(boolean hideAddress) {
-		this.hideAddress = hideAddress;
+	public void setNewJobPost(boolean newJobPost) {
+		this.newJobPost = newJobPost;
 	}
 
-	public boolean isReceiveUpdates() {
-		return receiveUpdates;
+	public boolean isNewJobInterest() {
+		return newJobInterest;
 	}
 
-	public void setReceiveUpdates(boolean receiveUpdates) {
-		this.receiveUpdates = receiveUpdates;
+	public void setNewJobInterest(boolean newJobInterest) {
+		this.newJobInterest = newJobInterest;
+	}
+	
+	public boolean isCompletedJob() {
+		return completedJob;
+	}
+
+	public void setCompletedJob(boolean completedJob) {
+		this.completedJob = completedJob;
 	}
 
 	public String getPostcode() {
