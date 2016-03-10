@@ -54,6 +54,33 @@ Controllers.controller("signupCtrl", function($scope, $rootScope, restservice, $
 			}
 		});
 	};
+	
+	$scope.sendVerificationCode = function() {
+		
+		restservice.post("", "api/v1/user/sendVerificationCode?mobileNumber=" + $scope.user.contact).then(function(response) {
+			if (response != null) {
+				
+			}
+			console.log(response);
+		});
+	};		
+	$scope.enteredVerificationCode=function(keyEvent){
+		 if (keyEvent.which === 13){				 
+			console.log('Key press'+$scope.user.verificationCode);		
+					restservice.post("", "api/v1/user/verifyNumber?verificationCode=" + $scope.user.verificationCode).then(function(response) {
+						console.log('After entering controller ');
+						if (response != null && response == true) {
+							$("#verificationCodeId").removeClass("verificationCode0");
+							$("#verificationCodeId").addClass("verificationCode1");
+						}else{
+							
+							$("#verificationCodeId").removeClass("verificationCode1");
+							$("#verificationCodeId").addClass("verificationCode0");
+						}
+						console.log(response);
+						});
+		 }
+	}
 });
 
 //Controllers.controller("invitationCtrl", function($scope, $rootScope, restservice, $cookies) {

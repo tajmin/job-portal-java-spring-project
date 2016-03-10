@@ -47,6 +47,7 @@ import com.selvesperer.knoeien.service.EmailService;
 import com.selvesperer.knoeien.service.UserService;
 import com.selvesperer.knoeien.spring.utils.ApplicationBeanFactory;
 import com.selvesperer.knoeien.utils.Constants;
+import com.selvesperer.knoeien.utils.configuration.ConfigurationUtil;
 import com.selvesperer.knoeien.utils.localization.LocalizationUtil;
 import com.selvesperer.knoeien.web.controllers.model.RestResponse;
 import com.selvesperer.knoeien.web.controllers.model.UserModel;
@@ -378,59 +379,77 @@ public class UserController extends AbstractController implements Serializable {
 		return "Success";
 	}
 	
-	@RequestMapping(value = "/verifyNumber", method = RequestMethod.POST, produces = "application/json")
+	@RequestMapping(value = "/sendVerificationCode", method = RequestMethod.POST, produces = "application/json")
 	@ResponseBody
-	public ResponseEntity<RestResponse> verifyNumber(
-			@RequestParam(value = "mobileNumber", required = true) String mobileNumber)
+	public ResponseEntity<RestResponse> sendVerificationCode(
+			@RequestParam(value = "mobileNumber", required = true) String mobileNumber, HttpServletRequest request)
 					throws EmailException, IOException {
 
+		RestResponse restResponse = null;
 		UserService userService = ApplicationBeanFactory.getBean(UserService.class);
-		final String username = "maxwork1";
-		final String password = "akertha1";
-
+		final String username = ConfigurationUtil.config().getString("sms.username");
+		final String password = ConfigurationUtil.config().getString("sms.password");
+		final String sender = ConfigurationUtil.config().getString("sms.sender");
 		try {
-			System.out.println(mobileNumber);
 
-			// Generating verification Code(Random Number)
+
 			long timeCalculate = System.nanoTime();
 			double randomCalculate = Math.random() * 1000;
 			long mixingTimeAndRand = (long) (timeCalculate * randomCalculate);
 			String s1 = mixingTimeAndRand + "";
 			String verificationCode = s1.substring(0, 6);
-
-			// Numeric ID, must be unique within one XML document/session
-
-			System.out.println(verificationCode);
-
-			// 6 digit code
-
-			// random number as verification code, Message can't exceed 160
-			// character
+			String message = verificationCode;
 			String myMessage = verificationCode;
-
-			// sender
-			String sender = "+8801676431121";
-
-			// receiver is given number from view
 			String receiver = mobileNumber;
-
+			boolean status;
 			String xml = "<?xml version=\"1.0\"?><SESSION><CLIENT>" + username + "</CLIENT><PW>" + password
-					+ "</PW><RCPREQ>Y</RCPREQ><MSGLST><MSG><TEXT>" + myMessage + "</TEXT><SND>" + sender + "</SND><RCV>"
+					+ "</PW><RCPREQ>Y</RCPREQ><MSGLST><MSG><TEXT>" + message + "</TEXT><SND>" + sender + "</SND><RCV>"
 					+ receiver + "</RCV></MSG></MSGLST></SESSION>";
 
 			String gatewayResponse = userService.sendVerificationCode("http://sms3.pswin.com/sms", xml);
+			String search="fail";
+			//TODO: parse the api response
 			System.out.println(gatewayResponse);
-
+			if(gatewayResponse.toLowerCase().indexOf(search)!=-1) {
+				status=false;
+			} else {
+				status=true;
+			}
+			
+			request.getSession().setAttribute("verificationCode", verificationCode);
 			return new ResponseEntity<RestResponse>(
-					convertToRestGoodResponse(null, LocalizationUtil.findLocalizedString("invitationsuccess.text")),
+					convertToRestGoodResponse(status, LocalizationUtil.findLocalizedString("invitationsuccess.text")),
 					HttpStatus.OK);
+
 		} catch (Exception ex) {
-			// Messages.addGlobalError(ex.getMessage());
+			restResponse = convertToRestBadResponse("", ex.getLocalizedMessage());
 		}
 
-		return new ResponseEntity<RestResponse>(convertToRestGoodResponse(null), HttpStatus.BAD_REQUEST);
+		return new ResponseEntity<RestResponse>(convertToRestGoodResponse(restResponse), HttpStatus.BAD_REQUEST);
 	}
+	
+	
+	@RequestMapping(value = "/verifyNumber", method = RequestMethod.POST, produces = "application/json")
+	@ResponseBody
+	public ResponseEntity<RestResponse> verifyNumber(@RequestParam(value = "verificationCode", required = true) String verificationCode, HttpServletRequest request)
+					throws IOException {
+		RestResponse restResponse = null;
+		try {
+			String storedCode=(String) request.getSession().getAttribute("verificationCode");
+			boolean status =false;
+			if(storedCode.equals(verificationCode)){
+				status = true;
+			}
+			
+			return new ResponseEntity<RestResponse>(
+					convertToRestGoodResponse(status, LocalizationUtil.findLocalizedString("invitationsuccess.text")),
+					HttpStatus.OK);
+		} catch (Exception ex) {
+			restResponse = convertToRestBadResponse("", ex.getLocalizedMessage());
+		}
 
+		return new ResponseEntity<RestResponse>(convertToRestGoodResponse(restResponse), HttpStatus.BAD_REQUEST);
+	}
 
 
 }
