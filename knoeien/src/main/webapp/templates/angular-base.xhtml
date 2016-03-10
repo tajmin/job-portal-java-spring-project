@@ -94,54 +94,18 @@
 					</div>
 				</li>
 
-				<li class="home-buttons clearfix">
-
-					<div class="text-right menu-last">
-						<c:if test="#{view.viewId == '/index.xhtml'}">
-							<a data-toggle="not-logedin-modal"
-								class="hlpr-color-#{(view.viewId == '/index.xhtml') ? 'info' : 'white hollow'} button"
-								style="display:#{authorizationBean.canView()?'none':''}">Post
-								Job</a>
-
-						</c:if>
-
-						<c:if test="#{authorizationBean.canView()}">
-
-							<a class="hollow hlpr-color-white button" href="jobpost.xhtml"
-								id="post-job">Post Job</a>
-
+				<li class="home-buttons clearfix" style="width: 50%">
+				
+					<div class="text-center">
+						<a href="#{authorizationBean.canView()?'jobpost.xhtml':''}" data-toggle="not-logedin-modal" class="hlpr-color-#{(view.viewId == '/index.xhtml') ? 'info' : 'white hollow'} button">Post Job</a>
+						<a href="#{authorizationBean.canView()?'findjobs.xhtml':''}" data-toggle="not-logedin-modal" class="hlpr-color-#{(view.viewId == '/index.xhtml') ? 'success' : 'white hollow'} button">Find Job</a>
+						<c:if test="#{view.viewId != '/index.xhtml'}">
+							<a class="hollow hlpr-color-white button" href="#">Overview</a>
 						</c:if>
 
 					</div>
 				</li>
-				<li class="home-buttons clearfix">
-					<div class="text-right menu-last">
-						<c:if test="#{view.viewId == '/index.xhtml'}">
-							<a data-toggle="not-logedin-modal"
-								class="hlpr-color-#{(view.viewId == '/index.xhtml') ? 'success' : 'white hollow'} button"
-								style="display:#{authorizationBean.canView()?'none':''}">Find
-								Job</a>
-
-						</c:if>
-
-						<c:if test="#{authorizationBean.canView()}">
-
-							<a class="hollow hlpr-color-white button" href="findjobs.xhtml"
-								id="find-jobs">Find Job</a>
-
-						</c:if>
-					</div>
-				</li>
-
-				<!-- 					Original Code -->
-				<!-- 					<div class="text-center"> -->
-				<!-- 						<a href="jobpost.xhtml" data-toggle="not-logedin-modal" class="hlpr-color-#{(view.viewId == '/index.xhtml') ? 'info' : 'white hollow'} button">Post Job</a> -->
-				<!-- 						<a href="findjobs.xhtml" data-toggle="not-logedin-modal" class="hlpr-color-#{(view.viewId == '/index.xhtml') ? 'success' : 'white hollow'} button">Find Job</a> -->
-				<!-- 						<c:if test="#{view.viewId != '/index.xhtml'}"> -->
-				<!-- 							<a class="hollow hlpr-color-white button" href="#">Overview</a> -->
-				<!-- 						</c:if> -->
-				<!-- 					</div> -->
-
+				
 				<li class="home-buttons clearfix" style="width: 25%">
 					<div class="text-right menu-last">
 						<!-- menu button goes here -->
@@ -159,7 +123,7 @@
 							</a>
 							<a href="profile.xhtml" id="profile-pic"> <img
 								class="circular-img" width="48" alt="My Profile"
-								src="#{request.contextPath}/resources/assets/images/profile_pic.png" />
+								src="#{request.contextPath}/resources/assets/images/profile_pic_white.png" />
 							</a>
 						</c:if>
 					</div>
