@@ -93,31 +93,28 @@ public class User extends AuditableEntity {
 	private Calendar dateOfBirth;
 	
 	@Column(name = "e_post")
-	private boolean epost; 
+	private boolean ePost; 
 	
 	@Column(name = "sms")
 	private boolean sms;
 	
-	@Column(name = "push_notification")
-	private boolean pushNotification; 
+	@Column(name = "message")
+	private boolean message; 
 	
-	@Column(name = "receive_updates")
-	private boolean receiveUpdates; 
-	
-	@Column(name = "receive_message")
-	private boolean receiveMessage;
-	
-	@Column(name = "new_job_post")
-	private boolean newJobPost; 
-	
-	@Column(name = "new_job_interest")
-	private boolean newJobInterest;
+	@Column(name = "reports")
+	private boolean reports; 
 	
 	@Column(name = "assigned_job")
 	private boolean assignedJob;
 	
-	@Column(name = "completed_job")
-	private boolean completedJob;
+	@Column(name = "confirm_job")
+	private boolean confirmJob; 
+	
+	@Column(name = "hide_address")
+	private boolean hideAddress;
+	
+	@Column(name = "receive_updates")
+	private boolean receiveUpdates;
 	
 	@Column(name = "postcode", length = 15)
 	private String postcode;
@@ -142,12 +139,12 @@ public class User extends AuditableEntity {
 		this.setAboutMe(userModel.getAboutMe());
 	}
 	
-	public boolean isEpost() {
-		return epost;
+	public boolean isePost() {
+		return ePost;
 	}
 
-	public void setEpost(boolean epost) {
-		this.epost = epost;
+	public void setePost(boolean ePost) {
+		this.ePost = ePost;
 	}
 
 	public boolean isSms() {
@@ -158,20 +155,20 @@ public class User extends AuditableEntity {
 		this.sms = sms;
 	}
 
-	public boolean isPushNotification() {
-		return pushNotification;
+	public boolean isMessage() {
+		return message;
 	}
 
-	public void setPushNotification(boolean pushNotification) {
-		this.pushNotification = pushNotification;
+	public void setMessage(boolean message) {
+		this.message = message;
 	}
 
-	public boolean isReceiveUpdates() {
-		return receiveUpdates;
+	public boolean isReports() {
+		return reports;
 	}
 
-	public void setReceiveUpdates(boolean receiveUpdates) {
-		this.receiveUpdates = receiveUpdates;
+	public void setReports(boolean reports) {
+		this.reports = reports;
 	}
 
 	public boolean isAssignedJob() {
@@ -182,36 +179,28 @@ public class User extends AuditableEntity {
 		this.assignedJob = assignedJob;
 	}
 
-	public boolean isReceiveMessage() {
-		return receiveMessage;
+	public boolean isConfirmJob() {
+		return confirmJob;
 	}
 
-	public void setReceiveMessage(boolean receiveMessage) {
-		this.receiveMessage = receiveMessage;
+	public void setConfirmJob(boolean confirmJob) {
+		this.confirmJob = confirmJob;
 	}
 
-	public boolean isNewJobPost() {
-		return newJobPost;
+	public boolean isHideAddress() {
+		return hideAddress;
 	}
 
-	public void setNewJobPost(boolean newJobPost) {
-		this.newJobPost = newJobPost;
+	public void setHideAddress(boolean hideAddress) {
+		this.hideAddress = hideAddress;
 	}
 
-	public boolean isNewJobInterest() {
-		return newJobInterest;
+	public boolean isReceiveUpdates() {
+		return receiveUpdates;
 	}
 
-	public void setNewJobInterest(boolean newJobInterest) {
-		this.newJobInterest = newJobInterest;
-	}
-	
-	public boolean isCompletedJob() {
-		return completedJob;
-	}
-
-	public void setCompletedJob(boolean completedJob) {
-		this.completedJob = completedJob;
+	public void setReceiveUpdates(boolean receiveUpdates) {
+		this.receiveUpdates = receiveUpdates;
 	}
 		
 	public String getFullName() {					

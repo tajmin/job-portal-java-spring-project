@@ -67,11 +67,13 @@ public class UserController extends AbstractController implements Serializable {
 		return 1;
 	}
 
-	@RequestMapping(value = "/invite", method = RequestMethod.POST, produces = "application/json")
-	@ResponseBody
+	//@author SHIFAT User controller edited for Invitation(invitation)
+	 @RequestMapping(value = "/invite", method = RequestMethod.POST, produces = "application/json")
+	 @ResponseBody
 	public ResponseEntity<RestResponse> invite(@RequestParam(value="email", required=true) String email) throws EmailException, IOException  {
-		User user=null;
-		try {
+	
+		 User user=null;
+	 try {
 			RestResponse restResponse = null;
 			if (StringUtils.isBlank(email)) {
 				restResponse = convertToRestBadResponse("",	LocalizationUtil.findLocalizedString("error.emptyemail.text"));
@@ -80,19 +82,21 @@ public class UserController extends AbstractController implements Serializable {
 			if (restResponse != null) {
 				return new ResponseEntity<RestResponse>(restResponse, HttpStatus.OK);
 			}
-			
+		
 			user = new User();
 			user.setEmail(email);
 			EmailService emailService = ApplicationBeanFactory.getBean(EmailService.class);
-			emailService.sendEmail(new InvitationFriendEmail(user));
-			
-			return new ResponseEntity<RestResponse>(convertToRestGoodResponse(null, LocalizationUtil.findLocalizedString("invitationsuccess.text")),HttpStatus.OK);
+			emailService.sendEmail(new InvitationFriendEmail(user));	
+			return new ResponseEntity<RestResponse>( convertToRestGoodResponse(null, LocalizationUtil.findLocalizedString("invitationsuccess.text")),HttpStatus.OK);
 		} catch (Exception ex) {
 			// Messages.addGlobalError(ex.getMessage());
-		}		 
+		}
+	
 		return new ResponseEntity<RestResponse>(convertToRestGoodResponse(user), HttpStatus.BAD_REQUEST);
 	}
 	
+	 
+	 
 	@RequestMapping(value = "/saveUserSetting", method = RequestMethod.POST, produces = "application/json")
 	@ResponseBody
 	public ResponseEntity<RestResponse> saveUserSetting(@RequestBody UserModel userModel, @RequestParam(value="name", required=true) String name) {
@@ -101,36 +105,44 @@ public class UserController extends AbstractController implements Serializable {
 			UserService userService = ApplicationBeanFactory.getBean(UserService.class);
 			String id = SecurityManager.getCurrentUserId();
 			userService.saveUserSetting(userModel, id, name);
-			
-			return new ResponseEntity<RestResponse>(convertToRestGoodResponse(null, LocalizationUtil.findLocalizedString("")), HttpStatus.OK);
+
+			return new ResponseEntity<RestResponse>(
+					convertToRestGoodResponse(null, LocalizationUtil.findLocalizedString("")), HttpStatus.OK);
 		} catch (Exception ex) {
 			// Messages.addGlobalError(ex.getMessage());
 		}
+
 		return new ResponseEntity<RestResponse>(convertToRestGoodResponse(userModel), HttpStatus.BAD_REQUEST);
 	}
 	
+ 
 	@RequestMapping(value = "/loadUserSetting", method = RequestMethod.GET, produces = "application/json")
-	public ResponseEntity<RestResponse> loadUserSetting() {
-		RestResponse restResponse = null;
+		public ResponseEntity<RestResponse> loadUserSetting() {
+			RestResponse restResponse = null;
+			if (log.isDebugEnabled()) log.debug("User Setting ");		
 			
-		if (log.isDebugEnabled()) log.debug("User Setting ");		
-			
-		try {
-			UserService userService = ApplicationBeanFactory.getBean(UserService.class);
-			String id = SecurityManager.getCurrentUserId();
-			System.out.println(id);
-			User user = userService.loadUserSetting(id);
-			UserModel userModel = new UserModel(user);
-			System.out.println(userModel.isEpost());
-			
-			return new ResponseEntity<RestResponse>( convertToRestGoodResponse(userModel, LocalizationUtil.findLocalizedString("")),HttpStatus.OK);
-		} catch (AuthenticationFailedException t) {
-			restResponse = convertToRestBadResponse("", t.getLocalizedMessage());
-		} catch (Exception t) {
-			restResponse = convertToRestBadResponse("", t.getLocalizedMessage());
-		}
-		return new ResponseEntity<RestResponse>( restResponse, HttpStatus.OK);
-	}
+			try {
+				
+				UserService userService = ApplicationBeanFactory.getBean(UserService.class);
+				String id = SecurityManager.getCurrentUserId();
+				System.out.println(id);
+				User user = userService.loadUserSetting(id);
+				UserModel userModel = new UserModel(user);
+				System.out.println(userModel.isePost());
+	
+				return new ResponseEntity<RestResponse>( convertToRestGoodResponse(userModel, LocalizationUtil.findLocalizedString("")),HttpStatus.OK);
+			} catch (AuthenticationFailedException t) {
+				restResponse = convertToRestBadResponse("", t.getLocalizedMessage());
+			} catch (Exception t) {
+				restResponse = convertToRestBadResponse("", t.getLocalizedMessage());
+			}
+			return new ResponseEntity<RestResponse>( restResponse, HttpStatus.OK);
+	}	
+	 
+ 
+	 
+	 
+	 //@author SHIFAT ends
 	
 	@RequestMapping(value = "/signup", method = RequestMethod.POST, produces = "application/json")
 	@ResponseBody
@@ -164,7 +176,8 @@ public class UserController extends AbstractController implements Serializable {
 			user = userService.saveUser(userModel);
 			EmailService emailService = ApplicationBeanFactory.getBean(EmailService.class);
 			emailService.sendEmail(new ActivationEmail(user, token));
-			
+
+		
 			return new ResponseEntity<RestResponse>( convertToRestGoodResponse(null, LocalizationUtil.findLocalizedString("signupsuccess.text")),HttpStatus.OK);
 		} catch (Exception ex) {
 			// Messages.addGlobalError(ex.getMessage());
@@ -178,6 +191,7 @@ public class UserController extends AbstractController implements Serializable {
 		User user = null;
 		try {
 			UserService userService = ApplicationBeanFactory.getBean(UserService.class);
+
 			String token = UUID.randomUUID().toString();
 			userModel.setPasswordResetToken(token);
 			user = userService.saveUser(userModel);
@@ -260,7 +274,6 @@ public class UserController extends AbstractController implements Serializable {
 		RestResponse restResponse = null;
 		try {
 			if (log.isDebugEnabled()) log.debug("login User");
-			
 			String password = requestObject.get("password");
 			String confirmPassword = requestObject.get("confirmPassword");
 			String token = requestObject.get("passwordResetToken");
@@ -293,12 +306,12 @@ public class UserController extends AbstractController implements Serializable {
 	@RequestMapping(value = "/editProfile", method = RequestMethod.POST, produces = "application/json")
 	public ResponseEntity<RestResponse> editProfile(@RequestBody UserModel userModel) {
 		RestResponse restResponse = null;
-		if (log.isDebugEnabled()) log.debug("Edit Profile");
-		
+		if (log.isDebugEnabled()) log.debug("Edit Profile");		
 		try {
 			UserService userService = ApplicationBeanFactory.getBean(UserService.class);
 			String id = SecurityManager.getCurrentUserId();
-			userService.updateUser(userModel, id);						
+			userService.updateUser(userModel, id);
+						
 			//if(u != null) response.sendRedirect("http://localhost:8080/knoeien/home.xhtml");
 			return new ResponseEntity<RestResponse>( convertToRestGoodResponse(null, LocalizationUtil.findLocalizedString("updatesuccess.text")),HttpStatus.OK);
 		} catch (AuthenticationFailedException t) {
@@ -330,7 +343,8 @@ public class UserController extends AbstractController implements Serializable {
 	
 	
 	@RequestMapping(value = "/doUpload", headers = ("content-type=multipart/*"), method = RequestMethod.POST)
-	public String handleFileUpload(HttpServletRequest request, @RequestParam(value = "file", required = true) CommonsMultipartFile[] file) throws Exception {
+	public String handleFileUpload(HttpServletRequest request,
+			@RequestParam(value = "file", required = true) CommonsMultipartFile[] file) throws Exception {
 		String saveDirectory = "E:/";
 		System.out.println("loading image" + file);
 		String imageName = SecurityManager.getCurrentUserId();
@@ -341,6 +355,7 @@ public class UserController extends AbstractController implements Serializable {
 
 		if (file != null && file.length > 0) {
 			for (CommonsMultipartFile aFile : file) {
+
 				System.out.println("Saving file: " + aFile.getOriginalFilename());
 
 				if (!aFile.getOriginalFilename().equals("")) {
@@ -365,26 +380,40 @@ public class UserController extends AbstractController implements Serializable {
 	
 	@RequestMapping(value = "/verifyNumber", method = RequestMethod.POST, produces = "application/json")
 	@ResponseBody
-	public ResponseEntity<RestResponse> verifyNumber(@RequestParam(value = "mobileNumber", required = true) String mobileNumber) throws EmailException, IOException {
+	public ResponseEntity<RestResponse> verifyNumber(
+			@RequestParam(value = "mobileNumber", required = true) String mobileNumber)
+					throws EmailException, IOException {
+
 		UserService userService = ApplicationBeanFactory.getBean(UserService.class);
 		final String username = "maxwork1";
-		final String password = "akertha1";		
+		final String password = "akertha1";
+
 		try {
+			System.out.println(mobileNumber);
+
+			// Generating verification Code(Random Number)
 			long timeCalculate = System.nanoTime();
 			double randomCalculate = Math.random() * 1000;
 			long mixingTimeAndRand = (long) (timeCalculate * randomCalculate);
 			String s1 = mixingTimeAndRand + "";
 			String verificationCode = s1.substring(0, 6);
+
 			// Numeric ID, must be unique within one XML document/session
+
 			System.out.println(verificationCode);
+
 			// 6 digit code
+
 			// random number as verification code, Message can't exceed 160
 			// character
 			String myMessage = verificationCode;
+
 			// sender
 			String sender = "+8801676431121";
+
 			// receiver is given number from view
 			String receiver = mobileNumber;
+
 			String xml = "<?xml version=\"1.0\"?><SESSION><CLIENT>" + username + "</CLIENT><PW>" + password
 					+ "</PW><RCPREQ>Y</RCPREQ><MSGLST><MSG><TEXT>" + myMessage + "</TEXT><SND>" + sender + "</SND><RCV>"
 					+ receiver + "</RCV></MSG></MSGLST></SESSION>";
@@ -392,11 +421,13 @@ public class UserController extends AbstractController implements Serializable {
 			String gatewayResponse = userService.sendVerificationCode("http://sms3.pswin.com/sms", xml);
 			System.out.println(gatewayResponse);
 
-			return new ResponseEntity<RestResponse>(convertToRestGoodResponse(null, LocalizationUtil.findLocalizedString("invitationsuccess.text")), HttpStatus.OK);
+			return new ResponseEntity<RestResponse>(
+					convertToRestGoodResponse(null, LocalizationUtil.findLocalizedString("invitationsuccess.text")),
+					HttpStatus.OK);
 		} catch (Exception ex) {
 			// Messages.addGlobalError(ex.getMessage());
 		}
-		
+
 		return new ResponseEntity<RestResponse>(convertToRestGoodResponse(null), HttpStatus.BAD_REQUEST);
 	}
 

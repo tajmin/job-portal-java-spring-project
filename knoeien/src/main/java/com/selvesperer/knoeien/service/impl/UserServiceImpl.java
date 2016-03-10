@@ -116,52 +116,51 @@ public class UserServiceImpl implements UserService {
 		emailService.sendEmail(new ForgetPasswordEmail(user, token));
 	}
 
+	
+	// @author SHIFAT save User settings 
 	@Override
-	public void saveUserSetting(UserModel userModel, String id, String requestField) {		
+	public void saveUserSetting(UserModel userModel, String id, String requestField) {
+		// TODO Auto-generated method stub
+		
 		User user=userRepository.findUserById(id);
-		
-		if (user == null) {
-			throw new AuthenticationFailedException("error.usernotfound.text");
-		}
-		
 		if(requestField.equals("epost")) {
-			user.setEpost(userModel.isEpost());
+			user.setePost(userModel.isePost());
 		}
 		
 		if(requestField.equals("sms")){
 			user.setSms(userModel.isSms());
 		}
 		
-		if(requestField.equals("pushNotification")){
-			user.setPushNotification(userModel.isPushNotification());
+		//next
+		if(requestField.equals("message")){
+			user.setMessage(userModel.isMessage());
 		}
 		
-		if(requestField.equals("receiveUpdates")){
-			user.setReceiveUpdates(userModel.isReceiveUpdates());
-		}
-		
-		if(requestField.equals("receiveMessage")){
-			user.setReceiveMessage(userModel.isReceiveMessage());
-		}
-		
-		if(requestField.equals("newJobPost")){
-			user.setNewJobPost(userModel.isNewJobPost());
-		}
-		
-		if(requestField.equals("newJobInterest")){
-			user.setNewJobInterest(userModel.isNewJobInterest());
+		if(requestField.equals("reports")){
+			user.setReports(userModel.isReports());
 		}
 		
 		if(requestField.equals("assignedJob")){
 			user.setAssignedJob(userModel.isAssignedJob());
 		}
 		
-		if(requestField.equals("completedJob")){
-			user.setCompletedJob(userModel.isCompletedJob());
+		if(requestField.equals("confirmJob")){
+			user.setConfirmJob(userModel.isConfirmJob());
 		}
 		
+		if(requestField.equals("hideAddress")){
+			user.setHideAddress(userModel.isHideAddress());
+		}
+		
+		if(requestField.equals("receiveUpdates")){
+			user.setReceiveUpdates(userModel.isReceiveUpdates());
+		}
+		
+	
 		userRepository.saveAndFlush(user);			
 	}
+	
+	// @author SHIFAT ends
 	
 	@Override
 	public void updateUser(UserModel userModel, String id) {

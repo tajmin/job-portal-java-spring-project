@@ -56,6 +56,17 @@ Controllers.controller("signupCtrl", function($scope, $rootScope, restservice, $
 	};
 });
 
+//Controllers.controller("invitationCtrl", function($scope, $rootScope, restservice, $cookies) {
+//	if(!isValid) return;
+//	
+//	restservice.post( $scope.user, "api/v1/user/signup").then(function(response) {
+//		if (response != null && response.success) {
+//			$scope.isproceed = true;
+//			$scope.responseMessage = response.message;				
+//    	}
+//    });    
+//});
+
 Controllers.controller("invitationCtrl", function($scope, $rootScope, restservice, $cookies) {
 	$scope.isproceed = false;
 	$scope.user = {};
@@ -74,34 +85,50 @@ Controllers.controller("invitationCtrl", function($scope, $rootScope, restservic
 	};
 });
 
-//Controllers.controller("saveUserSettingCtrl", function($scope, $rootScope, restservice, $cookies) {
-//	$scope.isproceed = false;
-//	$scope.user = {};
-//	$scope.responseMessage = "";
-//		
-//	$scope.loadUserSetting = function() {
-//		console.log("show user setting");
-//		console.log($scope.user.pushNotification);
-//		restservice.get('', "api/v1/user/loadUserSetting").then(function(response) {
-//			if (response != null) {
-//				$scope.user = response;
-//			} else {
-//				$scope.responseMessage = response.message;
-//			}
-//		});
-//	};
-//	$scope.loadUserSetting();
-//	
-//	$scope.settings = function(settingName) {
-//	console.log($scope.user.pushNotification);
-//		restservice.post($scope.user, "api/v1/user/saveUserSetting?name=" + settingName).then(function(response) {
-//			if (response != null && response.success) {
-//				$scope.isproceed = false;
-//				$scope.responseMessage = response.message;
-//			}
-//		});
-//	};
-//});
+Controllers.controller("saveUserSettingCtrl", function($scope, $rootScope, restservice, $cookies) {
+	$scope.isproceed = false;
+	$scope.user = {};
+	$scope.responseMessage = "";
+		
+	$scope.loadUserSetting = function() {
+		console.log("show user setting");
+		restservice.get('', "api/v1/user/loadUserSetting").then(function(response) {
+			if (response != null) {
+				$scope.user = response;
+			} else {
+				$scope.responseMessage = response.message;
+			}
+		});
+	};
+	$scope.loadUserSetting();
+	
+	$scope.settings = function(settingName) {
+	//console.log($scope.user.epost);
+		restservice.post($scope.user, "api/v1/user/saveUserSetting?name=" + settingName).then(function(response) {
+			if (response != null && response.success) {
+				$scope.isproceed = false;
+				$scope.responseMessage = response.message;
+			}
+		});
+	};
+});
+
+
+
+Controllers.controller("settingsCtrl", function($scope, $rootScope, restservice, $cookies) {
+	$scope.isproceed = false;
+	$scope.user = {};
+	$scope.responseMessage = "";
+	
+	$scope.settings = function() {
+		restservice.post( $scope.user, "api/v1/user/settings").then(function(response) {
+			if (response != null && response.success) {
+				$scope.isproceed = true;
+				$scope.responseMessage = response.message;				
+        	}
+        });
+    };
+});
 
 Controllers.controller("loginCtrl", function($scope, $rootScope, restservice, $cookies) {
 	$scope.formSubmitted = false;
@@ -173,7 +200,7 @@ Controllers.controller("logoutCtrl", function($scope, $rootScope, restservice,$c
 	};
 });
 
-Controllers.controller("profileCtrl", function($scope, $rootScope, restservice, $cookies) {
+Controllers.controller("editProfileCtrl", function($scope, $rootScope, restservice, $cookies) {
 	$scope.isproceed = false;
 	$rootScope.userinfos = {};
 	$scope.user = {};
@@ -208,27 +235,17 @@ Controllers.controller("profileCtrl", function($scope, $rootScope, restservice, 
 		
     };   
     
-    $scope.loadUserSetting = function() {
-		console.log("show user setting");
-		restservice.get('', "api/v1/user/loadUserSetting").then(function(response) {
-			if (response != null) {
-				$scope.user = response;
-			} else {
-				$scope.responseMessage = response.message;
-			}
-		});
-	};
-	$scope.loadUserSetting();
-	
-	$scope.settings = function(settingName) {
-		//console.log($scope.user.epost);
-		restservice.post($scope.user, "api/v1/user/saveUserSetting?name=" + settingName).then(function(response) {
-			if (response != null && response.success) {
-				$scope.isproceed = false;
-				$scope.responseMessage = response.message;
-			}
-		});
-	};
+//	$scope.editProfile = function(isValid) {
+//		if (!isValid) return;
+//		restservice.post($scope.user, "api/v1/balance/editProfile").then(
+//		function(response) {
+//			if (response != null && response.success) {
+//				$scope.isproceed = true;
+//				$scope.responseMessage = response.message;
+//			}
+//		});
+//	};
+
 });
 
 

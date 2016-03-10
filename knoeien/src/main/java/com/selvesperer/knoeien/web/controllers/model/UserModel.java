@@ -55,27 +55,25 @@ public class UserModel implements Serializable {
 	
 	private Calendar dateOfBirth;
 	
-	private String postcode;
-	
-	private String aboutMe;
-	
-	private boolean epost;
+	private boolean ePost;
 	
 	private boolean sms;
 	
-	private boolean pushNotification; 
+	private boolean message;
 	
-	private boolean receiveUpdates; 
-	
-	private boolean receiveMessage;
-	
-	private boolean newJobPost; 
-	
-	private boolean newJobInterest;
+	private boolean reports;
 	
 	private boolean assignedJob;
 	
-	private boolean completedJob;
+	private boolean confirmJob;
+
+	private boolean hideAddress;
+
+	private boolean receiveUpdates;
+	
+	private String postcode;
+	
+	private String aboutMe;
 	
 	public UserModel() {}
 	
@@ -86,15 +84,14 @@ public class UserModel implements Serializable {
 		this.setFullName(user.getFullName());
 		this.setLocation(user.getLocation());
 		this.setCountryCode(user.getCountryCode());
-		this.setEpost(user.isEpost());
+		this.setePost(user.isePost());
 		this.setSms(user.isSms());
-		this.setPushNotification(user.isPushNotification());
-		this.setReceiveUpdates(user.isReceiveUpdates());
-		this.setReceiveMessage(user.isReceiveMessage());
-		this.setNewJobPost(user.isNewJobPost());
-		this.setNewJobInterest(user.isNewJobInterest());
+		this.setMessage(user.isMessage());
+		this.setReports(user.isReports());
 		this.setAssignedJob(user.isAssignedJob());
-		this.setCompletedJob(user.isCompletedJob());
+		this.setConfirmJob(user.isConfirmJob());
+		this.setHideAddress(user.isHideAddress());
+		this.setReceiveUpdates(user.isReceiveUpdates());		
 		this.setDateOfBirth(user.getDateOfBirth());
 		this.setPostcode(user.getPostcode());
 		this.setFirstName(user.getFirstName());
@@ -288,12 +285,12 @@ public class UserModel implements Serializable {
 		this.confirmPassword = confirmPassword;
 	}
 	
-	public boolean isEpost() {
-		return epost;
+	public boolean isePost() {
+		return ePost;
 	}
 
-	public void setEpost(boolean epost) {
-		this.epost = epost;
+	public void setePost(boolean ePost) {
+		this.ePost = ePost;
 	}
 
 	public boolean isSms() {
@@ -304,20 +301,20 @@ public class UserModel implements Serializable {
 		this.sms = sms;
 	}
 
-	public boolean isPushNotification() {
-		return pushNotification;
+	public boolean isMessage() {
+		return message;
 	}
 
-	public void setPushNotification(boolean pushNotification) {
-		this.pushNotification = pushNotification;
+	public void setMessage(boolean message) {
+		this.message = message;
 	}
 
-	public boolean isReceiveUpdates() {
-		return receiveUpdates;
+	public boolean isReports() {
+		return reports;
 	}
 
-	public void setReceiveUpdates(boolean receiveUpdates) {
-		this.receiveUpdates = receiveUpdates;
+	public void setReports(boolean reports) {
+		this.reports = reports;
 	}
 
 	public boolean isAssignedJob() {
@@ -328,36 +325,28 @@ public class UserModel implements Serializable {
 		this.assignedJob = assignedJob;
 	}
 
-	public boolean isReceiveMessage() {
-		return receiveMessage;
+	public boolean isConfirmJob() {
+		return confirmJob;
 	}
 
-	public void setReceiveMessage(boolean receiveMessage) {
-		this.receiveMessage = receiveMessage;
+	public void setConfirmJob(boolean confirmJob) {
+		this.confirmJob = confirmJob;
 	}
 
-	public boolean isNewJobPost() {
-		return newJobPost;
+	public boolean isHideAddress() {
+		return hideAddress;
 	}
 
-	public void setNewJobPost(boolean newJobPost) {
-		this.newJobPost = newJobPost;
+	public void setHideAddress(boolean hideAddress) {
+		this.hideAddress = hideAddress;
 	}
 
-	public boolean isNewJobInterest() {
-		return newJobInterest;
+	public boolean isReceiveUpdates() {
+		return receiveUpdates;
 	}
 
-	public void setNewJobInterest(boolean newJobInterest) {
-		this.newJobInterest = newJobInterest;
-	}
-	
-	public boolean isCompletedJob() {
-		return completedJob;
-	}
-
-	public void setCompletedJob(boolean completedJob) {
-		this.completedJob = completedJob;
+	public void setReceiveUpdates(boolean receiveUpdates) {
+		this.receiveUpdates = receiveUpdates;
 	}
 
 	public String getPostcode() {
