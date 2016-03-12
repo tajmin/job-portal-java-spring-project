@@ -87,5 +87,23 @@ public class AppsUtil {
 		}
 		return null;
 	}
+	
+	public static String getDiffenrence(SelvEDate date){
+		int ss = SelvEDate.diffInSeconds(date, SelvEDate.getInstance());
+		String agoType = "sec";
+		if(ss >= 60){
+			agoType = "min";
+			ss = (ss/60);
+			if(ss >= 60){
+				agoType = "hour";
+				ss = (ss/60);
+				if(ss >= 24){
+					agoType = "day";
+					ss = (ss/24);
+				}
+			}
+		}
+		return ss + " " + agoType;
+	}
 
 }

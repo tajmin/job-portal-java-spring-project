@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Scope;
@@ -32,8 +33,15 @@ public class JobServiceImpl implements JobService {
 	}
 	
 	@Override
-	public Job saveJob(JobModel jobModel) {		
-		Job job = new Job(jobModel);
+	public Job saveJob(JobModel jobModel) {
+		Job job = null;
+		if(StringUtils.isNotBlank(jobModel.getId())){
+			job = jobRepository.findJobById(jobModel.getId());
+		}else{
+			job = new Job();
+		}
+		
+		job = job.setJob(jobModel);
 		return jobRepository.saveAndFlush(job);
 	}
 

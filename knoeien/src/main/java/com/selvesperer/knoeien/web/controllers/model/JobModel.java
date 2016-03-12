@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.selvesperer.knoeien.data.domain.Job;
 import com.selvesperer.knoeien.utils.AppsUtil;
 import com.selvesperer.knoeien.utils.DateFormatUtils;
@@ -45,7 +46,7 @@ public class JobModel implements Serializable{
 	private String percent = "-10";
 	private String totalPrice;
 	
-	
+	private String whenPosted;
 	
 	public JobModel() {}
 	
@@ -81,6 +82,8 @@ public class JobModel implements Serializable{
 		this.setPrice(AppsUtil.doubleToString(job.getPrice()));
 		this.setPercent(AppsUtil.doubleToString(job.getPercent()));
 		this.setTotalPrice(AppsUtil.doubleToString(job.getTotalPrice()));
+		
+		this.setWhenPosted(AppsUtil.getDiffenrence(job.getCreatedDate()));
 	}
 	
 	public String getId() {
@@ -314,5 +317,13 @@ public class JobModel implements Serializable{
 
 	public int getSeconds() {
 		return seconds;
-	}	
+	}
+
+	public String getWhenPosted() {
+		return whenPosted;
+	}
+
+	public void setWhenPosted(String whenPosted) {
+		this.whenPosted = whenPosted;
+	}
 }

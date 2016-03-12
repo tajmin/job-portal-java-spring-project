@@ -142,6 +142,42 @@ public class Job extends AuditableEntity {
 		this.setPercent(AppsUtil.stringToDouble(jobModel.getPercent()));
 		this.setTotalPrice(AppsUtil.addCommision(this.getPrice(), this.getPercent()));
 	}
+	
+	public Job setJob(JobModel jobModel) {
+		this.setId(jobModel.getId());
+		this.setAddressLine1(jobModel.getAddressLine1());
+		this.setAddressLine2(jobModel.getAddressLine2());
+		this.setAddressLine3(jobModel.getAddressLine3());
+		this.setCity(jobModel.getCity());
+		this.setState(jobModel.getState());
+		this.setZip(jobModel.getZip());
+		this.setTitle(jobModel.getTitle());
+		this.setDescription(jobModel.getDescription());
+		this.setDraft(jobModel.isDraft());
+		this.setImageUrl(jobModel.getImageUrl());
+		this.setLatitude(jobModel.getLatitude());
+		this.setLongitude(jobModel.getLongitude());
+		this.setAssignedUserId(jobModel.getAssignedUserId());
+		this.setRating(jobModel.getRating());
+		this.setReviewMessage(jobModel.getReviewMessage());
+		this.setSalesPromoCode(jobModel.getSalesPromoCode());
+		
+		this.setDeadlineMonth(jobModel.getDeadlineMonth());
+		this.setDeadlineDay(jobModel.getDeadlineDay());
+		this.setDeadlineTime(jobModel.getDeadlineTime());
+		this.setDeadline(AppsUtil.getCalenderByAdding(jobModel.getDeadlineMonth(), jobModel.getDeadlineDay(), null));
+		
+		this.setHours(jobModel.getHours());
+		this.setMinutes(jobModel.getMinutes());
+		this.setSeconds(jobModel.getSeconds());
+		this.setDuration(AppsUtil.getDurationInSecond(jobModel.getHours(), jobModel.getMinutes(), 0));
+		
+		this.setPrice(AppsUtil.stringToDouble(jobModel.getPrice()));
+		this.setPercent(AppsUtil.stringToDouble(jobModel.getPercent()));
+		this.setTotalPrice(AppsUtil.addCommision(this.getPrice(), this.getPercent()));
+		
+		return this;
+	}
 
 	public String getAssignedUserId() {
 		return assignedUserId;

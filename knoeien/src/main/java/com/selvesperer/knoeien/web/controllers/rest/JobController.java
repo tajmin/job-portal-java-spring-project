@@ -1,12 +1,9 @@
 package com.selvesperer.knoeien.web.controllers.rest;
 
-import java.awt.Image;
 import java.io.File;
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 
-import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.lang3.StringUtils;
@@ -24,7 +21,6 @@ import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 import com.selvesperer.knoeien.data.domain.Job;
 import com.selvesperer.knoeien.exception.AuthenticationFailedException;
-import com.selvesperer.knoeien.security.SecurityManager;
 import com.selvesperer.knoeien.service.JobService;
 import com.selvesperer.knoeien.spring.utils.ApplicationBeanFactory;
 import com.selvesperer.knoeien.utils.IdGenerator;
@@ -45,7 +41,6 @@ public class JobController extends AbstractController implements Serializable {
 	@RequestMapping(method = RequestMethod.GET, produces = "application/json")
 	@ResponseBody
 	public Integer getData() {
-		System.out.println("hay i amd here in get data for you.................................");
 		return 1;
 	}
 	
@@ -78,7 +73,6 @@ public class JobController extends AbstractController implements Serializable {
 	
 	@RequestMapping(value = "/uploadimage", headers = ("content-type=multipart/*"), method = RequestMethod.POST)
 	public ResponseEntity<RestResponse> uploadImage(HttpServletRequest request, @RequestParam(value = "file", required = true) CommonsMultipartFile[] file) throws Exception {
-		//props.put("mail.smtp.host", ConfigurationUtil.config().getString("smtp.host"));
 		RestResponse restResponse = null;
 		String imagePath = "";
 		try {
