@@ -1,75 +1,61 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets">
 	<!-- modal / reveal forget password starts here -->
-	<div class="reveal fast ease-in" id="card-info-modal" data-reveal="data-reveal"
-		data-close-on-click="true" data-animation-in="fade" data-animation-out="slide-out-right" ng-controller="signupCtrl">
-			<div class="row wrapper-content" >
-	<div class="medium-10 medium-centered columns" id="paymentInfo">	
+	<div class="reveal fast ease-in" id="card-info-modal" data-reveal="data-reveal" data-close-on-click="true" data-animation-in="fade" data-animation-out="slide-out-right" ng-controller="signupCtrl">
 		<div class="row">
-			<div class="medium-12 columns">
-				<h4>Payment Information</h4>
-			</div>
-			<div class="medium-6 columns">
-				
-				<div class="row">
-					<div class="medium-4 columns">
-				    	<label for="" class="right inline">Card Number</label>
-				 	</div>
-				    <div class="medium-8 columns">
-				    	<input type="text" id="" class="" placeholder=" Card Number" ng-model="" />
-				    </div>
-				</div>
-				<div class="row" style="margin-bottom: 15px;">
-					<div class="medium-4 columns">
-				    	<label for="" class="right inline">Cardholder's Name</label>
-				 	</div>
-				    <div class="medium-8 columns">
-				    	<input type="text" id="" class="" placeholder=" Name of card holder" ng-model="" />
-				    </div>
-				</div>
-				<h4>Payment Information for Payments</h4>
-				<div class="row">
-					<div class="medium-4 columns">
-				    	<label for="" class="right inline">Account number</label>
-				 	</div>
-				    <div class="medium-8 columns">
-				    	<input type="text" id="" class="" placeholder=" Account number" ng-model="" />
-				    </div>
-				</div>
-			</div>
-			<div class="medium-6 columns">
-				<div class="row">
-					<div class="medium-8 medium-centered columns">
-						<div class="medium-2 columns">
+			<div class="medium-12 medium-centered columns" id="card-info-modal" ng-if="!isproceed">			
+				<form name="">
+					<div class="medium-12 columns text-center">
+						<h4>Add payment solution</h4>
+					</div>
+					<div class="medium-12 columns text-left">
+						<h4>Payment Information</h4>
+					</div>					
+					<div class="row">
+						<div class="medium-3 columns">
+							<label for="card-number" class="right inline">Card Number</label>
+						</div>
+						<div class="medium-8 columns end">
+							<input type="text" class="" placeholder="" ng-model="" />
+						</div>
+					</div>
+					<div class="row">
+						<div class="medium-3 columns">
+							<label for="card-holder" class="right inline">Name of Card Holder</label>
+						</div>
+						<div class="medium-8 columns end">
+							<input type="text" class="" placeholder="" ng-model="" />
+						</div> 
+					</div>
+					<div class="row">
+						<div class="medium-3 columns text-right">
 					    	<label for="" class="right inline">Date</label>
 					 	</div>
-					    <div class="medium-5 columns">
-					    	<input type="text" id="" class="" placeholder=" Month " ng-model="" />
-					    </div>
-					    <div class="medium-5 columns">
-					    	<input type="text" id="" class="" placeholder=" Year " ng-model="" />
-					    </div>
-					</div>
-				</div>
-				<div class="row">
-					<div class="medium-8 medium-centered columns">
+					    <div class="medium-2 columns">
+							<input type="text" id="" class="" placeholder=" Month " ng-model="user.cardMonth" />
+						</div>
 						<div class="medium-2 columns">
+							<input type="text" id="" class="" placeholder=" Year " ng-model="user.cardYear" />
+						</div>
+					    <div class="medium-1 columns">
 					    	<label for="" class="right inline">CVC</label>
-					 	</div>
-					    <div class="medium-4 columns end">
-					    	<input type="text" id="" class="" placeholder="000" ng-model="" />
 					    </div>
+					    <div class="medium-2 columns end">
+					    	<input type="text" id="" class="" placeholder=" Year " ng-model="user.cardYear" />
+					    </div>
+					</div>					
+					<div class="row">
+						<div class="medium-7 medium-offset-3 columns text-left">
+							<img class="th" id="" alt="" src="#{request.contextPath}/resources/assets/images/visamaster.png" />
+						</div>
 					</div>
-				</div>
-				<div class="row">
-					<div class="medium-4 medium-centered columns text-center">
-						<img class="th" id="" alt="" src="#{request.contextPath}/resources/assets/images/visamaster.png" />
+					<div class="row">
+						<div class="medium-6 medium-centered columns text-center">
+			  				<a href="" class="button hlpr-color-success" style="width: 100%; padding: 14px 10px; border-radius: 7px;">Ok</a>
+			  			</div>
 					</div>
-				</div>
+					
+				</form>
 			</div>
-		</div>	
-	</div>
-</div>
-		
 			<div class="medium-10 medium-centered columns" ng-if="isproceed" id="registerProceed">
 				<div class="row">
 					<div class="medium-12 medium-centered columns text-center">
@@ -87,9 +73,11 @@
 							<a href="javascript:void(0);" class="button hlpr-color-success modal-close">Ok</a>
 						</div>
 					</fieldset>
-				</div>
-								
+				</div>				
 			</div>
+			
+		</div>
+		
 	</div>
 	<!-- modal / reveal forget password ends here -->
 </ui:composition>
