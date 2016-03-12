@@ -15,6 +15,8 @@ public class DateFormatUtils {
 	protected static final DateFormat apiDateFormatNoTimeZone = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss:SSS");
 	protected static final DateFormat apiDateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss:SSSZ");
 	public static final DateFormat birthdayFormat = new SimpleDateFormat("MM dd");
+	protected static final DateFormat webFormat = new SimpleDateFormat("dd-MM-yyyy");
+	
 
 	public static String getFormatPattern(DateFormat dateFormat) {
 		if (dateFormat != null && dateFormat instanceof SimpleDateFormat) {
@@ -295,6 +297,14 @@ public class DateFormatUtils {
 		String dateString = "";
 		if(date != null){
 			dateString = dbFormat.format(date.getTime());
+		}
+		return dateString;
+	}
+	
+	public static String getWebFormattedDateString(Calendar date){
+		String dateString = "";
+		if(date != null){
+			dateString = webFormat.format(date.getTime());
 		}
 		return dateString;
 	}

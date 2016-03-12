@@ -5,7 +5,7 @@
 		<div ng-controller="addJobCtrl">
 			<form name="jobPostingForm" data-abide="data-abide" novalidate="novalidate">
 				<div class="cover">
-					<canvas id="job_cover_image" class="cover-image" style="background-image: url('#{request.contextPath}/resources/assets/images/postjob/{{job.cover_image};')"></canvas>
+					<canvas id="job_cover_image" class="cover-image" style="background-image: url(/img/{{(job.imageUrl !== '')? job.imageUrl : ''}})"></canvas>
 					<!-- <canvas class="cover-image" style=""></canvas> -->
 					<div class="row expanded profile-img">
 						<div class="small-2 small-centered columns">
