@@ -131,12 +131,12 @@ public class Job extends AuditableEntity {
 		this.setDeadlineMonth(jobModel.getDeadlineMonth());
 		this.setDeadlineDay(jobModel.getDeadlineDay());
 		this.setDeadlineTime(jobModel.getDeadlineTime());
-		this.setDeadline(AppsUtil.getCalenderByAdding(jobModel.getDeadlineMonth(), jobModel.getDeadlineDay(), jobModel.getDeadlineTime()));
+		this.setDeadline(AppsUtil.getCalenderByAdding(jobModel.getDeadlineMonth(), jobModel.getDeadlineDay(), null));
 		
 		this.setHours(jobModel.getHours());
 		this.setMinutes(jobModel.getMinutes());
 		this.setSeconds(jobModel.getSeconds());
-		this.setDuration(AppsUtil.getDurationInSecond(jobModel.getHours(), jobModel.getMinutes(), jobModel.getSeconds()));
+		this.setDuration(AppsUtil.getDurationInSecond(jobModel.getHours(), jobModel.getMinutes(), 0));
 		
 		this.setPrice(AppsUtil.stringToDouble(jobModel.getPrice()));
 		this.setPercent(AppsUtil.stringToDouble(jobModel.getPercent()));
