@@ -81,8 +81,8 @@ public class AppsUtil {
 	
 	public static Double addCommision(Double price, Double percent){
 		if(price != null){
-			if(percent != null && percent > 0)
-				return price + (percent * price) / 100;
+			if(percent != null)
+				return price + ((percent * price) / 100);
 			else return price;
 		}
 		return null;

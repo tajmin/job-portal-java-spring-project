@@ -28,7 +28,7 @@
 					<div class="small-3 columns">
 						<label class="text-center">&#160;</label>
 						<div class="input-group">
-							<input type="text" class="input-group-field text-center" ng-model="job.deadlineTime" />
+							<input ng-disabled="true" type="text" class="input-group-field text-center" value="{{job.deadlineMonth}}.{{job.deadlineDay}}" />
 						</div>						
 					</div>
 					
@@ -59,7 +59,7 @@
 					<div class="small-3 columns">
 						<label class="text-center">&#160;</label>
 						<div class="input-group">
-							<input type="text" class="input-group-field text-center" ng-model="job.seconds" />
+							<input ng-disabled="true" type="text" class="input-group-field text-center" value="{{job.hours}}:{{job.minutes}}" />
 						</div>						
 					</div>
 					
@@ -82,7 +82,7 @@
 					<div class="small-3 columns">
 						<label class="text-center">&#160;</label>
 						<div class="input-group">
-							<input type="text" class="input-group-field text-center" ng-model="job.percent" />
+							<input ng-disabled="true" type="text" class="input-group-field text-center" value="{{job.price}},{{job.percent}}% fee" />
 						</div>						
 					</div>
 					

@@ -42,7 +42,7 @@ public class JobModel implements Serializable{
 	
 	
 	private String price;
-	private String percent;
+	private String percent = "-10";
 	private String totalPrice;
 	
 	
@@ -71,7 +71,7 @@ public class JobModel implements Serializable{
 		this.setDeadlineMonth(job.getDeadlineMonth());
 		this.setDeadlineDay(job.getDeadlineDay());
 		this.setDeadlineTime(job.getDeadlineTime());
-		this.setDeadline(DateFormatUtils.getDBFormattedDateString(job.getDeadline()));
+		this.setDeadline(DateFormatUtils.getWebFormattedDateString(job.getDeadline()));
 		
 		this.setHours(job.getHours());
 		this.setMinutes(job.getMinutes());
