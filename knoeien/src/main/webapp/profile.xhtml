@@ -4,7 +4,19 @@
 	<ui:define name="content">
 		<div ng-controller="editProfileCtrl">
 			<form name="profileEditForm">
-		<ui:include src="templates/profile-cover.xhtml" />
+				<div class="cover">
+					<canvas id="user_cover_image" class="cover-image" style="background-image: url(/userimg/{{(user.backgroundImageUrl != '')? user.backgroundImageUrl : '' }})"></canvas>
+					<!-- <canvas class="cover-image" style=""></canvas> -->
+					<div class="row expanded profile-img">
+						<div class="small-2 small-centered columns">
+							<div class="thumbnail">
+								<img id="user_thumbnail_image" src="/userimg/{{(user.backgroundImageUrl != '')? user.backgroundImageUrl : '' }}" alt="Profile" />
+								<label for="userImageFileUpload" class="middle" style="color: #6bbe54; font-weight: bold; cursor: pointer;"> Add photo </label>
+								<input type="file" id="userImageFileUpload" class="show-for-sr" file-model = "imageFile" onchange="angular.element(this).scope().imageUpload(this)" />
+							</div>
+						</div>
+					</div>
+				</div>
 		<ul class="tabs row expanded" data-tabs="data-tabs" id="example-tabs">
 			<li class="tabs-title is-active medium-3 columns"><a href="#panel1" aria-selected="true">My Profile</a></li>
 		  	<li class="tabs-title medium-3 columns"><a href="#panel2">Billing Info</a></li>

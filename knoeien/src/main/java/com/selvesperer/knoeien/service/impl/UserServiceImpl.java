@@ -116,60 +116,58 @@ public class UserServiceImpl implements UserService {
 		emailService.sendEmail(new ForgetPasswordEmail(user, token));
 	}
 
-	
-	// @author SHIFAT save User settings 
 	@Override
 	public void saveUserSetting(UserModel userModel, String id, String requestField) {
 		// TODO Auto-generated method stub
 		
 		User user=userRepository.findUserById(id);
-		if(requestField.equals("epost")) {
-			user.setePost(userModel.isePost());
+		if(requestField.equals("mobileSms")) {
+			user.setMobileSms(userModel.isMobileSms());
 		}
 		
-		if(requestField.equals("sms")){
-			user.setSms(userModel.isSms());
+		if(requestField.equals("pushNotification")){
+			user.setPushNotification(userModel.isPushNotification());
 		}
 		
 		//next
-		if(requestField.equals("message")){
-			user.setMessage(userModel.isMessage());
-		}
-		
-		if(requestField.equals("reports")){
-			user.setReports(userModel.isReports());
-		}
-		
-		if(requestField.equals("assignedJob")){
-			user.setAssignedJob(userModel.isAssignedJob());
-		}
-		
-		if(requestField.equals("confirmJob")){
-			user.setConfirmJob(userModel.isConfirmJob());
-		}
-		
-		if(requestField.equals("hideAddress")){
-			user.setHideAddress(userModel.isHideAddress());
+		if(requestField.equals("ePost")){
+			user.setePost(userModel.isePost());
 		}
 		
 		if(requestField.equals("receiveUpdates")){
 			user.setReceiveUpdates(userModel.isReceiveUpdates());
 		}
 		
-	
+		if(requestField.equals("receiveMessage")){
+			user.setReceiveMessage(userModel.isReceiveMessage());
+		}
+		
+		if(requestField.equals("jobPost")){
+			user.setJobPost(userModel.isJobPost());
+		}
+		
+		if(requestField.equals("jobInterest")){
+			user.setJobInterest(userModel.isJobInterest());
+		}
+		
+		if(requestField.equals("jobAssigned")){
+			user.setJobAssigned(userModel.isJobAssigned());
+		}
+		
+		if(requestField.equals("completeJob")){
+			user.setCompleteJob(userModel.isCompleteJob());
+		}
+		
 		userRepository.saveAndFlush(user);			
 	}
 	
-	// @author SHIFAT ends
-	
-	@Override
 	public void updateUser(UserModel userModel, String id) {
-		// TODO Auto-generated method stub
 		User user = userRepository.findUserById(id);
 		
 		if (user == null) {
 			throw new AuthenticationFailedException("error.usernotfound.text");
 		}
+		
 		user.setPhone(userModel.getPhone());
 		user.setLocation(userModel.getLocation());
 		user.setPostcode(userModel.getPostcode());
@@ -178,13 +176,20 @@ public class UserServiceImpl implements UserService {
 		user.setAddress(userModel.getAddress());
 		user.setHouseNumber(userModel.getHouseNumber());
 		user.setAboutMe(userModel.getAboutMe());
+		user.setBackgroundImageUrl(userModel.getBackgroundImageUrl());
+		user.setPromoCode(userModel.getPromoCode());
+		user.setCardNumber(userModel.getCardNumber());
+		user.setCardholderName(userModel.getCardholderName());
+		user.setAccountNumber(userModel.getAccountNumber());
+		user.setCardMonth(userModel.getCardMonth());
+		user.setCardYear(userModel.getCardYear());
+		user.setCvc(userModel.getCvc());
 	
 		userRepository.saveAndFlush(user);		
 	}
 
-	@Override
+
 	public User showUserInfo(String id) {
-		// TODO Auto-generated method stub
 		User user = userRepository.findUserById(id);	
 		
 		if (user == null) {
@@ -193,12 +198,11 @@ public class UserServiceImpl implements UserService {
 		
 		return user;
 	}
-
-	//@author SHIFAT edited for settings 
+	 
 	@Override
 	public User loadUserSetting(String id) {
-		// TODO Auto-generated method stub
 		User user=userRepository.findUserById(id);
+		
 		if (user == null) {
 			throw new AuthenticationFailedException("error.usernotfound.text");
 		}
@@ -206,7 +210,6 @@ public class UserServiceImpl implements UserService {
 		return user;
 	}
 
-	//@author SHIFAT Service 
 	@Override
 	public User facebookLogin(String fbName, String fbId) {
 		// TODO Auto-generated method stub
@@ -226,8 +229,6 @@ public class UserServiceImpl implements UserService {
 				fbFirstName=fbName;
 				fbLastName="";
 			}
-			
-			
 			
 			userModel.setFirstName(fbFirstName);
 			userModel.setLastName(fbLastName);
@@ -287,20 +288,14 @@ public class UserServiceImpl implements UserService {
             }
             rd.close();
             return response.toString();
-
         } catch (Exception e) {
-
             e.printStackTrace();
             return null;
-
         } finally {
-
             if(connection != null) {
                 connection.disconnect();
             }
         }
-        }	
-
+    }
 	
-	//@author SHIFAT ends
 }

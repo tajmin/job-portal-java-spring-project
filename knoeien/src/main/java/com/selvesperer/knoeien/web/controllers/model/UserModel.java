@@ -55,25 +55,41 @@ public class UserModel implements Serializable {
 	
 	private Calendar dateOfBirth;
 	
-	private boolean ePost;
-	
-	private boolean sms;
-	
-	private boolean message;
-	
-	private boolean reports;
-	
-	private boolean assignedJob;
-	
-	private boolean confirmJob;
-
-	private boolean hideAddress;
-
-	private boolean receiveUpdates;
-	
 	private String postcode;
 	
 	private String aboutMe;
+	
+	private boolean mobileSms;
+	
+	private boolean pushNotification;
+	
+	private boolean ePost; 
+	
+	private boolean receiveUpdates; 
+	
+	private boolean receiveMessage;
+	
+	private boolean jobPost;
+	
+	private boolean jobInterest;
+	
+	private boolean jobAssigned;
+	
+	private boolean completeJob;
+	
+	private String promoCode;
+	
+	private String cardNumber;
+	
+	private String cardholderName;
+	
+	private String accountNumber;
+	
+	private String cardMonth;
+	
+	private String cardYear;
+	
+	private String cvc;
 	
 	public UserModel() {}
 	
@@ -83,15 +99,7 @@ public class UserModel implements Serializable {
 		this.setPhone(user.getPhone());
 		this.setFullName(user.getFullName());
 		this.setLocation(user.getLocation());
-		this.setCountryCode(user.getCountryCode());
-		this.setePost(user.isePost());
-		this.setSms(user.isSms());
-		this.setMessage(user.isMessage());
-		this.setReports(user.isReports());
-		this.setAssignedJob(user.isAssignedJob());
-		this.setConfirmJob(user.isConfirmJob());
-		this.setHideAddress(user.isHideAddress());
-		this.setReceiveUpdates(user.isReceiveUpdates());		
+		this.setCountryCode(user.getCountryCode());		
 		this.setDateOfBirth(user.getDateOfBirth());
 		this.setPostcode(user.getPostcode());
 		this.setFirstName(user.getFirstName());
@@ -99,6 +107,23 @@ public class UserModel implements Serializable {
 		this.setAddress(user.getAddress());
 		this.setHouseNumber(user.getHouseNumber());
 		this.setAboutMe(user.getAboutMe());
+		this.setBackgroundImageUrl(user.getBackgroundImageUrl());
+		this.setMobileSms(user.isMobileSms());
+		this.setPushNotification(user.isPushNotification());
+		this.setePost(user.isePost());
+		this.setReceiveUpdates(user.isReceiveUpdates());
+		this.setReceiveMessage(user.isReceiveMessage());
+		this.setJobPost(user.isJobPost());
+		this.setJobInterest(user.isJobInterest());
+		this.setJobAssigned(user.isJobAssigned());
+		this.setCompleteJob(user.isCompleteJob());		
+		this.setPromoCode(user.getPromoCode());
+		this.setCardNumber(user.getCardNumber());
+		this.setCardholderName(user.getCardholderName());
+		this.setAccountNumber(user.getAccountNumber());
+		this.setCardMonth(user.getCardMonth());
+		this.setCardYear(user.getCardYear());
+		this.setCvc(user.getCvc());
 	}
 	
 	public String getCompanyId() {
@@ -284,70 +309,6 @@ public class UserModel implements Serializable {
 	public void setConfirmPassword(String confirmPassword) {
 		this.confirmPassword = confirmPassword;
 	}
-	
-	public boolean isePost() {
-		return ePost;
-	}
-
-	public void setePost(boolean ePost) {
-		this.ePost = ePost;
-	}
-
-	public boolean isSms() {
-		return sms;
-	}
-
-	public void setSms(boolean sms) {
-		this.sms = sms;
-	}
-
-	public boolean isMessage() {
-		return message;
-	}
-
-	public void setMessage(boolean message) {
-		this.message = message;
-	}
-
-	public boolean isReports() {
-		return reports;
-	}
-
-	public void setReports(boolean reports) {
-		this.reports = reports;
-	}
-
-	public boolean isAssignedJob() {
-		return assignedJob;
-	}
-
-	public void setAssignedJob(boolean assignedJob) {
-		this.assignedJob = assignedJob;
-	}
-
-	public boolean isConfirmJob() {
-		return confirmJob;
-	}
-
-	public void setConfirmJob(boolean confirmJob) {
-		this.confirmJob = confirmJob;
-	}
-
-	public boolean isHideAddress() {
-		return hideAddress;
-	}
-
-	public void setHideAddress(boolean hideAddress) {
-		this.hideAddress = hideAddress;
-	}
-
-	public boolean isReceiveUpdates() {
-		return receiveUpdates;
-	}
-
-	public void setReceiveUpdates(boolean receiveUpdates) {
-		this.receiveUpdates = receiveUpdates;
-	}
 
 	public String getPostcode() {
 		return postcode;
@@ -363,5 +324,135 @@ public class UserModel implements Serializable {
 
 	public void setAboutMe(String aboutMe) {
 		this.aboutMe = aboutMe;
-	}	
+	}
+
+	public boolean isMobileSms() {
+		return mobileSms;
+	}
+
+	public void setMobileSms(boolean mobileSms) {
+		this.mobileSms = mobileSms;
+	}
+
+	public boolean isPushNotification() {
+		return pushNotification;
+	}
+
+	public void setPushNotification(boolean pushNotification) {
+		this.pushNotification = pushNotification;
+	}
+
+	public boolean isePost() {
+		return ePost;
+	}
+
+	public void setePost(boolean ePost) {
+		this.ePost = ePost;
+	}
+
+	public boolean isReceiveUpdates() {
+		return receiveUpdates;
+	}
+
+	public void setReceiveUpdates(boolean receiveUpdates) {
+		this.receiveUpdates = receiveUpdates;
+	}
+
+	public boolean isReceiveMessage() {
+		return receiveMessage;
+	}
+
+	public void setReceiveMessage(boolean receiveMessage) {
+		this.receiveMessage = receiveMessage;
+	}
+
+	public boolean isJobPost() {
+		return jobPost;
+	}
+
+	public void setJobPost(boolean jobPost) {
+		this.jobPost = jobPost;
+	}
+
+	public boolean isJobInterest() {
+		return jobInterest;
+	}
+
+	public void setJobInterest(boolean jobInterest) {
+		this.jobInterest = jobInterest;
+	}
+	
+	public boolean isJobAssigned() {
+		return jobAssigned;
+	}
+
+	public void setJobAssigned(boolean jobAssigned) {
+		this.jobAssigned = jobAssigned;
+	}
+
+	public boolean isCompleteJob() {
+		return completeJob;
+	}
+
+	public void setCompleteJob(boolean completeJob) {
+		this.completeJob = completeJob;
+	}
+
+	public String getPromoCode() {
+		return promoCode;
+	}
+
+	public void setPromoCode(String promoCode) {
+		this.promoCode = promoCode;
+	}
+
+	public String getCardNumber() {
+		return cardNumber;
+	}
+
+	public void setCardNumber(String cardNumber) {
+		this.cardNumber = cardNumber;
+	}
+
+	public String getCardholderName() {
+		return cardholderName;
+	}
+
+	public void setCardholderName(String cardholderName) {
+		this.cardholderName = cardholderName;
+	}
+
+	public String getAccountNumber() {
+		return accountNumber;
+	}
+
+	public void setAccountNumber(String accountNumber) {
+		this.accountNumber = accountNumber;
+	}
+
+	public String getCardMonth() {
+		return cardMonth;
+	}
+
+	public void setCardMonth(String cardMonth) {
+		this.cardMonth = cardMonth;
+	}
+
+	public String getCardYear() {
+		return cardYear;
+	}
+
+	public void setCardYear(String cardYear) {
+		this.cardYear = cardYear;
+	}
+
+	public String getCvc() {
+		return cvc;
+	}
+
+	public void setCvc(String cvc) {
+		this.cvc = cvc;
+	}
+
+		
 }

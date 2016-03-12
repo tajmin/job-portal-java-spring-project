@@ -56,17 +56,6 @@ Controllers.controller("signupCtrl", function($scope, $rootScope, restservice, $
 	};
 });
 
-//Controllers.controller("invitationCtrl", function($scope, $rootScope, restservice, $cookies) {
-//	if(!isValid) return;
-//	
-//	restservice.post( $scope.user, "api/v1/user/signup").then(function(response) {
-//		if (response != null && response.success) {
-//			$scope.isproceed = true;
-//			$scope.responseMessage = response.message;				
-//    	}
-//    });    
-//});
-
 Controllers.controller("invitationCtrl", function($scope, $rootScope, restservice, $cookies) {
 	$scope.isproceed = false;
 	$scope.user = {};
@@ -200,13 +189,15 @@ Controllers.controller("logoutCtrl", function($scope, $rootScope, restservice,$c
 	};
 });
 
-Controllers.controller("editProfileCtrl", function($scope, $rootScope, restservice, $cookies) {
+Controllers.controller("editProfileCtrl", function($scope, $rootScope, restservice, $cookies, utilservice, $http, authService) {
 	$scope.isproceed = false;
-	$rootScope.userinfos = {};
 	$scope.user = {};
 	$scope.balance = {};
 	$scope.formSubmitted = false;
 	$scope.responseMessage = "";
+	$scope.cover_image = "";
+	$scope.imageFile;
+	$scope.tempUploadedFilePath = "";
 
 	$scope.profileInfo = function() {
 		console.log("loading show profile");
@@ -214,6 +205,7 @@ Controllers.controller("editProfileCtrl", function($scope, $rootScope, restservi
 		restservice.get('', "api/v1/user/profileInfo").then(function(response) {
 			if (response != null) {
 				$scope.user = response;
+				$scope.tempUploadedFilePath = $scope.user.backgroundImageUrl; 
 			} else {
 				$scope.responseMessage = response.message;
 			}
@@ -225,9 +217,10 @@ Controllers.controller("editProfileCtrl", function($scope, $rootScope, restservi
 	$scope.editProfile = function(isValid) {
 		if(!isValid) return;
 		
+		$scope.user.backgroundImageUrl = $scope.tempUploadedFilePath;
 		console.log($scope.user.firstname);
 		restservice.post( $scope.user, "api/v1/user/editProfile").then(function(response) {
-			if (response != null && response.success) {
+			if (response != null) {
 				$scope.isproceed = true;
 				$scope.responseMessage = response.message;				
         	}
@@ -235,21 +228,57 @@ Controllers.controller("editProfileCtrl", function($scope, $rootScope, restservi
 		
     };   
     
-//	$scope.editProfile = function(isValid) {
-//		if (!isValid) return;
-//		restservice.post($scope.user, "api/v1/balance/editProfile").then(
-//		function(response) {
-//			if (response != null && response.success) {
-//				$scope.isproceed = true;
-//				$scope.responseMessage = response.message;
-//			}
-//		});
-//	};
+    $scope.loadUserSetting = function() {
+		console.log("show user setting");
+		restservice.get('', "api/v1/user/loadUserSetting").then(function(response) {
+			if (response != null) {
+				$scope.user = response;
+			} else {
+				$scope.responseMessage = response.message;
+			}
+		});
+	};
+	$scope.loadUserSetting();
+	
+	$scope.settings = function(settingName) {
+	//console.log($scope.user.epost);
+		restservice.post($scope.user, "api/v1/user/saveUserSetting?name=" + settingName).then(function(response) {
+			if (response != null && response.success) {
+				$scope.isproceed = false;
+				$scope.responseMessage = response.message;
+			}
+		});
+	};
+	
+	$scope.imageUpload = function(input){
+    	if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                $('#user_thumbnail_image').attr('src', e.target.result);
+                $('#user_cover_image').css('background-image', "url(" + e.target.result + ")");
+            };
+            $scope.imageFile = input.files[0];
+            reader.readAsDataURL(input.files[0]);
+            
+            // save file as temporary
+            var uploadUrl = "api/v1/user/uploadimage";
+            var fd = new FormData();
+            fd.append('file', $scope.imageFile);
+    		 
+            $http.post(uploadUrl, fd, {
+                transformRequest: angular.identity,
+                headers: {'Content-Type': undefined}
+            }).success(function(succResponse){
+            	$rootScope.restMessages = succResponse.message;
+            	$scope.tempUploadedFilePath = succResponse.response
+            }).error(function(errResponse){
+            	$rootScope.restMessages = errResponse.message;
+            });
+        }
+    };
 
 });
 
-
-//@author SHIFAT controller for BALANCE
 Controllers.controller("transactionCtrl", function($scope, $rootScope,restservice, $cookies) {	
 	$scope.isproceed = false;
 	$scope.transactionHistory = {};
@@ -303,7 +332,6 @@ Controllers.controller("addJobCtrl", function($scope, $rootScope, restservice, $
 		
     };
     
-    
     $scope.postJob = function(isValid) {
     	$scope.job.draft = false;
 		$scope.job.latitude = $("#latitude").val();
@@ -318,7 +346,6 @@ Controllers.controller("addJobCtrl", function($scope, $rootScope, restservice, $
         });
 		
     };
-    
     
     $scope.imageUpload = function(input){
     	if (input.files && input.files[0]) {
