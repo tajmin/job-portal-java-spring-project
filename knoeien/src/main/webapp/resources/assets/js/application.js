@@ -15,8 +15,6 @@
 	$(document).on('click tap touchstart', '.reveal .modal-close', function() {
 		return $('[data-reveal="data-reveal"]').foundation('close');
 	});
-	
-	
 }(jQuery);
 
 /* Generate date, month and year select options */
