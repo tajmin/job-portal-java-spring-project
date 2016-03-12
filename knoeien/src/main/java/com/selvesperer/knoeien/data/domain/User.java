@@ -92,35 +92,59 @@ public class User extends AuditableEntity {
 	@Column(name ="date_of_birth")
 	private Calendar dateOfBirth;
 	
+	@Column(name = "mobile_sms")
+	private boolean mobileSms;
+	
+	@Column(name = "push_notification")
+	private boolean pushNotification;
+	
 	@Column(name = "e_post")
 	private boolean ePost; 
 	
-	@Column(name = "sms")
-	private boolean sms;
-	
-	@Column(name = "message")
-	private boolean message; 
-	
-	@Column(name = "reports")
-	private boolean reports; 
-	
-	@Column(name = "assigned_job")
-	private boolean assignedJob;
-	
-	@Column(name = "confirm_job")
-	private boolean confirmJob; 
-	
-	@Column(name = "hide_address")
-	private boolean hideAddress;
-	
 	@Column(name = "receive_updates")
-	private boolean receiveUpdates;
+	private boolean receiveUpdates; 
+	
+	@Column(name = "receive_message")
+	private boolean receiveMessage; 
+	
+	@Column(name = "job_post")
+	private boolean jobPost;
+	
+	@Column(name = "job_interest")
+	private boolean jobInterest;
+	
+	@Column(name = "job_assigned")
+	private boolean jobAssigned;
+	
+	@Column(name = "complete_job")
+	private boolean completeJob;
 	
 	@Column(name = "postcode", length = 15)
 	private String postcode;
 	
 	@Column(name = "about_me", length = 1024)
 	private String aboutMe;
+	
+	@Column(name = "promo_code", length = 15)
+	private String promoCode;
+	
+	@Column(name = "card_number", length = 50)
+	private String cardNumber;
+	
+	@Column(name = "cardholder_name", length = 128)
+	private String cardholderName;
+	
+	@Column(name = "account_number", length = 50)
+	private String accountNumber;
+	
+	@Column(name = "card_month", length = 10)
+	private String cardMonth;
+	
+	@Column(name = "card_year", length = 10)
+	private String cardYear;
+	
+	@Column(name = "cvc", length = 10)
+	private String cvc;
 	
 	public User() {}
 	
@@ -137,70 +161,6 @@ public class User extends AuditableEntity {
 		this.setAddress(userModel.getAddress());
 		this.setHouseNumber(userModel.getHouseNumber());
 		this.setAboutMe(userModel.getAboutMe());
-	}
-	
-	public boolean isePost() {
-		return ePost;
-	}
-
-	public void setePost(boolean ePost) {
-		this.ePost = ePost;
-	}
-
-	public boolean isSms() {
-		return sms;
-	}
-
-	public void setSms(boolean sms) {
-		this.sms = sms;
-	}
-
-	public boolean isMessage() {
-		return message;
-	}
-
-	public void setMessage(boolean message) {
-		this.message = message;
-	}
-
-	public boolean isReports() {
-		return reports;
-	}
-
-	public void setReports(boolean reports) {
-		this.reports = reports;
-	}
-
-	public boolean isAssignedJob() {
-		return assignedJob;
-	}
-
-	public void setAssignedJob(boolean assignedJob) {
-		this.assignedJob = assignedJob;
-	}
-
-	public boolean isConfirmJob() {
-		return confirmJob;
-	}
-
-	public void setConfirmJob(boolean confirmJob) {
-		this.confirmJob = confirmJob;
-	}
-
-	public boolean isHideAddress() {
-		return hideAddress;
-	}
-
-	public void setHideAddress(boolean hideAddress) {
-		this.hideAddress = hideAddress;
-	}
-
-	public boolean isReceiveUpdates() {
-		return receiveUpdates;
-	}
-
-	public void setReceiveUpdates(boolean receiveUpdates) {
-		this.receiveUpdates = receiveUpdates;
 	}
 		
 	public String getFullName() {					
@@ -390,6 +350,134 @@ public class User extends AuditableEntity {
 
 	public void setAboutMe(String aboutMe) {
 		this.aboutMe = aboutMe;
+	}
+	
+	public boolean isMobileSms() {
+		return mobileSms;
+	}
+
+	public void setMobileSms(boolean mobileSms) {
+		this.mobileSms = mobileSms;
+	}
+
+	public boolean isPushNotification() {
+		return pushNotification;
+	}
+
+	public void setPushNotification(boolean pushNotification) {
+		this.pushNotification = pushNotification;
+	}
+
+	public boolean isePost() {
+		return ePost;
+	}
+
+	public void setePost(boolean ePost) {
+		this.ePost = ePost;
+	}
+
+	public boolean isReceiveUpdates() {
+		return receiveUpdates;
+	}
+
+	public void setReceiveUpdates(boolean receiveUpdates) {
+		this.receiveUpdates = receiveUpdates;
+	}
+
+	public boolean isReceiveMessage() {
+		return receiveMessage;
+	}
+
+	public void setReceiveMessage(boolean receiveMessage) {
+		this.receiveMessage = receiveMessage;
+	}
+
+	public boolean isJobPost() {
+		return jobPost;
+	}
+
+	public void setJobPost(boolean jobPost) {
+		this.jobPost = jobPost;
+	}
+
+	public boolean isJobInterest() {
+		return jobInterest;
+	}
+
+	public void setJobInterest(boolean jobInterest) {
+		this.jobInterest = jobInterest;
+	}
+	
+	public boolean isJobAssigned() {
+		return jobAssigned;
+	}
+
+	public void setJobAssigned(boolean jobAssigned) {
+		this.jobAssigned = jobAssigned;
+	}
+
+	public boolean isCompleteJob() {
+		return completeJob;
+	}
+
+	public void setCompleteJob(boolean completeJob) {
+		this.completeJob = completeJob;
+	}
+	
+	public String getPromoCode() {
+		return promoCode;
+	}
+
+	public void setPromoCode(String promoCode) {
+		this.promoCode = promoCode;
+	}
+
+	public String getCardNumber() {
+		return cardNumber;
+	}
+
+	public void setCardNumber(String cardNumber) {
+		this.cardNumber = cardNumber;
+	}
+
+	public String getCardholderName() {
+		return cardholderName;
+	}
+
+	public void setCardholderName(String cardholderName) {
+		this.cardholderName = cardholderName;
+	}
+
+	public String getAccountNumber() {
+		return accountNumber;
+	}
+
+	public void setAccountNumber(String accountNumber) {
+		this.accountNumber = accountNumber;
+	}
+
+	public String getCardMonth() {
+		return cardMonth;
+	}
+
+	public void setCardMonth(String cardMonth) {
+		this.cardMonth = cardMonth;
+	}
+
+	public String getCardYear() {
+		return cardYear;
+	}
+
+	public void setCardYear(String cardYear) {
+		this.cardYear = cardYear;
+	}
+
+	public String getCvc() {
+		return cvc;
+	}
+
+	public void setCvc(String cvc) {
+		this.cvc = cvc;
 	}
 
 	@JsonIgnore
