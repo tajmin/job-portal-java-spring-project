@@ -31,8 +31,42 @@
 						</div>
 					</div>
 				</div>
-				<div class="row background-color-grey">
-					<span>Last Bid</span><span><input type="text" class="small-3" /></span>
+				<div class="row background-color-grey job-bid-info">
+					<div class="small-6 columns">
+						<div class="input-group">
+							<span class="input-group-label border-radius-5px-left" style="width: 50%;">Last Bid</span>
+							<input type="number" class="input-group-field text-right border-radius-5px-right" />
+						</div>
+					</div>
+					<div class="small-6 columns">
+						<div class="input-group">
+							<a class="input-group-label border-radius-5px-left" style="width: 25%;">-</a>
+							<input type="number" class="input-group-field text-center" />
+							<a class="input-group-label border-radius-5px-right" style="width: 25%;">+</a>
+						</div>
+					</div>
+				</div>
+				<div class="row employer-info">
+					<div class="medium-3 columns text-center">
+						<img class="border-radius-7px" src="#{request.contextPath}/resources/assets/images/postjob/1.png" alt="Job Image" />
+					</div>
+					<div class="medium-9 columns detail-section">
+						<div class="row">
+							<div class="medium-12 columns">
+								<h6 class="bold">Job Title</h6>
+							</div>
+						</div>
+						<div class="row">
+							<div class="medium-12 columns">
+								<p>Write some hijibiji hijibiji hijibiji hijibiji hijibiji hijibiji text here</p>
+							</div>
+						</div>
+						<div class="row">
+							<div class="medium-12 columns">
+								<a href="#" class="button hlpr-color-success border-radius-5px">Show Interest</a>
+							</div>
+						</div>
+					</div>
 				</div>
 			</div>
 			<div class="tabs-panel" id="interest">
@@ -42,7 +76,7 @@
 	</ui:define>
 	<ui:define name="right-content">
     	<div id="g-map" style="width:100%;height:98vh;"></div>
-		<script type="text/javascript">
+		<!-- <script type="text/javascript">
 			var map;
 			function initMap() {
 				var mapProp = {
@@ -53,7 +87,7 @@
 				var map=new google.maps.Map(document.getElementById("g-map"),mapProp);
 			};
 			google.maps.event.addDomListener(window, 'load', initMap);
-    	</script>
+    	</script> -->
 	</ui:define>
 	
 </ui:composition>
