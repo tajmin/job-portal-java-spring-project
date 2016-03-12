@@ -283,26 +283,68 @@
 #offCanvasLeft {
 	z-index: 6;
 }
-.border-radius-5px{
+.border-radius-5px {
 	border-radius: 5px;
 	-webkit-border-radius: 5px;
 	-moz-border-radius: 5px;
 	-ms-border-radius: 5px;
 	-o-border-radius: 5px;
 }
-.border-radius-7px{
+.border-radius-5px-left {
+	border-radius: 5px 0 0 5px;
+	-webkit-border-radius: 5px 0 0 5px;
+	-moz-border-radius: 5px 0 0 5px;
+	-ms-border-radius: 5px 0 0 5px;
+	-o-border-radius: 5px 0 0 5px;
+}
+.border-radius-5px-right {
+	border-radius: 0 5px 5px;
+	-webkit-border-radius: 0 5px 5px 0;
+	-moz-border-radius: 0 5px 5px 0;
+	-ms-border-radius: 0 5px 5px 0;
+	-o-border-radius: 0 5px 5px 0;
+}
+.border-radius-7px {
 	border-radius: 7px;
 	-webkit-border-radius: 7px;
 	-moz-border-radius: 7px;
 	-ms-border-radius: 7px;
 	-o-border-radius: 7px;
 }
-.border-radius-9px{
+.border-radius-7px-left {
+	border-radius: 7px 0 0 7px;
+	-webkit-border-radius: 7px 0 0 7px;
+	-moz-border-radius: 7px 0 0 7px;
+	-ms-border-radius: 7px 0 0 7px;
+	-o-border-radius: 7px 0 0 7px;
+}
+.border-radius-7px-right {
+	border-radius: 0 7px 7px 0;
+	-webkit-border-radius: 0 7px 7px 0;
+	-moz-border-radius: 0 7px 7px 0;
+	-ms-border-radius: 0 7px 7px 0;
+	-o-border-radius: 0 7px 7px 0;
+}
+.border-radius-9px {
 	border-radius: 9px;
 	-webkit-border-radius: 9px;
 	-moz-border-radius: 9px;
 	-ms-border-radius: 9px;
 	-o-border-radius: 9px;
+}
+.border-radius-9px-left {
+	border-radius: 9px 0 0 9px;
+	-webkit-border-radius: 9px 0 0 9px;
+	-moz-border-radius: 9px 0 0 9px;
+	-ms-border-radius: 9px 0 0 9px;
+	-o-border-radius: 9px 0 0 9px;
+}
+.border-radius-9px-right {
+	border-radius: 0 9px 9px 0;
+	-webkit-border-radius: 0 9px 9px 0;
+	-moz-border-radius: 0 9px 9px 0;
+	-ms-border-radius: 0 9px 9px 0;
+	-o-border-radius: 0 9px 9px 0;
 }
 .search-list {
 	border-bottom: 1px solid #e6e6e6;
@@ -861,6 +903,15 @@
 .background-color-grey {
 	background-color: #ebebeb;
 }
+.job-bid-info {
+	padding: 50px 20px;
+}
+.job-bid-info .input-group {
+	margin-bottom: 0;
+}
+.job-bid-info .input-group-label {
+	background-color: #fff;
+}
 
 /*my-profile.xhtml Starts */
 
@@ -1009,4 +1060,3 @@ line-height: 1.75em;
 	margin-right: 40px;
 }
 /*proceed-paymnet.xhtml ends*/
-
