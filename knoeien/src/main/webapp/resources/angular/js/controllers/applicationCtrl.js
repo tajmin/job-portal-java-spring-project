@@ -333,17 +333,18 @@ Controllers.controller("addJobCtrl", function($scope, $rootScope, restservice, $
     };
     
     $scope.postJob = function(isValid) {
+    	$("#card-info-modal").foundation('toggle');
     	$scope.job.draft = false;
 		$scope.job.latitude = $("#latitude").val();
 		$scope.job.longitude = $("#longitude").val();
 		$scope.job.addressLine1 = $("#placesearch").val();
 		$scope.job.imageUrl = $scope.tempUploadedFilePath;
 		
-		restservice.post($scope.job, "api/v1/job/addjob").then(function(response) {
-			if (response != null) {
-				$scope.job = response;
-        	}
-        });
+//		restservice.post($scope.job, "api/v1/job/addjob").then(function(response) {
+//			if (response != null) {
+//				$scope.job = response;
+//        	}
+//        });
 		
     };
     

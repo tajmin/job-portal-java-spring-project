@@ -2,6 +2,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <ui:composition template="templates/angular-template.xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core">
 	<ui:define name="content">
+		<ui:insert name="card-info-modal"></ui:insert>
 		<div ng-controller="addJobCtrl">
 			<form name="jobPostingForm" data-abide="data-abide" novalidate="novalidate">
 				<div class="cover">
@@ -39,8 +40,8 @@
 				<div class="row text-center">
 					<a  href="javascript:void(0);" ng-click="formSubmitted = true; draftJob(jobPostingForm.$valid);" class="button hlpr-color-alert">Save Draft</a>
 					<a href="javascript:void(0);" ng-click="formSubmitted = true; postJob(jobPostingForm.$valid);" class="button hlpr-color-info">Post</a> 										
-				</div>
-			</form>
-		</div>
-	</ui:define>
+				</div>				
+			</form>			
+		</div>		
+	</ui:define>	
 </ui:composition>
