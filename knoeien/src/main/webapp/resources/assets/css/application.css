@@ -298,7 +298,7 @@
 	-o-border-radius: 5px 0 0 5px;
 }
 .border-radius-5px-right {
-	border-radius: 0 5px 5px;
+	border-radius: 0 5px 5px 0;
 	-webkit-border-radius: 0 5px 5px 0;
 	-moz-border-radius: 0 5px 5px 0;
 	-ms-border-radius: 0 5px 5px 0;
@@ -904,7 +904,7 @@
 	background-color: #ebebeb;
 }
 .job-bid-info {
-	padding: 50px 20px;
+	padding: 20px 0;
 }
 .job-bid-info .input-group {
 	margin-bottom: 0;
