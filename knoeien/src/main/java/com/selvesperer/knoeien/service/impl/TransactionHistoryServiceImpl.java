@@ -14,6 +14,7 @@ import com.selvesperer.knoeien.data.repository.TransactionHistoryRepository;
 import com.selvesperer.knoeien.exception.AuthenticationFailedException;
 import com.selvesperer.knoeien.service.TransactionHistoryService;
 import com.selvesperer.knoeien.spring.ScopeType;
+import com.selvesperer.knoeien.web.controllers.model.TransactionHistoryModel;
 
 
 @Service("transactionHistoryService")
@@ -25,7 +26,6 @@ public class TransactionHistoryServiceImpl implements TransactionHistoryService 
 	@Inject
 	private TransactionHistoryRepository transactionHistoryRepository;
 	
-	//@author SHIFAT edited for settings 
 	@Override
 	public List<TransactionHistory> showTransactionInfo(String id) {
 		// TODO Auto-generated method stub
@@ -36,9 +36,22 @@ public class TransactionHistoryServiceImpl implements TransactionHistoryService 
 		
 		return transactionHistory;
 	}
+
+	@Override
+	public void saveTransactionHistory(TransactionHistoryModel transactionHistoryModel, String id) {
+		// TODO Auto-generated method stub
+		TransactionHistory transactionHistory=transactionHistoryRepository.findTransactionHistoryById(id);
+		transactionHistory.setFromUserId(transactionHistoryModel.getFromUserId());
+		transactionHistory.setToUserId(transactionHistoryModel.getToUserId());
+		transactionHistory.setAmount(transactionHistoryModel.getAmount());
+		transactionHistory.setJobId(transactionHistoryModel.getJobId());
+		transactionHistory.setUserId(transactionHistoryModel.getUserId());
+		transactionHistoryRepository.saveAndFlush(transactionHistory);   
+	}
+
 	
 	
-	//@author SHIFAT ends
+	
 	
 
 	
