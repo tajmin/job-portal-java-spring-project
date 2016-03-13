@@ -476,3 +476,103 @@ Controllers.controller("jobCtrl", function($scope, $rootScope, restservice, $coo
     }
     
 });
+
+Controllers.controller("jobDetailsCtrl", function($scope, $rootScope, restservice, $cookies, $window, utilservice) {
+	$scope.isproceed = false;
+	$scope.job = {};
+	$scope.formSubmitted = false;
+	$scope.responseMessage = "";
+	$scope.id = utilservice.getParameterByName("id");
+	
+	$window.map = new google.maps.Map(document.getElementById('g-map'), {
+        center: {
+            lat: -34.397,
+            lng: 150.644
+        },
+        zoom: 8
+    });
+	
+	//Show job details
+	$scope.jobDetailsById = function(jobId) {			
+		restservice.get( '', "api/v1/job/jobDetailsById?jobID=" + jobId).then(function(response) {
+			if (response != null) {
+				$scope.job = response;
+				$scope.showJobInMap();
+        	}
+        });
+	
+    };
+    $scope.jobDetailsById($scope.id);
+    
+    
+    //Shows Best Paid Jobs 
+    $scope.bestPaidJob = function() {	
+		
+		restservice.get( '', "api/v1/job/bestpaidjob").then(function(response) {
+			if (response != null) {
+				$scope.job = response;					
+        	} else {
+        		$scope.responseMessage = response.message;	
+        	}
+        });
+	
+    };
+    
+    //Shows Shortest Time Jobs 
+    $scope.shortestTimeJob = function() {		
+		restservice.get( '', "api/v1/job/shortesttimejob").then(function(response) {
+			if (response != null) {
+				$scope.job = response;	
+        	} else {
+        		$scope.responseMessage = response.message;	
+        	}
+        });
+	
+    };
+    
+    //Shows Earliest deadline Jobs 
+    $scope.earliestDeadlineJob = function() {		
+		restservice.get( '', "api/v1/job/earliestdeadlinejob").then(function(response) {
+			if (response != null) {
+				$scope.job = response;	
+        	} else {
+        		$scope.responseMessage = response.message;	
+        	}
+        });
+	
+    };
+    
+    //Shows Nearest You Jobs 
+    $scope.nearestJob = function() {		
+		restservice.get( '', "api/v1/job/nearestjob").then(function(response) {
+			if (response != null) {
+				$scope.job = response;	
+        	} else {
+        		$scope.responseMessage = response.message;	
+        	}
+        });
+	
+    };
+    
+    $scope.showJobInMap = function(){
+    	//http://stackoverflow.com/questions/1544739/google-maps-api-v3-how-to-remove-all-markers
+    	var bounds = new google.maps.LatLngBounds();
+    	//for(i in $scope.job) {
+    		if($scope.job && $scope.job.title){
+    			var latLng = new google.maps.LatLng($scope.job.latitude, $scope.job.longitude); 
+    	        var marker = new google.maps.Marker({
+    	            position: latLng,
+    	            map: $window.map,
+    	            title: $scope.job.title
+    	        });
+    	        bounds.extend(marker.position);
+    		}
+    	//}
+    	$window.map.fitBounds(bounds);
+    };
+    
+    $scope.selectJob = function(jobid){
+    	window.open("http://localhost:8080/knoeien/jobdetail.xhtml?id=" + jobid,	"_self");
+    }
+    
+});

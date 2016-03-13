@@ -70,6 +70,23 @@ public class JobController extends AbstractController implements Serializable {
 		return new ResponseEntity<RestResponse>(convertToRestGoodResponse(job), HttpStatus.BAD_REQUEST);
 	}
 	
+	@RequestMapping(value = "/jobDetailsById", method = RequestMethod.GET, produces = "application/json")
+	public ResponseEntity<RestResponse> jobDetailsById(@RequestParam(value = "jobID", required = true) String jobID) {
+		RestResponse restResponse = null;
+		try {
+			JobService jobService = ApplicationBeanFactory.getBean(JobService.class);
+			Job job = jobService.findJobById(jobID);
+			JobModel jobModel = new JobModel(job);
+
+			return new ResponseEntity<RestResponse>( convertToRestGoodResponse(jobModel, LocalizationUtil.findLocalizedString("jobdetailssuccess.text")),HttpStatus.OK);
+		} catch (AuthenticationFailedException t) {
+			restResponse = convertToRestBadResponse("", t.getLocalizedMessage());
+		} catch (Exception t) {
+			restResponse = convertToRestBadResponse("", t.getLocalizedMessage());
+		}
+		return new ResponseEntity<RestResponse>( restResponse, HttpStatus.OK);
+	}
+	
 	
 	@RequestMapping(value = "/uploadimage", headers = ("content-type=multipart/*"), method = RequestMethod.POST)
 	public ResponseEntity<RestResponse> uploadImage(HttpServletRequest request, @RequestParam(value = "file", required = true) CommonsMultipartFile[] file) throws Exception {

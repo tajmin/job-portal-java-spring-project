@@ -27,9 +27,8 @@ public class JobServiceImpl implements JobService {
 	private JobRepository jobRepository;
 	
 	@Override
-	public Job findJobById(String id) {
-		// TODO Auto-generated method stub
-		return null;
+	public Job findJobById(String jobID) {
+		return jobRepository.findJobById(jobID);
 	}
 	
 	@Override
