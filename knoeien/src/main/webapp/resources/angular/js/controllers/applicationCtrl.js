@@ -471,4 +471,8 @@ Controllers.controller("jobCtrl", function($scope, $rootScope, restservice, $coo
     	$window.map.fitBounds(bounds);
     };
     
+    $scope.selectJob = function(jobid){
+    	window.open("http://localhost:8080/knoeien/jobdetail.xhtml?id=" + jobid,	"_self");
+    }
+    
 });
