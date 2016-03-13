@@ -377,17 +377,26 @@ Controllers.controller("addJobCtrl", function($scope, $rootScope, restservice, $
 	
 });
 
-Controllers.controller("jobCtrl", function($scope, $rootScope, restservice, $cookies) {
+Controllers.controller("jobCtrl", function($scope, $rootScope, restservice, $cookies, $window) {
 	$scope.isproceed = false;
 	$scope.job = {};
 	$scope.formSubmitted = false;
 	$scope.responseMessage = "";
 	
+	$window.map = new google.maps.Map(document.getElementById('g-map'), {
+        center: {
+            lat: -34.397,
+            lng: 150.644
+        },
+        zoom: 8
+    });
+	
 	//Shows Latest Jobs
 	$scope.latestJob = function() {			
 		restservice.get( '', "api/v1/job/latestjob").then(function(response) {
 			if (response != null) {
-				$scope.job = response;	
+				$scope.job = response;
+				$scope.showJobInMap();
         	} else {
         		$scope.responseMessage = response.message;	
         	}
@@ -401,8 +410,7 @@ Controllers.controller("jobCtrl", function($scope, $rootScope, restservice, $coo
 		
 		restservice.get( '', "api/v1/job/bestpaidjob").then(function(response) {
 			if (response != null) {
-				$scope.job = response;	
-				console.log($scope.job);
+				$scope.job = response;					
         	} else {
         		$scope.responseMessage = response.message;	
         	}
@@ -444,5 +452,23 @@ Controllers.controller("jobCtrl", function($scope, $rootScope, restservice, $coo
         	}
         });
 	
-    };     
+    };
+    
+    $scope.showJobInMap = function(){
+    	//http://stackoverflow.com/questions/1544739/google-maps-api-v3-how-to-remove-all-markers
+    	var bounds = new google.maps.LatLngBounds();
+    	for(i in $scope.job) {
+    		if($scope.job[i] && $scope.job[i].title){
+    			var latLng = new google.maps.LatLng($scope.job[i].latitude, $scope.job[i].longitude); 
+    	        var marker = new google.maps.Marker({
+    	            position: latLng,
+    	            map: $window.map,
+    	            title: $scope.job[i].title
+    	        });
+    	        bounds.extend(marker.position);
+    		}
+    	}
+    	$window.map.fitBounds(bounds);
+    };
+    
 });
