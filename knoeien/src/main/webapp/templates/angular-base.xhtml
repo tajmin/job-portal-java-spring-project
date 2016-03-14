@@ -94,7 +94,7 @@
 						<a href="#{authorizationBean.canView()?'jobpost.xhtml':''}" data-toggle="not-logedin-modal" class="hlpr-color-#{(view.viewId == '/index.xhtml') ? 'info' : 'white hollow'} button">Post Job</a>
 						<a href="#{authorizationBean.canView()?'findjobs.xhtml':''}" data-toggle="not-logedin-modal" class="hlpr-color-#{(view.viewId == '/index.xhtml') ? 'success' : 'white hollow'} button">Find Job</a>
 						<c:if test="#{view.viewId != '/index.xhtml'}">
-							<a class="hollow hlpr-color-white button" href="#">Overview</a>
+							<a class="hollow hlpr-color-white button" href="overview.xhtml">Overview</a>
 						</c:if>
 
 					</div>
