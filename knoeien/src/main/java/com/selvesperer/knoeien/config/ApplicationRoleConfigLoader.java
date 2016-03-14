@@ -9,7 +9,7 @@ public class ApplicationRoleConfigLoader {
 	
 	static {	
 		try {
-			properties.load(ApplicationRoleConfigLoader.class.getClassLoader().getResourceAsStream("application_roles.properties"));
+			properties.load(ApplicationRoleConfigLoader.class.getClassLoader().getResourceAsStream("application-roles.properties"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
