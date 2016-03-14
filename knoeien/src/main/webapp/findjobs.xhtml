@@ -11,9 +11,16 @@
   			<!-- <li class="tabs-title"><a href="#shortestTime" ng-click="shortestTimeJob()">Shortest Time</a></li> -->
   			<li class="tabs-title"><a href="#earliestDeadline" ng-click="earliestDeadlineJob()">Earliest Deadline</a></li>  			
 		</ul>
-		<div class="tabs-content job-list" data-tabs-content="job-tabs" >
+		<style>
+			.search-list:hover{
+				background-color: #eee;
+				cursor: pointer;
+			}
+		</style>
+		
+		<div class="tabs-content job-list" data-tabs-content="job-tabs">
 			<div class="tabs-panel is-active" id="latest">
-				<div class="row search-list" ng-repeat="model in job">
+				<div class="row search-list" ng-repeat="model in job" ng-click="selectJob(model.id)">
 					<div class="medium-3 columns text-center">
 						<img class="border-radius-7px" src="/img/{{model.imageUrl}}" alt="Job Image" />
 					</div>
@@ -185,19 +192,7 @@
 	</div>
 	</ui:define>
 	<ui:define name="right-content">
-    	<div id="g-map" style="width:100%;height:98vh;"></div>
-		<script type="text/javascript">
-		var map;
-		function initMap() {
-			var mapProp = {
-					center:new google.maps.LatLng(61.0000,8.0000),
-					zoom:8,
-					mapTypeId:google.maps.MapTypeId.ROADMAP
-			};
-			var map=new google.maps.Map(document.getElementById("g-map"),mapProp);
-		}
-			google.maps.event.addDomListener(window, 'load', initMap);
-    	</script>
+    	<div id="g-map" style="width:100%;height:98vh;"></div>		
 	</ui:define>
 	
 </ui:composition>

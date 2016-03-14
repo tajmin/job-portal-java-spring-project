@@ -1087,3 +1087,21 @@ line-height: 1.75em;
 	width: 25px;
 }
 /*my-job.xhtml ends*/
+
+ul.custom-tabs li {
+	padding: 0;
+	text-align: center;
+}
+ul.custom-tabs li a {
+	background-color: #f5f2f2;
+    font-size: 1rem;
+    color: #3a3938;
+}
+ul.custom-tabs li.tabs-title > a:focus, ul.custom-tabs li.tabs-title > a[aria-selected="true"] {
+    background-color: #26c6e8;
+    color: #fff;
+}
+.tabs-content {
+	padding-bottom: 50px;
+}
+
