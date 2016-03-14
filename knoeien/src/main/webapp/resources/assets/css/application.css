@@ -1063,3 +1063,27 @@ line-height: 1.75em;
 	margin-right: 40px;
 }
 /*proceed-paymnet.xhtml ends*/
+
+/*my-job.xhtml starts*/
+.my-page-title {
+	margin-left: -12px;
+	color: #565454;
+}
+#my-job p {
+	font-size: 10px;
+	line-height: 0.6;
+}
+#my-job a {
+	padding: 5px 10px;
+    font-size: 11px;
+}
+.job-thumb {
+	max-width: 80px;
+	max-height: 80px;
+	border-radius: 8px;
+}
+.job-done-tick {
+	height: 20px;
+	width: 25px;
+}
+/*my-job.xhtml ends*/
