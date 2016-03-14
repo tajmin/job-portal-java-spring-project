@@ -1063,18 +1063,44 @@ line-height: 1.75em;
 	margin-right: 40px;
 }
 /*proceed-paymnet.xhtml ends*/
-ul.custom-tabs li {
+ul.custom-tabs, ul.custom-arrow-tabs {
+	background-color: #f5f2f2;
+}
+ul.custom-tabs li, ul.custom-arrow-tabs li {
 	padding: 0;
 	text-align: center;
 }
-ul.custom-tabs li a {
-	background-color: #f5f2f2;
+ul.custom-arrow-tabs li {
+	position: relative;
+}
+ul.custom-tabs li a, ul.custom-arrow-tabs li a {
     font-size: 1rem;
     color: #3a3938;
 }
-ul.custom-tabs li.tabs-title > a:focus, ul.custom-tabs li.tabs-title > a[aria-selected="true"] {
+ul.custom-tabs li.tabs-title > a:focus, ul.custom-tabs li.tabs-title > a[aria-selected="true"],
+ul.custom-arrow-tabs li.tabs-title > a:focus, ul.custom-arrow-tabs li.tabs-title > a[aria-selected="true"] {	
     background-color: #26c6e8;
     color: #fff;
+}
+ul.custom-arrow-tabs li.tabs-title > a[aria-selected="true"]::before {
+	border-bottom: 10px solid transparent;
+    border-left: 15px solid #f5f2f2;
+    border-top: 10px solid transparent;
+    content: "";
+    height: 0;
+    left: 0;
+    position: absolute;
+    width: 0;
+}
+ul.custom-arrow-tabs li.tabs-title:not(:last-child) > a[aria-selected="true"]::after {
+	border-bottom: 10px solid transparent;
+    border-left: 15px solid #26c6e8;
+    border-top: 10px solid transparent;
+    content: "";
+    height: 0;
+    left: 100%;
+    position: absolute;
+    width: 0;
 }
 .tabs-content {
 	padding-bottom: 50px;
