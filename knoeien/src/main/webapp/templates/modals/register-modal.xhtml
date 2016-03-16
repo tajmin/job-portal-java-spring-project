@@ -113,13 +113,13 @@
 						<div class="row">
 							<fieldset class="medium-12 columns">					
 								<div class="button-group">
-									<a href="" class="button hlpr-color-info" style="width: 100%; border-radius: 8px;">Send Verification Code</a>
+									<a ng-click="sendVerificationCode()" href="" class="button hlpr-color-info" style="width: 100%; border-radius: 8px;">Send Verification Code</a>
 								</div>
 							</fieldset>
 						</div>
 						<div class="row">
 							<div class="medium-12 columns">
-								<input name="verificationCode" ng-model="user.verificationCode" type="text" id="verificationCode" placeholder="Enter Verification Code Here"  />
+								<input name="verificationCode" ng-model="user.verificationCode" ng-keyup="verifyCode($event)" type="text" id="verificationCode" placeholder="Enter Verification Code Here"  />
 								<div ng-messages="formSubmitted &amp;&amp; signupForm.email.$error">
 		                        	<div ng-message="required" class="error">Verification Code is required.</div>
 		                        </div>
