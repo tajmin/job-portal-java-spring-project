@@ -20,7 +20,7 @@
 							<input class="search-bar border-radius-7px" type="text" placeholder="Search Text" ng-model="filter.searchText"/>
 						</div>
 						<div class="medium-3 columns">							
-							<a class="hlpr-color-info expanded button border-radius-7px" href="#{(authorizationBean.canView()) ? 'jobpost.xhtml' : ''}" data-toggle="not-logedin-modal" 
+							<a class="hlpr-color-info expanded button border-radius-7px" href="#{(authorizationBean.canView()) ? 'jobpost.xhtml?title={{filter.searchText}}' : ''}" data-toggle="not-logedin-modal" 
 								type="submit" id="post-job1">Post</a>
 						</div>
 						<!-- <div class="medium-3 large-2 columns">
