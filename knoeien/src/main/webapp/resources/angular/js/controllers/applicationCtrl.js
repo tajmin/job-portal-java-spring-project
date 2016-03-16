@@ -339,6 +339,7 @@ Controllers.controller("addJobCtrl", function($scope, $rootScope, restservice, $
 	$scope.imageFile;
 	$scope.tempUploadedFilePath = "";
 	$scope.titleEdit = false;
+	$scope.page = 1;
 	
 	var title = utilservice.getParameterByName("title");
 	if(!utilservice.isUndefinedOrNull(title)){
@@ -347,6 +348,54 @@ Controllers.controller("addJobCtrl", function($scope, $rootScope, restservice, $
 	
 	$scope.makeTitleEditable = function() {
 		$scope.titleEdit = true;		
+    };
+    
+    $scope.nextPage = function() {
+    	console.log($scope.page);
+    	if($scope.page > 3){
+    		return;
+    	}
+    	
+		$scope.page += 1;
+		
+		if($scope.page == 1){
+			$("#panel_job_info-label").trigger('click');
+		}
+		
+		if($scope.page == 2){
+			$("#panel_job_details-label").trigger('click');
+		}
+		
+		if($scope.page == 3){
+			$("#panel_job_approved-label").click();
+		}
+		
+    };
+    
+    $scope.prevPage = function() {
+    	if($scope.page < 0){
+    		return;
+    	}
+    	
+		$scope.page -= 1;
+		if($scope.page == 1){
+			$("#panel_job_info-label").trigger('click');
+		}
+		
+		if($scope.page == 2){
+			$("#panel_job_details-label").trigger('click');
+		}
+		
+		if($scope.page == 3){
+			$("#panel_job_approved-label").click();
+		}		
+    };
+    
+    $scope.isPost = function(isValid) {
+    	if($scope.page >= 3){
+    		return true;
+    	}
+    	return false;
     };
 	
 	$scope.draftJob = function(isValid) {
