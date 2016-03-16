@@ -1,13 +1,8 @@
 package com.selvesperer.knoeien.web.controllers.rest;
 import java.awt.Image;
-import java.io.BufferedOutputStream;
-import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileOutputStream;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Serializable;
-import java.io.Writer;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -32,18 +27,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
-import com.selvesperer.knoeien.data.domain.Notification;
 import com.selvesperer.knoeien.data.domain.User;
-import com.selvesperer.knoeien.data.repository.UserRepository;
 import com.selvesperer.knoeien.emails.ActivationEmail;
 import com.selvesperer.knoeien.emails.InvitationFriendEmail;
 import com.selvesperer.knoeien.exception.AuthenticationFailedException;
 import com.selvesperer.knoeien.security.SecurityManager;
 import com.selvesperer.knoeien.service.EmailService;
-
 import com.selvesperer.knoeien.service.UserService;
 import com.selvesperer.knoeien.spring.utils.ApplicationBeanFactory;
 import com.selvesperer.knoeien.utils.Constants;

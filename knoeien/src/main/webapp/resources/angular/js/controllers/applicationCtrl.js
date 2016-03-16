@@ -43,6 +43,8 @@ Controllers.controller("signupCtrl", function($scope, $rootScope, restservice, $
 	$scope.formSubmitted = false;
 	$scope.responseMessage = "";
 	
+	$("#verificationCode").removeClass("verificationCode");
+	
 	$scope.signup = function(isValid) {
 		if (!isValid) return;		
 		$scope.user.dateOfBirth = $scope.user.year + "-" + $scope.user.month + "-" + $scope.user.day;
@@ -53,6 +55,32 @@ Controllers.controller("signupCtrl", function($scope, $rootScope, restservice, $
 				$scope.responseMessage = response.message;
 			}
 		});
+	};
+	
+	$scope.sendVerificationCode = function() {
+		if($scope.user.contact.length >= 0){
+//			restservice.post($scope.user, "api/v1/user/signup").then(function(response) {
+//				if (response != null && response.success) {
+//					$scope.isproceed = true;
+//					$scope.responseMessage = response.message;
+//				}
+//			});
+		}
+	};
+	
+
+	$scope.verifyCode = function($event) {
+		if ($scope.user.verificationCode.length >= 0) {
+			if ($event.keyCode == 13 || $event.keyCode == 9) {
+				alert($scope.user.verificationCode);
+//				restservice.post($scope.user, "api/v1/user/signup").then(function(response) {
+//					if (response != null && response.success) {
+//						$scope.isproceed = true;
+//						$scope.responseMessage = response.message;
+//					}
+//				});
+			}
+		}
 	};
 });
 

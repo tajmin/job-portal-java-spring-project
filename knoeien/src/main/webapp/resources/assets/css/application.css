@@ -503,7 +503,7 @@
 #verifyTitle {
 	margin: 0 0 47px;
 }
-#verificationCode {
+.verificationCode {
 	background: url(../images/success.png) no-repeat;
     background-size: 36px 32px;
     padding: 5px 5px;
