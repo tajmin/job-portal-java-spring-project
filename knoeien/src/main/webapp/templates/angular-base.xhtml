@@ -78,33 +78,31 @@
 			<!-- menu for large device starts here -->
 			<ul
 				class="menu expanded sticky show-for-large #{(view.viewId == '/index.xhtml') ? 'dark' : 'light'}">
-				<li class="">
+				<li class="" style="width: 25%">
 					<div class="">
 						<!-- site title / logo goes here -->
 						<a href="index.xhtml" class="menu-text title">Helpers</a>
 					</div>
 				</li>
 
-				<li class="home-buttons clearfix">
+				<li class="home-buttons clearfix" style="width: 50%">
 				
 					<div class="text-center">
+						<a href="#{authorizationBean.canView()?'jobpost.xhtml':''}" data-toggle="not-logedin-modal" class="hlpr-color-#{(view.viewId == '/index.xhtml') ? 'info' : 'white hollow'} button">Post Job</a>
+						<a href="#{authorizationBean.canView()?'findjobs.xhtml':''}" data-toggle="not-logedin-modal" class="hlpr-color-#{(view.viewId == '/index.xhtml') ? 'success' : 'white hollow'} button">Find Job</a>
 						<c:if test="#{view.viewId != '/index.xhtml'}">
-							<a href="#{authorizationBean.canView()?'jobpost.xhtml':''}" data-toggle="not-logedin-modal" class="hlpr-color-#{(view.viewId == '/index.xhtml') ? 'info' : 'white hollow'} button border-radius-7px">Post Job</a>
-						</c:if>
-						<a href="#{authorizationBean.canView()?'findjobs.xhtml':''}" data-toggle="not-logedin-modal" class="hlpr-color-#{(view.viewId == '/index.xhtml') ? 'success' : 'white hollow'} button border-radius-7px">Find Job</a>
-						<c:if test="#{view.viewId != '/index.xhtml'}">
-							<a class="hollow hlpr-color-white button border-radius-7px" href="overview.xhtml">Overview</a>
+							<a class="hollow hlpr-color-white button" href="overview.xhtml">Overview</a>
 						</c:if>
 
 					</div>
 				</li>
 				
-				<li class="home-buttons clearfix">
+				<li class="home-buttons clearfix" style="width: 25%">
 					<div class="text-right menu-last">
 						<!-- menu button goes here -->
 						<c:if test="#{view.viewId == '/index.xhtml'}">
 							<a data-toggle="login-modal"
-								class="hollow hlpr-color-white button border-radius-7px"
+								class="hollow hlpr-color-white button"
 								style="display:#{authorizationBean.canView()?'none':''}">Login</a>
 							<!-- <a data-toggle="not-logedin-modal" class="hollow hlpr-color-white button ">My page</a> -->
 						</c:if>
