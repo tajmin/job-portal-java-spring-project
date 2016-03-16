@@ -59,6 +59,7 @@ Controllers.controller("signupCtrl", function($scope, $rootScope, restservice, $
 	
 	$scope.sendVerificationCode = function() {
 		if($scope.user.contact.length >= 0){
+			
 //			restservice.post($scope.user, "api/v1/user/signup").then(function(response) {
 //				if (response != null && response.success) {
 //					$scope.isproceed = true;
@@ -73,6 +74,7 @@ Controllers.controller("signupCtrl", function($scope, $rootScope, restservice, $
 		if ($scope.user.verificationCode.length >= 0) {
 			if ($event.keyCode == 13 || $event.keyCode == 9) {
 				alert($scope.user.verificationCode);
+				$("#verificationCode").addClass("verificationCode");
 //				restservice.post($scope.user, "api/v1/user/signup").then(function(response) {
 //					if (response != null && response.success) {
 //						$scope.isproceed = true;

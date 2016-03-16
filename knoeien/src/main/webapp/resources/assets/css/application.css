@@ -504,10 +504,10 @@
 	margin: 0 0 47px;
 }
 .verificationCode {
-	background: url(../images/success.png) no-repeat;
-    background-size: 36px 32px;
-    padding: 5px 5px;
-    background-position: 95% 70%;
+	background: url(../images/success.png) no-repeat !important;
+    background-size: 36px 32px !important;
+    /* padding: 5px 5px; */
+    background-position: 95% 70% !important;
 }
 #registerForm p {
 	font-size: 0.75em;
