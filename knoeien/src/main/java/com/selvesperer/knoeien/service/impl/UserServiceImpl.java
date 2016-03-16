@@ -32,6 +32,7 @@ import com.selvesperer.knoeien.service.EmailService;
 import com.selvesperer.knoeien.service.UserService;
 import com.selvesperer.knoeien.spring.ScopeType;
 import com.selvesperer.knoeien.spring.utils.ApplicationBeanFactory;
+import com.selvesperer.knoeien.web.controllers.model.PaymentInfoModel;
 import com.selvesperer.knoeien.web.controllers.model.UserModel;
 
 @Service("userService")
@@ -184,6 +185,23 @@ public class UserServiceImpl implements UserService {
 		user.setCardMonth(userModel.getCardMonth());
 		user.setCardYear(userModel.getCardYear());
 		user.setCvc(userModel.getCvc());
+	
+		userRepository.saveAndFlush(user);		
+	}
+	
+	public void updatePaymentInfo(PaymentInfoModel paymentInfoModel, String id) {
+		User user = userRepository.findUserById(id);
+		
+		if (user == null) {
+			throw new AuthenticationFailedException("error.usernotfound.text");
+		}
+		
+		user.setCardNumber(paymentInfoModel.getCardNumber());
+		user.setCardholderName(paymentInfoModel.getCardholderName());
+		user.setAccountNumber(paymentInfoModel.getAccountNumber());
+		user.setCardMonth(paymentInfoModel.getCardMonth());
+		user.setCardYear(paymentInfoModel.getCardYear());
+		user.setCvc(paymentInfoModel.getCvc());
 	
 		userRepository.saveAndFlush(user);		
 	}

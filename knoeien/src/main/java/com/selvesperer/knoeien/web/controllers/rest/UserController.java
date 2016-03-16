@@ -41,6 +41,7 @@ import com.selvesperer.knoeien.utils.Constants;
 import com.selvesperer.knoeien.utils.IdGenerator;
 import com.selvesperer.knoeien.utils.configuration.ConfigurationUtil;
 import com.selvesperer.knoeien.utils.localization.LocalizationUtil;
+import com.selvesperer.knoeien.web.controllers.model.PaymentInfoModel;
 import com.selvesperer.knoeien.web.controllers.model.RestResponse;
 import com.selvesperer.knoeien.web.controllers.model.UserModel;
 
@@ -91,7 +92,6 @@ public class UserController extends AbstractController implements Serializable {
 	@ResponseBody
 	public ResponseEntity<RestResponse> saveUserSetting(@RequestBody UserModel userModel, @RequestParam(value="name", required=true) String name) {
 		try {
-			RestResponse restResponse = null;
 			UserService userService = ApplicationBeanFactory.getBean(UserService.class);
 			String id = SecurityManager.getCurrentUserId();
 			userService.saveUserSetting(userModel, id, name);
@@ -309,6 +309,40 @@ public class UserController extends AbstractController implements Serializable {
 			UserModel userModel = new UserModel(user);
 
 			return new ResponseEntity<RestResponse>( convertToRestGoodResponse(userModel, LocalizationUtil.findLocalizedString("updatesuccess.text")),HttpStatus.OK);
+		} catch (AuthenticationFailedException t) {
+			restResponse = convertToRestBadResponse("", t.getLocalizedMessage());
+		} catch (Exception t) {
+			restResponse = convertToRestBadResponse("", t.getLocalizedMessage());
+		}
+		return new ResponseEntity<RestResponse>( restResponse, HttpStatus.OK);
+	}
+	
+	@RequestMapping(value = "/getUserPaymentInfo", method = RequestMethod.GET, produces = "application/json")
+	public ResponseEntity<RestResponse> getUserPaymentInfo() {
+		RestResponse restResponse = null;
+		try {
+			UserService userService = ApplicationBeanFactory.getBean(UserService.class);
+			String id = SecurityManager.getCurrentUserId();
+			User user = userService.showUserInfo(id);
+			PaymentInfoModel paymentInfoModel = new PaymentInfoModel(user);
+
+			return new ResponseEntity<RestResponse>( convertToRestGoodResponse(paymentInfoModel, LocalizationUtil.findLocalizedString("updatesuccess.text")),HttpStatus.OK);
+		} catch (AuthenticationFailedException t) {
+			restResponse = convertToRestBadResponse("", t.getLocalizedMessage());
+		} catch (Exception t) {
+			restResponse = convertToRestBadResponse("", t.getLocalizedMessage());
+		}
+		return new ResponseEntity<RestResponse>( restResponse, HttpStatus.OK);
+	}
+	
+	@RequestMapping(value = "/saveUserPaymentInfo", method = RequestMethod.POST, produces = "application/json")
+	public ResponseEntity<RestResponse> saveUserPaymentInfo(@RequestBody PaymentInfoModel paymentInfoModel) {
+		RestResponse restResponse = null;
+		try {
+			UserService userService = ApplicationBeanFactory.getBean(UserService.class);
+			String id = SecurityManager.getCurrentUserId();
+			userService.updatePaymentInfo(paymentInfoModel, id);						
+			return new ResponseEntity<RestResponse>(convertToRestGoodResponse(true, LocalizationUtil.findLocalizedString("updatesuccess.text")),HttpStatus.OK);
 		} catch (AuthenticationFailedException t) {
 			restResponse = convertToRestBadResponse("", t.getLocalizedMessage());
 		} catch (Exception t) {

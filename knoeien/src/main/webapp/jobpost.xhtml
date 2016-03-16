@@ -40,7 +40,7 @@
 				
 				<div class="row text-center">
 					<a  href="javascript:void(0);" ng-click="formSubmitted = true; draftJob(jobPostingForm.$valid);" class="button hlpr-color-alert">Save Draft</a>
-					<a ng-if="isPost()" href="javascript:void(0);" ng-click="formSubmitted = true; postJob(jobPostingForm.$valid);" class="button hlpr-color-info">Post</a>
+					<a ng-if="isPost()" href="javascript:void(0);" ng-click="formSubmitted = true; openPaymentWindow(jobPostingForm.$valid);" class="button hlpr-color-info">Post</a>
 					<a ng-if="!isPost()" href="javascript:void(0);" ng-click="formSubmitted = true; nextPage(jobPostingForm.$valid);" class="button hlpr-color-info">Next</a> 										
 				</div>				
 			</form>			

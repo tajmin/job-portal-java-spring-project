@@ -333,6 +333,7 @@ Controllers.controller("transactionCtrl", function($scope, $rootScope,restservic
 Controllers.controller("addJobCtrl", function($scope, $rootScope, restservice, $cookies, utilservice, $http, authService) {
 	$scope.isproceed = false;
 	$scope.job = {};
+	$scope.payment = {};
 	$scope.formSubmitted = false;
 	$scope.responseMessage = "";
 	$scope.cover_image = "";
@@ -340,6 +341,11 @@ Controllers.controller("addJobCtrl", function($scope, $rootScope, restservice, $
 	$scope.tempUploadedFilePath = "";
 	$scope.titleEdit = false;
 	$scope.page = 1;
+	$scope.job.price = 0;
+	$scope.job.deadlineMonth = 0;
+	$scope.job.deadlineDay = 0;
+	$scope.job.hours = 0;
+	$scope.job.minutes = 0;
 	
 	var title = utilservice.getParameterByName("title");
 	if(!utilservice.isUndefinedOrNull(title)){
@@ -376,7 +382,7 @@ Controllers.controller("addJobCtrl", function($scope, $rootScope, restservice, $
     $scope.increment = function(i) {
     	if(!i) i = 0;
     	i = parseInt(i);
-    	if(i <= 0) return 0;
+    	if(i < 0) return 0;
     	return i + 1;
     };
     
@@ -416,19 +422,25 @@ Controllers.controller("addJobCtrl", function($scope, $rootScope, restservice, $
 		
     };
     
-    $scope.postJob = function(isValid) {
-    	$("#card-info-modal").foundation('toggle');
+    
+    $scope.openPaymentWindow = function(isValid){
+    	if(!isValid) return;
+    	$scope.getUserPaymentInfo();
+    };
+    
+    $scope.postJob = function() {
     	$scope.job.draft = false;
 		$scope.job.latitude = $("#latitude").val();
 		$scope.job.longitude = $("#longitude").val();
 		$scope.job.addressLine1 = $("#placesearch").val();
 		$scope.job.imageUrl = $scope.tempUploadedFilePath;
 		
-//		restservice.post($scope.job, "api/v1/job/addjob").then(function(response) {
-//			if (response != null) {
-//				$scope.job = response;
-//        	}
-//        });
+		restservice.post($scope.job, "api/v1/job/addjob").then(function(response) {
+			if (response != null) {
+				$scope.job = response;
+				$("#draft-confirmation-modal").foundation('toggle');
+        	}
+        });
 		
     };
     
@@ -459,6 +471,26 @@ Controllers.controller("addJobCtrl", function($scope, $rootScope, restservice, $
             });
         }
     };
+    
+    $scope.getUserPaymentInfo = function() {
+		restservice.get('', "api/v1/user/getUserPaymentInfo").then(function(response) {
+			if (response != null) {
+				$scope.payment = response; 				
+			}
+			$("#card-info-modal").foundation('toggle');
+		});
+	};
+	
+	
+	$scope.saveUserPaymentInfo = function(isValid) {
+		if(!isValid) return;
+		
+		restservice.post( $scope.user, "api/v1/user/saveUserPaymentInfo").then(function(response) {
+			if (response != null) {
+				$scope.postJob();
+        	}
+        });
+    };   
 	
 });
 
