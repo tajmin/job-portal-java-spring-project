@@ -4,10 +4,14 @@
 			<div class="row" style="margin-top: 40px;">
 				<div class="small-12 columns">
 					<div class="small-5 columns" style="padding-left: 0">
-						<div class="input-group">
-							<label ng-if="!titleEdit"><h5>{{job.title}}</h5></label>
-							<input ng-if="titleEdit" type="text" class="input-group-field" ng-model="job.title" />
-							<a ng-click="makeTitleEditable()" style="width: 25%; border-bottom: 1px solid; margin-left: 10px"><i class="icon fi-pencil"></i></a>
+						<div class="row">
+							<div class="small-10 columns">
+								<label ng-if="!titleEdit"><h5>{{job.title}}</h5></label>
+								<input ng-if="titleEdit" type="text" class="input-group-field" ng-model="job.title" />
+							</div>
+							<div class="small-2 columns">
+								<a ng-click="makeTitleEditable()" style="width: 25%; border-bottom: 1px solid; margin-left: 10px"><i class="icon fi-pencil"></i></a>
+							</div>
 						</div>
 						<div ng-messages="formSubmitted &amp;&amp; jobPostingForm.title.$error">
 							<div ng-message="required" class="error">Title is required</div>
