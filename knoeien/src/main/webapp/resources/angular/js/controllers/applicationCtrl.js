@@ -338,12 +338,16 @@ Controllers.controller("addJobCtrl", function($scope, $rootScope, restservice, $
 	$scope.cover_image = "";
 	$scope.imageFile;
 	$scope.tempUploadedFilePath = "";
+	$scope.titleEdit = false;
 	
 	var title = utilservice.getParameterByName("title");
 	if(!utilservice.isUndefinedOrNull(title)){
 		$scope.job.title = title;
 	}
 	
+	$scope.makeTitleEditable = function() {
+		$scope.titleEdit = true;		
+    };
 	
 	$scope.draftJob = function(isValid) {
 		if(!isValid) return;
@@ -398,7 +402,8 @@ Controllers.controller("addJobCtrl", function($scope, $rootScope, restservice, $
                 headers: {'Content-Type': undefined}
             }).success(function(succResponse){
             	$rootScope.restMessages = succResponse.message;
-            	$scope.tempUploadedFilePath = succResponse.response
+            	$scope.tempUploadedFilePath = succResponse.response;
+            	$scope.job.imageUrl = $scope.tempUploadedFilePath;
             }).error(function(errResponse){
             	$rootScope.restMessages = errResponse.message;
             });

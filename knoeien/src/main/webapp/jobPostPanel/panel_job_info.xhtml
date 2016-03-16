@@ -3,39 +3,40 @@
 		
 			<div class="row" style="margin-top: 40px;">
 				<div class="small-12 columns">
-					<div class="row">
-						<div class="small-5 columns">
-							<div class="input-group">
-								<input type="text" class="input-group-field"  placeholder="Job title" ng-model="job.title" /> 
-								<span class="input-group-label"><i class="icon fi-pencil"></i></span>
-							</div>
-							<div ng-messages="formSubmitted &amp;&amp; jobPostingForm.title.$error">
-								<div ng-message="required" class="error">Title is required</div>
-							</div>
+					<div class="small-5 columns" style="padding-left: 0">
+						<div class="input-group">
+							<label ng-if="!titleEdit"><h5>{{job.title}}</h5></label>
+							<input ng-if="titleEdit" type="text" class="input-group-field" ng-model="job.title" />
+							<a ng-click="makeTitleEditable()" style="width: 25%; border-bottom: 1px solid; margin-left: 10px"><i class="icon fi-pencil"></i></a>
 						</div>
-						<div class="small-7 columns">
-							<div class="row">
-								<div class="small-12 columns text-right no-padding" style="padding: 0;">
-									<label for="jobImageFileUpload" class="middle" style="color: #6bbe54; font-weight: bold; cursor: pointer;">+ Add photo / switch image</label>
-									<input type="file" id="jobImageFileUpload" class="show-for-sr" file-model = "imageFile" onchange="angular.element(this).scope().imageUpload(this)" />
-								</div>
-							</div>
-							
+						<div ng-messages="formSubmitted &amp;&amp; jobPostingForm.title.$error">
+							<div ng-message="required" class="error">Title is required</div>
 						</div>
-					</div>					
+					</div>
+					<div class="small-7 columns">
+						<div class="row">
+							<div class="small-6 columns text-right no-padding" style="padding: 0; padding-right: 10px">
+								<label for="jobImageFileUpload" class="middle" style="color: #6bbe54; font-weight: bold; cursor: pointer;">+ Add photo / switch image</label>
+								<input type="file" id="jobImageFileUpload" class="show-for-sr" file-model = "imageFile" onchange="angular.element(this).scope().imageUpload(this)" />
+							</div>
+							<div class="small-6 columns text-right no-padding" style="padding: 0;">
+								<input type="text" ng-model="job.imageUrl" />
+							</div>
+						</div>						
+					</div>									
 				</div>
 				<div class="small-12 columns">
-					<label><h4>Job Details</h4></label>
-					<textarea rows="3" placeholder="Write your details job description" ng-model="job.description" />
+					<label><h5>Job Details</h5></label>
+					<textarea rows="3" ng-model="job.description" />
 					<div
 						ng-messages="formSubmitted &amp;&amp; jobPostingForm.description.$error">
 						<div ng-message="required" class="error">Description is required</div>
 					</div>
 				</div>
 				<div class="small-12 columns">
-					<label><h4>Have you been awarded a sales code, put it here</h4></label>
+					<label><h5>Have you been awarded a sales code, put it here</h5></label>
 					<div class="input-group">
-						<input type="text" class="input-group-field" placeholder="Write your sales code" ng-model="job.salesPromoCode" />
+						<input type="text" class="input-group-field" ng-model="job.salesPromoCode" />
 					</div>
 					<div ng-messages="formSubmitted &amp;&amp; jobPostingForm.description.$error">
 						<div ng-message="required" class="error">Description is required</div>
@@ -45,10 +46,10 @@
 				
 
 				<div class="small-12 columns">
-					<label><h4>Where do you need help?</h4></label>
+					<label><h5>Where do you need help?</h5></label>
 					<div class="input-group">
-						<span class="input-group-label" style="font-size: 20px;"><i class="fi-marker"></i></span> 
-						<input type="text" size="50" id="placesearch" class="input-group-field" placeholder="Enter your street address" ng-model="job.addressLine1" /> 
+						<!-- <span class="input-group-label" style="font-size: 20px;"><i class="fi-marker"></i></span> --> 
+						<input type="text" size="50" id="placesearch" class="input-group-field" ng-model="job.addressLine1" /> 
 						<input type="hidden" id="latitude" name="latitude" ng-model="job.latitude" /> 
 						<input type="hidden" id="longitude" name="longitude" ng-model="job.longitude" />
 					</div>
