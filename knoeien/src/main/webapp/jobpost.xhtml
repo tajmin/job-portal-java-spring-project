@@ -3,8 +3,9 @@
 <ui:composition template="templates/angular-template.xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core">
 	<ui:define name="content">
 		<ui:insert name="card-info-modal"></ui:insert>
+		<ui:insert name="draft-confirmation-modal"></ui:insert>
 		<div ng-controller="addJobCtrl">
-			<form name="jobPostingForm" data-abide="data-abide" novalidate="novalidate">
+			<form name="jobPostingForm">
 				<div class="cover">
 					<canvas id="job_cover_image" class="cover-image" style="background-image: url(/img/{{(job.imageUrl !== '')? job.imageUrl : ''}})"></canvas>
 					<!-- <canvas class="cover-image" style=""></canvas> -->
@@ -18,9 +19,9 @@
 				</div>
 				<ul class="tabs row expanded custom-tabs arrow-right x2 blue" data-tabs="data-tabs" id="job-post-tabs">
 					<li class="tabs-title medium-3 columns" ><a href="#" onclick="return false;">Post your job</a></li>
-				  	<li class="tabs-title is-active medium-3 columns"><a ng-click="pageNo=1;" href="#panel_job_info" aria-selected="true">Info on the job</a></li>
-				  	<li class="tabs-title medium-3 columns"><a href="#panel_job_details">job details</a></li>
-				  	<li class="tabs-title medium-3 columns"><a href="#panel_job_approved">approved</a></li>
+				  	<li class="tabs-title is-active medium-3 columns"><a ng-click="setPageNo(1);" href="#panel_job_info" aria-selected="true">Info on the job</a></li>
+				  	<li class="tabs-title medium-3 columns"><a ng-click="setPageNo(2);" href="#panel_job_details">job details</a></li>
+				  	<li class="tabs-title medium-3 columns"><a ng-click="setPageNo(3);" href="#panel_job_approved">approved</a></li>
 				</ul>
 				<div class="tabs-content" data-tabs-content="job-post-tabs">
 				  <div class="tabs-panel is-active" id="panel_job_info">
@@ -40,7 +41,7 @@
 				<div class="row text-center">
 					<a  href="javascript:void(0);" ng-click="formSubmitted = true; draftJob(jobPostingForm.$valid);" class="button hlpr-color-alert">Save Draft</a>
 					<a ng-if="isPost()" href="javascript:void(0);" ng-click="formSubmitted = true; postJob(jobPostingForm.$valid);" class="button hlpr-color-info">Post</a>
-					<a ng-if="!isPost()" href="javascript:void(0);" ng-click="nextPage();" class="button hlpr-color-info">Next</a> 										
+					<a ng-if="!isPost()" href="javascript:void(0);" ng-click="formSubmitted = true; nextPage(jobPostingForm.$valid);" class="button hlpr-color-info">Next</a> 										
 				</div>				
 			</form>			
 		</div>		

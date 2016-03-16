@@ -350,8 +350,9 @@ Controllers.controller("addJobCtrl", function($scope, $rootScope, restservice, $
 		$scope.titleEdit = true;		
     };
     
-    $scope.nextPage = function() {
-    	console.log($scope.page);
+    $scope.nextPage = function(isValid) {
+    	if(!isValid) return;
+    	
     	if($scope.page > 3){
     		return;
     	}
@@ -372,23 +373,18 @@ Controllers.controller("addJobCtrl", function($scope, $rootScope, restservice, $
 		
     };
     
-    $scope.prevPage = function() {
-    	if($scope.page < 0){
-    		return;
-    	}
-    	
-		$scope.page -= 1;
-		if($scope.page == 1){
-			$("#panel_job_info-label").trigger('click');
-		}
-		
-		if($scope.page == 2){
-			$("#panel_job_details-label").trigger('click');
-		}
-		
-		if($scope.page == 3){
-			$("#panel_job_approved-label").click();
-		}		
+    $scope.increment = function(i) {
+    	if(!i) i = 0;
+    	i = parseInt(i);
+    	if(i <= 0) return 0;
+    	return i + 1;
+    };
+    
+    $scope.decrement = function(i) {
+    	if(!i) i = 0;
+    	i = parseInt(i);
+    	if(i <= 0) return 0;
+    	return i - 1;
     };
     
     $scope.isPost = function(isValid) {
@@ -396,6 +392,10 @@ Controllers.controller("addJobCtrl", function($scope, $rootScope, restservice, $
     		return true;
     	}
     	return false;
+    };
+    
+    $scope.setPageNo = function(i) {
+    	$scope.page = i;
     };
 	
 	$scope.draftJob = function(isValid) {
@@ -410,6 +410,7 @@ Controllers.controller("addJobCtrl", function($scope, $rootScope, restservice, $
 		restservice.post($scope.job, "api/v1/job/addjob").then(function(response) {
 			if (response != null) {
 				$scope.job = response;
+				$("#draft-confirmation-modal").foundation('toggle');
         	}
         });
 		
