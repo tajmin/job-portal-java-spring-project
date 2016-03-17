@@ -11,22 +11,22 @@
 						<hr style="width: 15%; margin-top: -5px; float: left; margin-left: -11px; border: none; height: 1px; background-color: #555453;"/>
 					</div>
 				</div>				
-				<div class="row" style="height: 300px; overflow-y: scroll; overflow-x: hidden;">
-					<div class="wrap" style="background: #F5F2F2; padding: 20px 5px 10px 15px;">
-						<div class="row">
+				<div class="row" style="height: 300px; overflow-y: scroll; overflow-x: hidden;" >
+					<div class="wrap" style="background: #F5F2F2; padding: 20px 5px 10px 15px;"  >
+						<div class="row" ng-repeat="model in assginedJob">
 							<div class="medium-2 columns">
-								<img class="job-thumb" src="#{request.contextPath}/resources/assets/images/garage.JPG" alt="Job Image" />
+								<img class="job-thumb" src="/img/{{model.imageUrl}}" alt="Job Image" />
 							</div>
 							<div class="medium-10  columns">
 								<div class="row" style="padding-top: 40px;">
 									<div class="medium-4 columns">
-										<h6 class="bold">Job Title</h6>
+										<h6 class="bold">{{model.title}}</h6>
 									</div>
 									<div class="medium-2 columns text-center">
 										<span>10</span>
 									</div>
 									<div class="medium-4 columns text-center ">
-										<span>00.00.000</span>
+										<span>{{model.price}}</span>
 									</div>
 									<div class="medium-2 columns text-center">
 										<img class="job-done-tick" src="#{request.contextPath}/resources/assets/images/success.png" alt="Job Image" />
@@ -135,9 +135,9 @@
 				</div>	
 				<div class="row" style="height: 300px; overflow-y: scroll; overflow-x: hidden;">
 					<div class="wrap" style="background: #F5F2F2; padding: 20px 5px 10px 15px;">
-						<div class="row">
+						<div class="row" ng-repeat="model in postedJob">
 							<div class="medium-2 columns">
-								<img class="job-thumb" src="#{request.contextPath}/resources/assets/images/garage.JPG" alt="Job Image" />
+								<img class="job-thumb" src="/img/{{model.imageUrl}}" alt="Job Image" />
 							</div>
 							<div class="medium-10  columns">
 								<div class="row">
@@ -147,13 +147,13 @@
 								</div>
 								<div class="row" style="">
 									<div class="medium-4 columns">
-										<h6 class="bold">Job Title</h6>
+										<h6 class="bold">{{model.title}}</h6>
 									</div>
 									<div class="medium-2 columns text-center">
 										<span>10</span>
 									</div>
 									<div class="medium-4 columns text-center ">
-										<span>00.00.000</span>
+										<span>{{model.price}}</span>
 									</div>
 									<div class="medium-2 columns text-center">
 										<img class="job-done-tick" src="#{request.contextPath}/resources/assets/images/success.png" alt="Job Image" />

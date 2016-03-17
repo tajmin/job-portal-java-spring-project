@@ -21,6 +21,7 @@ import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 import com.selvesperer.knoeien.data.domain.Job;
 import com.selvesperer.knoeien.exception.AuthenticationFailedException;
+import com.selvesperer.knoeien.security.SecurityManager;
 import com.selvesperer.knoeien.service.JobService;
 import com.selvesperer.knoeien.spring.utils.ApplicationBeanFactory;
 import com.selvesperer.knoeien.utils.IdGenerator;
@@ -122,7 +123,7 @@ public class JobController extends AbstractController implements Serializable {
 			JobModel jobModel = new JobModel();
 			List<JobModel> jobModelList = jobModel.getJobModelList(job);
 
-			return new ResponseEntity<RestResponse>( convertToRestGoodResponse(jobModelList, LocalizationUtil.findLocalizedString("signupsuccess.text")),HttpStatus.OK);
+			return new ResponseEntity<RestResponse>( convertToRestGoodResponse(jobModelList, LocalizationUtil.findLocalizedString("")),HttpStatus.OK);
 		} catch (AuthenticationFailedException t) {
 			restResponse = convertToRestBadResponse("", t.getLocalizedMessage());
 		} catch (Exception t) {
@@ -142,7 +143,7 @@ public class JobController extends AbstractController implements Serializable {
 			JobModel jobModel = new JobModel();
 			List<JobModel> jobModelList = jobModel.getJobModelList(job);
 
-			return new ResponseEntity<RestResponse>( convertToRestGoodResponse(jobModelList, LocalizationUtil.findLocalizedString("signupsuccess.text")),HttpStatus.OK);
+			return new ResponseEntity<RestResponse>( convertToRestGoodResponse(jobModelList, LocalizationUtil.findLocalizedString("")),HttpStatus.OK);
 		} catch (AuthenticationFailedException t) {
 			restResponse = convertToRestBadResponse("", t.getLocalizedMessage());
 		} catch (Exception t) {
@@ -162,7 +163,7 @@ public class JobController extends AbstractController implements Serializable {
 			JobModel jobModel = new JobModel();
 			List<JobModel> jobModelList = jobModel.getJobModelList(job);
 
-			return new ResponseEntity<RestResponse>( convertToRestGoodResponse(jobModelList, LocalizationUtil.findLocalizedString("signupsuccess.text")),HttpStatus.OK);
+			return new ResponseEntity<RestResponse>( convertToRestGoodResponse(jobModelList, LocalizationUtil.findLocalizedString("")),HttpStatus.OK);
 		} catch (AuthenticationFailedException t) {
 			restResponse = convertToRestBadResponse("", t.getLocalizedMessage());
 		} catch (Exception t) {
@@ -212,17 +213,18 @@ public class JobController extends AbstractController implements Serializable {
 	
 	
 	@RequestMapping(value = "/getJobByAssignedUserId", method = RequestMethod.GET, produces = "application/json")
-	public ResponseEntity<RestResponse> getJobByAssignedUserId(@RequestParam(value = "assignedUserId", required = true) String assignedUserId) {
+	public ResponseEntity<RestResponse> getJobByAssignedUserId() {
 		RestResponse restResponse = null;
 		if (log.isDebugEnabled()) log.debug("Job Using Assigned User id");
 		
 		try {
-			JobService jobService = ApplicationBeanFactory.getBean(JobService.class);			
+			JobService jobService = ApplicationBeanFactory.getBean(JobService.class);
+			String assignedUserId = SecurityManager.getCurrentUserId();
 			List<Job> job = jobService.findJobByAssignedUserId(assignedUserId);
 			JobModel jobModel = new JobModel();
 			List<JobModel> jobModelList = jobModel.getJobModelList(job);
 
-			return new ResponseEntity<RestResponse>( convertToRestGoodResponse(jobModelList, LocalizationUtil.findLocalizedString("signupsuccess.text")),HttpStatus.OK);
+			return new ResponseEntity<RestResponse>( convertToRestGoodResponse(jobModelList, LocalizationUtil.findLocalizedString("")),HttpStatus.OK);
 		} catch (AuthenticationFailedException t) {
 			restResponse = convertToRestBadResponse("", t.getLocalizedMessage());
 		} catch (Exception t) {
@@ -233,17 +235,18 @@ public class JobController extends AbstractController implements Serializable {
 	
 	
 	@RequestMapping(value = "/getJobByCreatedUserId", method = RequestMethod.GET, produces = "application/json")
-	public ResponseEntity<RestResponse> getJobByCreatedUserId(@RequestParam(value = "createdUserId", required = true) String createdUserId) {
+	public ResponseEntity<RestResponse> getJobByCreatedUserId() {
 		RestResponse restResponse = null;
 		if (log.isDebugEnabled()) log.debug("Job Using Assigned User id");
 		
 		try {
-			JobService jobService = ApplicationBeanFactory.getBean(JobService.class);			
+			JobService jobService = ApplicationBeanFactory.getBean(JobService.class);
+			String createdUserId = SecurityManager.getCurrentUserId();
 			List<Job> job = jobService.findJobByCreatedUserId(createdUserId);
 			JobModel jobModel = new JobModel();
 			List<JobModel> jobModelList = jobModel.getJobModelList(job);
 
-			return new ResponseEntity<RestResponse>( convertToRestGoodResponse(jobModelList, LocalizationUtil.findLocalizedString("signupsuccess.text")),HttpStatus.OK);
+			return new ResponseEntity<RestResponse>( convertToRestGoodResponse(jobModelList, LocalizationUtil.findLocalizedString("")),HttpStatus.OK);
 		} catch (AuthenticationFailedException t) {
 			restResponse = convertToRestBadResponse("", t.getLocalizedMessage());
 		} catch (Exception t) {

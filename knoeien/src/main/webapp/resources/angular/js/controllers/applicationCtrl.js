@@ -104,50 +104,50 @@ Controllers.controller("invitationCtrl", function($scope, $rootScope, restservic
 	};
 });
 
-Controllers.controller("saveUserSettingCtrl", function($scope, $rootScope, restservice, $cookies) {
-	$scope.isproceed = false;
-	$scope.user = {};
-	$scope.responseMessage = "";
-		
-	$scope.loadUserSetting = function() {
-		console.log("show user setting");
-		restservice.get('', "api/v1/user/loadUserSetting").then(function(response) {
-			if (response != null) {
-				$scope.user = response;
-			} else {
-				$scope.responseMessage = response.message;
-			}
-		});
-	};
-	$scope.loadUserSetting();
-	
-	$scope.settings = function(settingName) {
-	//console.log($scope.user.epost);
-		restservice.post($scope.user, "api/v1/user/saveUserSetting?name=" + settingName).then(function(response) {
-			if (response != null && response.success) {
-				$scope.isproceed = false;
-				$scope.responseMessage = response.message;
-			}
-		});
-	};
-});
-
-
-
-Controllers.controller("settingsCtrl", function($scope, $rootScope, restservice, $cookies) {
-	$scope.isproceed = false;
-	$scope.user = {};
-	$scope.responseMessage = "";
-	
-	$scope.settings = function() {
-		restservice.post( $scope.user, "api/v1/user/settings").then(function(response) {
-			if (response != null && response.success) {
-				$scope.isproceed = true;
-				$scope.responseMessage = response.message;				
-        	}
-        });
-    };
-});
+//Controllers.controller("saveUserSettingCtrl", function($scope, $rootScope, restservice, $cookies) {
+//	$scope.isproceed = false;
+//	$scope.user = {};
+//	$scope.responseMessage = "";
+//		
+//	$scope.loadUserSetting = function() {
+//		console.log("show user setting");
+//		restservice.get('', "api/v1/user/loadUserSetting").then(function(response) {
+//			if (response != null) {
+//				$scope.user = response;
+//			} else {
+//				$scope.responseMessage = response.message;
+//			}
+//		});
+//	};
+//	$scope.loadUserSetting();
+//	
+//	$scope.settings = function(settingName) {
+//	//console.log($scope.user.epost);
+//		restservice.post($scope.user, "api/v1/user/saveUserSetting?name=" + settingName).then(function(response) {
+//			if (response != null && response.success) {
+//				$scope.isproceed = false;
+//				$scope.responseMessage = response.message;
+//			}
+//		});
+//	};
+//});
+//
+//
+//
+//Controllers.controller("settingsCtrl", function($scope, $rootScope, restservice, $cookies) {
+//	$scope.isproceed = false;
+//	$scope.user = {};
+//	$scope.responseMessage = "";
+//	
+//	$scope.settings = function() {
+//		restservice.post( $scope.user, "api/v1/user/settings").then(function(response) {
+//			if (response != null && response.success) {
+//				$scope.isproceed = true;
+//				$scope.responseMessage = response.message;				
+//        	}
+//        });
+//    };
+//});
 
 Controllers.controller("loginCtrl", function($scope, $rootScope, restservice, $cookies) {
 	$scope.formSubmitted = false;
@@ -309,6 +309,32 @@ Controllers.controller("editProfileCtrl", function($scope, $rootScope, restservi
 
 });
 
+Controllers.controller("overviewCtrl", function($scope, $rootScope, restservice, $cookies) {
+	$scope.isproceed = false;
+	$scope.assginedJob = {};
+	$scope.postedJob = {};
+	$scope.responseMessage = "";
+
+	$scope.jobAssigned = function() {
+		restservice.get('', "api/v1/job/getJobByAssignedUserId").then(function(response) {
+			if (response != null) {
+				$scope.assginedJob = response;				
+	    	}
+	    });
+	};	
+	$scope.jobAssigned();
+	
+	$scope.jobPosted = function() {
+		restservice.get('', "api/v1/job/getJobByCreatedUserId").then(function(response) {
+			if (response != null) {
+				$scope.postedJob = response;				
+	    	}
+	    });
+	};	
+	$scope.jobPosted();
+	
+});
+
 Controllers.controller("transactionCtrl", function($scope, $rootScope,restservice, $cookies) {	
 	$scope.isproceed = false;
 	$scope.transactionHistory = {};
@@ -363,18 +389,18 @@ Controllers.controller("addJobCtrl", function($scope, $rootScope, restservice, $
     };
     
     $scope.postJob = function(isValid) {
-    	$("#card-info-modal").foundation('toggle');
+    	//$("#card-info-modal").foundation('toggle');
     	$scope.job.draft = false;
 		$scope.job.latitude = $("#latitude").val();
 		$scope.job.longitude = $("#longitude").val();
 		$scope.job.addressLine1 = $("#placesearch").val();
 		$scope.job.imageUrl = $scope.tempUploadedFilePath;
 		
-//		restservice.post($scope.job, "api/v1/job/addjob").then(function(response) {
-//			if (response != null) {
-//				$scope.job = response;
-//        	}
-//        });
+		restservice.post($scope.job, "api/v1/job/addjob").then(function(response) {
+			if (response != null) {
+				$scope.job = response;
+        	}
+        });
 		
     };
     
