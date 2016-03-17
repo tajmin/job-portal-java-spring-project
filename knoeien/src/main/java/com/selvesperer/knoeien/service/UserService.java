@@ -5,6 +5,7 @@ import java.io.IOException;
 import org.apache.commons.mail.EmailException;
 
 import com.selvesperer.knoeien.data.domain.User;
+import com.selvesperer.knoeien.web.controllers.model.PaymentInfoModel;
 import com.selvesperer.knoeien.web.controllers.model.UserModel;
 
 public interface UserService {
@@ -36,6 +37,8 @@ public interface UserService {
 	public User showUserInfo(String id);
 	
 	public String sendVerificationCode(String targetURL, String xml);
+	
+	public void updatePaymentInfo(PaymentInfoModel paymentInfoModel, String id);
 	
 	
 }

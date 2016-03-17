@@ -76,16 +76,15 @@
 			<!-- menu for small device ends here -->
 
 			<!-- menu for large device starts here -->
-			<ul
-				class="menu expanded sticky show-for-large #{(view.viewId == '/index.xhtml') ? 'dark' : 'light'}">
-				<li class="">
+			<ul class="menu expanded sticky show-for-large #{(view.viewId == '/index.xhtml') ? 'dark' : 'light'}">
+				<li class="" style="width: 25%;">
 					<div class="">
 						<!-- site title / logo goes here -->
 						<a href="index.xhtml" class="menu-text title">Helpers</a>
 					</div>
 				</li>
 
-				<li class="home-buttons clearfix">
+				<li class="home-buttons clearfix" style="width: 50%;">
 				
 					<div class="text-center">
 						<c:if test="#{view.viewId != '/index.xhtml'}">
@@ -99,7 +98,7 @@
 					</div>
 				</li>
 				
-				<li class="home-buttons clearfix">
+				<li class="home-buttons clearfix" style="width: 25%;">
 					<div class="text-right menu-last">
 						<!-- menu button goes here -->
 						<c:if test="#{view.viewId == '/index.xhtml'}">
