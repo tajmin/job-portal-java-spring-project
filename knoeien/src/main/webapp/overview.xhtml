@@ -4,16 +4,11 @@
 	<ui:define name="content">
 		<div ng-controller="overviewCtrl">
 			<form name="">
-				<ul class="tabs row expanded medium-collapse text-center custom-tabs green" data-tabs="data-tabs" id="">
-					<li class="tabs-title is-active medium-2 columns "><a href="#panel1" aria-selected="true">My Jobs</a></li>
-				  	<li class="tabs-title medium-2 columns end"><a href="#panel2">Job History</a></li>
+				<ul class="tabs row expanded text-center custom-tabs green" data-tabs="data-tabs" id="">
+					<li class="tabs-title is-active medium-2 medium-centered columns "><a href="#panel1" aria-selected="true">My Jobs</a></li>
 				</ul>
 				<div class="tabs-content" data-tabs-content="example-tabs">
 				  <div class="tabs-panel is-active" id="panel1">
-				    <ui:include src="overview/my-job.xhtml"></ui:include>
-				  </div>
-				   
-				  <div class="tabs-panel" id="panel2">
 				    <ui:include src="overview/my-job.xhtml"></ui:include>
 				  </div>
 				  				  
