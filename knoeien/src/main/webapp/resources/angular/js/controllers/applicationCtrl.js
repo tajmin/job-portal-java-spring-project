@@ -359,17 +359,76 @@ Controllers.controller("transactionCtrl", function($scope, $rootScope,restservic
 Controllers.controller("addJobCtrl", function($scope, $rootScope, restservice, $cookies, utilservice, $http, authService) {
 	$scope.isproceed = false;
 	$scope.job = {};
+	$scope.payment = {};
 	$scope.formSubmitted = false;
 	$scope.responseMessage = "";
 	$scope.cover_image = "";
 	$scope.imageFile;
 	$scope.tempUploadedFilePath = "";
+	$scope.titleEdit = false;
+	$scope.page = 1;
+	$scope.job.price = 0;
+	$scope.job.deadlineMonth = 0;
+	$scope.job.deadlineDay = 0;
+	$scope.job.hours = 0;
+	$scope.job.minutes = 0;
 	
 	var title = utilservice.getParameterByName("title");
 	if(!utilservice.isUndefinedOrNull(title)){
 		$scope.job.title = title;
 	}
 	
+	$scope.makeTitleEditable = function() {
+		$scope.titleEdit = true;		
+    };
+    
+    $scope.nextPage = function(isValid) {
+    	if(!isValid) return;
+    	
+    	if($scope.page > 3){
+    		return;
+    	}
+    	
+		$scope.page += 1;
+		
+		if($scope.page == 1){
+			$("#panel_job_info-label").trigger('click');
+		}
+		
+		if($scope.page == 2){
+			$("#panel_job_details-label").trigger('click');
+		}
+		
+		if($scope.page == 3){
+			$("#panel_job_approved-label").click();
+		}
+		
+    };
+    
+    $scope.increment = function(i) {
+    	if(!i) i = 0;
+    	i = parseInt(i);
+    	if(i < 0) return 0;
+    	return i + 1;
+    };
+    
+    $scope.decrement = function(i) {
+    	if(!i) i = 0;
+    	i = parseInt(i);
+    	if(i <= 0) return 0;
+    	return i - 1;
+    };
+    
+    $scope.isPost = function(isValid) {
+    	if($scope.page >= 3){
+    		return true;
+    	}
+    	return false;
+    };
+    
+    $scope.setPageNo = function(i) {
+    	$scope.page = i;
+    };
 	
 	$scope.draftJob = function(isValid) {
 		if(!isValid) return;
@@ -383,13 +442,19 @@ Controllers.controller("addJobCtrl", function($scope, $rootScope, restservice, $
 		restservice.post($scope.job, "api/v1/job/addjob").then(function(response) {
 			if (response != null) {
 				$scope.job = response;
+				$("#draft-confirmation-modal").foundation('toggle');
         	}
         });
 		
     };
     
-    $scope.postJob = function(isValid) {
-    	//$("#card-info-modal").foundation('toggle');
+    
+    $scope.openPaymentWindow = function(isValid){
+    	if(!isValid) return;
+    	$scope.getUserPaymentInfo();
+    };
+    
+    $scope.postJob = function() {
     	$scope.job.draft = false;
 		$scope.job.latitude = $("#latitude").val();
 		$scope.job.longitude = $("#longitude").val();
@@ -399,6 +464,7 @@ Controllers.controller("addJobCtrl", function($scope, $rootScope, restservice, $
 		restservice.post($scope.job, "api/v1/job/addjob").then(function(response) {
 			if (response != null) {
 				$scope.job = response;
+				$("#draft-confirmation-modal").foundation('toggle');
         	}
         });
 		
@@ -424,12 +490,33 @@ Controllers.controller("addJobCtrl", function($scope, $rootScope, restservice, $
                 headers: {'Content-Type': undefined}
             }).success(function(succResponse){
             	$rootScope.restMessages = succResponse.message;
-            	$scope.tempUploadedFilePath = succResponse.response
+            	$scope.tempUploadedFilePath = succResponse.response;
+            	$scope.job.imageUrl = $scope.tempUploadedFilePath;
             }).error(function(errResponse){
             	$rootScope.restMessages = errResponse.message;
             });
         }
     };
+    
+    $scope.getUserPaymentInfo = function() {
+		restservice.get('', "api/v1/user/getUserPaymentInfo").then(function(response) {
+			if (response != null) {
+				$scope.payment = response; 				
+			}
+			$("#card-info-modal").foundation('toggle');
+		});
+	};
+	
+	
+	$scope.saveUserPaymentInfo = function(isValid) {
+		if(!isValid) return;
+		
+		restservice.post( $scope.user, "api/v1/user/saveUserPaymentInfo").then(function(response) {
+			if (response != null) {
+				$scope.postJob();
+        	}
+        });
+    };   
 	
 });
 
