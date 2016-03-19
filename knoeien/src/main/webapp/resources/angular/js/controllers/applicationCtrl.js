@@ -628,6 +628,7 @@ Controllers.controller("jobCtrl", function($scope, $rootScope, restservice, $coo
 Controllers.controller("jobDetailsCtrl", function($scope, $rootScope, restservice, $cookies, $window, utilservice) {
 	$scope.isproceed = false;
 	$scope.job = {};
+	$scope.employer = {};
 	$scope.formSubmitted = false;
 	$scope.responseMessage = "";
 	$scope.id = utilservice.getParameterByName("id");
@@ -653,54 +654,18 @@ Controllers.controller("jobDetailsCtrl", function($scope, $rootScope, restservic
     $scope.jobDetailsById($scope.id);
     
     
-    //Shows Best Paid Jobs 
-    $scope.bestPaidJob = function() {	
-		
-		restservice.get( '', "api/v1/job/bestpaidjob").then(function(response) {
+	$scope.getUserByJobId = function(jobId) {			
+		restservice.get( '', "api/v1/user/getUserByJobId?jobID=" + jobId).then(function(response) {
 			if (response != null) {
-				$scope.job = response;					
-        	} else {
-        		$scope.responseMessage = response.message;	
+				$scope.employer = response;
         	}
-        });
-	
+        });	
     };
+    $scope.getUserByJobId($scope.id);
     
-    //Shows Shortest Time Jobs 
-    $scope.shortestTimeJob = function() {		
-		restservice.get( '', "api/v1/job/shortesttimejob").then(function(response) {
-			if (response != null) {
-				$scope.job = response;	
-        	} else {
-        		$scope.responseMessage = response.message;	
-        	}
-        });
-	
-    };
     
-    //Shows Earliest deadline Jobs 
-    $scope.earliestDeadlineJob = function() {		
-		restservice.get( '', "api/v1/job/earliestdeadlinejob").then(function(response) {
-			if (response != null) {
-				$scope.job = response;	
-        	} else {
-        		$scope.responseMessage = response.message;	
-        	}
-        });
-	
-    };
     
-    //Shows Nearest You Jobs 
-    $scope.nearestJob = function() {		
-		restservice.get( '', "api/v1/job/nearestjob").then(function(response) {
-			if (response != null) {
-				$scope.job = response;	
-        	} else {
-        		$scope.responseMessage = response.message;	
-        	}
-        });
-	
-    };
+    
     
     $scope.showJobInMap = function(){
     	//http://stackoverflow.com/questions/1544739/google-maps-api-v3-how-to-remove-all-markers

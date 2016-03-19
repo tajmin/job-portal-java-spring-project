@@ -432,7 +432,25 @@ public class UserController extends AbstractController implements Serializable {
 		}
 		return new ResponseEntity<RestResponse>(convertToRestGoodResponse(restResponse), HttpStatus.BAD_REQUEST);
 	}
+	
 
+
+	@RequestMapping(value = "/getUserByJobId", method = RequestMethod.GET, produces = "application/json")
+	public ResponseEntity<RestResponse> getUserByJobId(@RequestParam(value = "jobID", required = true) String jobId) {
+		RestResponse restResponse = null;
+		if (log.isDebugEnabled()) log.debug("getUserByJobId");		
+		try {
+			UserService userService = ApplicationBeanFactory.getBean(UserService.class);
+			User user = userService.findUserByJobId(jobId);
+			UserModel userModel = new UserModel(user);
+			return new ResponseEntity<RestResponse>( convertToRestGoodResponse(userModel, ""),HttpStatus.OK);
+		} catch (AuthenticationFailedException t) {
+			restResponse = convertToRestBadResponse("", t.getLocalizedMessage());
+		} catch (Exception t) {
+			restResponse = convertToRestBadResponse("", t.getLocalizedMessage());
+		}
+		return new ResponseEntity<RestResponse>( restResponse, HttpStatus.OK);
+	}
 
 
 }

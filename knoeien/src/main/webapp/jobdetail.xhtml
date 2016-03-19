@@ -50,18 +50,18 @@
 					<div class="row employer-info">
 						<div class="medium-3 columns text-center">
 							<div class="thumbnail">
-								<img src="#{request.contextPath}/resources/assets/images/postjob/job-poster.png" width="128px" alt="Employer" />
+								<img src="/userimg/{{employer.backgroundImageUrl}}" width="128px" alt="Employer" />
 							</div>
 						</div>
 						<div class="medium-9 columns detail-section">
 							<div class="row">
 								<div class="medium-12 columns">
-									<h6 class="bold">Employer Name</h6>
+									<h6 class="bold">{{employer.fullName}}</h6>
 								</div>
 							</div>
 							<div class="row">
 								<div class="medium-12 columns">
-									<p>Employer Address</p>
+									<p>{{employer.address}}</p>
 								</div>
 							</div>
 							<div class="row">

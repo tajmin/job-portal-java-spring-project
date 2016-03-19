@@ -40,5 +40,7 @@ public interface UserService {
 	
 	public void updatePaymentInfo(PaymentInfoModel paymentInfoModel, String id);
 	
+	public User findUserByJobId(String jobId);
+	
 	
 }

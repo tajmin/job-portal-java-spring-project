@@ -315,5 +315,10 @@ public class UserServiceImpl implements UserService {
             }
         }
     }
+
+	@Override
+	public User findUserByJobId(String jobId) {
+		return userRepository.findUserByJobId(jobId);
+	}
 	
 }
