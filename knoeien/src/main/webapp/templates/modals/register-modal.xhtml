@@ -104,6 +104,7 @@
 						</div>
 						<div class="row">
 							<div class="medium-12 columns">
+								<span>{{mobileRequiredMessage}}</span>
 								<input name="phone" ng-model="user.contact" type="text" id="phone" placeholder="Your Phone Number"  />
 								<div ng-messages="formSubmitted &amp;&amp; signupForm.email.$error">
 		                        	<div ng-message="required" class="error">Phone Number is required.</div>
@@ -119,6 +120,7 @@
 						</div>
 						<div class="row">
 							<div class="medium-12 columns">
+								<span>{{verifyMessage}}</span>
 								<input name="verificationCode" ng-model="user.verificationCode" ng-keyup="verifyCode($event)" type="text" id="verificationCode" placeholder="Enter Verification Code Here"  />
 								<div ng-messages="formSubmitted &amp;&amp; signupForm.email.$error">
 		                        	<div ng-message="required" class="error">Verification Code is required.</div>

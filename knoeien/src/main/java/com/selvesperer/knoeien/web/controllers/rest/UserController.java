@@ -1,15 +1,11 @@
 package com.selvesperer.knoeien.web.controllers.rest;
-import java.awt.Image;
 import java.io.File;
 import java.io.IOException;
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
-import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -376,92 +372,65 @@ public class UserController extends AbstractController implements Serializable {
 	}
 	
 	
-	@RequestMapping(value = "/doUpload", headers = ("content-type=multipart/*"), method = RequestMethod.POST)
-	public String handleFileUpload(HttpServletRequest request, @RequestParam(value = "file", required = true) CommonsMultipartFile[] file) throws Exception {
-		String saveDirectory = "E:/";
-		System.out.println("loading image" + file);
-		String imageName = SecurityManager.getCurrentUserId();
-		List<String> list = new ArrayList<String>();
-
-		String desc = request.getParameter("description");
-		System.out.println("description: " + desc);
-
-		if (file != null && file.length > 0) {
-			for (CommonsMultipartFile aFile : file) {
-
-				System.out.println("Saving file: " + aFile.getOriginalFilename());
-
-				if (!aFile.getOriginalFilename().equals("")) {
-					// aFile.transferTo(new File(saveDirectory
-					// + aFile.getOriginalFilename()));
-
-					aFile.transferTo(new File(saveDirectory + imageName + ".jpg"));
-					// ************************
-					list.add(aFile.getOriginalFilename());
-					// ************************
-				}
-			}
-		}
-
-		// read using local directory
-		File sourceimage = new File("E:/" + imageName + ".jpg");
-		Image image = ImageIO.read(sourceimage);
-		System.out.println("Image obj  " + image);
-
-		return "Success";
-	}
-	
-	@RequestMapping(value = "/verifyNumber", method = RequestMethod.POST, produces = "application/json")
+	@RequestMapping(value = "/sendVerificationCode", method = RequestMethod.POST, produces = "application/json")
 	@ResponseBody
-	public ResponseEntity<RestResponse> verifyNumber(
-			@RequestParam(value = "mobileNumber", required = true) String mobileNumber)
-					throws EmailException, IOException {
-
+	public ResponseEntity<RestResponse> sendVerificationCode(@RequestParam(value = "mobileNumber", required = true) String mobileNumber, HttpServletRequest request) throws EmailException, IOException {
+		RestResponse restResponse = null;
 		UserService userService = ApplicationBeanFactory.getBean(UserService.class);
-		final String username = "maxwork1";
-		final String password = "akertha1";
-
+		final String username = ConfigurationUtil.config().getString("sms.username");
+		final String password = ConfigurationUtil.config().getString("sms.password");
+		final String sender = ConfigurationUtil.config().getString("sms.sender");
+		final String api = ConfigurationUtil.config().getString("sms.api");
 		try {
-			System.out.println(mobileNumber);
-
-			// Generating verification Code(Random Number)
 			long timeCalculate = System.nanoTime();
 			double randomCalculate = Math.random() * 1000;
 			long mixingTimeAndRand = (long) (timeCalculate * randomCalculate);
 			String s1 = mixingTimeAndRand + "";
 			String verificationCode = s1.substring(0, 6);
-
-			// Numeric ID, must be unique within one XML document/session
-
-			System.out.println(verificationCode);
-
-			// 6 digit code
-
-			// random number as verification code, Message can't exceed 160
-			// character
-			String myMessage = verificationCode;
-
-			// sender
-			String sender = "+8801676431121";
-
-			// receiver is given number from view
-			String receiver = mobileNumber;
-
+			String message = verificationCode;
+			String receiver = mobileNumber.trim();
+			if(StringUtils.isNotBlank(receiver)){
+				if(!StringUtils.contains(receiver, "+")){
+					receiver = "+" + receiver;
+				}
+			}
+			boolean status;
 			String xml = "<?xml version=\"1.0\"?><SESSION><CLIENT>" + username + "</CLIENT><PW>" + password
-					+ "</PW><RCPREQ>Y</RCPREQ><MSGLST><MSG><TEXT>" + myMessage + "</TEXT><SND>" + sender + "</SND><RCV>"
+					+ "</PW><RCPREQ>Y</RCPREQ><MSGLST><MSG><TEXT>" + message + "</TEXT><SND>" + sender + "</SND><RCV>"
 					+ receiver + "</RCV></MSG></MSGLST></SESSION>";
 
-			String gatewayResponse = userService.sendVerificationCode("http://sms3.pswin.com/sms", xml);
-			System.out.println(gatewayResponse);
-
-			return new ResponseEntity<RestResponse>(
-					convertToRestGoodResponse(null, LocalizationUtil.findLocalizedString("invitationsuccess.text")),
-					HttpStatus.OK);
+			String gatewayResponse = userService.sendVerificationCode(api, xml);
+			String search="fail";
+			if(gatewayResponse.toLowerCase().indexOf(search)!=-1) {
+				status=false;
+			} else {
+				status=true;
+			}
+			
+			request.getSession().setAttribute(Constants.VERIFICATION_CODE, verificationCode);
+			return new ResponseEntity<RestResponse>(convertToRestGoodResponse(status, ""), HttpStatus.OK);
 		} catch (Exception ex) {
-			// Messages.addGlobalError(ex.getMessage());
+			restResponse = convertToRestBadResponse("", ex.getLocalizedMessage());
 		}
-
-		return new ResponseEntity<RestResponse>(convertToRestGoodResponse(null), HttpStatus.BAD_REQUEST);
+		return new ResponseEntity<RestResponse>(convertToRestGoodResponse(restResponse), HttpStatus.BAD_REQUEST);
+	}
+	
+	
+	@RequestMapping(value = "/verifyNumber", method = RequestMethod.POST, produces = "application/json")
+	@ResponseBody
+	public ResponseEntity<RestResponse> verifyNumber(@RequestParam(value = "verificationCode", required = true) String verificationCode, HttpServletRequest request) throws IOException {
+		RestResponse restResponse = null;
+		try {
+			String storedCode=(String) request.getSession().getAttribute(Constants.VERIFICATION_CODE);
+			boolean status =false;
+			if(storedCode.equals(verificationCode)){
+				status = true;
+			}			
+			return new ResponseEntity<RestResponse>(convertToRestGoodResponse(status, ""), HttpStatus.OK);
+		} catch (Exception ex) {
+			restResponse = convertToRestBadResponse("", ex.getLocalizedMessage());
+		}
+		return new ResponseEntity<RestResponse>(convertToRestGoodResponse(restResponse), HttpStatus.BAD_REQUEST);
 	}
 
 

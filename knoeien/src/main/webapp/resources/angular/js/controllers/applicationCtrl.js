@@ -42,6 +42,8 @@ Controllers.controller("signupCtrl", function($scope, $rootScope, restservice, $
 	$scope.user.dateOfBirth = "";
 	$scope.formSubmitted = false;
 	$scope.responseMessage = "";
+	$scope.verifyMessage = "";
+	$scope.mobileRequiredMessage = "";
 	
 	$("#verificationCode").removeClass("verificationCode");
 	
@@ -51,37 +53,40 @@ Controllers.controller("signupCtrl", function($scope, $rootScope, restservice, $
 		
 		restservice.post($scope.user, "api/v1/user/signup").then(function(response) {
 			if (response != null && response.success) {
-				$scope.isproceed = true;
 				$scope.responseMessage = response.message;
 			}
 		});
 	};
 	
 	$scope.sendVerificationCode = function() {
-		if($scope.user.contact.length >= 0){
-			
-//			restservice.post($scope.user, "api/v1/user/signup").then(function(response) {
-//				if (response != null && response.success) {
-//					$scope.isproceed = true;
-//					$scope.responseMessage = response.message;
-//				}
-//			});
+		if($scope.user.contact && $scope.user.contact.trim().length > 0){
+			$scope.verifyMessage = "processing...";
+			$scope.mobileRequiredMessage = "";
+			restservice.post("", "api/v1/user/sendVerificationCode?mobileNumber=" + $scope.user.contact).then(function(response) {
+				if (response != null) {
+					$scope.verifyMessage = "enter verification code and hit enter button";
+				}
+			});
+		}else{
+			$scope.mobileRequiredMessage = "Please enter mobile number";
 		}
 	};
 	
 
 	$scope.verifyCode = function($event) {
-		if ($scope.user.verificationCode.length >= 0) {
+		if ($scope.user.verificationCode && $scope.user.verificationCode.trim().length > 0) {
 			if ($event.keyCode == 13 || $event.keyCode == 9) {
-				alert($scope.user.verificationCode);
-				$("#verificationCode").addClass("verificationCode");
-//				restservice.post($scope.user, "api/v1/user/signup").then(function(response) {
-//					if (response != null && response.success) {
-//						$scope.isproceed = true;
-//						$scope.responseMessage = response.message;
-//					}
-//				});
+				$scope.verifyMessage = "processing...";
+				$scope.mobileRequiredMessage = "";
+				restservice.post("", "api/v1/user/verifyNumber?verificationCode=" + $scope.user.verificationCode).then(function(response) {
+					if (response != null) {
+						$scope.verifyMessage = "";
+						$("#verificationCode").addClass("verificationCode");
+					}
+				});
 			}
+		}else{
+			$scope.verifyMessage = "enter verification code and hit enter button";
 		}
 	};
 });
