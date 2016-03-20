@@ -42,6 +42,8 @@ Controllers.controller("signupCtrl", function($scope, $rootScope, restservice, $
 	$scope.user.dateOfBirth = "";
 	$scope.formSubmitted = false;
 	$scope.responseMessage = "";
+	$scope.verifyMessage = "";
+	$scope.mobileRequiredMessage = "";
 	
 	$("#verificationCode").removeClass("verificationCode");
 	
@@ -51,37 +53,40 @@ Controllers.controller("signupCtrl", function($scope, $rootScope, restservice, $
 		
 		restservice.post($scope.user, "api/v1/user/signup").then(function(response) {
 			if (response != null && response.success) {
-				$scope.isproceed = true;
 				$scope.responseMessage = response.message;
 			}
 		});
 	};
 	
 	$scope.sendVerificationCode = function() {
-		if($scope.user.contact.length >= 0){
-			
-//			restservice.post($scope.user, "api/v1/user/signup").then(function(response) {
-//				if (response != null && response.success) {
-//					$scope.isproceed = true;
-//					$scope.responseMessage = response.message;
-//				}
-//			});
+		if($scope.user.contact && $scope.user.contact.trim().length > 0){
+			$scope.verifyMessage = "processing...";
+			$scope.mobileRequiredMessage = "";
+			restservice.post("", "api/v1/user/sendVerificationCode?mobileNumber=" + $scope.user.contact).then(function(response) {
+				if (response != null) {
+					$scope.verifyMessage = "enter verification code and hit enter button";
+				}
+			});
+		}else{
+			$scope.mobileRequiredMessage = "Please enter mobile number";
 		}
 	};
 	
 
 	$scope.verifyCode = function($event) {
-		if ($scope.user.verificationCode.length >= 0) {
+		if ($scope.user.verificationCode && $scope.user.verificationCode.trim().length > 0) {
 			if ($event.keyCode == 13 || $event.keyCode == 9) {
-				alert($scope.user.verificationCode);
-				$("#verificationCode").addClass("verificationCode");
-//				restservice.post($scope.user, "api/v1/user/signup").then(function(response) {
-//					if (response != null && response.success) {
-//						$scope.isproceed = true;
-//						$scope.responseMessage = response.message;
-//					}
-//				});
+				$scope.verifyMessage = "processing...";
+				$scope.mobileRequiredMessage = "";
+				restservice.post("", "api/v1/user/verifyNumber?verificationCode=" + $scope.user.verificationCode).then(function(response) {
+					if (response != null) {
+						$scope.verifyMessage = "";
+						$("#verificationCode").addClass("verificationCode");
+					}
+				});
 			}
+		}else{
+			$scope.verifyMessage = "enter verification code and hit enter button";
 		}
 	};
 });
@@ -161,7 +166,7 @@ Controllers.controller("loginCtrl", function($scope, $rootScope, restservice, $c
 			$scope.isproceed = true;
 			$rootScope.userinfos = response;
 			console.log($rootScope.userinfos);
-			window.open("http://localhost:8080/knoeien/home.xhtml",	"_self");
+			window.open($rootScope.getBaseUrl() + "/index.xhtml",	"_self");
 		});
 	};
 });
@@ -214,7 +219,7 @@ Controllers.controller("resetPasswordCtrl", function($scope, $rootScope, restser
 Controllers.controller("logoutCtrl", function($scope, $rootScope, restservice,$cookies) {
 	$scope.logout = function() {
 		restservice.get('', "api/v1/user/logout").then(function(response) {
-			window.open("http://localhost:8080/knoeien/index.xhtml", "_self");
+			window.open($rootScope.getBaseUrl() + "/index.xhtml", "_self");
 		});
 	};
 });
@@ -618,7 +623,7 @@ Controllers.controller("jobCtrl", function($scope, $rootScope, restservice, $coo
     };
     
     $scope.selectJob = function(jobid){
-    	window.open("http://localhost:8080/knoeien/jobdetail.xhtml?id=" + jobid,	"_self");
+    	window.open($rootScope.getBaseUrl() + "/jobdetail.xhtml?id=" + jobid,	"_self");
     }
     
 });
@@ -626,6 +631,7 @@ Controllers.controller("jobCtrl", function($scope, $rootScope, restservice, $coo
 Controllers.controller("jobDetailsCtrl", function($scope, $rootScope, restservice, $cookies, $window, utilservice) {
 	$scope.isproceed = false;
 	$scope.job = {};
+	$scope.employer = {};
 	$scope.formSubmitted = false;
 	$scope.responseMessage = "";
 	$scope.id = utilservice.getParameterByName("id");
@@ -651,54 +657,18 @@ Controllers.controller("jobDetailsCtrl", function($scope, $rootScope, restservic
     $scope.jobDetailsById($scope.id);
     
     
-    //Shows Best Paid Jobs 
-    $scope.bestPaidJob = function() {	
-		
-		restservice.get( '', "api/v1/job/bestpaidjob").then(function(response) {
+	$scope.getUserByJobId = function(jobId) {			
+		restservice.get( '', "api/v1/user/getUserByJobId?jobID=" + jobId).then(function(response) {
 			if (response != null) {
-				$scope.job = response;					
-        	} else {
-        		$scope.responseMessage = response.message;	
+				$scope.employer = response;
         	}
-        });
-	
+        });	
     };
+    $scope.getUserByJobId($scope.id);
     
-    //Shows Shortest Time Jobs 
-    $scope.shortestTimeJob = function() {		
-		restservice.get( '', "api/v1/job/shortesttimejob").then(function(response) {
-			if (response != null) {
-				$scope.job = response;	
-        	} else {
-        		$scope.responseMessage = response.message;	
-        	}
-        });
-	
-    };
     
-    //Shows Earliest deadline Jobs 
-    $scope.earliestDeadlineJob = function() {		
-		restservice.get( '', "api/v1/job/earliestdeadlinejob").then(function(response) {
-			if (response != null) {
-				$scope.job = response;	
-        	} else {
-        		$scope.responseMessage = response.message;	
-        	}
-        });
-	
-    };
     
-    //Shows Nearest You Jobs 
-    $scope.nearestJob = function() {		
-		restservice.get( '', "api/v1/job/nearestjob").then(function(response) {
-			if (response != null) {
-				$scope.job = response;	
-        	} else {
-        		$scope.responseMessage = response.message;	
-        	}
-        });
-	
-    };
+    
     
     $scope.showJobInMap = function(){
     	//http://stackoverflow.com/questions/1544739/google-maps-api-v3-how-to-remove-all-markers
@@ -715,10 +685,6 @@ Controllers.controller("jobDetailsCtrl", function($scope, $rootScope, restservic
     		}
     	//}
     	$window.map.fitBounds(bounds);
-    };
-    
-    $scope.selectJob = function(jobid){
-    	window.open("http://localhost:8080/knoeien/jobdetail.xhtml?id=" + jobid,	"_self");
-    }
+    };    
     
 });

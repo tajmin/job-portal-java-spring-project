@@ -5,10 +5,8 @@ import java.io.Serializable;
 import java.net.URI;
 import java.util.HashMap;
 import java.util.Random;
-import java.util.UUID;
 
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 //import org.scribe.builder.ServiceBuilder;
 //import org.scribe.builder.api.FacebookApi;
@@ -41,7 +39,7 @@ import com.selvesperer.knoeien.data.domain.User;
 import com.selvesperer.knoeien.service.UserService;
 import com.selvesperer.knoeien.spring.utils.ApplicationBeanFactory;
 import com.selvesperer.knoeien.utils.Constants;
-import com.selvesperer.knoeien.utils.localization.LocalizationUtil;
+import com.selvesperer.knoeien.utils.configuration.ConfigurationUtil;
 import com.selvesperer.knoeien.web.controllers.model.RestResponse;
 
 import net.sf.json.JSONObject;
@@ -61,7 +59,7 @@ public class SocialNetworkController extends AbstractController implements Seria
 	private final String apiKey = "196906993999156";
 	private final String apiSecret = "01f33e69a387ae68e16edb89016b1540";
 	private final String secretState = "secret" + new Random().nextInt(999_999);
-	private final String applicationHost = "http://localhost:8080/knoeien/api/v1/socialNetwork";
+	private final String applicationHost = ConfigurationUtil.config().getString("application.baseUrl") + "/api/v1/socialNetwork";
 	private final String STATE = "state";
 	private ObjectMapper objectMapper;
 
