@@ -39,9 +39,9 @@
 				</ul>
 				
 				<div class="row text-center">
-					<a  href="javascript:void(0);" ng-click="formSubmitted = true; draftJob(jobPostingForm.$valid);" class="button hlpr-color-alert">Save Draft</a>
-					<a ng-if="isPost()" href="javascript:void(0);" ng-click="formSubmitted = true; openPaymentWindow(jobPostingForm.$valid);" class="button hlpr-color-info">Post</a>
-					<a ng-if="!isPost()" href="javascript:void(0);" ng-click="formSubmitted = true; nextPage(jobPostingForm.$valid);" class="button hlpr-color-info">Next</a> 										
+					<a  href="javascript:void(0);" ng-click="formSubmitted = true; draftJob(jobPostingForm.$valid);" class="button hlpr-color-alert helper-tab-button">Save Draft</a>
+					<a ng-if="isPost()" href="javascript:void(0);" ng-click="formSubmitted = true; openPaymentWindow(jobPostingForm.$valid);" class="button hlpr-color-success helper-tab-button">Post</a>
+					<a ng-if="!isPost()" href="javascript:void(0);" ng-click="formSubmitted = true; nextPage(jobPostingForm.$valid);" class="button hlpr-color-success helper-tab-button">Next</a> 										
 				</div>				
 			</form>			
 		</div>		
