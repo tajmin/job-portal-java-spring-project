@@ -5,25 +5,12 @@
 			<div class="small-12 columns">
 				<div class="row">
 					<div class="small-6 columns">
-						<label><h5 style="color: #3ac5e6">Title</h5></label>
-						<label><h5>{{job.title}}</h5></label>
+						<label class="helper-label" style="color: #3ac5e6">Title</label>
+						<label class="helper-label" >{{job.title}}</label>
 					</div>
 					<div class="small-6 columns">
-						<label><h5 style="color: #3ac5e6">Deadline</h5></label>
-						<label><h5>{{job.deadline}}</h5></label>
-					</div>
-				</div>
-			</div>
-			
-			<div class="small-12 columns">
-				<div class="row">
-					<div class="small-6 columns">
-						<label><h5 style="color: #3ac5e6">About the job</h5></label>
-						<label><h5>{{job.description}}</h5></label>
-					</div>
-					<div class="small-6 columns">
-						<label><h5 style="color: #3ac5e6">Length of work</h5></label>
-						<label><h5>{{job.hours}}:{{job.minutes}} t</h5></label>
+						<label class="helper-label" style="color: #3ac5e6">Deadline</label>
+						<label class="helper-label" >{{job.deadline}}</label>
 					</div>
 				</div>
 			</div>
@@ -31,12 +18,25 @@
 			<div class="small-12 columns">
 				<div class="row">
 					<div class="small-6 columns">
-						<label><h5 style="color: #3ac5e6">Address</h5></label>
-						<label><h5>{{job.addressLine1}}</h5></label>
+						<label class="helper-label" style="color: #3ac5e6">About the job</label>
+						<label class="helper-label" >{{job.description}}</label>
 					</div>
 					<div class="small-6 columns">
-						<label><h5 style="color: #3ac5e6">Payment ({{job.percent}}% service charge)</h5></label>
-						<label><h5>{{job.totalPrice}} kr/t</h5></label>
+						<label class="helper-label" style="color: #3ac5e6">Length of work</label>
+						<label class="helper-label" >{{job.hours}}:{{job.minutes}} t</label>
+					</div>
+				</div>
+			</div>
+			
+			<div class="small-12 columns">
+				<div class="row">
+					<div class="small-6 columns">
+						<label class="helper-label" style="color: #3ac5e6">Address</label>
+						<label class="helper-label" >{{job.addressLine1}}</label>
+					</div>
+					<div class="small-6 columns">
+						<label class="helper-label" style="color: #3ac5e6">Payment ({{job.percent}}% service charge)</label>
+						<label class="helper-label" >{{job.totalPrice}} kr/t</label>
 					</div>
 				</div>
 			</div>

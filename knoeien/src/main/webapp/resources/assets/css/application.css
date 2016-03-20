@@ -1447,3 +1447,55 @@ ul.arrow-bottom.green li.tabs-title > a[aria-selected="true"]::after {
 	padding: 0.6rem 3rem;
 	margin-right: 0;
 }
+label.helper-label {
+	font-size: 1rem;
+}
+[type="text"],
+[type="password"],
+[type="date"],
+[type="datetime"],
+[type="datetime-local"],
+[type="month"],
+[type="week"],
+[type="email"],
+[type="number"],
+[type="search"],
+[type="tel"],
+[type="time"],
+[type="url"],
+[type="color"],
+textarea {
+	border-radius: 7px;
+	background-color: #f4f4f2;
+	border-color: transparent;
+}
+.button {
+	border-radius: 5px;
+}
+[class*=" input-group-"],
+[class^="input-group-"] {
+	border-radius: 0px;
+}
+[class*=" input-group-"]:first-child, 
+[class^="input-group-"]:first-child
+{
+	border-top-left-radius: 5px;
+	border-bottom-left-radius: 5px;
+}
+[class*=" input-group-"]:last-child, 
+[class^="input-group-"]:last-child
+{
+	border-top-right-radius: 5px;
+	border-bottom-right-radius: 5px;
+}
+[class*=" input-group-"], 
+[class^="input-group-"]
+{
+	border-color: #dfdddd;
+	background-color: #fff;
+}
+[class*=" input-group-"][disabled="disabled"],
+[class^="input-group-"][disabled="disabled"]
+{
+	background-color: #fff;
+}
