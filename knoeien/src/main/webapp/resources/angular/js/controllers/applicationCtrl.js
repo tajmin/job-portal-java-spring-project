@@ -506,11 +506,13 @@ Controllers.controller("addJobCtrl", function($scope, $rootScope, restservice, $
     $scope.getUserPaymentInfo = function() {
 		restservice.get('', "api/v1/user/getUserPaymentInfo").then(function(response) {
 			if (response != null) {
-				$scope.payment = response; 				
+				$scope.payment = response;
+				console.log($scope.payment);
 			}
 			$("#card-info-modal").foundation('toggle');
 		});
 	};
+	$scope.getUserPaymentInfo();    
 	
 	
 	$scope.saveUserPaymentInfo = function(isValid) {
@@ -520,6 +522,7 @@ Controllers.controller("addJobCtrl", function($scope, $rootScope, restservice, $
 			if (response != null) {
 				$scope.postJob();
         	}
+			$("#evaluate-confirmation-modal").foundation('toggle');
         });
     };   
 	

@@ -1,21 +1,25 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets">
 	<!-- modal / reveal forget password starts here -->
 	<div class="reveal fast ease-in" id="card-info-modal" data-reveal="data-reveal" data-close-on-click="true" data-animation-in="fade" data-animation-out="slide-out-right" ng-controller="addJobCtrl">
-		<div class="row">
-			<div class="medium-12 medium-centered columns" id="card-info-modal">			
+		<div class="medium-12 medium-centered columns" id="card-info">			
+			<div class="row">	
 				<form name="paymentInfo">
-					<div class="medium-12 columns text-center">
-						<h4>Add payment solution</h4>
+					<div class="row">
+						<div class="medium-12 columns text-center">
+							<h4>Add payment solution</h4>
+						</div>
 					</div>
-					<div class="medium-12 columns text-left">
-						<h4>Payment Information</h4>
-					</div>					
+					<div class="row">
+						<div class="medium-12 columns text-left">
+							<h6>Payment Information</h6>
+						</div>	
+					</div>				
 					<div class="row">
 						<div class="medium-3 columns">
 							<label for="card-number" class="right inline">Card Number</label>
 						</div>
 						<div class="medium-8 columns end">
-							<input type="text" class="" placeholder="" ng-model="payment.cardNumber" />
+							<input type="text" class="" placeholder="Card Number" ng-model="payment.cardNumber" />
 						</div>
 					</div>
 					<div class="row">
@@ -23,24 +27,24 @@
 							<label for="card-holder" class="right inline">Name of Card Holder</label>
 						</div>
 						<div class="medium-8 columns end">
-							<input type="text" class="" placeholder="" ng-model="payment.cardholderName" />
+							<input type="text" class="" placeholder="Card Holder's Name" ng-model="payment.cardholderName" />
 						</div> 
 					</div>
 					<div class="row">
 						<div class="medium-3 columns text-right">
-					    	<label for="" class="right inline">Date</label>
+					    	<label for="" class="right inline">Days</label>
 					 	</div>
 					    <div class="medium-2 columns">
-							<input type="text" id="" class="" placeholder=" Month " ng-model="payment.cardMonth" />
+							<input type="text" id="" class="Month" placeholder=" Month" ng-model="payment.cardMonth" />
 						</div>
 						<div class="medium-2 columns">
-							<input type="text" id="" class="" placeholder=" Year " ng-model="payment.cardYear" />
+							<input type="text" id="" class="Year" placeholder=" Year " ng-model="payment.cardYear" />
 						</div>
 					    <div class="medium-1 columns">
 					    	<label for="" class="right inline">CVC</label>
 					    </div>
 					    <div class="medium-2 columns end">
-					    	<input type="text" id="" class="" placeholder=" Year " ng-model="payment.cvc" />
+					    	<input type="text" id="" class="CVC" placeholder=" Year " ng-model="payment.cvc" />
 					    </div>
 					</div>					
 					<div class="row">
@@ -50,35 +54,12 @@
 					</div>
 					<div class="row">
 						<div class="medium-6 medium-centered columns text-center">
-			  				<a href="" class="button hlpr-color-success" style="width: 100%; padding: 14px 10px; border-radius: 7px;">Ok</a>
+			  				<a href="javascript:void(0);" ng-click="formSubmitted = true; saveUserPaymentInfo(paymentInfo.$valid);" class="button hlpr-color-success" >Ok</a>
 			  			</div>
-					</div>
-					
-					<div class="medium-10 medium-centered columns" id="registerProceed">
-						<div class="row">
-							<div class="medium-12 medium-centered columns text-center">
-								<p> {{responseMessage}} </p>
-							</div>
-						</div>
-						<div class="row">
-							<div class="small-4 small-centered columns text-center">
-								<img class="th" id="forgotPassImg" alt="" src="#{request.contextPath}/resources/assets/images/success.png" />
-							</div>				
-						</div>
-						<div class="row">
-							<fieldset class="medium-8 medium-centered columns text-center">
-								<div class="button-group">
-									<a href="javascript:void(0);" ng-click="alert('asdbahgsd');" class="button hlpr-color-success modal-close">Ok</a>
-								</div>
-							</fieldset>
-						</div>				
 					</div>
 				</form>
 			</div>
-			
-			
-		</div>
-		
+		</div>		
 	</div>
 	<!-- modal / reveal forget password ends here -->
 </ui:composition>
