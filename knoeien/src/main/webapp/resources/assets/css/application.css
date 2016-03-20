@@ -711,7 +711,7 @@ line-height: 1.75em;
 /*evaluate-confirmation-modal ends*/
 
 /*card-info-modal starts*/
-#card-info-modal {
+/* #card-info-modal {
 	border-radius: 8px;
 	background: #FFFFFF;
 }
@@ -727,8 +727,8 @@ line-height: 1.75em;
 #card-info label {
 	line-height: 3;
 	color: #3A3938;
-}
-#card-info input[type="text"] {
+} */
+/* #card-info input[type="text"] {
 	background-color: #F4F4F2;
 	border-radius: 8px;
 	padding-top: 10px ;
@@ -742,13 +742,13 @@ font-size: 0.7em;
 line-height: 1.75em;
 }
  
-#card-info input[type="text"]:-moz-placeholder { /* Firefox 18- */
+#card-info input[type="text"]:-moz-placeholder { Firefox 18-
 color: #B8B8B6 !important; 
 font-size: 0.7em;
 line-height: 1.75em;
 }
  
-#card-info input[type="text"]::-moz-placeholder {  /* Firefox 19+ */
+#card-info input[type="text"]::-moz-placeholder {  Firefox 19+
 color: #B8B8B6 !important; 
 font-size: 0.7em;
 line-height: 1.75em;
@@ -758,13 +758,13 @@ line-height: 1.75em;
 color: #B8B8B6 !important;
 font-size: 0.7em;
 line-height: 1.75em;  
-}
-#card-info a{
+} */
+/* #card-info a{
 	margin-top: 10px;
 	width: 100%; 
 	padding: 14px 10px; 
 	border-radius: 8px;
-}
+} */
 
 /*card-info-modal ends*/
 

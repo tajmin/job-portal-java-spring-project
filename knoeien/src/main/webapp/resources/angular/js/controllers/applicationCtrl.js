@@ -473,7 +473,7 @@ Controllers.controller("addJobCtrl", function($scope, $rootScope, restservice, $
 		restservice.post($scope.job, "api/v1/job/addjob").then(function(response) {
 			if (response != null) {
 				$scope.job = response;
-				$("#draft-confirmation-modal").foundation('toggle');
+				$("#post-confirmation-modal").foundation('toggle');
         	}
         });
 		
@@ -516,16 +516,16 @@ Controllers.controller("addJobCtrl", function($scope, $rootScope, restservice, $
 				$("#card-info-modal").foundation('toggle');
 			}
 		});
-	};    
-	
+	};	
+	//$scope.getUserPaymentInfo();
 	
 	$scope.saveUserPaymentInfo = function(isValid) {
 		if(!isValid) return;
 		
 		restservice.post( $scope.payment, "api/v1/user/saveUserPaymentInfo").then(function(response) {
 			if (response != null) {
-				$("#card-info-modal").foundation('close');
 				$scope.postJob();
+				$("#card-info-modal").foundation('close');				
         	}
         });
     };   

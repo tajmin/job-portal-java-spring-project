@@ -2,9 +2,10 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <ui:composition template="templates/angular-template.xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core">
 	<ui:define name="content">
-		<ui:insert name="card-info-modal"></ui:insert>
-		<ui:insert name="draft-confirmation-modal"></ui:insert>
 		<div ng-controller="addJobCtrl">
+			<ui:insert name="card-info-modal"></ui:insert>
+			<ui:insert name="draft-confirmation-modal"></ui:insert>
+			<ui:insert name="post-confirmation-modal"></ui:insert>		
 			<form name="jobPostingForm">
 				<div class="cover">
 					<canvas id="job_cover_image" class="cover-image" style="background-image: url(/img/{{(job.imageUrl !== '')? job.imageUrl : ''}})"></canvas>
@@ -34,9 +35,9 @@
 				    <ui:include src="jobPostPanel/panel_job_approved.xhtml"></ui:include>
 				  </div>
 				</div>
-				<ul class="global-message" style="white-space: normal; text-align: center;">
+				<!-- <ul class="global-message" style="white-space: normal; text-align: center;">
 						<li style="list-style: none;" ng-show="restMessages.length>0" class="info-text info-modal">{{restMessages}}</li>
-				</ul>
+				</ul> -->
 				
 				<div class="row text-center">
 					<a  href="javascript:void(0);" ng-click="formSubmitted = true; draftJob(jobPostingForm.$valid);" class="button hlpr-color-alert helper-tab-button">Save Draft</a>
