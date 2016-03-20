@@ -285,6 +285,10 @@ Controllers.controller("editProfileCtrl", function($scope, $rootScope, restservi
 		});
 	};
 	
+	$scope.openFileDialogue = function(){
+		$("#userImageFileUpload").trigger('click');
+	};
+	
 	$scope.imageUpload = function(input){
     	if (input.files && input.files[0]) {
             var reader = new FileReader();
