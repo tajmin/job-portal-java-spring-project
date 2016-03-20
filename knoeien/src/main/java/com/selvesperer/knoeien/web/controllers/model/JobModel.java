@@ -87,6 +87,15 @@ public class JobModel implements Serializable{
 		this.setCreatedDate(DateFormatUtils.getWebFormattedDateString(job.getCreatedDate()));
 	}
 	
+	public List<JobModel> getJobModelList(List<Job> jobList) {
+		List<JobModel> jobModelList = new ArrayList<>();
+		for(Job job : jobList) {
+			JobModel jobModel = new JobModel(job);
+			jobModelList.add(jobModel);
+		}
+		return jobModelList;
+	}
+	
 	public String getId() {
 		return id;
 	}
@@ -117,15 +126,6 @@ public class JobModel implements Serializable{
 
 	public void setReviewMessage(String reviewMessage) {
 		this.reviewMessage = reviewMessage;
-	}
-
-	public List<JobModel> getJobModelList(List<Job> jobList) {
-		List<JobModel> jobModelList = new ArrayList<>();
-		for(Job job : jobList) {
-			JobModel jobModel = new JobModel(job);
-			jobModelList.add(jobModel);
-		}
-		return jobModelList;
 	}
 
 	public String getDescription() {

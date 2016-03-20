@@ -35,7 +35,6 @@ public class TransactionHistoryController extends AbstractController implements 
 		return 1;
 	}
 	
-	//@author SHIFAT edited for balance info
 	@RequestMapping(value = "/transactionInfo", method = RequestMethod.GET, produces = "application/json")
 	public ResponseEntity<RestResponse> balanceInfo() {
 		RestResponse restResponse = null;
@@ -43,14 +42,8 @@ public class TransactionHistoryController extends AbstractController implements 
 		try {
 			TransactionHistoryService transactionHistoryService = ApplicationBeanFactory.getBean(TransactionHistoryService.class);
 			String id = SecurityManager.getCurrentUserId();
-			//String id="8000000";
 			List<TransactionHistory> transactionHistory = transactionHistoryService.showTransactionInfo(id);
-			TransactionHistoryModel transactionHistoryModel = new TransactionHistoryModel(transactionHistory.get(0));
-			
-//			for(int i=0;i<transactionHistory.size();i++){
-//			transactionHistoryModel = new TransactionHistoryModel(transactionHistory.get(i));
-//			}
-			
+			TransactionHistoryModel transactionHistoryModel = new TransactionHistoryModel(transactionHistory.get(0));			
 			System.out.println(id);
 			return new ResponseEntity<RestResponse>( convertToRestGoodResponse(transactionHistoryModel, LocalizationUtil.findLocalizedString("signupsuccess.text")),HttpStatus.OK);
 			
@@ -63,6 +56,47 @@ public class TransactionHistoryController extends AbstractController implements 
 		}
 		return new ResponseEntity<RestResponse>( restResponse, HttpStatus.OK);
 	}
+	@RequestMapping(value = "/paymentReceived", method = RequestMethod.GET, produces = "application/json")
+	public ResponseEntity<RestResponse> paymentReceived() {
+		RestResponse restResponse = null;
+		if (log.isDebugEnabled()) log.debug("Transaction Info");		
+		try {
+			TransactionHistoryService transactionHistoryService = ApplicationBeanFactory.getBean(TransactionHistoryService.class);
+			String id = SecurityManager.getCurrentUserId();
+			List<TransactionHistory> transactionHistoryList = transactionHistoryService.getPaymentReceivedByUser(id);
+			TransactionHistoryModel transactionHistoryModel = new TransactionHistoryModel();			
+			List<TransactionHistoryModel> transactionHistoryModelList = transactionHistoryModel.getTransactionHistoryModelList(transactionHistoryList);
+			return new ResponseEntity<RestResponse>( convertToRestGoodResponse(transactionHistoryModelList, LocalizationUtil.findLocalizedString("")),HttpStatus.OK);
+			
+		} catch (AuthenticationFailedException t) {
+			restResponse = convertToRestBadResponse("", t.getLocalizedMessage());
+			t.printStackTrace();
+		} catch (Exception t) {
+			restResponse = convertToRestBadResponse("", t.getLocalizedMessage());
+			t.printStackTrace();
+		}
+		return new ResponseEntity<RestResponse>( restResponse, HttpStatus.OK);
+	}
 	
-	//@author SHIFAT ends
+	@RequestMapping(value = "/paymentMade", method = RequestMethod.GET, produces = "application/json")
+	public ResponseEntity<RestResponse> paymentMade() {
+		RestResponse restResponse = null;
+		if (log.isDebugEnabled()) log.debug("Transaction Info");		
+		try {
+			TransactionHistoryService transactionHistoryService = ApplicationBeanFactory.getBean(TransactionHistoryService.class);
+			String id = SecurityManager.getCurrentUserId();
+			List<TransactionHistory> transactionHistoryList = transactionHistoryService.getPaymentPaidByUser(id);
+			TransactionHistoryModel transactionHistoryModel = new TransactionHistoryModel();			
+			List<TransactionHistoryModel> transactionHistoryModelList = transactionHistoryModel.getTransactionHistoryModelList(transactionHistoryList);
+			return new ResponseEntity<RestResponse>( convertToRestGoodResponse(transactionHistoryModelList, LocalizationUtil.findLocalizedString("")),HttpStatus.OK);
+			
+		} catch (AuthenticationFailedException t) {
+			restResponse = convertToRestBadResponse("", t.getLocalizedMessage());
+			t.printStackTrace();
+		} catch (Exception t) {
+			restResponse = convertToRestBadResponse("", t.getLocalizedMessage());
+			t.printStackTrace();
+		}
+		return new ResponseEntity<RestResponse>( restResponse, HttpStatus.OK);
+	}
 }
