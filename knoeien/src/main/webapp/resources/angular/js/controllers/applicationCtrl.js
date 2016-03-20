@@ -509,24 +509,24 @@ Controllers.controller("addJobCtrl", function($scope, $rootScope, restservice, $
     
     $scope.getUserPaymentInfo = function() {
 		restservice.get('', "api/v1/user/getUserPaymentInfo").then(function(response) {
-			if (response != null) {
+			if (response != null && response.cardNumber != null && response.cardNumber != "") {
+				$scope.postJob();
+			}else{
 				$scope.payment = response;
-				console.log($scope.payment);
+				$("#card-info-modal").foundation('toggle');
 			}
-			$("#card-info-modal").foundation('toggle');
 		});
-	};
-	$scope.getUserPaymentInfo();    
+	};    
 	
 	
 	$scope.saveUserPaymentInfo = function(isValid) {
 		if(!isValid) return;
 		
-		restservice.post( $scope.user, "api/v1/user/saveUserPaymentInfo").then(function(response) {
+		restservice.post( $scope.payment, "api/v1/user/saveUserPaymentInfo").then(function(response) {
 			if (response != null) {
+				$("#card-info-modal").foundation('close');
 				$scope.postJob();
         	}
-			$("#evaluate-confirmation-modal").foundation('toggle');
         });
     };   
 	
