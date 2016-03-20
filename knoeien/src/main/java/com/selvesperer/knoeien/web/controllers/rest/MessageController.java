@@ -15,14 +15,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.selvesperer.knoeien.data.domain.Job;
 import com.selvesperer.knoeien.data.domain.Message;
 import com.selvesperer.knoeien.exception.AuthenticationFailedException;
-import com.selvesperer.knoeien.service.JobService;
 import com.selvesperer.knoeien.service.MessageService;
 import com.selvesperer.knoeien.spring.utils.ApplicationBeanFactory;
 import com.selvesperer.knoeien.utils.localization.LocalizationUtil;
-import com.selvesperer.knoeien.web.controllers.model.JobModel;
 import com.selvesperer.knoeien.web.controllers.model.MessageModel;
 import com.selvesperer.knoeien.web.controllers.model.RestResponse;
 

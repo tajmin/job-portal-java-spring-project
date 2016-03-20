@@ -189,7 +189,6 @@ public class UserController extends AbstractController implements Serializable {
 			uData.put(Constants.CURRENT_USER_ID, u.getEmail());
 			uData.put(Constants.CURRENT_USER_NAME, u.getFullName());
 			
-			//if(u != null) response.sendRedirect("http://localhost:8080/knoeien/home.xhtml");
 			return new ResponseEntity<RestResponse>( convertToRestGoodResponse(uData, LocalizationUtil.findLocalizedString("signupsuccess.text")),HttpStatus.OK);
 		} catch (AuthenticationFailedException t) {
 			restResponse = convertToRestBadResponse("", t.getLocalizedMessage());
@@ -284,7 +283,6 @@ public class UserController extends AbstractController implements Serializable {
 			String id = SecurityManager.getCurrentUserId();
 			userService.updateUser(userModel, id);
 						
-			//if(u != null) response.sendRedirect("http://localhost:8080/knoeien/home.xhtml");
 			return new ResponseEntity<RestResponse>(convertToRestGoodResponse(null, LocalizationUtil.findLocalizedString("updatesuccess.text")),HttpStatus.OK);
 		} catch (AuthenticationFailedException t) {
 			restResponse = convertToRestBadResponse("", t.getLocalizedMessage());

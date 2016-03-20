@@ -40,4 +40,8 @@ ppApp.run(function($rootScope, $location, authService, restservice) {
     $rootScope.isUndefinedOrNull = function(val) {
 	    return angular.isUndefined(val) || val === null 
 	}
+    
+    $rootScope.getBaseUrl = function() {
+	    return "http://localhost:8080/knoeien"; 
+	}
 });

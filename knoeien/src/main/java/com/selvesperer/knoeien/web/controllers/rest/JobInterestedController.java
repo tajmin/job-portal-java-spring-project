@@ -12,22 +12,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.selvesperer.knoeien.data.domain.Company;
-import com.selvesperer.knoeien.data.domain.Job;
-import com.selvesperer.knoeien.service.CompanyService;
-import com.selvesperer.knoeien.service.JobInterestedService;
-import com.selvesperer.knoeien.service.JobService;
-import com.selvesperer.knoeien.spring.utils.ApplicationBeanFactory;
-import com.selvesperer.knoeien.utils.localization.LocalizationUtil;
-import com.selvesperer.knoeien.web.controllers.model.CompanyModel;
-import com.selvesperer.knoeien.web.controllers.model.JobInterestedModel;
-import com.selvesperer.knoeien.web.controllers.model.JobModel;
-import com.selvesperer.knoeien.web.controllers.model.RestResponse;
 import com.selvesperer.knoeien.data.domain.JobInterested;
 import com.selvesperer.knoeien.exception.AuthenticationFailedException;
 import com.selvesperer.knoeien.security.SecurityManager;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import com.selvesperer.knoeien.service.JobInterestedService;
+import com.selvesperer.knoeien.spring.utils.ApplicationBeanFactory;
+import com.selvesperer.knoeien.utils.localization.LocalizationUtil;
+import com.selvesperer.knoeien.web.controllers.model.JobInterestedModel;
+import com.selvesperer.knoeien.web.controllers.model.RestResponse;
 
 
 @Controller

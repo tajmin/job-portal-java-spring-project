@@ -5,7 +5,6 @@
 	<ui:param name="leftMenu" value="show"></ui:param>
 
 	<ui:define name="content">
-<!-- 		<div class="row wrapper-content" ng-controller="facebookLoginCtrl"> -->
 			<div class="row wrapper-content">
 			<div class="medium-7 medium-centered columns" ng-if="!isproceed">
 				<!-- Foundation "abide" plug-in used for validation  -->
@@ -14,20 +13,11 @@
 						<fieldset class="medium-12 columns">
 							<div class="button-group float-right">
 								<a href="/knoeien/api/v1/socialNetwork/auth/facebook" class="button hlpr-color-info" >Facebook Login</a>
-<!-- 								<a class="button hlpr-color-alert" href="index.xhtml">Cancel</a> -->
 							</div>
 						</fieldset>
 					</div>
 				</form>
-				<!-- Sign up form ends here 
-				href="http://localhost:8080/knoeien/api/v1/socialNetwork/auth/facebook"
-				-->
 			</div>
-			
-		
 		</div>
-		
-<!-- 		<ui:insert name="login-modal"></ui:insert> -->
-<!-- 		<ui:insert name="forgot-password-modal"></ui:insert> -->
 	</ui:define>
 </ui:composition>

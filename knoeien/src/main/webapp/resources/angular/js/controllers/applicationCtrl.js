@@ -166,7 +166,7 @@ Controllers.controller("loginCtrl", function($scope, $rootScope, restservice, $c
 			$scope.isproceed = true;
 			$rootScope.userinfos = response;
 			console.log($rootScope.userinfos);
-			window.open("http://localhost:8080/knoeien/home.xhtml",	"_self");
+			window.open($rootScope.getBaseUrl() + "/index.xhtml",	"_self");
 		});
 	};
 });
@@ -219,7 +219,7 @@ Controllers.controller("resetPasswordCtrl", function($scope, $rootScope, restser
 Controllers.controller("logoutCtrl", function($scope, $rootScope, restservice,$cookies) {
 	$scope.logout = function() {
 		restservice.get('', "api/v1/user/logout").then(function(response) {
-			window.open("http://localhost:8080/knoeien/index.xhtml", "_self");
+			window.open($rootScope.getBaseUrl() + "/index.xhtml", "_self");
 		});
 	};
 });
@@ -620,7 +620,7 @@ Controllers.controller("jobCtrl", function($scope, $rootScope, restservice, $coo
     };
     
     $scope.selectJob = function(jobid){
-    	window.open("http://localhost:8080/knoeien/jobdetail.xhtml?id=" + jobid,	"_self");
+    	window.open($rootScope.getBaseUrl() + "/jobdetail.xhtml?id=" + jobid,	"_self");
     }
     
 });
@@ -682,10 +682,6 @@ Controllers.controller("jobDetailsCtrl", function($scope, $rootScope, restservic
     		}
     	//}
     	$window.map.fitBounds(bounds);
-    };
-    
-    $scope.selectJob = function(jobid){
-    	window.open("http://localhost:8080/knoeien/jobdetail.xhtml?id=" + jobid,	"_self");
-    }
+    };    
     
 });
