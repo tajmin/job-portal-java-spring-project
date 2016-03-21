@@ -3,6 +3,8 @@ package com.selvesperer.knoeien.web.controllers.model;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.selvesperer.knoeien.data.domain.TransactionHistory;
 
@@ -24,15 +26,21 @@ public class TransactionHistoryModel implements Serializable{
 	public TransactionHistoryModel() {}
 	
 	public TransactionHistoryModel(TransactionHistory transactionHistory) {
-		super();
-		
+		super();		
 		this.setAmount(transactionHistory.getAmount());
 		this.setFromUserId(transactionHistory.getFromUserId());
 		this.setToUserId(transactionHistory.getToUserId());
 		this.setJobId(transactionHistory.getJobId());
-		this.setUserId(transactionHistory.getUserId());
-		
-		
+		this.setUserId(transactionHistory.getUserId());		
+	}
+	
+	public List<TransactionHistoryModel> getTransactionHistoryModelList(List<TransactionHistory> transactionHistoryList) {
+		List<TransactionHistoryModel> transactionHistoryModelList = new ArrayList<>();
+		for(TransactionHistory transactionHistory : transactionHistoryList ) {
+			TransactionHistoryModel transactionHistoryModel = new TransactionHistoryModel(transactionHistory);
+			transactionHistoryModelList.add(transactionHistoryModel);
+		}
+		return transactionHistoryModelList;
 	}
 	
 	public String getFromUserId() {

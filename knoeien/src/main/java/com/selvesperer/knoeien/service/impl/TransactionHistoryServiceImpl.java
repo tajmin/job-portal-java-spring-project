@@ -25,7 +25,6 @@ public class TransactionHistoryServiceImpl implements TransactionHistoryService 
 	@Inject
 	private TransactionHistoryRepository transactionHistoryRepository;
 	
-	//@author SHIFAT edited for settings 
 	@Override
 	public List<TransactionHistory> showTransactionInfo(String id) {
 		// TODO Auto-generated method stub
@@ -36,10 +35,22 @@ public class TransactionHistoryServiceImpl implements TransactionHistoryService 
 		
 		return transactionHistory;
 	}
+
+	public List<TransactionHistory> getPaymentReceivedByUser(String id) {
+		List<TransactionHistory> transactionHistory = transactionHistoryRepository.findTransactionHistoryReceivedByUserId(id);
+		if (transactionHistory == null) {
+			throw new AuthenticationFailedException("error.usernotfound.text");
+		}
+		return transactionHistory;
+	}
 	
-	
-	//@author SHIFAT ends
-	
+	public List<TransactionHistory> getPaymentPaidByUser(String id) {
+		List<TransactionHistory> transactionHistory = transactionHistoryRepository.findTransactionHistoryPaidByUserId(id);
+		if (transactionHistory == null) {
+			throw new AuthenticationFailedException("error.usernotfound.text");
+		}
+		return transactionHistory;
+	}
 
 	
 }
