@@ -11,7 +11,7 @@ public interface JobService {
 
 	public Job saveJob(JobModel jobModel);
 	
-	public List<Job> showLatestJob();
+	public List<JobModel> findLatestJobs(int page, int limit);
 	
 	public List<Job> showBestPaidJob();
 	

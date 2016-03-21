@@ -24,6 +24,7 @@ import com.selvesperer.knoeien.exception.AuthenticationFailedException;
 import com.selvesperer.knoeien.security.SecurityManager;
 import com.selvesperer.knoeien.service.JobService;
 import com.selvesperer.knoeien.spring.utils.ApplicationBeanFactory;
+import com.selvesperer.knoeien.utils.Constants;
 import com.selvesperer.knoeien.utils.IdGenerator;
 import com.selvesperer.knoeien.utils.configuration.ConfigurationUtil;
 import com.selvesperer.knoeien.utils.localization.LocalizationUtil;
@@ -114,16 +115,13 @@ public class JobController extends AbstractController implements Serializable {
 	}
 	
 	@RequestMapping(value = "/latestjob", method = RequestMethod.GET, produces = "application/json")
-	public ResponseEntity<RestResponse> latestJob() {
+	public ResponseEntity<RestResponse> latestJob(@RequestParam(value="page", required=false) Integer page) {
 		RestResponse restResponse = null;
-		if (log.isDebugEnabled()) log.debug("Job Info");		
+		if (log.isDebugEnabled()) log.debug("Job Info");
 		try {
 			JobService jobService = ApplicationBeanFactory.getBean(JobService.class);
-			List<Job> job = jobService.showLatestJob();
-			JobModel jobModel = new JobModel();
-			List<JobModel> jobModelList = jobModel.getJobModelList(job);
-
-			return new ResponseEntity<RestResponse>( convertToRestGoodResponse(jobModelList, LocalizationUtil.findLocalizedString("")),HttpStatus.OK);
+			List<JobModel> jobs = jobService.findLatestJobs(page, Constants.JOB_LATEST_SIZE);			
+			return new ResponseEntity<RestResponse>( convertToRestGoodResponse(jobs, LocalizationUtil.findLocalizedString("")),HttpStatus.OK);
 		} catch (AuthenticationFailedException t) {
 			restResponse = convertToRestBadResponse("", t.getLocalizedMessage());
 		} catch (Exception t) {
