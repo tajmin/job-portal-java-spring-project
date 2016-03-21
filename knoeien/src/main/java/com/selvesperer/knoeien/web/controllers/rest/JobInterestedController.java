@@ -31,61 +31,61 @@ public class JobInterestedController extends AbstractController implements Seria
 	 */
 	private static final long serialVersionUID = 5883325019280616658L;
 	
-	@RequestMapping(value = "/saveJobInterested", method = RequestMethod.POST, produces = "application/json")
-	@ResponseBody
-	public ResponseEntity<RestResponse> saveJobInterested(@RequestBody JobInterestedModel jobInterestedModel) {		
-		JobInterested jobInterested  = null;
-		try {
-			JobInterestedService jobInterestedService = ApplicationBeanFactory.getBean(JobInterestedService.class);
-			jobInterested = jobInterestedService.saveJobInterested(jobInterestedModel);
-		} catch (Exception ex) {
-			Messages.addGlobalError(ex.getMessage());
-		}
-		return new ResponseEntity<RestResponse>(convertToRestGoodResponse(jobInterested), HttpStatus.OK);
-	}
-	
-	@RequestMapping(value = "/getAllJobInterestedByUserId", method = RequestMethod.GET, produces = "application/json")
-	public ResponseEntity<RestResponse> getAllJobInterestedByUserId() {
-		RestResponse restResponse = null;
-		
-		
-		try {
-			JobInterestedService jobInterestedService = ApplicationBeanFactory.getBean(JobInterestedService.class);
-			String Id = SecurityManager.getCurrentUserId();
-			List<JobInterested> jobInterested = jobInterestedService.findJobInterestedUserId(Id);
-			JobInterestedModel jobInterestedModel = new JobInterestedModel();
-			List<JobInterestedModel> jobModelList = jobInterestedModel.getJobModelList(jobInterested);
-
-			return new ResponseEntity<RestResponse>( convertToRestGoodResponse(jobModelList, LocalizationUtil.findLocalizedString("")),HttpStatus.OK);
-		} catch (AuthenticationFailedException t) {
-			restResponse = convertToRestBadResponse("", t.getLocalizedMessage());
-		} catch (Exception t) {
-			restResponse = convertToRestBadResponse("", t.getLocalizedMessage());
-		}
-		return new ResponseEntity<RestResponse>( restResponse, HttpStatus.OK);
-	}
-	
-	@RequestMapping(value = "/getLowestBidAmount", method = RequestMethod.GET, produces = "application/json")
-	public ResponseEntity<RestResponse> getLowestBidAmount() {
-		RestResponse restResponse = null;
-		
-		
-		try {
-			JobInterestedService jobInterestedService = ApplicationBeanFactory.getBean(JobInterestedService.class);
-			List<JobInterested> jobInterested = jobInterestedService.showLowestBidAmount();
-			
-			JobInterestedModel jobInterestedModel = new JobInterestedModel();
-			List<JobInterestedModel> jobInterestedModelList = jobInterestedModel.getJobModelList(jobInterested);
-			
-			return new ResponseEntity<RestResponse>( convertToRestGoodResponse(jobInterestedModelList, LocalizationUtil.findLocalizedString("")),HttpStatus.OK);
-		} catch (AuthenticationFailedException t) {
-			restResponse = convertToRestBadResponse("", t.getLocalizedMessage());
-		} catch (Exception t) {
-			restResponse = convertToRestBadResponse("", t.getLocalizedMessage());
-		}
-		return new ResponseEntity<RestResponse>( restResponse, HttpStatus.OK);
-	}
-	
+//	@RequestMapping(value = "/saveJobInterested", method = RequestMethod.POST, produces = "application/json")
+//	@ResponseBody
+//	public ResponseEntity<RestResponse> saveJobInterested(@RequestBody JobInterestedModel jobInterestedModel) {		
+//		JobInterested jobInterested  = null;
+//		try {
+//			JobInterestedService jobInterestedService = ApplicationBeanFactory.getBean(JobInterestedService.class);
+//			jobInterested = jobInterestedService.saveJobInterested(jobInterestedModel);
+//		} catch (Exception ex) {
+//			Messages.addGlobalError(ex.getMessage());
+//		}
+//		return new ResponseEntity<RestResponse>(convertToRestGoodResponse(jobInterested), HttpStatus.OK);
+//	}
+//	
+//	@RequestMapping(value = "/getAllJobInterestedByUserId", method = RequestMethod.GET, produces = "application/json")
+//	public ResponseEntity<RestResponse> getAllJobInterestedByUserId() {
+//		RestResponse restResponse = null;
+//		
+//		
+//		try {
+//			JobInterestedService jobInterestedService = ApplicationBeanFactory.getBean(JobInterestedService.class);
+//			String Id = SecurityManager.getCurrentUserId();
+//			List<JobInterested> jobInterested = jobInterestedService.findJobInterestedUserId(Id);
+//			JobInterestedModel jobInterestedModel = new JobInterestedModel();
+//			List<JobInterestedModel> jobModelList = jobInterestedModel.getJobModelList(jobInterested);
+//
+//			return new ResponseEntity<RestResponse>( convertToRestGoodResponse(jobModelList, LocalizationUtil.findLocalizedString("")),HttpStatus.OK);
+//		} catch (AuthenticationFailedException t) {
+//			restResponse = convertToRestBadResponse("", t.getLocalizedMessage());
+//		} catch (Exception t) {
+//			restResponse = convertToRestBadResponse("", t.getLocalizedMessage());
+//		}
+//		return new ResponseEntity<RestResponse>( restResponse, HttpStatus.OK);
+//	}
+//	
+//	@RequestMapping(value = "/getLowestBidAmount", method = RequestMethod.GET, produces = "application/json")
+//	public ResponseEntity<RestResponse> getLowestBidAmount() {
+//		RestResponse restResponse = null;
+//		
+//		
+//		try {
+//			JobInterestedService jobInterestedService = ApplicationBeanFactory.getBean(JobInterestedService.class);
+//			List<JobInterested> jobInterested = jobInterestedService.showLowestBidAmount();
+//			
+//			JobInterestedModel jobInterestedModel = new JobInterestedModel();
+//			List<JobInterestedModel> jobInterestedModelList = jobInterestedModel.getJobModelList(jobInterested);
+//			
+//			return new ResponseEntity<RestResponse>( convertToRestGoodResponse(jobInterestedModelList, LocalizationUtil.findLocalizedString("")),HttpStatus.OK);
+//		} catch (AuthenticationFailedException t) {
+//			restResponse = convertToRestBadResponse("", t.getLocalizedMessage());
+//		} catch (Exception t) {
+//			restResponse = convertToRestBadResponse("", t.getLocalizedMessage());
+//		}
+//		return new ResponseEntity<RestResponse>( restResponse, HttpStatus.OK);
+//	}
+//	
 	
 	
 

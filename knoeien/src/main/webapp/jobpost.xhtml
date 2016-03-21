@@ -2,9 +2,10 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <ui:composition template="templates/angular-template.xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core">
 	<ui:define name="content">
-		<ui:insert name="card-info-modal"></ui:insert>
-		<ui:insert name="draft-confirmation-modal"></ui:insert>
 		<div ng-controller="addJobCtrl">
+			<ui:insert name="card-info-modal"></ui:insert>
+			<ui:insert name="draft-confirmation-modal"></ui:insert>
+			<ui:insert name="post-confirmation-modal"></ui:insert>		
 			<form name="jobPostingForm">
 				<div class="cover">
 					<canvas id="job_cover_image" class="cover-image" style="background-image: url(/img/{{(job.imageUrl !== '')? job.imageUrl : ''}})"></canvas>
@@ -23,7 +24,7 @@
 				  	<li class="tabs-title medium-3 columns"><a ng-click="setPageNo(2);" href="#panel_job_details">job details</a></li>
 				  	<li class="tabs-title medium-3 columns"><a ng-click="setPageNo(3);" href="#panel_job_approved">approved</a></li>
 				</ul>
-				<div class="tabs-content" data-tabs-content="job-post-tabs">
+				<div class="tabs-content" data-tabs-content="job-post-tabs" style="border-bottom-color: transparent;">
 				  <div class="tabs-panel is-active" id="panel_job_info">
 				    <ui:include src="jobPostPanel/panel_job_info.xhtml"></ui:include>
 				  </div>
@@ -34,14 +35,14 @@
 				    <ui:include src="jobPostPanel/panel_job_approved.xhtml"></ui:include>
 				  </div>
 				</div>
-				<ul class="global-message" style="white-space: normal; text-align: center;">
+				<!-- <ul class="global-message" style="white-space: normal; text-align: center;">
 						<li style="list-style: none;" ng-show="restMessages.length>0" class="info-text info-modal">{{restMessages}}</li>
-				</ul>
+				</ul> -->
 				
 				<div class="row text-center">
-					<a  href="javascript:void(0);" ng-click="formSubmitted = true; draftJob(jobPostingForm.$valid);" class="button hlpr-color-alert">Save Draft</a>
-					<a ng-if="isPost()" href="javascript:void(0);" ng-click="formSubmitted = true; openPaymentWindow(jobPostingForm.$valid);" class="button hlpr-color-info">Post</a>
-					<a ng-if="!isPost()" href="javascript:void(0);" ng-click="formSubmitted = true; nextPage(jobPostingForm.$valid);" class="button hlpr-color-info">Next</a> 										
+					<a  href="javascript:void(0);" ng-click="formSubmitted = true; draftJob(jobPostingForm.$valid);" class="button hlpr-color-alert helper-tab-button">Save Draft</a>
+					<a ng-if="isPost()" href="javascript:void(0);" ng-click="formSubmitted = true; openPaymentWindow(jobPostingForm.$valid);" class="button hlpr-color-success helper-tab-button">Post</a>
+					<a ng-if="!isPost()" href="javascript:void(0);" ng-click="formSubmitted = true; nextPage(jobPostingForm.$valid);" class="button hlpr-color-success helper-tab-button">Next</a> 										
 				</div>				
 			</form>			
 		</div>		

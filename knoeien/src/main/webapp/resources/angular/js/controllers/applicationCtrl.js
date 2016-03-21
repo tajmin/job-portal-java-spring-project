@@ -310,6 +310,10 @@ Controllers.controller("editProfileCtrl", function($scope, $rootScope, restservi
 
 	};
 	$scope.transactionPaid();
+
+	$scope.openFileDialogue = function(){
+		$("#userImageFileUpload").trigger('click');
+	};
 	
 	$scope.imageUpload = function(input){
     	if (input.files && input.files[0]) {
@@ -495,7 +499,7 @@ Controllers.controller("addJobCtrl", function($scope, $rootScope, restservice, $
 		restservice.post($scope.job, "api/v1/job/addjob").then(function(response) {
 			if (response != null) {
 				$scope.job = response;
-				$("#draft-confirmation-modal").foundation('toggle');
+				$("#post-confirmation-modal").foundation('toggle');
         	}
         });
 		
@@ -531,24 +535,24 @@ Controllers.controller("addJobCtrl", function($scope, $rootScope, restservice, $
     
     $scope.getUserPaymentInfo = function() {
 		restservice.get('', "api/v1/user/getUserPaymentInfo").then(function(response) {
-			if (response != null) {
+			if (response != null && response.cardNumber != null && response.cardNumber != "") {
+				$scope.postJob();
+			}else{
 				$scope.payment = response;
-				console.log($scope.payment);
+				$("#card-info-modal").foundation('toggle');
 			}
-			$("#card-info-modal").foundation('toggle');
 		});
-	};
-	$scope.getUserPaymentInfo();    
-	
+	};	
+	//$scope.getUserPaymentInfo();
 	
 	$scope.saveUserPaymentInfo = function(isValid) {
 		if(!isValid) return;
 		
-		restservice.post( $scope.user, "api/v1/user/saveUserPaymentInfo").then(function(response) {
+		restservice.post( $scope.payment, "api/v1/user/saveUserPaymentInfo").then(function(response) {
 			if (response != null) {
 				$scope.postJob();
+				$("#card-info-modal").foundation('close');				
         	}
-			$("#evaluate-confirmation-modal").foundation('toggle');
         });
     };   
 	

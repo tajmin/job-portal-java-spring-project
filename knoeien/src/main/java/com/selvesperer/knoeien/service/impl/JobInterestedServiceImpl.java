@@ -44,8 +44,8 @@ public class JobInterestedServiceImpl implements JobInterestedService{
 	@Override
 	public List<JobInterested> showLowestBidAmount() {
 		// TODO Auto-generated method stub
-		List<JobInterested> jobInterested = new ArrayList<>(jobInterestedRepository.findLowestBidAmount());
-		return jobInterested;
+		//List<JobInterested> jobInterested = new ArrayList<>(jobInterestedRepository.findLowestBidAmount());
+		return null;
 	}
 
 }

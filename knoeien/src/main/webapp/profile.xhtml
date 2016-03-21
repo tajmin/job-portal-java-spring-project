@@ -10,8 +10,7 @@
 					<div class="row expanded profile-img">
 						<div class="small-2 small-centered columns">
 							<div class="thumbnail">
-								<img id="user_thumbnail_image" src="/userimg/{{(user.backgroundImageUrl != '')? user.backgroundImageUrl : '' }}" alt="Profile" />
-								<label for="userImageFileUpload" class="middle" style="color: #6bbe54; font-weight: bold; cursor: pointer;"> Add photo </label>
+								<img ng-click="openFileDialogue();" id="user_thumbnail_image" src="/userimg/{{(user.backgroundImageUrl != '')? user.backgroundImageUrl : '' }}" alt="Add Photo" />
 								<input type="file" id="userImageFileUpload" class="show-for-sr" file-model = "imageFile" onchange="angular.element(this).scope().imageUpload(this)" />
 							</div>
 						</div>

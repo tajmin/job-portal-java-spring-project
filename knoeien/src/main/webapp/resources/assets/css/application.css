@@ -727,41 +727,24 @@ line-height: 1.75em;
 #card-info label {
 	line-height: 3;
 	color: #3A3938;
-}
-#card-info input[type="text"] {
+} 
+/* #card-info input[type="text"] {
 	background-color: #F4F4F2;
 	border-radius: 8px;
 	
 }
-/*#card-info input[type="text"]::-webkit-input-placeholder {
+#card-info input[type="text"]::-webkit-input-placeholder {
 color: #B8B8B6 !important;
 font-size: 0.7em;
 line-height: 1.75em;
 }
- 
- #card-info input[type="text"]:-moz-placeholder { Firefox 18-
-color: #B8B8B6 !important; 
-font-size: 0.7em;
-line-height: 1.75em;
-}
- 
-#card-info input[type="text"]::-moz-placeholder {  Firefox 19+
-color: #B8B8B6 !important; 
-font-size: 0.7em;
-line-height: 1.75em;
- }
- */ 
-#card-info input[type="text"]:-ms-input-placeholder {  
-color: #B8B8B6 !important;
-font-size: 0.7em;
-line-height: 1.75em;  
-}
+  */
 #card-info a{
 	margin-top: 10px;
 	width: 100%; 
 	padding: 14px 10px; 
 	border-radius: 8px;
-}
+} 
 
 /*card-info-modal ends*/
 
@@ -955,6 +938,10 @@ line-height: 1.75em;
 	z-index: 10;
 	width: 160px;
 	height: 160px;
+	line-height: 160px;
+	text-align: center;
+	font-weight: bolder;
+	cursor: pointer;
 }
 .cover-image {
 	display: block;
@@ -1439,4 +1426,66 @@ ul.arrow-bottom.green li.tabs-title > a[aria-selected="true"]::after {
 .chat-section form .button {
 	padding: 0.6rem 3rem;
 	margin-right: 0;
+}
+label.helper-label {
+	font-size: 1rem;
+}
+[type="text"],
+[type="password"],
+[type="date"],
+[type="datetime"],
+[type="datetime-local"],
+[type="month"],
+[type="week"],
+[type="email"],
+[type="number"],
+[type="search"],
+[type="tel"],
+[type="time"],
+[type="url"],
+[type="color"],
+textarea {
+	border-radius: 7px;
+	background-color: #f4f4f2;
+	border-color: transparent;
+}
+.button {
+	border-radius: 5px;
+}
+[class*=" input-group-"],
+[class^="input-group-"] {
+	border-radius: 0px;
+}
+[class*=" input-group-"]:first-child, 
+[class^="input-group-"]:first-child
+{
+	border-top-left-radius: 5px;
+	border-bottom-left-radius: 5px;
+}
+[class*=" input-group-"]:last-child, 
+[class^="input-group-"]:last-child
+{
+	border-top-right-radius: 5px;
+	border-bottom-right-radius: 5px;
+}
+[class*=" input-group-"], 
+[class^="input-group-"]
+{
+	border-color: #dfdddd;
+	background-color: #fff;
+}
+[class*=" input-group-"][disabled="disabled"],
+[class^="input-group-"][disabled="disabled"]
+{
+	background-color: #fff;
+}
+.helper-tab-button {
+	width: 150px;
+}
+.reveal {
+	border-radius: 7px;
+}
+.helper-button-fullwidth {
+	width: 100%;
+	margin-top: 10px;
 }
