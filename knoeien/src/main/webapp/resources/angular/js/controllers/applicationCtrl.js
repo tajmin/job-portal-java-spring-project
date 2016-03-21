@@ -289,9 +289,10 @@ Controllers.controller("editProfileCtrl", function($scope, $rootScope, restservi
 	
 	$scope.transactionReceived = function() {
 		console.log("loading payment received");
-		console.log($scope.paymentReceived);
+		
 		restservice.get('', "api/v1/transaction/paymentReceived").then(function(response) {
 			if (response != null) {
+				console.log(response);
 				$scope.paymentReceived = response;
 			} 
 		});
