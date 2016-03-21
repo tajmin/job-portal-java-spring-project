@@ -228,6 +228,8 @@ Controllers.controller("editProfileCtrl", function($scope, $rootScope, restservi
 	$scope.isproceed = false;
 	$scope.user = {};
 	$scope.balance = {};
+	$scope.paymentReceived = {};
+	$scope.paymentMade = {};
 	$scope.formSubmitted = false;
 	$scope.responseMessage = "";
 	$scope.cover_image = "";
@@ -285,6 +287,30 @@ Controllers.controller("editProfileCtrl", function($scope, $rootScope, restservi
 		});
 	};
 	
+	$scope.transactionReceived = function() {
+		console.log("loading payment received");
+		console.log($scope.paymentReceived);
+		restservice.get('', "api/v1/transaction/paymentReceived").then(function(response) {
+			if (response != null) {
+				$scope.paymentReceived = response;
+			} 
+		});
+
+	};
+	$scope.transactionReceived();
+	
+	$scope.transactionPaid = function() {
+		console.log("loading payment made");
+		console.log($scope.paymentReceived);
+		restservice.get('', "api/v1/transaction/paymentMade").then(function(response) {
+			if (response != null) {
+				$scope.paymentMade = response;
+			} 
+		});
+
+	};
+	$scope.transactionPaid();
+
 	$scope.openFileDialogue = function(){
 		$("#userImageFileUpload").trigger('click');
 	};
