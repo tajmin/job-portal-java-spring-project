@@ -731,29 +731,26 @@ line-height: 1.75em;
 #card-info input[type="text"] {
 	background-color: #F4F4F2;
 	border-radius: 8px;
-	padding-top: 10px ;
-	padding-bottom: 10px;
-	padding-left: 10px;
-	border: 1px solid #F4F4F2
+	
 }
-#card-info input[type="text"]::-webkit-input-placeholder {
+/*#card-info input[type="text"]::-webkit-input-placeholder {
 color: #B8B8B6 !important;
 font-size: 0.7em;
 line-height: 1.75em;
 }
  
-#card-info input[type="text"]:-moz-placeholder { /* Firefox 18- */
+ #card-info input[type="text"]:-moz-placeholder { Firefox 18-
 color: #B8B8B6 !important; 
 font-size: 0.7em;
 line-height: 1.75em;
 }
  
-#card-info input[type="text"]::-moz-placeholder {  /* Firefox 19+ */
+#card-info input[type="text"]::-moz-placeholder {  Firefox 19+
 color: #B8B8B6 !important; 
 font-size: 0.7em;
 line-height: 1.75em;
-}
- 
+ }
+ */ 
 #card-info input[type="text"]:-ms-input-placeholder {  
 color: #B8B8B6 !important;
 font-size: 0.7em;
