@@ -564,9 +564,12 @@ Controllers.controller("addJobCtrl", function($scope, $rootScope, restservice, $
 
 Controllers.controller("jobCtrl", function($scope, $rootScope, restservice, $cookies, $window) {
 	$scope.isproceed = false;
-	$scope.job = {};
+	$scope.job = [];
 	$scope.formSubmitted = false;
 	$scope.responseMessage = "";
+	$scope.filter = {};
+	$scope.filter.page = 1;
+	$scope.filter.moreLink = true;
 	
 	$window.map = new google.maps.Map(document.getElementById('g-map'), {
         center: {
@@ -577,10 +580,11 @@ Controllers.controller("jobCtrl", function($scope, $rootScope, restservice, $coo
     });
 	
 	//Shows Latest Jobs
-	$scope.latestJob = function() {			
-		restservice.get( '', "api/v1/job/latestjob").then(function(response) {
+	$scope.loadLatestJob = function() {			
+		restservice.get( '', "api/v1/job/latestjob?page="+$scope.filter.page).then(function(response) {
 			if (response != null) {
 				$scope.job = response;
+				if(response.length < 2) $scope.filter.moreLink = false;				
 				$scope.showJobInMap();
         	} else {
         		$scope.responseMessage = response.message;	
@@ -588,7 +592,23 @@ Controllers.controller("jobCtrl", function($scope, $rootScope, restservice, $coo
         });
 	
     };
-    $scope.latestJob();
+    
+	$scope.loadMoreLatestJob = function() {
+		$scope.filter.page = $scope.filter.page + 1;;
+		restservice.get( '', "api/v1/job/latestjob?page="+$scope.filter.page).then(function(response) {
+			if (response != null) {
+				for (var i = 0; i < response.length; i++) {
+					$scope.job.push(response[i]);
+	            }
+				if(response.length < 2) $scope.filter.moreLink = false;
+				$scope.showJobInMap();
+        	} else {
+        		$scope.responseMessage = response.message;	
+        	}
+        });	
+    };
+    
+    $scope.loadLatestJob();
     
     //Shows Best Paid Jobs 
     $scope.bestPaidJob = function() {	

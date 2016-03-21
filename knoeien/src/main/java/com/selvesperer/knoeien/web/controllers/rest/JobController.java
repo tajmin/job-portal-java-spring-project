@@ -119,6 +119,7 @@ public class JobController extends AbstractController implements Serializable {
 		RestResponse restResponse = null;
 		if (log.isDebugEnabled()) log.debug("Job Info");
 		try {
+			if(page == null) page = 1;
 			JobService jobService = ApplicationBeanFactory.getBean(JobService.class);
 			List<JobModel> jobs = jobService.findLatestJobs(page, Constants.JOB_LATEST_SIZE);			
 			return new ResponseEntity<RestResponse>( convertToRestGoodResponse(jobs, LocalizationUtil.findLocalizedString("")),HttpStatus.OK);

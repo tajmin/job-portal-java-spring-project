@@ -12,7 +12,7 @@ public class RestResponse implements Serializable {
 	@JsonInclude(Include.NON_EMPTY)
 	private boolean success = true;
 	
-	@JsonInclude(Include.NON_EMPTY)
+	@JsonInclude(Include.NON_NULL)
 	private Object response;
 	
 	@JsonInclude(Include.NON_EMPTY)
