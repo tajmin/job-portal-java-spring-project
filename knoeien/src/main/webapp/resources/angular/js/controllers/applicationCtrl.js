@@ -52,8 +52,8 @@ Controllers.controller("signupCtrl", function($scope, $rootScope, restservice, $
 		$scope.user.dateOfBirth = $scope.user.year + "-" + $scope.user.month + "-" + $scope.user.day;
 		
 		restservice.post($scope.user, "api/v1/user/signup").then(function(response) {
-			if (response != null && response.success) {
-				$scope.responseMessage = response.message;
+			if (response != null) {
+				$scope.isproceed = true;
 			}
 		});
 	};
@@ -630,10 +630,11 @@ Controllers.controller("jobCtrl", function($scope, $rootScope, restservice, $coo
     //Shows Nearest You Jobs 
     $scope.nearestJob = function() {		
 		restservice.get( '', "api/v1/job/nearestjob").then(function(response) {
+			console.log(response);
 			if (response != null) {
 				$scope.job = response;	
         	} else {
-        		$scope.responseMessage = response.message;	
+        		$scope.job = {};	
         	}
         });
 	
