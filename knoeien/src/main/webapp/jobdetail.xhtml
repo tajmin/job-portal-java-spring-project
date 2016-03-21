@@ -10,24 +10,25 @@
 			</ul>
 			<div class="tabs-content job-detail-content" data-tabs-content="job-detail-tabs">
 				<div class="tabs-panel is-active" id="detail">
-					<div class="row search-list">
+					<div class="row">
 						<div class="medium-3 columns text-center">
 							<img class="border-radius-7px" src="/img/{{job.imageUrl}}" alt="Job Image" />
 						</div>
 						<div class="medium-9 columns detail-section">
 							<div class="row">
 								<div class="medium-12 columns">
-									<h6 class="bold">{{job.title}}</h6>
+									<!-- <h6 class="bold">{{job.title}}</h6> -->
+									<label class="helper-label" style="font-weight: bold;">{{job.title}}</label>
 								</div>
 							</div>
 							<div class="row">
 								<div class="medium-12 columns">
-									<p>{{job.description}}</p>
+									<p style="font-size: .75em">{{job.description}}</p>
 								</div>
 							</div>
 							<div class="row">
 								<div class="medium-12 columns">
-									<a href="#" class="button hlpr-color-success border-radius-5px">Show Interest</a>
+									<a href="#" class="button hlpr-color-success border-radius-5px" style="margin-bottom: 10px">Show Interest</a>
 								</div>
 							</div>
 						</div>

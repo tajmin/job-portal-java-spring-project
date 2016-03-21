@@ -52,8 +52,8 @@ Controllers.controller("signupCtrl", function($scope, $rootScope, restservice, $
 		$scope.user.dateOfBirth = $scope.user.year + "-" + $scope.user.month + "-" + $scope.user.day;
 		
 		restservice.post($scope.user, "api/v1/user/signup").then(function(response) {
-			if (response != null && response.success) {
-				$scope.responseMessage = response.message;
+			if (response != null) {
+				$scope.isproceed = true;
 			}
 		});
 	};
@@ -439,6 +439,8 @@ Controllers.controller("addJobCtrl", function($scope, $rootScope, restservice, $
 			$("#panel_job_approved-label").click();
 		}
 		
+		//draft the job
+		$scope.draftJob(isValid, false);
     };
     
     $scope.increment = function(i) {
@@ -466,7 +468,7 @@ Controllers.controller("addJobCtrl", function($scope, $rootScope, restservice, $
     	$scope.page = i;
     };
 	
-	$scope.draftJob = function(isValid) {
+	$scope.draftJob = function(isValid, showModal) {
 		if(!isValid) return;
 		
 		$scope.job.draft = true;
@@ -478,7 +480,9 @@ Controllers.controller("addJobCtrl", function($scope, $rootScope, restservice, $
 		restservice.post($scope.job, "api/v1/job/addjob").then(function(response) {
 			if (response != null) {
 				$scope.job = response;
-				$("#draft-confirmation-modal").foundation('toggle');
+				if(showModal){
+					$("#draft-confirmation-modal").foundation('toggle');
+				}
         	}
         });
 		
@@ -561,9 +565,12 @@ Controllers.controller("addJobCtrl", function($scope, $rootScope, restservice, $
 
 Controllers.controller("jobCtrl", function($scope, $rootScope, restservice, $cookies, $window) {
 	$scope.isproceed = false;
-	$scope.job = {};
+	$scope.job = [];
 	$scope.formSubmitted = false;
 	$scope.responseMessage = "";
+	$scope.filter = {};
+	$scope.filter.page = 1;
+	$scope.filter.moreLink = true;
 	
 	$window.map = new google.maps.Map(document.getElementById('g-map'), {
         center: {
@@ -574,10 +581,11 @@ Controllers.controller("jobCtrl", function($scope, $rootScope, restservice, $coo
     });
 	
 	//Shows Latest Jobs
-	$scope.latestJob = function() {			
-		restservice.get( '', "api/v1/job/latestjob").then(function(response) {
+	$scope.loadLatestJob = function() {			
+		restservice.get( '', "api/v1/job/latestjob?page="+$scope.filter.page).then(function(response) {
 			if (response != null) {
 				$scope.job = response;
+				if(response.length < 2) $scope.filter.moreLink = false;				
 				$scope.showJobInMap();
         	} else {
         		$scope.responseMessage = response.message;	
@@ -585,7 +593,23 @@ Controllers.controller("jobCtrl", function($scope, $rootScope, restservice, $coo
         });
 	
     };
-    $scope.latestJob();
+    
+	$scope.loadMoreLatestJob = function() {
+		$scope.filter.page = $scope.filter.page + 1;;
+		restservice.get( '', "api/v1/job/latestjob?page="+$scope.filter.page).then(function(response) {
+			if (response != null) {
+				for (var i = 0; i < response.length; i++) {
+					$scope.job.push(response[i]);
+	            }
+				if(response.length < 2) $scope.filter.moreLink = false;
+				$scope.showJobInMap();
+        	} else {
+        		$scope.responseMessage = response.message;	
+        	}
+        });	
+    };
+    
+    $scope.loadLatestJob();
     
     //Shows Best Paid Jobs 
     $scope.bestPaidJob = function() {	
@@ -627,10 +651,11 @@ Controllers.controller("jobCtrl", function($scope, $rootScope, restservice, $coo
     //Shows Nearest You Jobs 
     $scope.nearestJob = function() {		
 		restservice.get( '', "api/v1/job/nearestjob").then(function(response) {
+			console.log(response);
 			if (response != null) {
 				$scope.job = response;	
         	} else {
-        		$scope.responseMessage = response.message;	
+        		$scope.job = {};	
         	}
         });
 	

@@ -24,7 +24,9 @@ public interface Constants {
 	//Database keys
 	public static final int RESULT_LIMIT = 4;
 	public static final int RESULT_OFFSET = 10;
+	public static final int JOB_LATEST_SIZE = 2;
 	
 	//sms verification code
 	public static final String VERIFICATION_CODE = "verificationCode";
+	
 }

@@ -45,9 +45,9 @@ public class JobServiceImpl implements JobService {
 	}
 
 	@Override
-	public List<Job> showLatestJob() {
-		List<Job> job = new ArrayList<>(jobRepository.findJobOrderByCreatedDateDesc());
-		return job;
+	public List<JobModel> findLatestJobs(int page, int limit) {
+		List<JobModel> jobs = jobRepository.findLatestJobs(page, limit);
+		return jobs;
 	}
 
 	@Override
