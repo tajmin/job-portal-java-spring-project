@@ -235,6 +235,8 @@ Controllers.controller("editProfileCtrl", function($scope, $rootScope, restservi
 	$scope.cover_image = "";
 	$scope.imageFile;
 	$scope.tempUploadedFilePath = "";
+	$scope.verifyMessage="";
+	$scope.mobileRequiredMessage="";
 
 	$scope.profileInfo = function() {
 		console.log("loading show profile");
@@ -311,6 +313,38 @@ Controllers.controller("editProfileCtrl", function($scope, $rootScope, restservi
 
 	};
 	$scope.transactionPaid();
+	
+	$scope.sendVerificationCode = function() {
+		if($scope.user.phone && $scope.user.phone.trim().length > 0){
+			$scope.verifyMessage = "processing...";
+			$scope.mobileRequiredMessage = "";
+			restservice.post("", "api/v1/user/sendVerificationCode?mobileNumber=" + $scope.user.phone).then(function(response) {
+				if (response != null) {
+					$scope.verifyMessage = "enter verification code and hit enter button";
+					$("#phone-verification-modal").foundation('toggle');
+				}
+			});
+		}else{
+			$scope.mobileRequiredMessage = "Please enter mobile number";
+		}
+	};
+	
+	$scope.verifyCode = function($event) {
+		if ($scope.user.verificationCode && $scope.user.verificationCode.trim().length > 0) {
+			if ($event.keyCode == 13 || $event.keyCode == 9) {
+				$scope.verifyMessage = "processing...";
+				$scope.mobileRequiredMessage = "";
+				restservice.post("", "api/v1/user/verifyNumber?verificationCode=" + $scope.user.verificationCode).then(function(response) {
+					if (response != null) {
+						$scope.verifyMessage = "";
+						$("#verificationCode").addClass("verificationCode");
+					}
+				});
+			}
+		}else{
+			$scope.verifyMessage = "enter verification code and hit enter button";
+		}
+	};
 
 	$scope.openFileDialogue = function(){
 		$("#userImageFileUpload").trigger('click');

@@ -3,6 +3,7 @@
 <ui:composition template="templates/angular-template.xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core">
 	<ui:define name="content">
 		<div ng-controller="editProfileCtrl">
+			<ui:insert name="phone-verification-modal"></ui:insert>	
 			<form name="profileEditForm">
 				<div class="cover">
 					<canvas id="user_cover_image" class="cover-image" style="background-image: url(/userimg/{{(user.backgroundImageUrl != '')? user.backgroundImageUrl : '' }})"></canvas>
