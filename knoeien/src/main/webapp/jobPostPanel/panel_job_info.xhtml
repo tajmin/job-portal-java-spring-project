@@ -29,27 +29,28 @@
 						</div>						
 					</div>									
 				</div>
-				<div class="small-12 columns">
+				<div class="small-12 columns helper-form-field" ng-class="(formSubmitted &amp;&amp; jobPostingForm.description.$error)? 'error' : ''">
 					<label class="helper-label">Job Details</label>
 					<textarea rows="3" ng-model="job.description" name="description" required="required" />
+					<div class="icon fi-alert" ng-class="(formSubmitted &amp;&amp; jobPostingForm.description.$error)? '' : 'hide'"></div>
 					<div ng-messages="formSubmitted &amp;&amp; jobPostingForm.description.$error">
-						<div ng-message="required" class="error">Job Details is required</div>
+						<div ng-message="required">Job Details is required</div>
 					</div>
 				</div>
-				<div class="small-12 columns">
+				<div class="small-12 columns helper-form-field">
 					<label class="helper-label">Have you been awarded a sales code, put it here</label>
 					<input type="text" ng-model="job.salesPromoCode" />					
 				</div>
 
-				<div class="small-12 columns">
+				<div class="small-12 columns helper-form-field" ng-class="(formSubmitted &amp;&amp; jobPostingForm.addressLine1.$error)? {'error':1}:{'error':0}}">
 					<label class="helper-label">Where do you need help?</label>
 					<!-- <span class="input-group-label" style="font-size: 20px;"><i class="fi-marker"></i></span> --> 
 					<input type="text" size="50" id="placesearch" ng-model="job.addressLine1" name="addressLine1" required="required" placeholder="" /> 
 					<input type="hidden" id="latitude" name="latitude" ng-model="job.latitude" /> 
 					<input type="hidden" id="longitude" name="longitude" ng-model="job.longitude" />
-					<div
-						ng-messages="formSubmitted &amp;&amp; jobPostingForm.addressLine1.$error">
-						<div ng-message="required" class="error">Location is required</div>
+					<div class="icon fi-alert" ng-class="(formSubmitted &amp;&amp; jobPostingForm.addressLine1.$error)? '' : 'hide'"></div>
+					<div ng-messages="formSubmitted &amp;&amp; jobPostingForm.addressLine1.$error">
+						<div ng-message="required">Location is required</div>
 					</div>
 				</div>
 				<script type="text/javascript">
