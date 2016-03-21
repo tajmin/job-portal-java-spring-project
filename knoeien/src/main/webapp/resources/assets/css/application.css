@@ -1509,6 +1509,9 @@ form .helper-form-field.error .icon {
 	position: absolute;
 	top: 33px;
 	right: 25px;
-	font-size: 1.2rem;
+	font-size: 1.4rem;
 	color: #ef6767;
+}
+form .helper-form-field.error .bttm-icon {
+	font-size: 1.4rem;
 }
