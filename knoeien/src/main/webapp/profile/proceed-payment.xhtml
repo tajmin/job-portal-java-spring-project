@@ -4,16 +4,16 @@
 		<div class="row">
 			<div class="medium-6 columns" style="padding-right: 35px;">
 				<h4>Proceeds</h4>
-				<div class="row" style="height: 200px; overflow-y: scroll; padding-left: 12px;">
+				<div class="row" style="height: 300px; overflow-y: scroll; overflow-x: hidden; padding-left: 12px;">
 					<div class="wrap" style="background: #F5F2F2; padding: 20px 0 10px 15px;">
 						<div class="row" ng-repeat="model in paymentReceived">
 							<div class="medium-6 columns">
-								<p>{{model.title}}</p>
-								<p>The job Giver's Name</p>
+								<p>{{model.jobTitle}}</p>
+								<p>{{model.createdByName}}</p>
 							</div>
 							<div class="medium-5 columns end text-right">
 								<p>{{model.amount}}</p>
-								<p>{{model.createdDate}}</p>
+								<p>Date: {{model.createdDate}}</p>
 							</div>
 							<hr />
 						</div>	
@@ -22,16 +22,16 @@
 			</div>
 			<div class="medium-6 columns" style="padding-left: 35px;">
 				<h4>Payments</h4>
-				<div class="row" style="height: 200px; overflow-y: scroll; padding-left: 12px;">
+				<div class="row" style="height: 300px; overflow-y: scroll; overflow-x: hidden; padding-left: 12px;">
 					<div class="wrap" style="background: #F5F2F2; padding: 20px 0 10px 15px;">
 						<div class="row" ng-repeat="model in paymentMade">
 							<div class="medium-6 columns">
-								<p>{{model.title}}</p>
-								<p>The job Giver's Name</p>
+								<p>{{model.jobTitle}}</p>
+								<p>{{model.createdByName}}</p>
 							</div>
 							<div class="medium-5 columns text-right">
-								<p>{{model.price}}</p>
-								<p>Date: 09.04.2016</p>
+								<p>{{model.amount}}</p>
+								<p>Date: {{model.createdDate}}</p>
 							</div>
 							<hr />
 						</div>

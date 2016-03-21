@@ -1,8 +1,5 @@
 package com.selvesperer.knoeien.data.domain;
 
-import java.math.BigDecimal;
-import java.math.RoundingMode;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
@@ -20,7 +17,7 @@ public class TransactionHistory extends AuditableEntity {
 	private String toUserId;
 	
 	@Column(name = "amount")
-	private BigDecimal amount = BigDecimal.ZERO.setScale(2, RoundingMode.HALF_UP);
+	private Double amount;
 	
 	@Column(name = "job_id", nullable = false, length = 100)
 	private String jobId;
@@ -48,11 +45,11 @@ public class TransactionHistory extends AuditableEntity {
 		this.toUserId = toUserId;
 	}
 	
-	public BigDecimal getAmount() {
+	public Double getAmount() {
 		return amount;
 	}
 
-	public void setAmount(BigDecimal amount) {
+	public void setAmount(Double amount) {
 		this.amount = amount;
 	}
 	

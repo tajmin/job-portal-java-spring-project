@@ -1,5 +1,6 @@
 package com.selvesperer.knoeien.utils;
 
+import java.sql.Timestamp;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -297,6 +298,14 @@ public class DateFormatUtils {
 		String dateString = "";
 		if(date != null){
 			dateString = dbFormat.format(date.getTime());
+		}
+		return dateString;
+	}
+	
+	public static String getShortFormattedDateString(Timestamp timestamp){
+		String dateString = "";
+		if(timestamp != null){
+			dateString = shortFormat.format(timestamp.getTime());
 		}
 		return dateString;
 	}

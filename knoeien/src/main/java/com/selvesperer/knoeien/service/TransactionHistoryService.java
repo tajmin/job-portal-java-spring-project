@@ -8,8 +8,8 @@ public interface TransactionHistoryService {
 	
 	public List<TransactionHistory> showTransactionInfo(String id);
 	
-	public List<TransactionHistory> getPaymentReceivedByUser(String id);
+	public List<Object[]> getPaymentReceivedByUser(String id);
 	
-	public List<TransactionHistory> getPaymentPaidByUser(String id);
+	public List<Object[]> getPaymentPaidByUser(String id);
 
 }
