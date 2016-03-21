@@ -412,6 +412,8 @@ Controllers.controller("addJobCtrl", function($scope, $rootScope, restservice, $
 			$("#panel_job_approved-label").click();
 		}
 		
+		//draft the job
+		$scope.draftJob(isValid, false);
     };
     
     $scope.increment = function(i) {
@@ -439,7 +441,7 @@ Controllers.controller("addJobCtrl", function($scope, $rootScope, restservice, $
     	$scope.page = i;
     };
 	
-	$scope.draftJob = function(isValid) {
+	$scope.draftJob = function(isValid, showModal) {
 		if(!isValid) return;
 		
 		$scope.job.draft = true;
@@ -451,7 +453,9 @@ Controllers.controller("addJobCtrl", function($scope, $rootScope, restservice, $
 		restservice.post($scope.job, "api/v1/job/addjob").then(function(response) {
 			if (response != null) {
 				$scope.job = response;
-				$("#draft-confirmation-modal").foundation('toggle');
+				if(showModal){
+					$("#draft-confirmation-modal").foundation('toggle');
+				}
         	}
         });
 		

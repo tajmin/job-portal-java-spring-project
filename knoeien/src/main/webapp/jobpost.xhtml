@@ -19,7 +19,7 @@
 					</div>
 				</div>
 				<ul class="tabs row expanded custom-tabs arrow-right x2 blue" data-tabs="data-tabs" id="job-post-tabs">
-					<li class="tabs-title medium-3 columns" ><a href="#" onclick="return false;">Post your job</a></li>
+					<li class="tabs-title medium-3 columns" ><a href="#">Post your job</a></li>
 				  	<li class="tabs-title is-active medium-3 columns"><a ng-click="setPageNo(1);" href="#panel_job_info" aria-selected="true">Info on the job</a></li>
 				  	<li class="tabs-title medium-3 columns"><a ng-click="setPageNo(2);" href="#panel_job_details">job details</a></li>
 				  	<li class="tabs-title medium-3 columns"><a ng-click="setPageNo(3);" href="#panel_job_approved">approved</a></li>
@@ -40,7 +40,7 @@
 				</ul> -->
 				
 				<div class="row text-center">
-					<a  href="javascript:void(0);" ng-click="formSubmitted = true; draftJob(jobPostingForm.$valid);" class="button hlpr-color-alert helper-tab-button">Save Draft</a>
+					<a  href="javascript:void(0);" ng-click="formSubmitted = true; draftJob(jobPostingForm.$valid, true);" class="button hlpr-color-alert helper-tab-button">Save Draft</a>
 					<a ng-if="isPost()" href="javascript:void(0);" ng-click="formSubmitted = true; openPaymentWindow(jobPostingForm.$valid);" class="button hlpr-color-success helper-tab-button">Post</a>
 					<a ng-if="!isPost()" href="javascript:void(0);" ng-click="formSubmitted = true; nextPage(jobPostingForm.$valid);" class="button hlpr-color-success helper-tab-button">Next</a> 										
 				</div>				
