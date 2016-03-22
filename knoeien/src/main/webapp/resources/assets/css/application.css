@@ -1489,3 +1489,29 @@ textarea {
 	width: 100%;
 	margin-top: 10px;
 }
+form .helper-form-field {
+	margin-bottom: 1rem;
+	position: relative;
+}
+form .helper-form-field input, form .helper-form-field textarea {
+	margin: 0;
+}
+form .helper-form-field.error,
+form .helper-form-field.error .helper-label {
+	color: #ef6767;
+}
+form .helper-form-field.error input,
+form .helper-form-field.error textarea {
+	border-color: #ef6767;
+	padding-right: 25px;
+}
+form .helper-form-field.error .icon {
+	position: absolute;
+	top: 33px;
+	right: 25px;
+	font-size: 1.4rem;
+	color: #ef6767;
+}
+form .helper-form-field.error .bttm-icon {
+	font-size: 1.4rem;
+}

@@ -20,11 +20,11 @@ public class JobRepositoryImpl implements JobRepositoryCustom {
 
 	@PersistenceContext
 	private EntityManager entityManager;
-
+	
 	@Override
 	public List<JobModel> findLatestJobs(int page, int limit){
 		 StringBuffer queryString = new StringBuffer();
-		 queryString.append("select j.id,j.title, j.address_line_1, j.price, j.hours, j.deadline, j.minutes, j.created_date from job j"); 
+		 queryString.append("select j.id,j.title, j.address_line_1, j.price, j.hours, j.deadline, j.minutes, j.created_date,j.image_url from job j order by j.created_date desc"); 
 		 Query query = entityManager.createNativeQuery(queryString.toString());
 		
 		 if( limit > 0 ) {
@@ -40,11 +40,17 @@ public class JobRepositoryImpl implements JobRepositoryCustom {
 			  jobModel.setId((String)result[0]);  
 			  jobModel.setTitle((String)result[1]);
 			  jobModel.setAddressLine1((String)result[2]);
-			  
+			  jobModel.setPrice((String)result[3].toString());
 			  jobModel.setHours(QueryUtils.parseInteger(result[4], false));
+			  jobModel.setDeadline((String)result[5].toString());
+			  jobModel.setMinutes(QueryUtils.parseInteger(result[6], false));
+			  jobModel.setCreatedDate((String)result[7].toString());
+			  jobModel.setImageUrl((String)result[8].toString());
 			  listOfJobs.add(jobModel);
 		  }
 		  return listOfJobs;
 		  
 	}
+	
+	
 }
