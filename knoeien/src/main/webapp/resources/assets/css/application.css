@@ -560,33 +560,21 @@
 	max-width: 400px;
 	border-radius: 5px;
 }
-#forgotPassTitle {
+#forget-password-modal h4 {
 	color: #8A8A8A;
 }
-#forgotPassEmail {
-	border-radius: 5px;
-}
-#fogotPassInstruction {
+#forget-password-modal p {
 	font-size: 1em;
 	color: #8A8A8A;
 }
-#forgotPassLinkBtn {
+#forget-password-modal a {
 	width: 100%;
 	border-radius: 5px;
 }
-#forgotResponseMsg {
-	color: #8A8A8A;
-	font-size: 1em;
-	padding-top: 13px;
-}
-#forgotPassImg {
-	width: 80px;
-	height: 75px;
-	margin: 18px 0;
-}
-#forgotPassOkBtn {
-	width: 100%;
-	border-radius: 5px;
+.success-tick {
+	width: 75px;
+	height: 80px;
+	margin: 18px 0 20px;
 }
 /*Forgot Password Modal Ends*/
 
@@ -626,7 +614,6 @@
 
 /*evaluate-helper-modal starts*/
 #evaluate-helper-modal {
-	background: #F4F2F3;
 	border-radius: 8px;
 }
 #evaluate-helper h4 {
@@ -648,9 +635,8 @@
 	color: #26C7E8
 }
 #evaluate-helper textarea {
-	background: #EDEEED;
-	border: none;
 	height: 80px;
+	resize: none;
 }
 #evaluate-helper textarea::-webkit-input-placeholder {
 color: #979595 !important;

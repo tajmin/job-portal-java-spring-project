@@ -8,55 +8,32 @@
 <head>
 <title>Helper<ui:fragment rendered="#{not empty pageTitle}">-#{pageTitle}</ui:fragment></title>
 <meta charset="utf-8" />
-<meta name="viewport"
-	content="width=device-width, height=device-height initial-scale=1.0" />
+<meta name="viewport" content="width=device-width, height=device-height initial-scale=1.0" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 <meta name="HandheldFriendly" content="True" />
-<link rel="icon"
-	href="#{request.contextPath}/resources/assets/images/favicon.png"
-	type="image/png" />
 
-<link rel="stylesheet" type="text/css"
-	href="#{request.contextPath}/resources/assets/css/foundation.css?#{msg['vrsn']}" />
-
-<link rel="stylesheet" type="text/css"
-	href="#{request.contextPath}/resources/assets/css/motion-ui.css?#{msg['vrsn']}" />
-<link rel="stylesheet" type="text/css"
-	href="#{request.contextPath}/resources/assets/css/foundation-icons.css?#{msg['vrsn']}" />
+<link rel="icon" href="#{request.contextPath}/resources/assets/images/favicon.png"	type="image/png" />
+<link rel="stylesheet" type="text/css"	href="#{request.contextPath}/resources/assets/css/foundation.css?#{msg['vrsn']}" />
+<link rel="stylesheet" type="text/css"	href="#{request.contextPath}/resources/assets/css/motion-ui.css?#{msg['vrsn']}" />
+<link rel="stylesheet" type="text/css"	href="#{request.contextPath}/resources/assets/css/foundation-icons.css?#{msg['vrsn']}" />
 <link rel="stylesheet" type="text/css"	href="#{request.contextPath}/resources/assets/css/application.css?#{msg['vrsn']}" />
 <link rel="stylesheet" type="text/css"	href="#{request.contextPath}/resources/assets/css/foundation-datepicker.css?#{msg['vrsn']}" />
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" />
 
-
-<script type="text/javascript"
-	src="#{request.contextPath}/resources/assets/js/head.js?#{msg['vrsn']}"></script>
-<script type="text/javascript"
-	src="#{request.contextPath}/resources/angular/lib/angular/angular.min.js?#{msg['vrsn']}"></script>
-
-<script type="text/javascript"
-	src="#{request.contextPath}/resources/angular/lib/angular/angular-messages.js?#{msg['vrsn']}"></script>
-<script type="text/javascript"
-	src="#{request.contextPath}/resources/angular/lib/lodash.js?#{msg['vrsn']}"></script>
-<script type="text/javascript"
-	src="#{request.contextPath}/resources/assets/js/jquery/jquery.js?#{msg['vrsn']}"></script>
-<script type="text/javascript"
-	src="#{request.contextPath}/resources/angular/lib/angular-ui/ui-bootstrap-custom-tpls-0.10.0.min.js"></script>
-<script type="text/javascript"
-	src="#{request.contextPath}/resources/angular/lib/angular/angular-cookies.min.js?#{msg['vrsn']}"></script>
-<script type="text/javascript"
-	src="#{request.contextPath}/resources/angular/lib/angular/restangular.js?#{msg['vrsn']}"></script>
-<script type="text/javascript"
-	src="#{request.contextPath}/resources/angular/js/app.js?#{msg['vrsn']}"></script>
-<script type="text/javascript"
-	src="#{request.contextPath}/resources/angular/js/directives/directives.js?#{msg['vrsn']}"></script>
-<script type="text/javascript"
-	src="#{request.contextPath}/resources/angular/js/services/applicationService.js?#{msg['vrsn']}"></script>
-<script type="text/javascript"
-	src="#{request.contextPath}/resources/angular/js/controllers/applicationCtrl.js?#{msg['vrsn']}"></script>
-<script type="text/javascript"
-	src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAjAJgul5TdZNsTAo_WTXxtQb8C3jFPXwo&amp;libraries=places"></script>
-<script type="text/javascript"
-	src="#{request.contextPath}/resources/assets/js/foundation-datepicker.js"></script>
+<script type="text/javascript"	src="#{request.contextPath}/resources/assets/js/head.js?#{msg['vrsn']}"></script>
+<script type="text/javascript"	src="#{request.contextPath}/resources/angular/lib/angular/angular.min.js?#{msg['vrsn']}"></script>
+<script type="text/javascript"	src="#{request.contextPath}/resources/angular/lib/angular/angular-messages.js?#{msg['vrsn']}"></script>
+<script type="text/javascript"	src="#{request.contextPath}/resources/angular/lib/lodash.js?#{msg['vrsn']}"></script>
+<script type="text/javascript"	src="#{request.contextPath}/resources/assets/js/jquery/jquery.js?#{msg['vrsn']}"></script>
+<script type="text/javascript"	src="#{request.contextPath}/resources/angular/lib/angular-ui/ui-bootstrap-custom-tpls-0.10.0.min.js"></script>
+<script type="text/javascript"	src="#{request.contextPath}/resources/angular/lib/angular/angular-cookies.min.js?#{msg['vrsn']}"></script>
+<script type="text/javascript"	src="#{request.contextPath}/resources/angular/lib/angular/restangular.js?#{msg['vrsn']}"></script>
+<script type="text/javascript"	src="#{request.contextPath}/resources/angular/js/app.js?#{msg['vrsn']}"></script>
+<script type="text/javascript"	src="#{request.contextPath}/resources/angular/js/directives/directives.js?#{msg['vrsn']}"></script>
+<script type="text/javascript"	src="#{request.contextPath}/resources/angular/js/services/applicationService.js?#{msg['vrsn']}"></script>
+<script type="text/javascript"	src="#{request.contextPath}/resources/angular/js/controllers/applicationCtrl.js?#{msg['vrsn']}"></script>
+<script type="text/javascript"	src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAjAJgul5TdZNsTAo_WTXxtQb8C3jFPXwo&amp;libraries=places"></script>
+<script type="text/javascript"	src="#{request.contextPath}/resources/assets/js/foundation-datepicker.js"></script>
 <ui:insert name="head"></ui:insert>
 </head>
 <body>
@@ -67,8 +44,7 @@
 			<ul
 				class="menu expanded sticky hide-for-large  #{(view.viewId == '/index.xhtml') ? 'dark' : 'light'}">
 				<li>
-					<button class="menu-text title" data-toggle="offCanvasLeft"
-						type="button">
+					<button class="menu-text title" data-toggle="offCanvasLeft"	type="button">
 						<i class="fi-list"></i> Helpers
 					</button>
 				</li>
@@ -102,9 +78,7 @@
 					<div class="text-right menu-last">
 						<!-- menu button goes here -->
 						<c:if test="#{view.viewId == '/index.xhtml'}">
-							<a data-toggle="login-modal"
-								class="hollow hlpr-color-white button border-radius-7px"
-								style="display:#{authorizationBean.canView()?'none':''}">Login</a>
+							<a data-toggle="login-modal" class="hollow hlpr-color-white button border-radius-7px" style="display:#{authorizationBean.canView()?'none':''}">Login</a>
 							<!-- <a data-toggle="not-logedin-modal" class="hollow hlpr-color-white button ">My page</a> -->
 						</c:if>
 						<c:if test="#{authorizationBean.canView()}">
@@ -131,8 +105,7 @@
 					<div class="media-object">
 						<div class="media-object-section">
 							<div class="thumbnail">
-								<img
-									src="#{request.contextPath}/resources/assets/images/profile/user1.jpg" />
+								<img src="#{request.contextPath}/resources/assets/images/profile/user1.jpg" />
 							</div>
 						</div>
 						<div class="media-object-section main-section">
@@ -145,8 +118,7 @@
 					<div class="media-object">
 						<div class="media-object-section">
 							<div class="thumbnail">
-								<img
-									src="#{request.contextPath}/resources/assets/images/profile/user2.jpg" />
+								<img src="#{request.contextPath}/resources/assets/images/profile/user2.jpg" />
 							</div>
 						</div>
 						<div class="media-object-section main-section">
@@ -160,14 +132,9 @@
 	</div>
 	<!-- body wrapper starts here -->
 	<div class="off-canvas-wrapper">
-		<div class="off-canvas-wrapper-inner"
-			id="#{(pageLocation == 'index') ? '' : 'main-wrapper'}"
-			data-off-canvas-wrapper="true">
-			<div
-				class="off-canvas position-left #{(leftMenu=='show') ? 'reveal-for-large' : ''}"
-				id="offCanvasLeft" data-off-canvas="true" style="#{(pageLocation == 'index') ? 'top: 70px;' : ''}">
-				<button class="close-button" data-close="offCanvasLeft"
-					type="button">
+		<div class="off-canvas-wrapper-inner" id="#{(pageLocation == 'index') ? '' : 'main-wrapper'}" data-off-canvas-wrapper="true">
+			<div class="off-canvas position-left #{(leftMenu=='show') ? 'reveal-for-large' : ''}" id="offCanvasLeft" data-off-canvas="true" style="#{(pageLocation == 'index') ? 'top: 70px;' : ''}">
+				<button class="close-button" data-close="offCanvasLeft"	type="button">
 					<span aria-hidden="true">&#215;</span>
 				</button>
 				<!-- < ul class="off-canvas-list">
@@ -187,8 +154,7 @@
 					<li><a href="balance.xhtml">Balance and payments</a></li>
 					<li><a href="settings.xhtml">Settings</a></li>
 					<li><a href="invite.xhtml">Invite friends</a></li>
-					<li ng-controller="logoutCtrl"><a href="javascript:void(0);"
-						ng-click="logout();">Log out</a></li>
+					<li ng-controller="logoutCtrl"><a href="javascript:void(0);" ng-click="logout();">Log out</a></li>
 				</ul>
 			</div>
 			<div class="off-canvas-content" data-off-canvas-content="true">
@@ -206,22 +172,17 @@
 	</div>
 	<!-- body wrapper ends here -->
 
-	<script type="text/javascript"
-		src="#{request.contextPath}/resources/assets/js/foundation/motion-ui.js?#{msg['vrsn']}"></script>
-	<script type="text/javascript"
-		src="#{request.contextPath}/resources/assets/js/foundation/foundation.js?#{msg['vrsn']}"></script>
-
-	<script type="text/javascript"
-		src="#{request.contextPath}/resources/assets/js/foundation/what-input.min.js?#{msg['vrsn']}"></script>
-	<script type="text/javascript"
-		src="#{request.contextPath}/resources/assets/js/application.js?#{msg['vrsn']}"></script>
+	<script type="text/javascript"	src="#{request.contextPath}/resources/assets/js/foundation/motion-ui.js?#{msg['vrsn']}"></script>
+	<script type="text/javascript"	src="#{request.contextPath}/resources/assets/js/foundation/foundation.js?#{msg['vrsn']}"></script>
+	<script type="text/javascript"	src="#{request.contextPath}/resources/assets/js/foundation/what-input.min.js?#{msg['vrsn']}"></script>
+	<script type="text/javascript"	src="#{request.contextPath}/resources/assets/js/application.js?#{msg['vrsn']}"></script>
 	<script type="text/javascript">
 		var Settings = {};
 		Settings.serviceBaseUrl='#{request.contextPath}';	
 		
-		/* jQuery(document).ready( function( ) {
-			$('#change-password-modal').foundation('toggle');
-		}); */
+		 /*  jQuery(document).ready( function( ) {
+			$('#forget-password-modal').foundation('toggle');
+		});   */
 	</script>
 </body>
 </html>
