@@ -4,7 +4,6 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.selvesperer.knoeien.data.domain.Job;
 import com.selvesperer.knoeien.data.domain.JobInterested;
 
 public class JobInterestedModel  implements Serializable {
@@ -14,9 +13,6 @@ public class JobInterestedModel  implements Serializable {
 	 */
 	private static final long serialVersionUID = -2054948275236797349L;
 	
-	
-	private String name;
-	private String description;
 	private String jobId;
 	private String jobCreatedById;
 	private String jobInterestedUserId;
@@ -25,9 +21,6 @@ public class JobInterestedModel  implements Serializable {
 	public JobInterestedModel() {}
 	
 	public JobInterestedModel(JobInterested jobInterested) {
-		
-		this.setName(jobInterested.getName());
-		this.setDescription(jobInterested.getDescription());
 		this.setJobId(jobInterested.getJobId());
 		this.setJobCreatedById(jobInterested.getJobCreatedById());
 		this.setJobInterestedUserId(jobInterested.getJobInterestedUserId());
@@ -36,18 +29,6 @@ public class JobInterestedModel  implements Serializable {
 		
 	}
 	
-	public String getName() {
-		return name;
-	}
-	public void setName(String name) {
-		this.name = name;
-	}
-	public String getDescription() {
-		return description;
-	}
-	public void setDescription(String description) {
-		this.description = description;
-	}
 	public String getJobId() {
 		return jobId;
 	}
