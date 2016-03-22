@@ -636,6 +636,7 @@
 }
 #evaluate-helper textarea {
 	height: 80px;
+	resize: none;
 }
 #evaluate-helper textarea::-webkit-input-placeholder {
 color: #979595 !important;
