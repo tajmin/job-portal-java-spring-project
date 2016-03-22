@@ -1157,7 +1157,6 @@ line-height: 1.75em;
 	color: #3A3938;
 	line-height: 2.7;
 }
-
 #paymentInfo h4 {
 	font-size: 1.0em;
 	color: #3A3938;
@@ -1178,11 +1177,6 @@ line-height: 1.75em;
 #user-settings p, span {
 	font-size: 0.73em;
 	color: #3A3938;
-}
-#user-settings input[type="text"] {
-	background-color: #F5F2F2;
-	border-radius: 8px;
-	padding: 22px 10px;
 }
 #user-settings input[type="text"]::-webkit-input-placeholder {
 color: #B9B7B6 !important;
