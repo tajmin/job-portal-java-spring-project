@@ -1058,15 +1058,8 @@ line-height: 1.75em;
 .employer-info {
 	padding: 20px 0;
 }
+
 /*my-profile.xhtml Starts */
-#profileInfo input[type="text"] {
-	background-color: #F5F2F2;
-	border-radius: 6px;
-	border: 1px solid #F5F2F2;
-	padding-top: 12px;
-	padding-bottom: 12px;
-	padding-left: 12px;
-}
 #profileInfo input[type="text"]::-webkit-input-placeholder {
 color: #B9B7B6 !important;
 font-size: 0.7em;
@@ -1091,10 +1084,8 @@ font-size: 0.7em;
 line-height: 1.0em;  
 }
 #profileInfo textarea {
-	background-color: #F5F2F2;
-	border-radius: 6px;
-	border: 1px solid #F5F2F2;
-	height: 141px; resize: none;
+	height: 141px; 
+	resize: none;
 }
 #profileInfo textarea::-webkit-input-placeholder {
 color: #B9B7B6 !important;
@@ -1130,7 +1121,7 @@ padding: 10px 10px;
 	line-height: 2.7;
 }
 #profileInfo a {
-	border-radius: 8px;
+	border-radius: 7px;
 	padding: 12px 20px;
 	width: 100%;
 	font-size: 0.85em;
@@ -1138,14 +1129,6 @@ padding: 10px 10px;
 /*my-profile.xhtml Ends*/
 
 /*billing-info.xhtml starts*/
-#paymentInfo input[type="text"] {
-	background-color: #F4F4F2;
-	border-radius: 6px;
-	border: 1px solid #F4F4F2
-	padding-top: 12px;
-	padding-bottom: 12px;
-	padding-left: 12px;
-}
 #paymentInfo input[type="text"]::-webkit-input-placeholder {
 color: #B9B7B6 !important;
 font-size: 0.7em;
@@ -1174,7 +1157,6 @@ line-height: 1.75em;
 	color: #3A3938;
 	line-height: 2.7;
 }
-
 #paymentInfo h4 {
 	font-size: 1.0em;
 	color: #3A3938;
@@ -1195,11 +1177,6 @@ line-height: 1.75em;
 #user-settings p, span {
 	font-size: 0.73em;
 	color: #3A3938;
-}
-#user-settings input[type="text"] {
-	background-color: #F5F2F2;
-	border-radius: 8px;
-	padding: 22px 10px;
 }
 #user-settings input[type="text"]::-webkit-input-placeholder {
 color: #B9B7B6 !important;
