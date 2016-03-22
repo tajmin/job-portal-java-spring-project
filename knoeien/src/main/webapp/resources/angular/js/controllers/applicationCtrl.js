@@ -757,23 +757,17 @@ Controllers.controller("jobDetailsCtrl", function($scope, $rootScope, restservic
     $scope.getUserByJobId($scope.id);
     
     
-    
-    
-    
     $scope.showJobInMap = function(){
-    	//http://stackoverflow.com/questions/1544739/google-maps-api-v3-how-to-remove-all-markers
     	var bounds = new google.maps.LatLngBounds();
-    	//for(i in $scope.job) {
-    		if($scope.job && $scope.job.title){
-    			var latLng = new google.maps.LatLng($scope.job.latitude, $scope.job.longitude); 
-    	        var marker = new google.maps.Marker({
-    	            position: latLng,
-    	            map: $window.map,
-    	            title: $scope.job.title
-    	        });
-    	        bounds.extend(marker.position);
-    		}
-    	//}
+		if($scope.job && $scope.job.title){
+			var latLng = new google.maps.LatLng($scope.job.latitude, $scope.job.longitude); 
+	        var marker = new google.maps.Marker({
+	            position: latLng,
+	            map: $window.map,
+	            title: $scope.job.title
+	        });
+	        bounds.extend(marker.position);
+		}
     	$window.map.fitBounds(bounds);
     };    
     

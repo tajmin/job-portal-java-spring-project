@@ -12,12 +12,6 @@ public class JobInterested extends AuditableEntity {
 
 	private static final long serialVersionUID = 5454522042314035295L;
 	
-	@Column(name = "name", nullable = false, length = 100)
-	private String name;
-	
-	@Column(name ="description", length = 250)
-	private String description;
-	
 	@Column(name ="job_id", nullable = false, length = 250)
 	private String jobId;
 	
@@ -35,8 +29,6 @@ public class JobInterested extends AuditableEntity {
 	
 	public JobInterested setJobInterested(JobInterestedModel jobInterestedModel) {
 		
-		this.setName(jobInterestedModel.getName());
-		this.setDescription(jobInterestedModel.getDescription());
 		this.setBidAmount(jobInterestedModel.getBidAmount());
 		this.setJobCreatedById(jobInterestedModel.getJobCreatedById());
 		this.setJobId(jobInterestedModel.getJobId());
@@ -46,22 +38,6 @@ public class JobInterested extends AuditableEntity {
 		return this;
 	}
 	
-	public String getName() {
-		return name;
-	}
-	
-	public void setName(String name) {
-		this.name = name;
-	}
-	
-	public String getDescription() {
-		return description;
-	}
-	
-	public void setDescription(String description) {
-		this.description = description;
-	}
-
 	public String getJobId() {
 		return jobId;
 	}
@@ -93,6 +69,4 @@ public class JobInterested extends AuditableEntity {
 	public void setBidAmount(Double bidAmount) {
 		this.bidAmount = bidAmount;
 	}
-	
-	
 }
