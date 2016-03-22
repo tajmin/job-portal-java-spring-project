@@ -1,5 +1,6 @@
 package com.selvesperer.knoeien.data.repository.custom;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,7 +12,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.selvesperer.knoeien.data.enums.FindJobEnum;
+import com.selvesperer.knoeien.utils.AppsUtil;
+import com.selvesperer.knoeien.utils.DateFormatUtils;
 import com.selvesperer.knoeien.utils.QueryUtils;
+import com.selvesperer.knoeien.utils.SelvEDate;
 import com.selvesperer.knoeien.web.controllers.model.JobModel;
 
 public class JobRepositoryImpl implements JobRepositoryCustom {
@@ -45,12 +49,14 @@ public class JobRepositoryImpl implements JobRepositoryCustom {
 			jobModel.setId((String) result[0]);
 			jobModel.setTitle((String) result[1]);
 			jobModel.setAddressLine1((String) result[2]);
-			//jobModel.setPrice((String) result[3].toString());
+			jobModel.setPrice(AppsUtil.doubleToString((Double) result[3]));
 			jobModel.setHours(QueryUtils.parseInteger(result[4], false));
-			//jobModel.setDeadline((String) result[5].toString());
-			//jobModel.setMinutes(QueryUtils.parseInteger(result[6], false));
-			//jobModel.setCreatedDate((String) result[7].toString());
+			jobModel.setDeadline(DateFormatUtils.getWebDateFromTimestamp((Timestamp) result[5]));
+			jobModel.setMinutes(QueryUtils.parseInteger(result[6], false));
+			jobModel.setCreatedDate(DateFormatUtils.getWebDateFromTimestamp((Timestamp) result[7]));
+			//jobModel.setWhenPosted(AppsUtil.getDiffenrence(SelvEDate.toDate(jobModel.getCreatedDate())));
 			jobModel.setImageUrl((String) result[8]);
+			
 			listOfJobs.add(jobModel);
 		}
 		return listOfJobs;
