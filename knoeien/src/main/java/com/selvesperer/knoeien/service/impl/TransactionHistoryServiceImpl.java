@@ -36,16 +36,16 @@ public class TransactionHistoryServiceImpl implements TransactionHistoryService 
 		return transactionHistory;
 	}
 
-	public List<TransactionHistory> getPaymentReceivedByUser(String id) {
-		List<TransactionHistory> transactionHistory = transactionHistoryRepository.findTransactionHistoryReceivedByUserId(id);
+	public List<Object[]> getPaymentReceivedByUser(String id) {
+		List<Object[]> transactionHistory = transactionHistoryRepository.findTransactionHistoryReceivedByUserId(id);
 		if (transactionHistory == null) {
 			throw new AuthenticationFailedException("error.usernotfound.text");
 		}
 		return transactionHistory;
 	}
 	
-	public List<TransactionHistory> getPaymentPaidByUser(String id) {
-		List<TransactionHistory> transactionHistory = transactionHistoryRepository.findTransactionHistoryPaidByUserId(id);
+	public List<Object[]> getPaymentPaidByUser(String id) {
+		List<Object[]> transactionHistory = transactionHistoryRepository.findTransactionHistoryPaidByUserId(id);
 		if (transactionHistory == null) {
 			throw new AuthenticationFailedException("error.usernotfound.text");
 		}

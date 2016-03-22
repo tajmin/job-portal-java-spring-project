@@ -19,11 +19,11 @@ public interface TransactionHistoryRepository extends JpaRepository<TransactionH
 	@Query("from TransactionHistory t where t.userId = :id")
 	List<TransactionHistory> findTransactionHistoryByUserId(@Param("id") String id);
 	
-	@Query(value="SELECT * FROM transaction_history t join Job j on j.id=t.job_id where t.to_user_id = :toUserId",nativeQuery=true)
-	List<TransactionHistory> findTransactionHistoryReceivedByUserId(@Param("toUserId") String toUserId);
+	@Query(value="SELECT t.amount, t.created_by_name, t.created_date, j.title FROM transaction_history t join job j on t.job_id=j.id where t.to_user_id = :toUserId Order by t.created_date desc",nativeQuery=true)
+	List<Object[]> findTransactionHistoryReceivedByUserId(@Param("toUserId") String toUserId);
 	
-	@Query(value="SELECT * FROM transaction_history t join Job j on j.id=t.job_id where t.from_user_id = :fromUserId",nativeQuery=true)
-	List<TransactionHistory> findTransactionHistoryPaidByUserId(@Param("fromUserId") String fromUserId);
+	@Query(value="SELECT t.amount, t.created_by_name, t.created_date, j.title FROM transaction_history t join job j on t.job_id=j.id where t.from_user_id = :fromUserId Order by t.created_date desc",nativeQuery=true)
+	List<Object[]> findTransactionHistoryPaidByUserId(@Param("fromUserId") String fromUserId);
 
 	
 }

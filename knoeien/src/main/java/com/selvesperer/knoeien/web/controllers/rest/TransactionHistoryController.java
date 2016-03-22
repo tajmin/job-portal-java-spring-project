@@ -63,9 +63,9 @@ public class TransactionHistoryController extends AbstractController implements 
 		try {
 			TransactionHistoryService transactionHistoryService = ApplicationBeanFactory.getBean(TransactionHistoryService.class);
 			String id = SecurityManager.getCurrentUserId();
-			List<TransactionHistory> transactionHistoryList = transactionHistoryService.getPaymentReceivedByUser(id);
+			List<Object[]> transactionHistoryList = transactionHistoryService.getPaymentReceivedByUser(id);
 			TransactionHistoryModel transactionHistoryModel = new TransactionHistoryModel();			
-			List<TransactionHistoryModel> transactionHistoryModelList = transactionHistoryModel.getTransactionHistoryModelList(transactionHistoryList);
+			List<TransactionHistoryModel> transactionHistoryModelList = transactionHistoryModel.getModelList(transactionHistoryList);
 			return new ResponseEntity<RestResponse>( convertToRestGoodResponse(transactionHistoryModelList, LocalizationUtil.findLocalizedString("")),HttpStatus.OK);
 			
 		} catch (AuthenticationFailedException t) {
@@ -85,9 +85,9 @@ public class TransactionHistoryController extends AbstractController implements 
 		try {
 			TransactionHistoryService transactionHistoryService = ApplicationBeanFactory.getBean(TransactionHistoryService.class);
 			String id = SecurityManager.getCurrentUserId();
-			List<TransactionHistory> transactionHistoryList = transactionHistoryService.getPaymentPaidByUser(id);
+			List<Object[]> transactionHistoryList = transactionHistoryService.getPaymentPaidByUser(id);
 			TransactionHistoryModel transactionHistoryModel = new TransactionHistoryModel();			
-			List<TransactionHistoryModel> transactionHistoryModelList = transactionHistoryModel.getTransactionHistoryModelList(transactionHistoryList);
+			List<TransactionHistoryModel> transactionHistoryModelList = transactionHistoryModel.getModelList(transactionHistoryList);
 			return new ResponseEntity<RestResponse>( convertToRestGoodResponse(transactionHistoryModelList, LocalizationUtil.findLocalizedString("")),HttpStatus.OK);
 			
 		} catch (AuthenticationFailedException t) {
