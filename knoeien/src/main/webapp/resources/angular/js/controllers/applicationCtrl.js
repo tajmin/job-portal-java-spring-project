@@ -100,7 +100,7 @@ Controllers.controller("invitationCtrl", function($scope, $rootScope, restservic
 	$scope.invite = function(isValid) {
 		if (!isValid) return;
 
-		restservice.post('', "api/v1/user/invite?email=" + $scope.user.email).then(function(response) {
+		restservice.post('', "api/v1/user/invite?email=" + $scope.user.inviteEmail).then(function(response) {
 			if (response != null && response.success) {
 				$scope.isproceed = true;
 				$scope.responseMessage = response.message;
@@ -195,7 +195,6 @@ Controllers.controller("editProfileCtrl", function($scope, $rootScope, restservi
 
 	$scope.profileInfo = function() {
 		console.log("loading show profile");
-		console.log($scope.user);
 		restservice.get('', "api/v1/user/profileInfo").then(function(response) {
 			if (response != null) {
 				$scope.user = response;
@@ -237,6 +236,17 @@ Controllers.controller("editProfileCtrl", function($scope, $rootScope, restservi
 		restservice.post($scope.user, "api/v1/user/saveUserSetting?name=" + settingName).then(function(response) {
 			if (response != null && response.success) {
 				$scope.isproceed = false;
+				$scope.responseMessage = response.message;
+			}
+		});
+	};
+	
+	$scope.invite = function(isValid) {
+		if (!isValid) return;
+
+		restservice.post('', "api/v1/user/invite?email=" + $scope.user.inviteEmail).then(function(response) {
+			if (response != null && response.success) {
+				$scope.isproceed = true;
 				$scope.responseMessage = response.message;
 			}
 		});
