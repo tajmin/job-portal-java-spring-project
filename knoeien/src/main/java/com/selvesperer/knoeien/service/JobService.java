@@ -11,11 +11,7 @@ public interface JobService {
 
 	public Job saveJob(JobModel jobModel);
 	
-	public List<JobModel> findLatestJobs(int page, int limit);
-	
-	public List<Job> showBestPaidJob();
-	
-	public List<Job> showEarliestDeadlineJob();
+	public List<JobModel> findjobs(String type, int page, int limit);	
 	
 	public List<Job> findJobByAssignedUserId(String assignedUserId);
 	
