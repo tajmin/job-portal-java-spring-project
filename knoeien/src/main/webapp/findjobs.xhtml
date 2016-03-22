@@ -16,7 +16,8 @@
 			<div class="tabs-panel is-active" id="latest">
 				<div class="row search-list" ng-repeat="model in job" ng-click="selectJob(model.id)">
 					<div class="medium-3 columns text-center">
-						<img class="border-radius-7px" src="/img/{{model.imageUrl}}" alt="Job Image" />
+						<img ng-if="(model.imageUrl !== null &amp;&amp; model.imageUrl !== '')" class="border-radius-7px" src="/img/{{model.imageUrl}}" alt="Job Image" />
+						<img ng-if="(model.imageUrl == null || model.imageUrl == '')" class="border-radius-7px" src="#{request.contextPath}/resources/assets/images/postjob/default_job.png" alt="Job Image" />
 					</div>
 					<div class="medium-9 columns">
 						<div class="row">
