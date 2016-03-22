@@ -1058,6 +1058,7 @@ line-height: 1.75em;
 .employer-info {
 	padding: 20px 0;
 }
+
 /*my-profile.xhtml Starts */
 #profileInfo input[type="text"]::-webkit-input-placeholder {
 color: #B9B7B6 !important;
@@ -1128,14 +1129,6 @@ padding: 10px 10px;
 /*my-profile.xhtml Ends*/
 
 /*billing-info.xhtml starts*/
-#paymentInfo input[type="text"] {
-	background-color: #F4F4F2;
-	border-radius: 6px;
-	border: 1px solid #F4F4F2
-	padding-top: 12px;
-	padding-bottom: 12px;
-	padding-left: 12px;
-}
 #paymentInfo input[type="text"]::-webkit-input-placeholder {
 color: #B9B7B6 !important;
 font-size: 0.7em;
