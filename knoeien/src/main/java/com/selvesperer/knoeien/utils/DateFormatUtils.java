@@ -302,10 +302,10 @@ public class DateFormatUtils {
 		return dateString;
 	}
 	
-	public static String getShortFormattedDateString(Timestamp timestamp){
+	public static String getWebDateFromTimestamp(Timestamp timestamp){
 		String dateString = "";
 		if(timestamp != null){
-			dateString = shortFormat.format(timestamp.getTime());
+			dateString = webFormat.format(timestamp.getTime());
 		}
 		return dateString;
 	}

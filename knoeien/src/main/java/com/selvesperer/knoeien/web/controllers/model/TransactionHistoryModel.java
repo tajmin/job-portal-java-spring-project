@@ -46,7 +46,7 @@ public class TransactionHistoryModel implements Serializable{
 			TransactionHistoryModel transactionHistoryModel = new TransactionHistoryModel();
 			transactionHistoryModel.setAmount((Double) objs[0]);
 			transactionHistoryModel.setCreatedByName((String) objs[1]);
-			transactionHistoryModel.setCreatedDate(DateFormatUtils.getShortFormattedDateString((Timestamp) objs[2]));
+			transactionHistoryModel.setCreatedDate(DateFormatUtils.getWebDateFromTimestamp((Timestamp) objs[2]));
 			transactionHistoryModel.setJobTitle((String) objs[3]);
 			
 			modelObjectList.add(transactionHistoryModel);
