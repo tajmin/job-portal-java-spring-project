@@ -5,18 +5,18 @@
 	<ui:define name="left-content">
 	<div ng-controller="jobCtrl">
 		<ul class="tabs custom-tabs arrow-bottom green" data-tabs="data-tabs" id="job-tabs">
-  			<li class="tabs-title is-active"><a href="#latest" aria-selected="true" ng-click="loadLatestJob()">Latest</a></li>
-  			<li class="tabs-title"><a href="#nearestYou" ng-click="nearestJob()">Nearest You</a></li>
-  			<li class="tabs-title"><a href="#bestPaid" ng-click="bestPaidJob()">Best Paid</a></li>
-  			<!-- <li class="tabs-title"><a href="#shortestTime" ng-click="shortestTimeJob()">Shortest Time</a></li> -->
-  			<li class="tabs-title"><a href="#earliestDeadline" ng-click="earliestDeadlineJob()">Earliest Deadline</a></li>  			
+  			<li class="tabs-title is-active"><a href="#latest" aria-selected="true" ng-click="loadJobs('LGB')">Latest</a></li>
+  			<li class="tabs-title"><a href="#nearestYou" ng-click="loadJobs('NRJ')">Nearest You</a></li>
+  			<li class="tabs-title"><a href="#bestPaid" ng-click="loadJobs('BPJ')">Best Paid</a></li>
+  			<li class="tabs-title"><a href="#earliestDeadline" ng-click="loadJobs('EDJ')">Earliest Deadline</a></li>  			
 		</ul>
 		
 		<div class="tabs-content job-list" data-tabs-content="job-tabs">
 			<div class="tabs-panel is-active" id="latest">
 				<div class="row search-list" ng-repeat="model in job" ng-click="selectJob(model.id)">
 					<div class="medium-3 columns text-center">
-						<img class="border-radius-7px" src="/img/{{model.imageUrl}}" alt="Job Image" />
+						<img ng-if="(model.imageUrl !== null &amp;&amp; model.imageUrl !== '')" class="border-radius-7px" src="/img/{{model.imageUrl}}" alt="Job Image" />
+						<img ng-if="(model.imageUrl == null || model.imageUrl == '')" class="border-radius-7px" src="#{request.contextPath}/resources/assets/images/postjob/default_job.png" alt="Job Image" />
 					</div>
 					<div class="medium-9 columns">
 						<div class="row">

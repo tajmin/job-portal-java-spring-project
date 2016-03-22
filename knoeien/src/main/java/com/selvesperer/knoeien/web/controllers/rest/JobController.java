@@ -114,14 +114,14 @@ public class JobController extends AbstractController implements Serializable {
 		return new ResponseEntity<RestResponse>( restResponse, HttpStatus.OK);
 	}
 	
-	@RequestMapping(value = "/latestjob", method = RequestMethod.GET, produces = "application/json")
-	public ResponseEntity<RestResponse> latestJob(@RequestParam(value="page", required=false) Integer page) {
+	@RequestMapping(value = "/findjobs", method = RequestMethod.GET, produces = "application/json")
+	public ResponseEntity<RestResponse> latestJob(@RequestParam(value="page", required=true) Integer page, @RequestParam(value="type", required=true) String type) {
 		RestResponse restResponse = null;
 		if (log.isDebugEnabled()) log.debug("Job Info");
 		try {
 			if(page == null) page = 1;
 			JobService jobService = ApplicationBeanFactory.getBean(JobService.class);
-			List<JobModel> jobs = jobService.findLatestJobs(page, Constants.JOB_LATEST_SIZE);			
+			List<JobModel> jobs = jobService.findjobs(type, page, Constants.JOB_LATEST_SIZE);			
 			return new ResponseEntity<RestResponse>( convertToRestGoodResponse(jobs, LocalizationUtil.findLocalizedString("")),HttpStatus.OK);
 		} catch (AuthenticationFailedException t) {
 			restResponse = convertToRestBadResponse("", t.getLocalizedMessage());
@@ -129,87 +129,7 @@ public class JobController extends AbstractController implements Serializable {
 			restResponse = convertToRestBadResponse("", t.getLocalizedMessage());
 		}
 		return new ResponseEntity<RestResponse>( restResponse, HttpStatus.OK);
-	}
-	
-	@RequestMapping(value = "/bestpaidjob", method = RequestMethod.GET, produces = "application/json")
-	public ResponseEntity<RestResponse> bestPaidJob() {
-		RestResponse restResponse = null;
-		if (log.isDebugEnabled()) log.debug("Job Info");
-		
-		try {
-			JobService jobService = ApplicationBeanFactory.getBean(JobService.class);			
-			List<Job> job = jobService.showBestPaidJob();
-			JobModel jobModel = new JobModel();
-			List<JobModel> jobModelList = jobModel.getJobModelList(job);
-
-			return new ResponseEntity<RestResponse>( convertToRestGoodResponse(jobModelList, LocalizationUtil.findLocalizedString("")),HttpStatus.OK);
-		} catch (AuthenticationFailedException t) {
-			restResponse = convertToRestBadResponse("", t.getLocalizedMessage());
-		} catch (Exception t) {
-			restResponse = convertToRestBadResponse("", t.getLocalizedMessage());
-		}
-		return new ResponseEntity<RestResponse>( restResponse, HttpStatus.OK);
-	}
-	
-	@RequestMapping(value = "/shortesttimejob", method = RequestMethod.GET, produces = "application/json")
-	public ResponseEntity<RestResponse> shortestTimeJob() {
-		RestResponse restResponse = null;
-		if (log.isDebugEnabled()) log.debug("Job Info");
-		
-		try {
-			JobService jobService = ApplicationBeanFactory.getBean(JobService.class);			
-			List<Job> job = jobService.showEarliestDeadlineJob();
-			JobModel jobModel = new JobModel();
-			List<JobModel> jobModelList = jobModel.getJobModelList(job);
-
-			return new ResponseEntity<RestResponse>( convertToRestGoodResponse(jobModelList, LocalizationUtil.findLocalizedString("")),HttpStatus.OK);
-		} catch (AuthenticationFailedException t) {
-			restResponse = convertToRestBadResponse("", t.getLocalizedMessage());
-		} catch (Exception t) {
-			restResponse = convertToRestBadResponse("", t.getLocalizedMessage());
-		}
-		return new ResponseEntity<RestResponse>( restResponse, HttpStatus.OK);
-	}
-	
-	@RequestMapping(value = "/earliestdeadlinejob", method = RequestMethod.GET, produces = "application/json")
-	public ResponseEntity<RestResponse> earliestDeadlineJob() {
-		RestResponse restResponse = null;
-		if (log.isDebugEnabled()) log.debug("Job Info");
-		
-		try {
-			JobService jobService = ApplicationBeanFactory.getBean(JobService.class);			
-			List<Job> job = jobService.showEarliestDeadlineJob();
-			JobModel jobModel = new JobModel();
-			List<JobModel> jobModelList = jobModel.getJobModelList(job);
-
-			return new ResponseEntity<RestResponse>( convertToRestGoodResponse(jobModelList, LocalizationUtil.findLocalizedString("")),HttpStatus.OK);
-		} catch (AuthenticationFailedException t) {
-			restResponse = convertToRestBadResponse("", t.getLocalizedMessage());
-		} catch (Exception t) {
-			restResponse = convertToRestBadResponse("", t.getLocalizedMessage());
-		}
-		return new ResponseEntity<RestResponse>( restResponse, HttpStatus.OK);
-	}
-	
-	@RequestMapping(value = "/nearestjob", method = RequestMethod.GET, produces = "application/json")
-	public ResponseEntity<RestResponse> nearestJob() {
-		RestResponse restResponse = null;
-		if (log.isDebugEnabled()) log.debug("Job Info");
-		
-		try {
-//			JobService jobService = ApplicationBeanFactory.getBean(JobService.class);			
-//			Job job = jobService.showBestPaidJob();
-//			JobModel jobModel = new JobModel(job);
-
-			return new ResponseEntity<RestResponse>( convertToRestGoodResponse(null, LocalizationUtil.findLocalizedString("")),HttpStatus.OK);
-		} catch (AuthenticationFailedException t) {
-			restResponse = convertToRestBadResponse("", t.getLocalizedMessage());
-		} catch (Exception t) {
-			restResponse = convertToRestBadResponse("", t.getLocalizedMessage());
-		}
-		return new ResponseEntity<RestResponse>( restResponse, HttpStatus.OK);
-	}
-	
+	}	
 	
 	@RequestMapping(value = "/getJobByAssignedUserId", method = RequestMethod.GET, produces = "application/json")
 	public ResponseEntity<RestResponse> getJobByAssignedUserId() {
