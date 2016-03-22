@@ -536,7 +536,7 @@
 /*Change Password Modal Starts*/
 #change-password-modal {
 	max-width: 400px;
-	border-radius: 5px;
+	border-radius: 7px;
 }
 #change-password-modal h4 {
 	color: #8A8A8A;
@@ -551,7 +551,7 @@
 }
 #change-password-modal a {
 	width: 100%;
-	border-radius: 5px;
+	border-radius: 6px;
 }
 /*Change Password Modal Ends*/
 
