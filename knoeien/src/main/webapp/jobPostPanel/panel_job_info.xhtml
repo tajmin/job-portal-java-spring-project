@@ -13,13 +13,13 @@
 		                        </div>
 							</div>
 							<div class="small-2 columns">
-								<a ng-click="makeTitleEditable()" style="width: 25%; border-bottom: 1px solid; margin-left: 10px"><img src="#{request.contextPath}/resources/assets/images/edit.png" /></a>
+								<a ng-click="makeTitleEditable()" style="width: 25%;"><img src="#{request.contextPath}/resources/assets/images/edit.png" /></a>
 							</div>
 						</div>						
 					</div>
 					<div class="small-7 columns">
 						<div class="row">
-							<div class="small-6 columns text-right no-padding" style="padding: 0; padding-right: 10px">
+							<div class="small-6 columns text-right no-padding" style="padding: 0; padding-right: 10px" >
 								<label for="jobImageFileUpload" class="middle" style="color: #6bbe54; font-weight: bold; cursor: pointer;">+ Add photo / switch image</label>
 								<input type="file" id="jobImageFileUpload" class="show-for-sr" file-model = "imageFile" onchange="angular.element(this).scope().imageUpload(this)" />
 							</div>
@@ -42,7 +42,8 @@
 					<input type="text" ng-model="job.salesPromoCode" />					
 				</div>
 
-				<div class="small-12 columns helper-form-field" ng-class="(formSubmitted &amp;&amp; jobPostingForm.addressLine1.$error)? {'error':1}:{'error':0}}">
+				<div class="small-12 columns helper-form-field">
+					<!-- ng-class="(formSubmitted &amp;&amp; jobPostingForm.addressLine1.$error)? {'error':1}:{'error':0}}" -->
 					<label class="helper-label">Where do you need help?</label>
 					<!-- <span class="input-group-label" style="font-size: 20px;"><i class="fi-marker"></i></span> --> 
 					<input type="text" size="50" id="placesearch" ng-model="job.addressLine1" name="addressLine1" required="required" placeholder="" /> 

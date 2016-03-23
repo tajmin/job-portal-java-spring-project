@@ -13,6 +13,7 @@ public class JobInterestedModel  implements Serializable {
 	 */
 	private static final long serialVersionUID = -2054948275236797349L;
 	
+	private String id;
 	private String jobId;
 	private String jobCreatedById;
 	private String jobInterestedUserId;
@@ -25,8 +26,6 @@ public class JobInterestedModel  implements Serializable {
 		this.setJobCreatedById(jobInterested.getJobCreatedById());
 		this.setJobInterestedUserId(jobInterested.getJobInterestedUserId());
 		this.setBidAmount(jobInterested.getBidAmount());
-		
-		
 	}
 	
 	public String getJobId() {
@@ -54,6 +53,14 @@ public class JobInterestedModel  implements Serializable {
 		this.bidAmount = bidAmount;
 	}
 	
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
 	public List<JobInterestedModel> getJobModelList(List<JobInterested> jobInterestedList) {
 		List<JobInterestedModel> jobInterestedModelList = new ArrayList<>();
 		for(JobInterested jobInterested : jobInterestedList) {

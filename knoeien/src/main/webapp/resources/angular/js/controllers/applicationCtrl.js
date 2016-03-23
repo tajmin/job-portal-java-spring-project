@@ -414,6 +414,17 @@ Controllers.controller("addJobCtrl", function($scope, $rootScope, restservice, $
 	$scope.job.deadlineDay = 0;
 	$scope.job.hours = 0;
 	$scope.job.minutes = 0;
+	$scope.jobId = utilservice.getParameterByName("id");
+	if($scope.jobId && $scope.jobId != null){
+		$scope.jobDetailsById = function(jobId) {			
+			restservice.get( '', "api/v1/job/jobDetailsById?jobID=" + jobId).then(function(response) {
+				if (response != null) {
+					$scope.job = response;
+	        	}
+	        });
+	    };
+	    $scope.jobDetailsById($scope.jobId);
+	}
 	
 	var title = utilservice.getParameterByName("title");
 	if(!utilservice.isUndefinedOrNull(title)){
@@ -578,6 +589,11 @@ Controllers.controller("jobCtrl", function($scope, $rootScope, restservice, $coo
 	$scope.filter.page = 1;
 	$scope.filter.moreLink = true;
 	
+	$scope.lgbPage = 1;
+	$scope.nrjPage = 1;
+	$scope.bpjPage = 1;
+	$scope.edjPage = 1;
+	
 	$window.map = new google.maps.Map(document.getElementById('g-map'), {
         center: {
             lat: -34.397,
@@ -587,23 +603,34 @@ Controllers.controller("jobCtrl", function($scope, $rootScope, restservice, $coo
     });
 	
 	//Shows Latest Jobs
-	$scope.loadJobs = function(type) {
-		$scope.job = [];
+	$scope.loadJobs = function(type, page) {
+		//$scope.job = [];
 		$scope.filter = {};
-		$scope.filter.page = 1;
+		$scope.filter.page = page;
 		$scope.filter.moreLink = true;
 		restservice.get( '', "api/v1/job/findjobs?page="+$scope.filter.page+"&type="+type).then(function(response) {
 			if (response != null) {
-				$scope.job = response;
-				if(response.length < 2) $scope.filter.moreLink = false;				
+				for (var i = 0; i < response.length; i++) {
+					$scope.job.push(response[i]);
+				}
+				
+				if(response.length < 2){
+					$scope.filter.moreLink = false;				
+				}else{
+					if(type == "LGB") $scope.lgbPage += 1;
+					if(type == "NRJ") $scope.nrjPage += 1;
+					if(type == "BPJ") $scope.bpjPage += 1;
+					if(type == "EDJ") $scope.edjPage += 1;
+				}
 				$scope.showJobInMap();
         	} else {
-        		$scope.responseMessage = response.message;	
+        		//$scope.responseMessage = response.message;
+        		$scope.filter.moreLink = false;
         	}
         });	
     };
     
-    $scope.loadJobs('LGB');
+    $scope.loadJobs('LGB', $scope.lgbPage);
     
     $scope.showJobInMap = function(){
     	//http://stackoverflow.com/questions/1544739/google-maps-api-v3-how-to-remove-all-markers
@@ -632,6 +659,7 @@ Controllers.controller("jobDetailsCtrl", function($scope, $rootScope, restservic
 	$scope.isproceed = false;
 	$scope.job = {};
 	$scope.employer = {};
+	$scope.jobInterest = {};
 	$scope.formSubmitted = false;
 	$scope.responseMessage = "";
 	$scope.id = utilservice.getParameterByName("id");
@@ -649,6 +677,7 @@ Controllers.controller("jobDetailsCtrl", function($scope, $rootScope, restservic
 		restservice.get( '', "api/v1/job/jobDetailsById?jobID=" + jobId).then(function(response) {
 			if (response != null) {
 				$scope.job = response;
+				$scope.jobInterest.bidAmount = $scope.job.price; 
 				$scope.showJobInMap();
         	}
         });
@@ -679,6 +708,22 @@ Controllers.controller("jobDetailsCtrl", function($scope, $rootScope, restservic
 	        bounds.extend(marker.position);
 		}
     	$window.map.fitBounds(bounds);
-    };    
+    };
+    
+    $scope.saveJobInterest = function() {
+    	$scope.jobInterest.bidAmount = parseFloat($scope.jobInterest.bidAmount);
+    	if(!$scope.jobInterest.bidAmount){
+    		return;
+    	}
+    	
+    	$scope.jobInterest.jobId = $scope.id;
+    	$scope.jobInterest.jobCreatedById = $scope.employer.id
+    	restservice.post($scope.jobInterest, "api/v1/jobInterested/saveJobInterest").then(function(response) {
+			if (response != null) {
+				$rootScope.restMessages = "success";
+        	}
+        });
+		
+    };
     
 });

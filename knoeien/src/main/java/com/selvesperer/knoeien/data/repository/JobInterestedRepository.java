@@ -10,6 +10,9 @@ import com.selvesperer.knoeien.data.domain.JobInterested;
 
 public interface JobInterestedRepository extends JpaRepository<JobInterested, String>{
 
+	@Query("from JobInterested ji where ji.id = :id")
+	JobInterested findById(@Param("id") String id);
+	
 	@Query("from JobInterested ji where ji.id = :jobId")
 	JobInterested findJobById(@Param("jobId") String jobId);
 	
