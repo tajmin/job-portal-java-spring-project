@@ -366,6 +366,15 @@ Controllers.controller("overviewCtrl", function($scope, $rootScope, restservice,
 	};	
 	$scope.jobPosted();
 	
+	$scope.postJob = function(jobId) {			
+		restservice.post( '', "api/v1/job/postsavedjob?jobID=" + jobId).then(function(response) {
+			if (response != null) {
+				$scope.postedJob = response;
+        	}
+        });
+	
+    };
+	
 });
 
 Controllers.controller("transactionCtrl", function($scope, $rootScope,restservice, $cookies) {	
