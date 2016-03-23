@@ -70,7 +70,8 @@
 							<div class="medium-10  columns">
 								<div class="row">
 									<div class="medium-4 columns">
-										<a class="button hlpr-color-success" data-toggle="evaluate-helper-modal">Pay Helper</a>
+										<a ng-if="(!model.draft)" class="button hlpr-color-success" data-toggle="evaluate-helper-modal">Pay This Helper</a>
+										<a ng-if="(model.draft)" ng-click="postJob(model.id);" class="button hlpr-color-success">Post This Job</a>
 									</div>
 								</div>
 								<div class="row" style="">

@@ -17,4 +17,6 @@ public interface JobService {
 	
 	public List<Job> findJobByCreatedUserId(String createdByUserId);
 	
+	public Job updateJob(String id);
+	
 }

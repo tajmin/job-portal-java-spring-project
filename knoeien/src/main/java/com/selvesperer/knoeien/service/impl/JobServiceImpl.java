@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import com.selvesperer.knoeien.data.domain.Job;
 import com.selvesperer.knoeien.data.repository.JobRepository;
+import com.selvesperer.knoeien.exception.AuthenticationFailedException;
 import com.selvesperer.knoeien.service.JobService;
 import com.selvesperer.knoeien.spring.ScopeType;
 import com.selvesperer.knoeien.web.controllers.model.JobModel;
@@ -66,6 +67,20 @@ public class JobServiceImpl implements JobService {
 		// TODO Auto-generated method stub
 		List<Job> job=new ArrayList<>(jobRepository.findJobByCreatedUserId(createdByUserId));
 		return job;
+	}
+
+	@Override
+	public Job updateJob(String id) {
+		Job job = jobRepository.findJobById(id);
+		
+		if (job == null) {
+			throw new AuthenticationFailedException("error.jobnotfound.text");
+		}
+		
+		job.setDraft(false);
+		jobRepository.saveAndFlush(job);
+		
+		return null;
 	}
 	
 }
