@@ -2,11 +2,13 @@ package com.selvesperer.knoeien.web.controllers.model;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import com.selvesperer.knoeien.data.domain.Job;
 import com.selvesperer.knoeien.utils.AppsUtil;
 import com.selvesperer.knoeien.utils.DateFormatUtils;
+import com.selvesperer.knoeien.utils.SelvEDate;
 
 public class JobModel implements Serializable{
 
@@ -95,7 +97,7 @@ public class JobModel implements Serializable{
 		}
 		return jobModelList;
 	}
-	
+		
 	public String getId() {
 		return id;
 	}

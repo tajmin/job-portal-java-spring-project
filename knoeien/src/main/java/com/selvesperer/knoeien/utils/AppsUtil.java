@@ -105,5 +105,26 @@ public class AppsUtil {
 		}
 		return ss + " " + agoType;
 	}
+	
+	
+	public static String getDiffenrence(String createdDate){
+		Calendar cal = DateFormatUtils.getDBCalendarFromString(createdDate);
+		int ss = SelvEDate.diffInSeconds(SelvEDate.nullableDate(cal), SelvEDate.getInstance());
+		String agoType = "sec";
+		if(ss >= 60){
+			agoType = "min";
+			ss = (ss/60);
+			if(ss >= 60){
+				agoType = "hour";
+				ss = (ss/60);
+				if(ss >= 24){
+					agoType = "day";
+					ss = (ss/24);
+				}
+			}
+		}
+		return ss + " " + agoType;
+	}
+	
 
 }
