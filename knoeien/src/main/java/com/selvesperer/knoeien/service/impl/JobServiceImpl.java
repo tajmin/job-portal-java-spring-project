@@ -45,31 +45,20 @@ public class JobServiceImpl implements JobService {
 	}
 
 	@Override
-	public List<JobModel> findLatestJobs(int page, int limit) {
-		List<JobModel> jobs = jobRepository.findLatestJobs(page, limit);
+	public List<JobModel> findjobs(String type, int page, int limit) {
+		List<JobModel> jobs = jobRepository.findJobs(type, page, limit);
 		return jobs;
 	}
-
-	@Override
-	public List<Job> showBestPaidJob() {
-		List<Job> job = new ArrayList<>(jobRepository.findJobOrderByPaymentDesc());		
-		return job;
-	}
 	
-	public List<Job> showShortestTimeJob() {
-		List<Job> job = new ArrayList<>(jobRepository.findJobOrderByDurationAsc());	
-		return job;
-	}
-	
-	public List<Job> showEarliestDeadlineJob() {
-		List<Job> job = new ArrayList<>(jobRepository.findJobOrderByDateAsc());	
-		return job;
-	}
-
 	@Override
 	public List<Job> findJobByAssignedUserId(String assignedUserId) {
-		List<Job> job=new ArrayList<>(jobRepository.findJobByAssignedUserId(assignedUserId));
-		return job;
+		try {
+			List<Job> job=new ArrayList<>(jobRepository.findJobByAssignedUserId(assignedUserId));
+			return job;
+		} catch(Throwable ex) {
+			ex.printStackTrace();
+		}
+		return new ArrayList<Job>();
 	}
 
 	@Override
