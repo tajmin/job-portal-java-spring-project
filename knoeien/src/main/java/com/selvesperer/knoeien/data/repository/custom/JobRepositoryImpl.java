@@ -56,7 +56,8 @@ public class JobRepositoryImpl implements JobRepositoryCustom {
 			jobModel.setCreatedDate(DateFormatUtils.getWebDateFromTimestamp((Timestamp) result[7]));
 			//jobModel.setWhenPosted(AppsUtil.getDiffenrence(SelvEDate.toDate(jobModel.getCreatedDate())));
 			jobModel.setImageUrl((String) result[8]);
-			
+			jobModel.setLatitude((String) result[9]);
+			jobModel.setLongitude((String) result[10]);
 			listOfJobs.add(jobModel);
 		}
 		return listOfJobs;
