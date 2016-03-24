@@ -131,11 +131,12 @@ public class JobController extends AbstractController implements Serializable {
 	}	
 	
 	@RequestMapping(value = "/getJobByAssignedUserId", method = RequestMethod.GET, produces = "application/json")
-	public ResponseEntity<RestResponse> getJobByAssignedUserId() {
+	public ResponseEntity<RestResponse> getJobByAssignedUserId(@RequestParam(value="page", required=true) Integer page) {
 		RestResponse restResponse = null;
 		if (log.isDebugEnabled()) log.debug("Job Using Assigned User id");
 		
 		try {
+			if(page == null) page = 1;
 			JobService jobService = ApplicationBeanFactory.getBean(JobService.class);
 			String assignedUserId = SecurityManager.getCurrentUserId();
 			List<Job> job = jobService.findJobByAssignedUserId(assignedUserId);
@@ -153,18 +154,17 @@ public class JobController extends AbstractController implements Serializable {
 	
 	
 	@RequestMapping(value = "/getJobByCreatedUserId", method = RequestMethod.GET, produces = "application/json")
-	public ResponseEntity<RestResponse> getJobByCreatedUserId() {
+	public ResponseEntity<RestResponse> getJobByCreatedUserId(@RequestParam(value="page", required=true) Integer page) {
 		RestResponse restResponse = null;
 		if (log.isDebugEnabled()) log.debug("Job Using Assigned User id");
 		
 		try {
+			if(page == null) page = 1;
 			JobService jobService = ApplicationBeanFactory.getBean(JobService.class);
 			String createdUserId = SecurityManager.getCurrentUserId();
-			List<Job> job = jobService.findJobByCreatedUserId(createdUserId);
-			JobModel jobModel = new JobModel();
-			List<JobModel> jobModelList = jobModel.getJobModelList(job);
+			List<JobModel> jobs = jobService.findJobByCreatedUserId(createdUserId, page, Constants.RESULT_LIMIT);
 
-			return new ResponseEntity<RestResponse>( convertToRestGoodResponse(jobModelList, LocalizationUtil.findLocalizedString("")),HttpStatus.OK);
+			return new ResponseEntity<RestResponse>( convertToRestGoodResponse(jobs, LocalizationUtil.findLocalizedString("")),HttpStatus.OK);
 		} catch (AuthenticationFailedException t) {
 			restResponse = convertToRestBadResponse("", t.getLocalizedMessage());
 		} catch (Exception t) {

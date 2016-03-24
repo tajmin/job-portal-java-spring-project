@@ -15,7 +15,7 @@ public interface JobService {
 	
 	public List<Job> findJobByAssignedUserId(String assignedUserId);
 	
-	public List<Job> findJobByCreatedUserId(String createdByUserId);
+	public List<JobModel> findJobByCreatedUserId(String createdByUserId, int page, int limit);
 	
 	public Job updateJob(String id);
 	

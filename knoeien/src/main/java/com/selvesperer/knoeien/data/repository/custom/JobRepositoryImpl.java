@@ -1,14 +1,9 @@
 package com.selvesperer.knoeien.data.repository.custom;
 
 import java.sql.Timestamp;
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
-import java.util.Locale;
+
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -21,7 +16,6 @@ import com.selvesperer.knoeien.data.enums.FindJobEnum;
 import com.selvesperer.knoeien.utils.AppsUtil;
 import com.selvesperer.knoeien.utils.DateFormatUtils;
 import com.selvesperer.knoeien.utils.QueryUtils;
-import com.selvesperer.knoeien.utils.SelvEDate;
 import com.selvesperer.knoeien.web.controllers.model.JobModel;
 
 public class JobRepositoryImpl implements JobRepositoryCustom {
@@ -69,6 +63,14 @@ public class JobRepositoryImpl implements JobRepositoryCustom {
 		}
 		return listOfJobs;
 
+	}
+
+	@Override
+	public List<JobModel> findJobByCreatedUserId(String createdByUserId, int page, int limit) {
+		StringBuffer queryString = new StringBuffer();
+		queryString.append("select * from from job j");
+		queryString.append(" where j.createdByID");
+		return null;
 	}
 
 }

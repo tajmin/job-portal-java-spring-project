@@ -63,10 +63,10 @@ public class JobServiceImpl implements JobService {
 	}
 
 	@Override
-	public List<Job> findJobByCreatedUserId(String createdByUserId) {
+	public List<JobModel> findJobByCreatedUserId(String createdByUserId, int page, int limit) {
 		// TODO Auto-generated method stub
-		List<Job> job=new ArrayList<>(jobRepository.findJobByCreatedUserId(createdByUserId));
-		return job;
+		List<JobModel> jobs = jobRepository.findJobByCreatedUserId(createdByUserId, page, limit);
+		return jobs;
 	}
 
 	@Override
