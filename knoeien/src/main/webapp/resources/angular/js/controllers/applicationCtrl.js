@@ -292,20 +292,17 @@ Controllers.controller("editProfileCtrl", function($scope, $rootScope, restservi
 		}
 	};
 	
-	$scope.verifyCode = function($event) {
+	$scope.verifyCode = function(isValid) {
+		if(!isValid) return;
+		
 		if ($scope.user.verificationCode && $scope.user.verificationCode.trim().length > 0) {
-			if ($event.keyCode == 13 || $event.keyCode == 9) {
 				$scope.verifyMessage = "processing...";
 				$scope.mobileRequiredMessage = "";
 				restservice.post("", "api/v1/user/verifyNumber?verificationCode=" + $scope.user.verificationCode).then(function(response) {
 					if (response != null) {
 						$scope.verifyMessage = "";
-						$("#verificationCode").addClass("verificationCode");
 					}
-				});
-			}
-		}else{
-			$scope.verifyMessage = "enter verification code and hit enter button";
+				});	
 		}
 	};
 
