@@ -45,9 +45,9 @@
 						</div>
 						<div class="small-6 columns">
 							<div class="input-group">
-								<a class="input-group-label border-radius-5px-left" style="width: 25%;" >-</a>
+								<a ng-click="jobInterest.bidAmount = decrement(jobInterest.bidAmount)" class="input-group-label border-radius-5px-left" style="width: 25%;" >-</a>
 								<input ng-model="jobInterest.bidAmount" id="bid-amount" type="text" class="input-group-field text-center" />
-								<a class="input-group-label border-radius-5px-right" style="width: 25%;" >+</a>
+								<a ng-click="jobInterest.bidAmount = increment(jobInterest.bidAmount)" class="input-group-label border-radius-5px-right" style="width: 25%;" >+</a>
 							</div>
 						</div>
 					</div>

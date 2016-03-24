@@ -726,6 +726,20 @@ Controllers.controller("jobDetailsCtrl", function($scope, $rootScope, restservic
     	$window.map.fitBounds(bounds);
     };
     
+    $scope.increment = function(i) {
+    	if(!i) i = 0;
+    	i = parseFloat(i);
+    	if(i < 0) return 0;
+    	return i + 1;
+    };
+    
+    $scope.decrement = function(i) {
+    	if(!i) i = 0;
+    	i = parseFloat(i);
+    	if(i <= 0) return 0;
+    	return i - 1;
+    };
+    
     $scope.saveJobInterest = function() {
     	$scope.jobInterest.bidAmount = parseFloat($scope.jobInterest.bidAmount);
     	if(!$scope.jobInterest.bidAmount){

@@ -6,12 +6,17 @@ import java.util.List;
 import javax.inject.Inject;
 
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Service;
 
 import com.selvesperer.knoeien.data.domain.JobInterested;
 import com.selvesperer.knoeien.data.repository.JobInterestedRepository;
 import com.selvesperer.knoeien.service.JobInterestedService;
+import com.selvesperer.knoeien.spring.ScopeType;
 import com.selvesperer.knoeien.web.controllers.model.JobInterestedModel;
 
+@Service("jobInterestedService")
+@Scope(ScopeType.SINGLETON)
 public class JobInterestedServiceImpl implements JobInterestedService{
 
 	@Inject
