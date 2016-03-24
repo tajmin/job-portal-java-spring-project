@@ -15,7 +15,8 @@
 					<div class="wrap" style="background: #F5F2F2; padding: 20px 5px 10px 15px;"  >
 						<div class="row" ng-repeat="model in assginedJob">
 							<div class="medium-2 columns">
-								<img class="job-thumb" src="/img/{{model.imageUrl}}" alt="Job Image" />
+								<img ng-if="(model.imageUrl !== null &amp;&amp; model.imageUrl !== '')" class="job-thumb" src="/img/{{model.imageUrl}}" alt="Job Image" />
+								<img ng-if="(model.imageUrl == null || model.imageUrl == '')" class="job-thumb" src="#{request.contextPath}/resources/assets/images/postjob/default_job.png" alt="Job Image" />
 							</div>
 							<div class="medium-10  columns">
 								<div class="row" style="padding-top: 40px;">
@@ -65,13 +66,14 @@
 					<div class="wrap" style="background: #F5F2F2; padding: 20px 5px 10px 15px;">
 						<div class="row" ng-repeat="model in postedJob">
 							<div class="medium-2 columns">
-								<img class="job-thumb" src="/img/{{model.imageUrl}}" alt="Job Image" />
+								<img ng-if="(model.imageUrl !== null &amp;&amp; model.imageUrl !== '')" class="job-thumb" src="/img/{{model.imageUrl}}" alt="Job Image" />
+								<img ng-if="(model.imageUrl == null || model.imageUrl == '')" class="job-thumb" src="#{request.contextPath}/resources/assets/images/postjob/default_job.png" alt="Job Image" />
 							</div>
 							<div class="medium-10  columns">
 								<div class="row">
 									<div class="medium-4 columns">
 										<a ng-if="(!model.draft)" class="button hlpr-color-success" data-toggle="evaluate-helper-modal">Pay This Helper</a>
-										<a ng-if="(model.draft)" ng-click="postJob(model.id);" class="button hlpr-color-success">Post This Job</a>
+										<a ng-if="(model.draft)" ng-click="postJob(model.id);" class="button alert">Post This Job</a>
 									</div>
 								</div>
 								<div class="row" style="">
