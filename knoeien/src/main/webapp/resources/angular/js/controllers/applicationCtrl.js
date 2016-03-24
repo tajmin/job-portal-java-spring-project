@@ -414,8 +414,11 @@ Controllers.controller("addJobCtrl", function($scope, $rootScope, restservice, $
 	$scope.job.deadlineDay = 0;
 	$scope.job.hours = 0;
 	$scope.job.minutes = 0;
+	
+	
+	//@start this portion is responsible to edit draft job 
 	$scope.jobId = utilservice.getParameterByName("id");
-	if($scope.jobId && $scope.jobId != null){
+	if(!utilservice.isUndefinedOrNull($scope.jobId)){
 		$scope.jobDetailsById = function(jobId) {			
 			restservice.get( '', "api/v1/job/jobDetailsById?jobID=" + jobId).then(function(response) {
 				if (response != null) {
@@ -425,16 +428,27 @@ Controllers.controller("addJobCtrl", function($scope, $rootScope, restservice, $
 	    };
 	    $scope.jobDetailsById($scope.jobId);
 	}
+	//@end
 	
+	
+	//@start if title is provided then textbox will hide otherwise textbox will show
 	var title = utilservice.getParameterByName("title");
 	if(!utilservice.isUndefinedOrNull(title)){
 		$scope.job.title = title;
+		$scope.titleEdit = false;
+	}else{
+		$scope.titleEdit = true;
 	}
+	//@end
 	
+	
+	//@start title edit button click listener
 	$scope.makeTitleEditable = function() {
 		$scope.titleEdit = true;		
     };
+    //@end
     
+    //@start next button click listener to move next page
     $scope.nextPage = function(isValid) {
     	if(!isValid) return;
     	
@@ -459,6 +473,8 @@ Controllers.controller("addJobCtrl", function($scope, $rootScope, restservice, $
 		//draft the job
 		$scope.draftJob(isValid, false);
     };
+    //@end
+    
     
     $scope.increment = function(i) {
     	if(!i) i = 0;
