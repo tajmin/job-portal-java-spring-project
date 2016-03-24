@@ -5,10 +5,10 @@
 	<ui:define name="left-content">
 	<div ng-controller="jobCtrl">
 		<ul class="tabs custom-tabs arrow-bottom green" data-tabs="data-tabs" id="job-tabs">
-  			<li class="tabs-title is-active"><a href="#latest" aria-selected="true" ng-click="loadJobs('LGB')">Latest</a></li>
-  			<li class="tabs-title"><a href="#nearestYou" ng-click="loadJobs('NRJ')">Nearest You</a></li>
-  			<li class="tabs-title"><a href="#bestPaid" ng-click="loadJobs('BPJ')">Best Paid</a></li>
-  			<li class="tabs-title"><a href="#earliestDeadline" ng-click="loadJobs('EDJ')">Earliest Deadline</a></li>  			
+  			<li class="tabs-title is-active"><a href="#latest" aria-selected="true" ng-click="job = []; loadJobs('LGB', lgbPage=1)">Latest</a></li>
+  			<li class="tabs-title"><a href="#nearestYou" ng-click="job = []; loadJobs('NRJ', nrjPage=1)">Nearest You</a></li>
+  			<li class="tabs-title"><a href="#bestPaid" ng-click="job = []; loadJobs('BPJ', bpjPage=1)">Best Paid</a></li>
+  			<li class="tabs-title"><a href="#earliestDeadline" ng-click="job = []; loadJobs('EDJ', edjPage=1)">Earliest Deadline</a></li>  			
 		</ul>
 		
 		<div class="tabs-content job-list" data-tabs-content="job-tabs">
@@ -49,12 +49,13 @@
 					</div>
 				</div>
 				
-				<a href="" ng-click="loadMoreLatestJob();" ng-if="filter.moreLink">Show More</a>
+				<a href="" ng-click="loadJobs('LGB', lgbPage);" ng-if="filter.moreLink">Show More</a>
 			</div>
 			<div class="tabs-panel" id="nearestYou">
 				<div class="row search-list" ng-repeat="model in job">
 					<div class="small-3 columns text-center">
-						<img class="border-radius-7px" src="/img/{{model.imageUrl}}" alt="Job Image" />
+						<img ng-if="(model.imageUrl !== null &amp;&amp; model.imageUrl !== '')" class="border-radius-7px" src="/img/{{model.imageUrl}}" alt="Job Image" />
+						<img ng-if="(model.imageUrl == null || model.imageUrl == '')" class="border-radius-7px" src="#{request.contextPath}/resources/assets/images/postjob/default_job.png" alt="Job Image" />
 					</div>
 					<div class="small-9 columns">
 						<div class="row">
@@ -86,12 +87,14 @@
 						</div>
 					</div>
 				</div>
+				<a href="" ng-click="loadJobs('NRJ', nrjPage);" ng-if="filter.moreLink">Show More</a>
 			</div>
 			
 			<div class="tabs-panel" id="bestPaid">
 				<div class="row search-list" ng-repeat="model in job">
 					<div class="medium-3 columns text-center">
-						<img class="border-radius-7px" src="/img/{{model.imageUrl}}" alt="Job Image" />
+						<img ng-if="(model.imageUrl !== null &amp;&amp; model.imageUrl !== '')" class="border-radius-7px" src="/img/{{model.imageUrl}}" alt="Job Image" />
+						<img ng-if="(model.imageUrl == null || model.imageUrl == '')" class="border-radius-7px" src="#{request.contextPath}/resources/assets/images/postjob/default_job.png" alt="Job Image" />
 					</div>
 					<div class="medium-9 columns">
 						<div class="row">
@@ -123,35 +126,14 @@
 						</div>
 					</div>
 				</div>
+				<a href="" ng-click="loadJobs('BPJ', bpjPage);" ng-if="filter.moreLink">Show More</a>
 			</div>
-			
-			<!-- <div class="tabs-panel" id="shortestTime">
-				<div class="row search-list" ng-repeat="model in job">
-					<div class="medium-3 columns text-center">
-						<img class="border-radius-7px" src="/img/{{model.imageUrl}}" alt="Job Image" />
-					</div>
-					<div class="medium-9 columns">
-						<div class="row">
-							<div class="medium-6 columns">
-								<h6 class="bold">{{model.title}}</h6>
-							</div>
-							<div class="medium-6 columns text-right">
-								<a href="#">posted | {{model.whenPosted}}</a>
-							</div>
-						</div>
-						<div class="row">
-							<div class="medium-12 columns">
-								<a>{{model.addressLine1}}</a>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div> -->
 			
 			<div class="tabs-panel" id="earliestDeadline">
 				<div class="row search-list" ng-repeat="model in job">
 					<div class="medium-3 columns text-center">
-						<img class="border-radius-7px" src="/img/{{model.imageUrl}}" alt="Job Image" />
+						<img ng-if="(model.imageUrl !== null &amp;&amp; model.imageUrl !== '')" class="border-radius-7px" src="/img/{{model.imageUrl}}" alt="Job Image" />
+						<img ng-if="(model.imageUrl == null || model.imageUrl == '')" class="border-radius-7px" src="#{request.contextPath}/resources/assets/images/postjob/default_job.png" alt="Job Image" />
 					</div>
 					<div class="medium-9 columns">
 						<div class="row">
@@ -183,6 +165,7 @@
 						</div>
 					</div>
 				</div>
+				<a href="" ng-click="loadJobs('EDJ', edjPage);" ng-if="filter.moreLink">Show More</a>
 			</div>			
 		</div>
 	</div>

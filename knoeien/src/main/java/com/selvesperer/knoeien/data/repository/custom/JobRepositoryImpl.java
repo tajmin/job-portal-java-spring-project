@@ -1,8 +1,14 @@
 package com.selvesperer.knoeien.data.repository.custom;
 
 import java.sql.Timestamp;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -53,8 +59,9 @@ public class JobRepositoryImpl implements JobRepositoryCustom {
 			jobModel.setHours(QueryUtils.parseInteger(result[4], false));
 			jobModel.setDeadline(DateFormatUtils.getWebDateFromTimestamp((Timestamp) result[5]));
 			jobModel.setMinutes(QueryUtils.parseInteger(result[6], false));
-			jobModel.setCreatedDate(DateFormatUtils.getWebDateFromTimestamp((Timestamp) result[7]));
-			//jobModel.setWhenPosted(AppsUtil.getDiffenrence(SelvEDate.toDate(jobModel.getCreatedDate())));
+			jobModel.setCreatedDate(DateFormatUtils.getDBFormattedFromTimestamp((Timestamp) result[7]));			
+			jobModel.setWhenPosted(AppsUtil.getDiffenrence(jobModel.getCreatedDate()));
+
 			jobModel.setImageUrl((String) result[8]);
 			jobModel.setLatitude((String) result[9]);
 			jobModel.setLongitude((String) result[10]);

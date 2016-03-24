@@ -100,7 +100,7 @@ Services.factory('utilservice', function() {
 	service = {};
 	
 	service.isUndefinedOrNull = function(val) {
-	    return angular.isUndefined(val) || val === null 
+	    return angular.isUndefined(val) || val === null || val === "" 
 	}
 	
 	service.getParameterByName = function(sname) {

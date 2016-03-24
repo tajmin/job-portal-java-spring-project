@@ -1,41 +1,39 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets">
 	<!-- modal / reveal forget password starts here -->
-	<div class="reveal fast ease-in" id="phone-verification-modal" data-reveal="data-reveal"
-		data-close-on-click="true" data-animation-in="wiggle" data-animation-out="slide-out-right" ng-controller="resetPasswordCtrl">
+	<div class="reveal fast ease-in" id="phone-verification-modal" data-reveal="data-reveal" data-close-on-click="true" data-animation-in="wiggle" data-animation-out="slide-out-right" >
 		<div class="row" ng-if="!isproceed">
-		<div class="medium-12 medium-centered columns" >
-			<form name="phoneverifyForm">
-				<div class="row">
-					<div class="medium-12 columns">
-						<h4 class="text-left" id="forgotPassTitle">Enter Verification Code</h4>
-					</div>
-				</div>			
-				<div class="row" >
-					<div class="medium-12 columns">
-						<p id="">Use the verification code that you received in your phone</p>
-						<input type="text" id="" name="username" placeholder="Enter verification code" required="required" ng-model="user.verificationCode"/>
-						<div ng-messages="formSubmitted &amp;&amp; resetPasswordForm.username.$error">
-	                    	<div ng-message="required" class="error">Verification code is required.</div>
-	                    </div>					
-					</div>
-				</div>			
-				
-				<ul class="global-message" style="white-space:normal">
-					<span ng-repeat="m in restMessages"> 
-						<li class="info-text info-modal">{{m.message}}</li>
-					</span>								
-				</ul>
-						
-				<div class="row">
-					<fieldset class="medium-12 columns">
-						<div class="button-group">						
-							<a id="phoneVerifyCodeBtn" class="button hlpr-color-success" ng-click="formSubmitted = true; verifyCode(phoneverifyForm.$valid);">Verify</a>						
-							<!-- <button class="button hlpr-color-info" type="submit">Reset Password</button> -->
+			<div class="medium-12 medium-centered columns" >
+				<form name="phoneverifyForm">
+					<div class="row">
+						<div class="medium-12 columns">
+							<h4 class="text-left" id="forgotPassTitle">Enter Verification Code</h4>
 						</div>
-					</fieldset>
-				</div>
-			</form>
-		</div>
+					</div>			
+					<div class="row" >
+						<div class="medium-12 columns">
+							<p id="">Use the verification code that you received in your phone</p>
+							<input type="text" id="" name="verification" placeholder="Enter verification code" required="required" ng-model="user.verificationCode"/>
+							<div ng-messages="formSubmitted &amp;&amp; phoneverifyForm.verification.$error">
+		                    	<div ng-message="required" class="error">Verification code is required.</div>
+		                    </div>					
+						</div>
+					</div>			
+					
+					<ul class="global-message" style="white-space:normal">
+						<span ng-repeat="m in restMessages"> 
+							<li class="info-text info-modal">{{m.message}}</li>
+						</span>								
+					</ul>
+							
+					<div class="row">
+						<fieldset class="medium-12 columns">
+							<div class="button-group">						
+								<a id="phoneVerifyCodeBtn" class="button hlpr-color-success" ng-click="formSubmitted = true; verifyCode(phoneverifyForm.$valid);">Verify</a>
+							</div>
+						</fieldset>
+					</div>
+				</form>
+			</div>
 		</div>
 		<div class="row" ng-if="isproceed">
 			<div class="row">

@@ -302,6 +302,14 @@ public class DateFormatUtils {
 		return dateString;
 	}
 	
+	public static String getDBFormattedFromTimestamp(Timestamp timestamp){
+		String dateString = "";
+		if(timestamp != null){
+			dateString = dbFormat.format(timestamp.getTime());
+		}
+		return dateString;
+	}
+	
 	public static String getWebDateFromTimestamp(Timestamp timestamp){
 		String dateString = "";
 		if(timestamp != null){
@@ -324,6 +332,19 @@ public class DateFormatUtils {
 			if(StringUtils.isNotBlank(date)){
 				calender = Calendar.getInstance();
 				calender.setTime(dbFormat.parse(date));
+			}
+		}catch(Throwable t){
+			calender = null;
+		}
+		return calender;
+	}
+	
+	public static Calendar getWebCalendarFromString(String date){
+		Calendar calender = null;
+		try{
+			if(StringUtils.isNotBlank(date)){
+				calender = Calendar.getInstance();
+				calender.setTime(webFormat.parse(date));
 			}
 		}catch(Throwable t){
 			calender = null;

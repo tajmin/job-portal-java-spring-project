@@ -6,16 +6,17 @@ import java.util.List;
 import javax.inject.Inject;
 
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Service;
 
-import com.selvesperer.knoeien.data.domain.Job;
 import com.selvesperer.knoeien.data.domain.JobInterested;
 import com.selvesperer.knoeien.data.repository.JobInterestedRepository;
-import com.selvesperer.knoeien.data.repository.JobRepository;
-import com.selvesperer.knoeien.service.CompanyService;
 import com.selvesperer.knoeien.service.JobInterestedService;
+import com.selvesperer.knoeien.spring.ScopeType;
 import com.selvesperer.knoeien.web.controllers.model.JobInterestedModel;
-import com.selvesperer.knoeien.web.controllers.model.JobModel;
 
+@Service("jobInterestedService")
+@Scope(ScopeType.SINGLETON)
 public class JobInterestedServiceImpl implements JobInterestedService{
 
 	@Inject
@@ -24,8 +25,8 @@ public class JobInterestedServiceImpl implements JobInterestedService{
 	@Override
 	public JobInterested saveJobInterested(JobInterestedModel jobInterestedModel) {
 		JobInterested jobInterested = null;
-		if(StringUtils.isNotBlank(jobInterestedModel.getJobId())){
-			jobInterested = jobInterestedRepository.findJobById(jobInterestedModel.getJobId());
+		if(StringUtils.isNotBlank(jobInterestedModel.getId())){
+			jobInterested = jobInterestedRepository.findById(jobInterestedModel.getJobId());
 		}else{
 			jobInterested = new JobInterested();
 		}

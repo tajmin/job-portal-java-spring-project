@@ -10,11 +10,14 @@ import com.selvesperer.knoeien.data.domain.JobInterested;
 
 public interface JobInterestedRepository extends JpaRepository<JobInterested, String>{
 
+	@Query("from JobInterested ji where ji.id = :id")
+	JobInterested findById(@Param("id") String id);
+	
 	@Query("from JobInterested ji where ji.id = :jobId")
 	JobInterested findJobById(@Param("jobId") String jobId);
 	
-	@Query("from JobInterested ji where ji.interestedUserId = :Id")
-	List<JobInterested> findJobByInterestedUserId(@Param("Id") String Id);
+	@Query("from JobInterested ji where ji.jobInterestedUserId = :userId")
+	List<JobInterested> findJobByInterestedUserId(@Param("userId") String userId);
 	
 //	@Query(value="select * from JobInterested",nativeQuery=true)
 //	List<JobInterested> findLowestBidAmount();

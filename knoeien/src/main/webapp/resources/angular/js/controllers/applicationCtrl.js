@@ -292,20 +292,17 @@ Controllers.controller("editProfileCtrl", function($scope, $rootScope, restservi
 		}
 	};
 	
-	$scope.verifyCode = function($event) {
+	$scope.verifyCode = function(isValid) {
+		if(!isValid) return;
+		
 		if ($scope.user.verificationCode && $scope.user.verificationCode.trim().length > 0) {
-			if ($event.keyCode == 13 || $event.keyCode == 9) {
 				$scope.verifyMessage = "processing...";
 				$scope.mobileRequiredMessage = "";
 				restservice.post("", "api/v1/user/verifyNumber?verificationCode=" + $scope.user.verificationCode).then(function(response) {
 					if (response != null) {
 						$scope.verifyMessage = "";
-						$("#verificationCode").addClass("verificationCode");
 					}
-				});
-			}
-		}else{
-			$scope.verifyMessage = "enter verification code and hit enter button";
+				});	
 		}
 	};
 
@@ -342,7 +339,7 @@ Controllers.controller("editProfileCtrl", function($scope, $rootScope, restservi
 
 });
 
-Controllers.controller("overviewCtrl", function($scope, $rootScope, restservice, $cookies) {
+Controllers.controller("overviewCtrl", function($scope, $rootScope, restservice, $cookies, $window) {
 	$scope.isproceed = false;
 	$scope.assginedJob = {};
 	$scope.postedJob = {};
@@ -366,14 +363,18 @@ Controllers.controller("overviewCtrl", function($scope, $rootScope, restservice,
 	};	
 	$scope.jobPosted();
 	
-	$scope.postJob = function(jobId) {			
+	/*$scope.postJob = function(jobId) {			
 		restservice.post( '', "api/v1/job/postsavedjob?jobID=" + jobId).then(function(response) {
 			if (response != null) {
 				$scope.postedJob = response;
         	}
         });
 	
-    };
+    };*/
+    
+    $scope.postJob = function(jobid){
+    	window.open($rootScope.getBaseUrl() + "/jobpost.xhtml?id=" + jobid,	"_self");
+    }
 	
 });
 
@@ -415,15 +416,40 @@ Controllers.controller("addJobCtrl", function($scope, $rootScope, restservice, $
 	$scope.job.hours = 0;
 	$scope.job.minutes = 0;
 	
+	
+	//@start this portion is responsible to edit draft job 
+	$scope.jobId = utilservice.getParameterByName("id");
+	if(!utilservice.isUndefinedOrNull($scope.jobId)){
+		$scope.jobDetailsById = function(jobId) {			
+			restservice.get( '', "api/v1/job/jobDetailsById?jobID=" + jobId).then(function(response) {
+				if (response != null) {
+					$scope.job = response;
+	        	}
+	        });
+	    };
+	    $scope.jobDetailsById($scope.jobId);
+	}
+	//@end
+	
+	
+	//@start if title is provided then textbox will hide otherwise textbox will show
 	var title = utilservice.getParameterByName("title");
 	if(!utilservice.isUndefinedOrNull(title)){
 		$scope.job.title = title;
+		$scope.titleEdit = false;
+	}else{
+		$scope.titleEdit = true;
 	}
+	//@end
 	
+	
+	//@start title edit button click listener
 	$scope.makeTitleEditable = function() {
 		$scope.titleEdit = true;		
     };
+    //@end
     
+    //@start next button click listener to move next page
     $scope.nextPage = function(isValid) {
     	if(!isValid) return;
     	
@@ -448,6 +474,8 @@ Controllers.controller("addJobCtrl", function($scope, $rootScope, restservice, $
 		//draft the job
 		$scope.draftJob(isValid, false);
     };
+    //@end
+    
     
     $scope.increment = function(i) {
     	if(!i) i = 0;
@@ -578,6 +606,11 @@ Controllers.controller("jobCtrl", function($scope, $rootScope, restservice, $coo
 	$scope.filter.page = 1;
 	$scope.filter.moreLink = true;
 	
+	$scope.lgbPage = 1;
+	$scope.nrjPage = 1;
+	$scope.bpjPage = 1;
+	$scope.edjPage = 1;
+	
 	$window.map = new google.maps.Map(document.getElementById('g-map'), {
         center: {
             lat: -34.397,
@@ -587,23 +620,34 @@ Controllers.controller("jobCtrl", function($scope, $rootScope, restservice, $coo
     });
 	
 	//Shows Latest Jobs
-	$scope.loadJobs = function(type) {
-		$scope.job = [];
+	$scope.loadJobs = function(type, page) {
+		//$scope.job = [];
 		$scope.filter = {};
-		$scope.filter.page = 1;
+		$scope.filter.page = page;
 		$scope.filter.moreLink = true;
 		restservice.get( '', "api/v1/job/findjobs?page="+$scope.filter.page+"&type="+type).then(function(response) {
 			if (response != null) {
-				$scope.job = response;
-				if(response.length < 2) $scope.filter.moreLink = false;				
+				for (var i = 0; i < response.length; i++) {
+					$scope.job.push(response[i]);
+				}
+				
+				if(response.length < 2){
+					$scope.filter.moreLink = false;				
+				}else{
+					if(type == "LGB") $scope.lgbPage += 1;
+					if(type == "NRJ") $scope.nrjPage += 1;
+					if(type == "BPJ") $scope.bpjPage += 1;
+					if(type == "EDJ") $scope.edjPage += 1;
+				}
 				$scope.showJobInMap();
         	} else {
-        		$scope.responseMessage = response.message;	
+        		//$scope.responseMessage = response.message;
+        		$scope.filter.moreLink = false;
         	}
         });	
     };
     
-    $scope.loadJobs('LGB');
+    $scope.loadJobs('LGB', $scope.lgbPage);
     
     $scope.showJobInMap = function(){
     	//http://stackoverflow.com/questions/1544739/google-maps-api-v3-how-to-remove-all-markers
@@ -632,6 +676,7 @@ Controllers.controller("jobDetailsCtrl", function($scope, $rootScope, restservic
 	$scope.isproceed = false;
 	$scope.job = {};
 	$scope.employer = {};
+	$scope.jobInterest = {};
 	$scope.formSubmitted = false;
 	$scope.responseMessage = "";
 	$scope.id = utilservice.getParameterByName("id");
@@ -649,6 +694,7 @@ Controllers.controller("jobDetailsCtrl", function($scope, $rootScope, restservic
 		restservice.get( '', "api/v1/job/jobDetailsById?jobID=" + jobId).then(function(response) {
 			if (response != null) {
 				$scope.job = response;
+				$scope.jobInterest.bidAmount = $scope.job.price; 
 				$scope.showJobInMap();
         	}
         });
@@ -679,6 +725,36 @@ Controllers.controller("jobDetailsCtrl", function($scope, $rootScope, restservic
 	        bounds.extend(marker.position);
 		}
     	$window.map.fitBounds(bounds);
-    };    
+    };
+    
+    $scope.increment = function(i) {
+    	if(!i) i = 0;
+    	i = parseFloat(i);
+    	if(i < 0) return 0;
+    	return i + 1;
+    };
+    
+    $scope.decrement = function(i) {
+    	if(!i) i = 0;
+    	i = parseFloat(i);
+    	if(i <= 0) return 0;
+    	return i - 1;
+    };
+    
+    $scope.saveJobInterest = function() {
+    	$scope.jobInterest.bidAmount = parseFloat($scope.jobInterest.bidAmount);
+    	if(!$scope.jobInterest.bidAmount){
+    		return;
+    	}
+    	
+    	$scope.jobInterest.jobId = $scope.id;
+    	$scope.jobInterest.jobCreatedById = $scope.employer.id
+    	restservice.post($scope.jobInterest, "api/v1/jobInterested/saveJobInterest").then(function(response) {
+			if (response != null) {
+				$rootScope.restMessages = "success";
+        	}
+        });
+		
+    };
     
 });

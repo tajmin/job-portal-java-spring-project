@@ -31,13 +31,15 @@ public class JobInterestedController extends AbstractController implements Seria
 	 */
 	private static final long serialVersionUID = 5883325019280616658L;
 	
-	@RequestMapping(value = "/saveJobInterested", method = RequestMethod.POST, produces = "application/json")
+	@RequestMapping(value = "/saveJobInterest", method = RequestMethod.POST, produces = "application/json")
 	@ResponseBody
-	public ResponseEntity<RestResponse> saveJobInterested(@RequestBody JobInterestedModel jobInterestedModel) {		
+	public ResponseEntity<RestResponse> saveJobInterest(@RequestBody JobInterestedModel jobInterestedModel) {		
 		JobInterested jobInterested  = null;
 		try {
 			JobInterestedService jobInterestedService = ApplicationBeanFactory.getBean(JobInterestedService.class);
+			jobInterestedModel.setJobInterestedUserId(SecurityManager.getCurrentUserId());
 			jobInterested = jobInterestedService.saveJobInterested(jobInterestedModel);
+			return new ResponseEntity<RestResponse>( convertToRestGoodResponse(new JobInterestedModel(jobInterested), LocalizationUtil.findLocalizedString("")),HttpStatus.OK);
 		} catch (Exception ex) {
 			Messages.addGlobalError(ex.getMessage());
 		}
