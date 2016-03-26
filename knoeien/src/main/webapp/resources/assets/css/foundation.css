@@ -2757,7 +2757,7 @@ body.is-reveal-open {
   right: 0;
   z-index: 1005;
   background-color: rgba(10, 10, 10, 0.45);
-  overflow-y: scroll; }
+  overflow-y: auto; }
 
 .reveal {
   display: none;
