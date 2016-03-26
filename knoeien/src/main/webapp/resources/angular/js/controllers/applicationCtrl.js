@@ -43,9 +43,14 @@ Controllers.controller("signupCtrl", function($scope, $rootScope, restservice, $
 	$scope.formSubmitted = false;
 	$scope.responseMessage = "";
 	$scope.verifyMessage = "";
-	$scope.mobileRequiredMessage = "";
+	$scope.verifyMessageRequired = false;
+	$scope.contactRequired = false;
 	
 	$("#verificationCode").removeClass("verificationCode");
+	
+	$scope.init = function() {
+		console.log("dasd");
+	};
 	
 	$scope.signup = function(isValid) {
 		if (!isValid) return;		
@@ -61,14 +66,16 @@ Controllers.controller("signupCtrl", function($scope, $rootScope, restservice, $
 	$scope.sendVerificationCode = function() {
 		if($scope.user.contact && $scope.user.contact.trim().length > 0){
 			$scope.verifyMessage = "processing...";
-			$scope.mobileRequiredMessage = "";
+			$scope.verifyMessageRequired = true;
+			$scope.contactRequired = false;
 			restservice.post("", "api/v1/user/sendVerificationCode?mobileNumber=" + $scope.user.contact).then(function(response) {
 				if (response != null) {
-					$scope.verifyMessage = "enter verification code and hit enter button";
+					$scope.verifyMessage = "Enter verification code and hit enter button";
+					$scope.verifyMessageRequired = true;
 				}
 			});
 		}else{
-			$scope.mobileRequiredMessage = "Please enter mobile number";
+			$scope.contactRequired = true;
 		}
 	};
 	
@@ -76,17 +83,20 @@ Controllers.controller("signupCtrl", function($scope, $rootScope, restservice, $
 	$scope.verifyCode = function($event) {
 		if ($scope.user.verificationCode && $scope.user.verificationCode.trim().length > 0) {
 			if ($event.keyCode == 13 || $event.keyCode == 9) {
-				$scope.verifyMessage = "processing...";
-				$scope.mobileRequiredMessage = "";
+				$scope.verifyMessage = "Processing...";
+				$scope.verifyMessageRequired = true;
+				$scope.contactRequired = false;
 				restservice.post("", "api/v1/user/verifyNumber?verificationCode=" + $scope.user.verificationCode).then(function(response) {
 					if (response != null) {
 						$scope.verifyMessage = "";
+						$scope.verifyMessageRequired = false;
 						$("#verificationCode").addClass("verificationCode");
 					}
 				});
 			}
 		}else{
-			$scope.verifyMessage = "enter verification code and hit enter button";
+			$scope.verifyMessage = "Enter verification code and hit enter button";
+			$scope.verifyMessageRequired = true;
 		}
 	};
 });

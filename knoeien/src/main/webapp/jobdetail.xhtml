@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <ui:composition template="templates/two-column.xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core">
-
+	<div>
 	<ui:define name="left-content">
 		<div ng-controller="jobDetailsCtrl">
 			<ul class="tabs custom-tabs arrow-bottom green" data-tabs="data-tabs" id="job-detail-tabs">
@@ -35,6 +35,7 @@
 							</div>
 						</div>
 					</div>
+					
 					<div class="row background-color-grey job-bid-info">
 						<div class="small-6 columns">
 							<div class="input-group">
@@ -108,8 +109,10 @@
 		</div>
 	</ui:define>
 	<ui:define name="right-content">
+		<div ng-controller="jobDetailsCtrl">
     	<div id="g-map" style="width:100%;height:98vh;"></div>
-    	<div class="chat-section">
+    	
+    	<div class="chat-section" ng-if="chat==true">
     		<form action="">
 	    		<ul class="no-bullet">
 	    			<li class="me">
@@ -131,6 +134,7 @@
 	    		</div>
     		</form>
     	</div>
+    	</div>
 	</ui:define>
-	
+	</div>
 </ui:composition>
