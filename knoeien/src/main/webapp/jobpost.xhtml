@@ -6,7 +6,7 @@
 			<ui:insert name="card-info-modal"></ui:insert>
 			<ui:insert name="draft-confirmation-modal"></ui:insert>
 			<ui:insert name="post-confirmation-modal"></ui:insert>		
-			<form name="jobPostingForm">
+			<form name="jobPostingForm" novalidate="true">
 				<div class="cover">
 					<canvas id="job_cover_image" class="cover-image" style="background-image: url(/img/{{(job.imageUrl !== '')? job.imageUrl : ''}})"></canvas>
 					<!-- <canvas class="cover-image" style=""></canvas> -->
@@ -42,8 +42,8 @@
 				
 				<div class="row text-center">
 					<a  href="javascript:void(0);" ng-click="formSubmitted = true; draftJob(jobPostingForm.$valid, true);" class="button hlpr-color-alert helper-tab-button">Save Draft</a>
-					<a ng-if="isPost()" href="javascript:void(0);" ng-click="formSubmitted = true; openPaymentWindow(jobPostingForm.$valid);" class="button hlpr-color-success helper-tab-button">Post</a>
-					<a ng-if="!isPost()" href="javascript:void(0);" ng-click="formSubmitted = true; nextPage(jobPostingForm.$valid);" class="button hlpr-color-success helper-tab-button">Next</a> 										
+					<a href="javascript:void(0);" ng-if="!filter.isnext" ng-click="formSubmitted = true; openPaymentWindow(jobPostingForm.$valid);" class="button hlpr-color-success helper-tab-button">Post</a>
+					<a href="javascript:void(0);" ng-show="filter.isnext" ng-click="formSubmitted = true; nextPage(jobPostingForm.$valid);" class="button hlpr-color-success helper-tab-button">Next</a> 										
 				</div>				
 			</form>			
 		</div>		

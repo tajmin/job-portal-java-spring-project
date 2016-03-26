@@ -8,5 +8,7 @@ public interface JobRepositoryCustom {
 	
 	public List<JobModel> findJobs(String type, int page, int limit);
 	
-	public List<JobModel> findJobByCreatedUserId(String createdByUserId, int page, int limit);
+	public List<JobModel> findJobByCreatedUserId(String id, int page, int limit);
+	
+	public List<JobModel> findJobByAssignedUserId(String id, int page, int limit);
 }

@@ -341,24 +341,50 @@ Controllers.controller("editProfileCtrl", function($scope, $rootScope, restservi
 
 Controllers.controller("overviewCtrl", function($scope, $rootScope, restservice, $cookies, $window) {
 	$scope.isproceed = false;
-	$scope.assginedJob = {};
-	$scope.postedJob = {};
+	$scope.assginedJob = [];
+	$scope.postedJob = [];
 	$scope.responseMessage = "";
+	$scope.filter = {};
+	$scope.assignedFilter = {};
+	$scope.assignedFilter.page = 1;
+	$scope.assignedFilter.moreLink = true;
+	$scope.filter.page = 1;
+	$scope.filter.moreLink = true;
 
 	$scope.jobAssigned = function() {
-		restservice.get('', "api/v1/job/getJobByAssignedUserId").then(function(response) {
+		$scope.assignedFilter.moreLink = true;
+		restservice.get('', "api/v1/job/getJobByAssignedUserId?page=" +$scope.assignedFilter.page).then(function(response) {
 			if (response != null) {
-				$scope.assginedJob = response;				
+				for (var i = 0; i < response.length; i++) {
+					$scope.assginedJob.push(response[i]);
+				}
+				if(response.length < 4){
+					$scope.assignedFilter.moreLink = false;				
+				}else{
+					$scope.assignedFilter.page += 1;
+				}
+	    	} else {
+	    		$scope.assignedFilter.moreLink = false;
 	    	}
 	    });
 	};	
 	$scope.jobAssigned();
 	
 	$scope.jobPosted = function() {
-		restservice.get('', "api/v1/job/getJobByCreatedUserId").then(function(response) {
+		$scope.filter.moreLink = true;
+		restservice.get('', "api/v1/job/getJobByCreatedUserId?page=" +$scope.filter.page).then(function(response) {
 			if (response != null) {
-				$scope.postedJob = response;				
-	    	}
+				for (var i = 0; i < response.length; i++) {
+					$scope.postedJob.push(response[i]);
+				}
+				if(response.length < 4){
+					$scope.filter.moreLink = false;				
+				}else{
+					$scope.filter.page += 1;
+				}
+	    	} else {
+        		$scope.filter.moreLink = false;
+        	}
 	    });
 	};	
 	$scope.jobPosted();
@@ -408,14 +434,15 @@ Controllers.controller("addJobCtrl", function($scope, $rootScope, restservice, $
 	$scope.cover_image = "";
 	$scope.imageFile;
 	$scope.tempUploadedFilePath = "";
-	$scope.titleEdit = false;
-	$scope.page = 1;
+	$scope.titleEdit = false;	
 	$scope.job.price = 0;
 	$scope.job.deadlineMonth = 0;
 	$scope.job.deadlineDay = 0;
 	$scope.job.hours = 0;
 	$scope.job.minutes = 0;
-	
+	$scope.filter = {};
+	$scope.filter.isnext = true;
+	$scope.page = 1;
 	
 	//@start this portion is responsible to edit draft job 
 	$scope.jobId = utilservice.getParameterByName("id");
@@ -452,9 +479,11 @@ Controllers.controller("addJobCtrl", function($scope, $rootScope, restservice, $
     
     //@start next button click listener to move next page
     $scope.nextPage = function(isValid) {
+    	$scope.filter.isnext = true;
     	if(!isValid) return;
     	
     	if($scope.page > 3){
+    		$scope.filter.isnext = false;
     		return;
     	}
     	
@@ -469,6 +498,7 @@ Controllers.controller("addJobCtrl", function($scope, $rootScope, restservice, $
 		}
 		
 		if($scope.page == 3){
+			$scope.filter.isnext = false;
 			$("#panel_job_approved-label").click();
 		}
 		
@@ -492,14 +522,7 @@ Controllers.controller("addJobCtrl", function($scope, $rootScope, restservice, $
     	return i - 1;
     };
     
-    $scope.isPost = function(isValid) {
-    	if($scope.page >= 3){
-    		return true;
-    	}
-    	return false;
-    };
-    
-    $scope.setPageNo = function(i) {
+   $scope.setPageNo = function(i) {
     	$scope.page = i;
     };
 	
