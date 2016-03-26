@@ -35,7 +35,7 @@
 				<div class="small-12 columns helper-form-field {{(formSubmitted &amp;&amp; jobPostingForm.description.$error)? 'error' : ''}}" >
 					<label class="helper-label">Job Details</label>
 					<textarea rows="3" ng-model="job.description" name="description" required="required" />
-					<div class="icon fi-info" ng-class="(formSubmitted &amp;&amp; jobPostingForm.description.$error)? '' : 'hide'"></div>
+					<div class="icon fi-info {{(formSubmitted &amp;&amp; jobPostingForm.description.$error)? '' : 'hide'}}"></div>
 					<div ng-messages="formSubmitted &amp;&amp; jobPostingForm.description.$error">
 						<div ng-message="required"><i class="bttm-icon fi-info"></i>Job Details is required</div>
 					</div>

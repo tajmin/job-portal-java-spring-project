@@ -424,6 +424,7 @@ Controllers.controller("addJobCtrl", function($scope, $rootScope, restservice, $
 			restservice.get( '', "api/v1/job/jobDetailsById?jobID=" + jobId).then(function(response) {
 				if (response != null) {
 					$scope.job = response;
+					$scope.tempUploadedFilePath = $scope.job.imageUrl; 
 	        	}
 	        });
 	    };
@@ -751,10 +752,18 @@ Controllers.controller("jobDetailsCtrl", function($scope, $rootScope, restservic
     	$scope.jobInterest.jobCreatedById = $scope.employer.id
     	restservice.post($scope.jobInterest, "api/v1/jobInterested/saveJobInterest").then(function(response) {
 			if (response != null) {
-				$rootScope.restMessages = "success";
+				$scope.jobInterest = response; 
         	}
-        });
-		
+        });	
     };
+    
+    $scope.getJobInterestDetailsByInterestUserId = function(jobID) {			
+		restservice.get( '', "api/v1/jobInterested/getJobInterestDetailsByInterestUserId?jobID=" + jobID).then(function(response) {
+			if (response != null) {
+				$scope.jobInterest = response;
+        	}
+        });	
+    };
+    $scope.getJobInterestDetailsByInterestUserId($scope.id);
     
 });
