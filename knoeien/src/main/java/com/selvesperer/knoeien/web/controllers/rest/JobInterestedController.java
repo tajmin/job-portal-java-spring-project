@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.selvesperer.knoeien.data.domain.JobInterested;
@@ -39,6 +40,20 @@ public class JobInterestedController extends AbstractController implements Seria
 			JobInterestedService jobInterestedService = ApplicationBeanFactory.getBean(JobInterestedService.class);
 			jobInterestedModel.setJobInterestedUserId(SecurityManager.getCurrentUserId());
 			jobInterested = jobInterestedService.saveJobInterested(jobInterestedModel);
+			return new ResponseEntity<RestResponse>( convertToRestGoodResponse(new JobInterestedModel(jobInterested), LocalizationUtil.findLocalizedString("")),HttpStatus.OK);
+		} catch (Exception ex) {
+			Messages.addGlobalError(ex.getMessage());
+		}
+		return new ResponseEntity<RestResponse>(convertToRestGoodResponse(jobInterested), HttpStatus.OK);
+	}
+	
+	@RequestMapping(value = "/getJobInterestDetailsByInterestUserId", method = RequestMethod.GET, produces = "application/json")
+	@ResponseBody
+	public ResponseEntity<RestResponse> getJobInterestDetailsByInterestUserId(@RequestParam(value = "jobID", required = true) String jobID) {		
+		JobInterested jobInterested  = null;
+		try {
+			JobInterestedService jobInterestedService = ApplicationBeanFactory.getBean(JobInterestedService.class);
+			jobInterested = jobInterestedService.findJobInterestDetailsByInterestUserId(jobID, SecurityManager.getCurrentUserId());
 			return new ResponseEntity<RestResponse>( convertToRestGoodResponse(new JobInterestedModel(jobInterested), LocalizationUtil.findLocalizedString("")),HttpStatus.OK);
 		} catch (Exception ex) {
 			Messages.addGlobalError(ex.getMessage());

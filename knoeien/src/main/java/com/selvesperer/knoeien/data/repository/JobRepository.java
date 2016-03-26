@@ -27,9 +27,5 @@ public interface JobRepository extends JpaRepository<Job, String>, JobRepository
 	
 	@Query("from Job j Where j.draft=false Order by j.createdDate desc")
 	List<Job> findJobOrderByCreatedDateDesc();
-
-	@Query("from Job j where j.assignedUserId = :assignedUserId")
-	List<Job> findJobByAssignedUserId(@Param("assignedUserId") String assignedUserID);
-	
 	
 }
