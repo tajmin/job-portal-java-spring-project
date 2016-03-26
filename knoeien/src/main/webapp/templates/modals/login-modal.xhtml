@@ -14,18 +14,20 @@
 				</div>
 			</div>
 			<div class="row">
-				<div class="medium-12 columns">		
+				<div class="medium-12 columns helper-form-field" ng-class="(formSubmitted &amp;&amp; loginForm.username.$error.required == true)? 'error' : ''" >		
 					<input type="text" name="username" placeholder="Enter your email" required="required" ng-model="user.username" />
+					<div style="top: 3px" class="icon fi-info" ng-class="(formSubmitted &amp;&amp; loginForm.username.$error.required == true)? '' : 'hide'"></div>
 					<div ng-messages="formSubmitted &amp;&amp; loginForm.username.$error">
-                         <div ng-message="required" class="error">Email is required</div>
+                         <div ng-message="required" class="error"><i class="bttm-icon fi-info"></i>Email is required</div>
                      </div>
 				</div>
 			</div>
 			<div class="row">
-				<div class="medium-12 columns">
+				<div class="medium-12 columns helper-form-field" ng-class="(formSubmitted &amp;&amp; loginForm.password.$error.required == true)? 'error' : ''" >
 					<input type="Password" name="password" placeholder="Enter your password" required="required" ng-model="user.password" />
+					<div style="top: 3px" class="icon fi-info" ng-class="(formSubmitted &amp;&amp; loginForm.password.$error.required == true)? '' : 'hide'"></div>
 					<div ng-messages="formSubmitted &amp;&amp; loginForm.password.$error">
-                         <div ng-message="required" class="error">Password is required</div>
+                         <div ng-message="required" class="error"><i class="bttm-icon fi-info"></i>Password is required</div>
                      </div>
 				</div>
 			</div>
