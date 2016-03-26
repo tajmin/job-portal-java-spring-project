@@ -676,6 +676,7 @@ Controllers.controller("jobCtrl", function($scope, $rootScope, restservice, $coo
 Controllers.controller("jobDetailsCtrl", function($scope, $rootScope, restservice, $cookies, $window, utilservice) {
 	$scope.isproceed = false;
 	$scope.job = {};
+	$scope.chat = false;
 	$scope.employer = {};
 	$scope.jobInterest = {};
 	$scope.formSubmitted = false;
@@ -752,7 +753,8 @@ Controllers.controller("jobDetailsCtrl", function($scope, $rootScope, restservic
     	$scope.jobInterest.jobCreatedById = $scope.employer.id
     	restservice.post($scope.jobInterest, "api/v1/jobInterested/saveJobInterest").then(function(response) {
 			if (response != null) {
-				$scope.jobInterest = response; 
+				$scope.jobInterest = response;
+				$scope.chat = true;
         	}
         });	
     };
@@ -761,6 +763,7 @@ Controllers.controller("jobDetailsCtrl", function($scope, $rootScope, restservic
 		restservice.get( '', "api/v1/jobInterested/getJobInterestDetailsByInterestUserId?jobID=" + jobID).then(function(response) {
 			if (response != null) {
 				$scope.jobInterest = response;
+				$scope.chat = true;
         	}
         });	
     };
