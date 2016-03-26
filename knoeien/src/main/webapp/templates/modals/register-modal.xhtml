@@ -15,38 +15,47 @@
 								</div>
 							</div>
 							<div class="row">
-								<div class="medium-6 columns">
-									<input ng-model="user.firstName" type="text" name="firstName" placeholder="Write Firstname" required="required" />							
+								<div class="medium-6 columns helper-form-field" ng-class="(formSubmitted &amp;&amp; signupForm.firstName.$error.required == true)? 'error' : ''" >
+									<input ng-model="user.firstName" type="text" name="firstName" placeholder="Write Firstname" required="required" />
+									<div style="top: 3px" class="icon fi-info" ng-class="(formSubmitted &amp;&amp; signupForm.firstName.$error.required == true)? '' : 'hide'"></div>											
 			                        <div ng-messages="formSubmitted &amp;&amp; signupForm.firstName.$error">
-			                            <div ng-message="required" class="error">First name name is required</div>
+			                            <div ng-message="required" class="error"><i class="bttm-icon fi-info"></i>First name is required</div>
 			                        </div>
 								</div>
 								
-								<div class="medium-6 columns">
+								<div class="medium-6 columns helper-form-field" ng-class="(formSubmitted &amp;&amp; signupForm.lastName.$error.required == true)? 'error' : ''" >
 									<input ng-model="user.lastName" type="text" name="lastName" placeholder="Write lastname" required="required"/>
+									<div style="top: 3px" class="icon fi-info" ng-class="(formSubmitted &amp;&amp; signupForm.lastName.$error.required == true)? '' : 'hide'"></div>
 									<div ng-messages="formSubmitted &amp;&amp; signupForm.lastName.$error">
-		                            	<div ng-message="required" class="error">Last name name is required</div>
+		                            	<div ng-message="required" class="error"><i class="bttm-icon fi-info"></i>Last name is required</div>
 		                        	</div>							
 								</div>
 							</div>
 							<div class="row">
-								<div class="medium-12 columns">
+								<div class="medium-12 columns helper-form-field" ng-class="(formSubmitted &amp;&amp; signupForm.email.$error.required == true)? 'error' : ''" >
 									<input name="email" ng-model="user.email" type="text" id="email" placeholder="Provide your email" required="required" />
+									<div style="top: 3px" class="icon fi-info" ng-class="(formSubmitted &amp;&amp; signupForm.email.$error.required == true)? '' : 'hide'"></div>
 									<div ng-messages="formSubmitted &amp;&amp; signupForm.email.$error">
-		                            	<div ng-message="required" class="error">Email is required.</div>
+		                            	<div ng-message="required" class="error"><i class="bttm-icon fi-info"></i>Email is required.</div>
 		                        	</div>
 								</div>
 							</div>
 							<div class="row">
-								<div class="medium-12 columns">
+								<div class="medium-12 columns helper-form-field" ng-class="(formSubmitted &amp;&amp; signupForm.password.$error.required == true)? 'error' : ''" >
 									<input name="password" ng-model="user.password" type="password" id="password" placeholder="Enter a password" aria-describedby="password-help-text" required="required" />	
+									<div style="top: 3px" class="icon fi-info" ng-class="(formSubmitted &amp;&amp; signupForm.password.$error.required == true)? '' : 'hide'"></div>
 									<div ng-messages="formSubmitted &amp;&amp; signupForm.password.$error">
-		                            	<div ng-message="required" class="error">Password is required.</div>
+		                            	<div ng-message="required" class="error"><i class="bttm-icon fi-info"></i>Password is required.</div>
 		                        	</div>
 								</div>
-								<div class="medium-12 columns">
+								<div class="medium-12 columns helper-form-field" ng-class="(formSubmitted &amp;&amp; signupForm.confirmPassword.$error.required == true)? 'error' : ''" >
 									<input name="confirmPassword" type="password" ng-model="user.confirmPassword" placeholder="Retype your password" required="required" data-ng-match="password"/>
-									<span class="error" data-ng-show="signupForm.confirmPassword.$error.match">Passwords do not match.</span>
+									<div style="top: 3px" class="icon fi-info" ng-class="(formSubmitted &amp;&amp; signupForm.confirmPassword.$error.required == true)? '' : 'hide'"></div>
+									<!-- <span class="error" data-ng-show="signupForm.confirmPassword.$error.match">Passwords do not match.</span> -->
+									<div ng-messages="formSubmitted &amp;&amp; signupForm.confirmPassword.$error">
+		                            	<div ng-message="required" class="error"><i class="bttm-icon fi-info"></i>Re-Password is required.</div>
+		                            	<div ng-message="match" class="error"><i class="bttm-icon fi-info"></i>Passwords do not match.</div>
+		                        	</div>
 								</div>
 								<div class="small-12 columns">
 									<p class="help-text" id="password-help-text" style="margin-top: 0">Password must be at least 8 characters long.</p>
@@ -54,38 +63,37 @@
 							</div>
 							
 							<div class="row">	
-								<div class="medium-4 columns">	
+								<div class="medium-4 columns helper-form-field" ng-class="(formSubmitted &amp;&amp; signupForm.dateDay.$error.required == true)? 'error' : ''" >	
 									<label id="dobLabel">Date of Birth</label>								
 									<select name="dateDay" class="day-select" id="date-day" required="required" ng-model="user.day">
 										<option value="" disabled="disabled" selected="selected">Day</option>
 									</select>
 									<div ng-messages="formSubmitted &amp;&amp; signupForm.dateDay.$error">
-		                            	<div ng-message="required" class="error">Day is required.</div>
+		                            	<div ng-message="required" class="error"><i class="bttm-icon fi-info"></i>Day is required.</div>
 		                        	</div>							
 								</div>
-								<div class="medium-4 columns">
+								<div class="medium-4 columns helper-form-field" ng-class="(formSubmitted &amp;&amp; signupForm.dateMonth.$error.required == true)? 'error' : ''" >
 									<label><span class="hide-for-small-only">&#160;</span></label>
 									<select name="dateMonth" class="full-month-select" id="date-month" required="required" ng-model="user.month">
 										<option value="" disabled="disabled" selected="selected">Month</option>
-									</select>
-									
+									</select>									
 									<div ng-messages="formSubmitted &amp;&amp; signupForm.dateMonth.$error">
-		                            	<div ng-message="required" class="error">Month is required.</div>
+		                            	<div ng-message="required" class="error"><i class="bttm-icon fi-info"></i>Month is required.</div>
 		                        	</div>							
 								</div>
 								
-								<div class="medium-4 columns">
+								<div class="medium-4 columns helper-form-field" ng-class="(formSubmitted &amp;&amp; signupForm.dateYear.$error.required == true)? 'error' : ''" >
 									<label><span class="hide-for-small-only">&#160;</span></label>
 									<select name="dateYear" class="year-select" id="date-year" required="required" ng-model="user.year">
 										<option value="" disabled="disabled" selected="selected">Year</option>
 									</select>
 									<div ng-messages="formSubmitted &amp;&amp; signupForm.dateYear.$error">
-		                            	<div ng-message="required" class="error">Year is required.</div>
+		                            	<div ng-message="required" class="error"><i class="bttm-icon fi-info"></i>Year is required.</div>
 		                        	</div>
 								</div>
 							</div>
 							<div class="row">
-								<div class="medium-12 columns">					
+								<div class="medium-12 columns">
 									<input id="newsLetter" type="checkbox" /><label for="newsLetter" id="newsLetterLabel"> I want news letter. </label>
 								</div>
 							</div>
@@ -103,12 +111,13 @@
 							</div>
 						</div>
 						<div class="row">
-							<div class="medium-12 columns">
-								<span>{{mobileRequiredMessage}}</span>
-								<input name="phone" ng-model="user.contact" type="text" id="phone" placeholder="Your Phone Number"  />
-								<div ng-messages="formSubmitted &amp;&amp; signupForm.email.$error">
+							<div class="medium-12 columns helper-form-field" ng-class="(contactRequired || (formSubmitted &amp;&amp; signupForm.contact.$error.required == true))? 'error' : ''" >
+								<input name="contact" ng-model="user.contact" type="text" id="phone" required="required" placeholder="Your Phone Number"  />
+								<div style="top: 3px" class="icon fi-info" ng-class="(contactRequired || (formSubmitted &amp;&amp; signupForm.contact.$error.required == true))? '' : 'hide'"></div>
+								<div ng-if="!contactRequired" ng-messages="formSubmitted &amp;&amp; signupForm.contact.$error">
 		                        	<div ng-message="required" class="error">Phone Number is required.</div>
 		                        </div>
+		                        <div ng-if="contactRequired" class="error"><i class="bttm-icon fi-info"></i>Phone Number is required.</div>
 							</div>
 						</div>
 						<div class="row">
@@ -119,18 +128,15 @@
 							</fieldset>
 						</div>
 						<div class="row">
-							<div class="medium-12 columns">
-								<span>{{verifyMessage}}</span>
+							<div class="medium-12 columns helper-form-field" ng-class="(verifyMessageRequired==true)? 'error' : ''" >
 								<input name="verificationCode" ng-model="user.verificationCode" ng-keyup="verifyCode($event)" type="text" id="verificationCode" placeholder="Enter Verification Code Here"  />
-								<div ng-messages="formSubmitted &amp;&amp; signupForm.email.$error">
-		                        	<div ng-message="required" class="error">Verification Code is required.</div>
-		                        </div>
+								<div class="info">{{verifyMessage}}</div>
 							</div>
 						</div>
 						<div class="row">
 							<fieldset class="medium-12 columns">					
 								<div class="button-group">
-									<a href="javascript:void(0);" ng-click="formSubmitted = true; signup(signupForm.$valid);" class="button hlpr-color-success" style="width: 100%; border-radius: 8px;">Finish Registration</a>
+									<a href="javascript:void(0);" ng-click="contactRequired= fasle; formSubmitted = true; signup(signupForm.$valid);" class="button hlpr-color-success" style="width: 100%; border-radius: 8px;">Finish Registration</a>
 								</div>
 							</fieldset>
 						</div>
