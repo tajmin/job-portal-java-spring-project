@@ -1021,7 +1021,8 @@ line-height: 1.75em;
 }
 .job-list {
 	height:90vh;
-	overflow: auto;
+	overflow-x: hidden;
+	overflow-y: auto;
 }
 .transform-rotate-90deg {
 	display: table-cell;
