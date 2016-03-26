@@ -42,9 +42,7 @@
 								<div class="medium-9 columns">
 									100% done
 								</div>
-							</div>
-							<div class="row">
-								<div class="small-12">
+								<div class="small-12 columns">
 									See reviews
 								</div>
 							</div>
@@ -65,12 +63,18 @@
     	<div class="chat-section">
     		<form action="">
     			<div class="row">
-    				<div class="small-6">Full Name</div>
-    				<div class="small-6 text-right">
-    					<span class="chat-notification">
+    				<div class="small-6 columns">Full Name</div>
+    				<div class="small-6 columns text-right chat-notification">
+    					<a href="#">
+    						<img src="#{request.contextPath}/resources/assets/images/user-2.png" alt="User name" />
+    					</a>
+    					<a href="#">
     						<img src="#{request.contextPath}/resources/assets/images/user-1.png" alt="User name" />
     						<span class="badge alert">2</span>
-    					</span>
+    					</a>
+    					<a href="#" class="add-user">
+    						<i class="fa fa-plus"></i>
+    					</a>
     				</div>
     			</div>
 	    		<ul class="no-bullet" style="height: 50vh;">

@@ -1359,7 +1359,7 @@ ul.arrow-bottom.green li.tabs-title > a[aria-selected="true"]::after {
     overflow: auto;
 }
 .chat-section {
-	width: 70%;
+	width: 90%;
 	position: absolute;
 	left: 5%;
 	top: 2%;
@@ -1505,15 +1505,31 @@ form .helper-form-field.error .bttm-icon {
 	font-size: 1rem;
 	margin-right: 0.5rem
 }
-.chat-notification {
+.chat-notification a {
 	position: relative;
+	margin-right: 10px;
+}
+.chat-notification a:last-child {
+	margin-right: 0;
 }
 .chat-notification img {
 	width: 64px;
 	height: 64px;
 }
+.chat-notification .add-user {
+	width: 64px;
+    height: 64px;
+    display: inline-block;
+    text-align: center;
+    line-height: 64px;
+    color: #fff;
+    background-color: #6bbe54;
+    vertical-align: middle;
+}
 .chat-notification .badge {
 	position: absolute;
-	top: 28px;
+	top: 22px;
 	left: -8px;
+	font-size: 0.8rem;
+	font-weight: bold;
 }
