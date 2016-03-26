@@ -9,11 +9,19 @@
 				        </div>
 				        <div class="medium-9 columns end">
 				          <div class="row collapse">
-				          	<div class="small-6 columns" style="padding-right: 5px">
-				          		<input type="text" placeholder="First Name" ng-model="user.firstName" />
+				          	<div class="small-6 columns helper-form-field" ng-class="(formSubmitted &amp;&amp; profileEditForm.firstName.$error.required == true)? 'error' : ''" style="padding-right: 5px;">
+				          		<input type="text" required="required" name="firstName" placeholder="First Name" ng-model="user.firstName" />
+				          		<div style="top: 3px" class="icon fi-info" ng-class="(formSubmitted &amp;&amp; profileEditForm.firstName.$error.required == true)? '' : 'hide'"></div>
+				          		<div ng-messages="formSubmitted &amp;&amp; profileEditForm.firstName.$error">
+			                     	<div ng-message="required" class="error"><i class="bttm-icon fi-info"></i>First name is required</div>
+			                     </div>
 				          	</div>
-				          	<div class="small-6 columns" style="padding-left: 5px">
-				          		<input type="text" placeholder="Last Name" ng-model="user.lastName" />
+				          	<div class="small-6 columns helper-form-field" ng-class="(formSubmitted &amp;&amp; profileEditForm.lastName.$error.required == true)? 'error' : ''" style="padding-left: 5px">
+				          		<input type="text" required="required" name="lastName" placeholder="Last Name" ng-model="user.lastName" />
+				          		<div style="top: 3px" class="icon fi-info" ng-class="(formSubmitted &amp;&amp; profileEditForm.lastName.$error.required == true)? '' : 'hide'"></div>
+				          		<div ng-messages="formSubmitted &amp;&amp; profileEditForm.lastName.$error">
+			                    	<div ng-message="required" class="error"><i class="bttm-icon fi-info"></i>Last name is required</div>
+			                    </div>
 				          	</div>
 				          </div>
 				        </div>
@@ -22,8 +30,12 @@
 						<div class="medium-2 columns">
 					    	<label class="right inline">Telephone</label>
 						</div>
-						<div class="medium-9 columns end">
-					    	<input type="text" placeholder="Telephone Number" ng-model="user.phone" />
+						<div class="medium-9 columns end helper-form-field" ng-class="(formSubmitted &amp;&amp; profileEditForm.phone.$error.required == true)? 'error' : ''">
+					    	<input type="text" required="required" name="phone" placeholder="Telephone Number" ng-model="user.phone" />
+					    	<div style="top: 3px" class="icon fi-info" ng-class="(formSubmitted &amp;&amp; profileEditForm.phone.$error.required == true)? '' : 'hide'"></div>
+				          	<div ng-messages="formSubmitted &amp;&amp; profileEditForm.phone.$error">
+			                	<div ng-message="required" class="error"><i class="bttm-icon fi-info"></i>Phone number is required</div>
+			                </div>
 					    	<div class="row collapse">
 					        	<div class="medium-6 columns">
 						        	<label class="right inline">Verification Code</label>
@@ -38,8 +50,12 @@
 				  		<div class="medium-2 columns">
 				    		<label class="right inline">E-Post</label>
 				 		</div>
-				    	<div class="medium-9 columns end">
-				    		<input type="text" placeholder=" e-mail Address" ng-model="user.email" />
+				    	<div class="medium-9 columns end helper-form-field" ng-class="(formSubmitted &amp;&amp; profileEditForm.email.$error.required == true)? 'error' : ''">
+				    		<input type="text" required="required" name="email" placeholder=" e-mail Address" ng-model="user.email" />
+				    		<div style="top: 3px" class="icon fi-info" ng-class="(formSubmitted &amp;&amp; profileEditForm.email.$error.required == true)? '' : 'hide'"></div>
+				          	<div ng-messages="formSubmitted &amp;&amp; profileEditForm.email.$error">
+			                	<div ng-message="required" class="error"><i class="bttm-icon fi-info"></i>Email is required</div>
+			                </div>
 				    	</div>
 			      	</div>
 			      	<div class="row">
