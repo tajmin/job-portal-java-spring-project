@@ -487,7 +487,7 @@
 }
 #registerForm select {
 	border-radius: 8px;
-	color: #8A8A8A;
+	color: #8A8A8A; margin-bottom: 0;
 }
 #newsLetter {
 	width: 20px;
@@ -1486,7 +1486,7 @@ form .helper-form-field input, form .helper-form-field textarea {
 	margin: 0;
 }
 form .helper-form-field.error {
-	color: #ef6767; font-size: 0.9rem;
+	color: #ef6767; font-size: 0.8rem;
 }
 form .helper-form-field.error input,
 form .helper-form-field.error textarea {
