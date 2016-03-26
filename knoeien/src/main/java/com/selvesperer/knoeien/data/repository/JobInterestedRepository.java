@@ -13,6 +13,9 @@ public interface JobInterestedRepository extends JpaRepository<JobInterested, St
 	@Query("from JobInterested ji where ji.id = :id")
 	JobInterested findById(@Param("id") String id);
 	
+	@Query("from JobInterested ji where ji.jobId = :jobId and ji.jobInterestedUserId = :interestUserId")
+	JobInterested findJobInterestDetailsByInterestUserId(@Param("jobId") String jobId, @Param("interestUserId") String interestUserId);
+	
 	@Query("from JobInterested ji where ji.id = :jobId")
 	JobInterested findJobById(@Param("jobId") String jobId);
 	

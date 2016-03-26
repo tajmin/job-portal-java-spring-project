@@ -52,26 +52,21 @@ public class JobServiceImpl implements JobService {
 	}
 	
 	@Override
-	public List<Job> findJobByAssignedUserId(String assignedUserId) {
-		try {
-			List<Job> job=new ArrayList<>(jobRepository.findJobByAssignedUserId(assignedUserId));
-			return job;
-		} catch(Throwable ex) {
-			ex.printStackTrace();
-		}
-		return new ArrayList<Job>();
+	public List<JobModel> findJobByAssignedUserId(String id, int page, int limit) {
+		List<JobModel> jobs = jobRepository.findJobByAssignedUserId(id, page, limit);
+		return jobs;
 	}
 
 	@Override
-	public List<Job> findJobByCreatedUserId(String createdByUserId) {
-		// TODO Auto-generated method stub
-		List<Job> job=new ArrayList<>(jobRepository.findJobByCreatedUserId(createdByUserId));
-		return job;
+	public List<JobModel> findJobByCreatedUserId(String id, int page, int limit) {
+		List<JobModel> jobs = jobRepository.findJobByCreatedUserId(id, page, limit);
+		return jobs;
 	}
 
 	@Override
 	public Job updateJob(String id) {
 		Job job = jobRepository.findJobById(id);
+		JobModel jobmodel = new JobModel();
 		
 		if (job == null) {
 			throw new AuthenticationFailedException("error.jobnotfound.text");

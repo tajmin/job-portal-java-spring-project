@@ -37,16 +37,19 @@ public class JobInterestedServiceImpl implements JobInterestedService{
 
 	@Override
 	public List<JobInterested> findJobInterestedUserId(String Id) {
-		// TODO Auto-generated method stub
 		List<JobInterested> jobInterested=new ArrayList<>(jobInterestedRepository.findJobByInterestedUserId(Id));
 		return jobInterested;
 	}
 
 	@Override
 	public List<JobInterested> showLowestBidAmount() {
-		// TODO Auto-generated method stub
 		//List<JobInterested> jobInterested = new ArrayList<>(jobInterestedRepository.findLowestBidAmount());
 		return null;
+	}
+
+	@Override
+	public JobInterested findJobInterestDetailsByInterestUserId(String jobId, String interestUserId) {
+		return jobInterestedRepository.findJobInterestDetailsByInterestUserId(jobId, interestUserId);
 	}
 
 }

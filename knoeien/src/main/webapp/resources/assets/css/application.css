@@ -1024,6 +1024,7 @@ line-height: 1.75em;
 	overflow: auto;
 }
 .transform-rotate-90deg {
+	display: table-cell;
 	transform: rotate(90deg);
 	-webkit-transform: rotate(90deg);
 	-moz-transform: rotate(90deg);
@@ -1031,6 +1032,7 @@ line-height: 1.75em;
 	-o-transform: rotate(90deg);
 }
 .transform-rotate-180deg {
+	display: table-cell;
 	transform: rotate(180deg);
 	-webkit-transform: rotate(180deg);
 	-moz-transform: rotate(180deg);
@@ -1186,7 +1188,7 @@ line-height: 1.75em;
 	margin-bottom: 15px;
 	font-weight: 600;
 }
-#user-settings p, span {
+#user-settings p, #user-settings span {
 	font-size: 0.73em;
 	color: #3A3938;
 }
@@ -1502,4 +1504,16 @@ form .helper-form-field.error .icon {
 form .helper-form-field.error .bttm-icon {
 	font-size: 1rem;
 	margin-right: 0.5rem
+}
+.chat-notification {
+	position: relative;
+}
+.chat-notification img {
+	width: 64px;
+	height: 64px;
+}
+.chat-notification .badge {
+	position: absolute;
+	top: 28px;
+	left: -8px;
 }

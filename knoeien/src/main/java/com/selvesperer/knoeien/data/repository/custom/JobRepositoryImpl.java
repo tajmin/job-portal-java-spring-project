@@ -1,14 +1,9 @@
 package com.selvesperer.knoeien.data.repository.custom;
 
 import java.sql.Timestamp;
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
-import java.util.Locale;
+
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -21,7 +16,6 @@ import com.selvesperer.knoeien.data.enums.FindJobEnum;
 import com.selvesperer.knoeien.utils.AppsUtil;
 import com.selvesperer.knoeien.utils.DateFormatUtils;
 import com.selvesperer.knoeien.utils.QueryUtils;
-import com.selvesperer.knoeien.utils.SelvEDate;
 import com.selvesperer.knoeien.web.controllers.model.JobModel;
 
 public class JobRepositoryImpl implements JobRepositoryCustom {
@@ -69,6 +63,62 @@ public class JobRepositoryImpl implements JobRepositoryCustom {
 		}
 		return listOfJobs;
 
+	}
+
+	@Override
+	public List<JobModel> findJobByCreatedUserId(String id, int page, int limit) {
+		StringBuffer queryString = new StringBuffer();
+		queryString.append("select j.id, j.title, j.price, j.image_url from job j");
+		queryString.append(" where j.created_by_id= '" + id +"'");
+		
+		Query query = entityManager.createNativeQuery(queryString.toString());
+		
+		if (limit > 0) {
+			page = page - 1;
+			query.setFirstResult(page * limit);
+			query.setMaxResults(limit);
+		}
+		
+		List<Object[]> results = query.getResultList();
+		List<JobModel> listOfJobs = new ArrayList<JobModel>();
+		for (Object[] result : results) {
+			JobModel jobModel = new JobModel();
+			jobModel.setId((String) result[0]);
+			jobModel.setTitle((String) result[1]);
+			jobModel.setPrice(AppsUtil.doubleToString((Double) result[2]));
+			jobModel.setImageUrl((String) result[3]);
+			
+			listOfJobs.add(jobModel);
+		}
+		return listOfJobs;
+	}
+
+	@Override
+	public List<JobModel> findJobByAssignedUserId(String id, int page, int limit) {
+		StringBuffer queryString = new StringBuffer();
+		queryString.append("select j.id, j.title, j.price, j.image_url from job j");
+		queryString.append(" where j.assigned_user_id= '" + id +"'");
+		
+		Query query = entityManager.createNativeQuery(queryString.toString());
+		
+		if (limit > 0) {
+			page = page - 1;
+			query.setFirstResult(page * limit);
+			query.setMaxResults(limit);
+		}
+		
+		List<Object[]> results = query.getResultList();
+		List<JobModel> listOfJobs = new ArrayList<JobModel>();
+		for (Object[] result : results) {
+			JobModel jobModel = new JobModel();
+			jobModel.setId((String) result[0]);
+			jobModel.setTitle((String) result[1]);
+			jobModel.setPrice(AppsUtil.doubleToString((Double) result[2]));
+			jobModel.setImageUrl((String) result[3]);
+			
+			listOfJobs.add(jobModel);
+		}
+		return listOfJobs;
 	}
 
 }
