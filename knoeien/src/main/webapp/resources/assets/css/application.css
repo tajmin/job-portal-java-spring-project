@@ -1021,9 +1021,11 @@ line-height: 1.75em;
 }
 .job-list {
 	height:90vh;
-	overflow: auto;
+	overflow-x: hidden;
+	overflow-y: auto;
 }
 .transform-rotate-90deg {
+	display: table-cell;
 	transform: rotate(90deg);
 	-webkit-transform: rotate(90deg);
 	-moz-transform: rotate(90deg);
@@ -1031,6 +1033,7 @@ line-height: 1.75em;
 	-o-transform: rotate(90deg);
 }
 .transform-rotate-180deg {
+	display: table-cell;
 	transform: rotate(180deg);
 	-webkit-transform: rotate(180deg);
 	-moz-transform: rotate(180deg);
@@ -1186,7 +1189,7 @@ line-height: 1.75em;
 	margin-bottom: 15px;
 	font-weight: 600;
 }
-#user-settings p, span {
+#user-settings p, #user-settings span {
 	font-size: 0.73em;
 	color: #3A3938;
 }
@@ -1357,7 +1360,7 @@ ul.arrow-bottom.green li.tabs-title > a[aria-selected="true"]::after {
     overflow: auto;
 }
 .chat-section {
-	width: 70%;
+	width: 90%;
 	position: absolute;
 	left: 5%;
 	top: 2%;
@@ -1502,4 +1505,32 @@ form .helper-form-field.error .icon {
 form .helper-form-field.error .bttm-icon {
 	font-size: 1rem;
 	margin-right: 0.5rem
+}
+.chat-notification a {
+	position: relative;
+	margin-right: 10px;
+}
+.chat-notification a:last-child {
+	margin-right: 0;
+}
+.chat-notification img {
+	width: 64px;
+	height: 64px;
+}
+.chat-notification .add-user {
+	width: 64px;
+    height: 64px;
+    display: inline-block;
+    text-align: center;
+    line-height: 64px;
+    color: #fff;
+    background-color: #6bbe54;
+    vertical-align: middle;
+}
+.chat-notification .badge {
+	position: absolute;
+	top: 22px;
+	left: -8px;
+	font-size: 0.8rem;
+	font-weight: bold;
 }
