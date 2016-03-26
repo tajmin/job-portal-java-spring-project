@@ -180,9 +180,20 @@
 		var Settings = {};
 		Settings.serviceBaseUrl='#{request.contextPath}';	
 		
-		 /*  jQuery(document).ready( function( ) {
-			$('#forget-password-modal').foundation('toggle');
-		});   */
+		   jQuery(document).ready( function() {
+			   var param = getParameterByName('invite');
+			   if(param == "joinhelper") {
+				   $('#register-modal').foundation('toggle');
+			   }
+			   function getParameterByName(name) {
+					name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+					var regex = new RegExp("[\\?&amp;]" + name + "=([^&amp;#]*)"), results = regex
+							.exec(location.search);
+					return results == null ? "" : decodeURIComponent(results[1].replace(
+							/\+/g, " "));
+				}
+			
+		});   
 	</script>
 </body>
 </html>
