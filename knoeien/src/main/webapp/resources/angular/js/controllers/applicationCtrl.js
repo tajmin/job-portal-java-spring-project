@@ -434,14 +434,15 @@ Controllers.controller("addJobCtrl", function($scope, $rootScope, restservice, $
 	$scope.cover_image = "";
 	$scope.imageFile;
 	$scope.tempUploadedFilePath = "";
-	$scope.titleEdit = false;
-	$scope.page = 1;
+	$scope.titleEdit = false;	
 	$scope.job.price = 0;
 	$scope.job.deadlineMonth = 0;
 	$scope.job.deadlineDay = 0;
 	$scope.job.hours = 0;
 	$scope.job.minutes = 0;
-	
+	$scope.filter = {};
+	$scope.filter.isnext = true;
+	$scope.page = 1;
 	
 	//@start this portion is responsible to edit draft job 
 	$scope.jobId = utilservice.getParameterByName("id");
@@ -478,9 +479,11 @@ Controllers.controller("addJobCtrl", function($scope, $rootScope, restservice, $
     
     //@start next button click listener to move next page
     $scope.nextPage = function(isValid) {
+    	$scope.filter.isnext = true;
     	if(!isValid) return;
     	
     	if($scope.page > 3){
+    		$scope.filter.isnext = false;
     		return;
     	}
     	
@@ -495,6 +498,7 @@ Controllers.controller("addJobCtrl", function($scope, $rootScope, restservice, $
 		}
 		
 		if($scope.page == 3){
+			$scope.filter.isnext = false;
 			$("#panel_job_approved-label").click();
 		}
 		
@@ -518,14 +522,7 @@ Controllers.controller("addJobCtrl", function($scope, $rootScope, restservice, $
     	return i - 1;
     };
     
-    $scope.isPost = function(isValid) {
-    	if($scope.page >= 3){
-    		return true;
-    	}
-    	return false;
-    };
-    
-    $scope.setPageNo = function(i) {
+   $scope.setPageNo = function(i) {
     	$scope.page = i;
     };
 	
