@@ -341,24 +341,50 @@ Controllers.controller("editProfileCtrl", function($scope, $rootScope, restservi
 
 Controllers.controller("overviewCtrl", function($scope, $rootScope, restservice, $cookies, $window) {
 	$scope.isproceed = false;
-	$scope.assginedJob = {};
-	$scope.postedJob = {};
+	$scope.assginedJob = [];
+	$scope.postedJob = [];
 	$scope.responseMessage = "";
+	$scope.filter = {};
+	$scope.assignedFilter = {};
+	$scope.assignedFilter.page = 1;
+	$scope.assignedFilter.moreLink = true;
+	$scope.filter.page = 1;
+	$scope.filter.moreLink = true;
 
 	$scope.jobAssigned = function() {
-		restservice.get('', "api/v1/job/getJobByAssignedUserId").then(function(response) {
+		$scope.assignedFilter.moreLink = true;
+		restservice.get('', "api/v1/job/getJobByAssignedUserId?page=" +$scope.assignedFilter.page).then(function(response) {
 			if (response != null) {
-				$scope.assginedJob = response;				
+				for (var i = 0; i < response.length; i++) {
+					$scope.assginedJob.push(response[i]);
+				}
+				if(response.length < 4){
+					$scope.assignedFilter.moreLink = false;				
+				}else{
+					$scope.assignedFilter.page += 1;
+				}
+	    	} else {
+	    		$scope.assignedFilter.moreLink = false;
 	    	}
 	    });
 	};	
 	$scope.jobAssigned();
 	
 	$scope.jobPosted = function() {
-		restservice.get('', "api/v1/job/getJobByCreatedUserId").then(function(response) {
+		$scope.filter.moreLink = true;
+		restservice.get('', "api/v1/job/getJobByCreatedUserId?page=" +$scope.filter.page).then(function(response) {
 			if (response != null) {
-				$scope.postedJob = response;				
-	    	}
+				for (var i = 0; i < response.length; i++) {
+					$scope.postedJob.push(response[i]);
+				}
+				if(response.length < 4){
+					$scope.filter.moreLink = false;				
+				}else{
+					$scope.filter.page += 1;
+				}
+	    	} else {
+        		$scope.filter.moreLink = false;
+        	}
 	    });
 	};	
 	$scope.jobPosted();
