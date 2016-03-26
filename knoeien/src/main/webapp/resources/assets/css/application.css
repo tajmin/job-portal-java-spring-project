@@ -760,6 +760,20 @@ line-height: 1.75em;
 }
 /*invite-friend-modal ends*/
 
+/*profile-response-modal starts*/
+#profile-response-modal {
+	width: 400px;
+	border-radius: 8px;
+}
+#profile-response-modal h4 {
+	font-size: 1.2rem;
+}
+#profile-response-modal a {
+	width: 100%;
+	border-radius: 5px;
+}
+/*profile-response-modal ends*/
+
 /* Helper Colours Start */
 .hlpr-color-info {
 	background-color: #3ac5e6;

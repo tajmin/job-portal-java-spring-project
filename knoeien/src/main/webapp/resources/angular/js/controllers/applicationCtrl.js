@@ -208,15 +208,15 @@ Controllers.controller("editProfileCtrl", function($scope, $rootScope, restservi
 	$scope.profileInfo();
 	
 	$scope.editProfile = function(isValid) {
-		if(!isValid) return;
+		if(myprofile && !isValid) return;
 		
 		$scope.user.backgroundImageUrl = $scope.tempUploadedFilePath;
-		console.log($scope.user.firstname);
 		restservice.post( $scope.user, "api/v1/user/editProfile").then(function(response) {
 			if (response != null) {
 				$scope.isproceed = true;
-				$scope.responseMessage = response.message;				
-        	}
+				$scope.responseMessage = response.message;
+        	} 
+			$("#profile-response-modal").foundation('toggle');
         });
 		
     };   
