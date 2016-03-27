@@ -10,7 +10,7 @@ import com.selvesperer.knoeien.utils.AppsUtil;
 import com.selvesperer.knoeien.utils.DateFormatUtils;
 import com.selvesperer.knoeien.utils.SelvEDate;
 
-public class JobModel implements Serializable{
+public class JobModel implements Serializable {
 
 	private static final long serialVersionUID = 1348771858514768261L;
 	
