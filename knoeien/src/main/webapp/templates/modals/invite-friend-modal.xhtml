@@ -10,19 +10,15 @@
 						</div>
 					</div>			
 					<div class="row" >
-						<div class="medium-12 columns">
+						<div class="medium-12 columns helper-form-field" ng-class="(formSubmitted &amp;&amp; inviteForm.email.$error.required == true)? 'error' : ''">
 							<p>Write email address of your friend to join Helper </p>
-							<input type="text" placeholder="Enter email address to invite" required="required" ng-model="user.inviteEmail"/>
-							<div ng-messages="formSubmitted &amp;&amp; inviteForm.inviteEmail.$error">
-                            	<div ng-message="required" class="error">Email is required.</div>
-                        	</div>					
+							<input type="text" required="required" name="email" placeholder="Enter email address to invite" ng-model="user.inviteEmail"/>
+							<div style="top: 3px" class="icon fi-info" ng-class="(formSubmitted &amp;&amp; inviteForm.email.$error.required == true)? '' : 'hide'"></div>
+				          	<div ng-messages="formSubmitted &amp;&amp; inviteForm.email.$error">
+			                	<div ng-message="required" class="error"><i class="bttm-icon fi-info"></i>Email is required</div>
+			                 </div>					
 						</div>
-					</div>			
-					<ul class="global-message" style="white-space:normal">
-						<span ng-repeat="m in restMessages"> 
-							<li class="info-text info-modal">{{m.message}}</li>
-						</span>								
-					</ul>							
+					</div>						
 					<div class="row">
 						<fieldset class="medium-12 columns">					
 							<a class="button hlpr-color-success" href="javascript:void(0);" ng-click="formSubmitted = true; invite(inviteForm.$valid);">Send Invitation Email</a>

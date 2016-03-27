@@ -218,7 +218,7 @@ Controllers.controller("editProfileCtrl", function($scope, $rootScope, restservi
 	$scope.profileInfo();
 	
 	$scope.editProfile = function(isValid) {
-		if(myprofile && !isValid) return;
+		if(!isValid) return;
 		
 		$scope.user.backgroundImageUrl = $scope.tempUploadedFilePath;
 		restservice.post( $scope.user, "api/v1/user/editProfile").then(function(response) {
