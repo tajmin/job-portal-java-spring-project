@@ -128,10 +128,11 @@ Controllers.controller("loginCtrl", function($scope, $rootScope, restservice, $c
 		if (!isValid) return;
 		
 		restservice.post($scope.user, "api/v1/user/login").then(function(response) {
-			$scope.isproceed = true;
-			$rootScope.userinfos = response;
-			console.log($rootScope.userinfos);
-			window.open($rootScope.getBaseUrl() + "/index.xhtml",	"_self");
+			if(response){
+				$scope.isproceed = true;
+				$rootScope.userinfos = response;
+				window.open($rootScope.getBaseUrl() + "/index.xhtml",	"_self");
+			}
 		});
 	};
 });

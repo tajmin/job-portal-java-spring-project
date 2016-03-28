@@ -63,7 +63,7 @@ public class User extends AuditableEntity {
 	private String phone;
 
 	@Column(name = "active")
-	private boolean active = true; // users will be assumed to be active by
+	private boolean active = false; // users will be assumed to be active by
 									// default. Company activation controls
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "password_exp_date")
