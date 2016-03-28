@@ -808,6 +808,7 @@ Controllers.controller("jobDetailsCtrl", function($scope, $rootScope, restservic
 Controllers.controller("sliderImgCtrl", function($scope, $rootScope, restservice, $cookies, $http, authService) {
 	$scope.isproceed = false;
 	$scope.slider = {};
+	$scope.sliderList = {};
 	$scope.formSubmitted = false;
 	$scope.responseMessage = "";
 	$scope.thumb_image = "";
@@ -817,15 +818,15 @@ Controllers.controller("sliderImgCtrl", function($scope, $rootScope, restservice
 	
 	
 	$scope.openFileDialogue = function() {
-		$("#userImageFileUpload").trigger('click');
+		$("#sliderImageFileUpload").trigger('click');
 	};
 	
 	$scope.imageUpload = function(input) {
     	if (input.files && input.files[0]) {
             var reader = new FileReader();
             reader.onload = function (e) {
-                $('#user_thumbnail_image').attr('src', e.target.result);
-                $('#user_cover_image').css('background-image', "url(" + e.target.result + ")");
+                $('#slider_thumbnail_image').attr('src', e.target.result);
+               // $('#user_cover_image').css('background-image', "url(" + e.target.result + ")");
             };
             $scope.imageFile = input.files[0];
             reader.readAsDataURL(input.files[0]);
@@ -860,5 +861,19 @@ Controllers.controller("sliderImgCtrl", function($scope, $rootScope, restservice
         });
 		
     };
+    
+    $scope.showImage = function() {
+		console.log("shows image list");
+		restservice.get('', "api/v1/sliderimage/showslider").then(function(response) {
+			if (response != null) {
+				$scope.sliderList = response;
+				//$scope.tempUploadedFilePath = $scope.sliderList.backgroundImageUrl; 
+			} else {
+				$scope.responseMessage = response.message;
+			}
+		});
+
+	};
+	$scope.showImage();
 	
 });

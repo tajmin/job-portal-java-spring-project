@@ -2,6 +2,7 @@ package com.selvesperer.knoeien.web.controllers.rest;
 
 import java.io.File;
 import java.io.Serializable;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -15,6 +16,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
+import com.selvesperer.knoeien.data.domain.SliderImage;
+import com.selvesperer.knoeien.exception.AuthenticationFailedException;
 import com.selvesperer.knoeien.service.SliderImageService;
 import com.selvesperer.knoeien.spring.utils.ApplicationBeanFactory;
 import com.selvesperer.knoeien.utils.IdGenerator;
@@ -73,6 +76,24 @@ public class SliderImageController extends AbstractController implements Seriali
 			ex.printStackTrace();
 		}
 		return new ResponseEntity<RestResponse>(convertToRestGoodResponse(sliderImageModel), HttpStatus.BAD_REQUEST);
+	}
+	
+	@RequestMapping(value = "/showslider", method = RequestMethod.GET, produces = "application/json")
+	public ResponseEntity<RestResponse> showSlider() {
+		RestResponse restResponse = null;
+		
+		try{
+			SliderImageService sliderImageService = ApplicationBeanFactory.getBean(SliderImageService.class);
+			List <SliderImage> sliderImageList = sliderImageService.findSliderImages();
+			SliderImageModel sliderImageModel = new SliderImageModel();
+			List <SliderImageModel> modelList = sliderImageModel.getSliderImageModel(sliderImageList);
+			return new ResponseEntity<RestResponse>( convertToRestGoodResponse(modelList, LocalizationUtil.findLocalizedString("")),HttpStatus.OK);
+		} catch (AuthenticationFailedException t) {
+			restResponse = convertToRestBadResponse("", t.getLocalizedMessage());
+		} catch (Exception t) {
+			restResponse = convertToRestBadResponse("", t.getLocalizedMessage());
+		}
+		return new ResponseEntity<RestResponse>( restResponse, HttpStatus.OK);
 	}
 
 }

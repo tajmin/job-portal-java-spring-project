@@ -13,43 +13,23 @@
 					</div>
 					<div class="row">
 						<div class="medium-12 columns">
-							<img ng-click="openFileDialogue();" id="slider_thumbnail_image" src="/userimg/{{(user.backgroundImageUrl != '')? user.backgroundImageUrl : '' }}" alt="Add Photo" />
-							<input type="file" id="userImageFileUpload" class="show-for-sr" file-model = "imageFile" onchange="angular.element(this).scope().imageUpload(this)" />							
+							<img ng-click="openFileDialogue();" id="slider_thumbnail_image" src="/slider/{{(slider.imageUrl != '')? slider.imageUrl : '' }}" alt="Add Photo" />
+							<input type="file" id="sliderImageFileUpload" class="show-for-sr" file-model = "imageFile" onchange="angular.element(this).scope().imageUpload(this)" />							
 						</div>
-					</div>
-					
-					
-					
-				
-							
+					</div>							
 					<div class="row">
 						<fieldset class="medium-12 columns">
 							<div class="button-group float-right">
-								<a href="javascript:void(0);" ng-click="formSubmitted = true; invite(inviteForm.$valid);" class="button hlpr-color-info" >Send mail</a>
-<!-- 								<a class="button hlpr-color-alert" href="index.xhtml">Cancel</a> -->
+								<a href="javascript:void(0);" ng-click="formSubmitted = true; saveImage(inviteForm.$valid);" class="button hlpr-color-info" >Save Image</a>
 							</div>
 						</fieldset>
 					</div>
 				</form>
-				<!-- Sign up form ends here -->
-			</div>
-			
-			<div class="medium-7 medium-centered columns" ng-if="isproceed">
-				<div style="height:300px;">
-					<span>{{responseMessage}} </span>
-					<div class="row" style="text-align:center">
-						<fieldset class="medium-12 columns">
-							<div class="button-group float-right">
-								<a class="button hlpr-color-info" onClick="refreshPage()">Invite More</a>
-							</div>
-						</fieldset>
+				<div class="row" ng-repeat="model in sliderList">
+						<div class="medium-3 columns">
+							<img class="border-radius-7px" src="/slider/{{model.imageUrl}}" alt="Slider Image" />
+						</div>
 					</div>
-				</div>
-				<script type="text/javascript">
-					function refreshPage(){
-					    window.location.reload();
-					} 
-				</script>					
 			</div>
 		</div>
 	</ui:define>

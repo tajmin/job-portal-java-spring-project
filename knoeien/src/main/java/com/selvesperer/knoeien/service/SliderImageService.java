@@ -10,5 +10,7 @@ public interface SliderImageService {
 	public List<SliderImage> findSliderImages();
 	
 	public void saveImage(SliderImageModel sliderImageModel);
+	
+	
 
 }

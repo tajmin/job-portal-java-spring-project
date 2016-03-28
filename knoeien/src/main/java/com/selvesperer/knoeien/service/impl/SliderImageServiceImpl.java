@@ -22,8 +22,8 @@ public class SliderImageServiceImpl implements SliderImageService {
 
 	@Override
 	public List<SliderImage> findSliderImages() {
-		// TODO Auto-generated method stub
-		return null;
+		List <SliderImage> sliderImageList = sliderImageRepo.findSliderImageList();
+		return sliderImageList;
 	}
 
 	@Override
