@@ -194,7 +194,7 @@ public class UserController extends AbstractController implements Serializable {
 		} catch (AuthenticationFailedException t) {
 			restResponse = convertToRestBadResponse("", t.getLocalizedMessage());
 		} catch (Exception t) {
-			restResponse = convertToRestBadResponse("", t.getLocalizedMessage());
+			restResponse = convertToRestBadResponse("", LocalizationUtil.findLocalizedString("error.usernameandpasswordnotmatch.text"));
 		}
 		return new ResponseEntity<RestResponse>( restResponse, HttpStatus.OK);
 	}

@@ -91,7 +91,7 @@ public class UserServiceImpl implements UserService {
 
 	public User login(String username, String password) {
 		User user = userRepository.findUserByEmail(username);
-		if (user == null) {
+		if (user == null || !user.isActive()) {
 			throw new AuthenticationFailedException("error.usernameandpasswordnotmatch.text");
 		}
 

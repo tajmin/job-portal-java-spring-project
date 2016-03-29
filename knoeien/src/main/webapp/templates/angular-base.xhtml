@@ -18,6 +18,7 @@
 <link rel="stylesheet" type="text/css"	href="#{request.contextPath}/resources/assets/css/foundation-icons.css?#{msg['vrsn']}" />
 <link rel="stylesheet" type="text/css"	href="#{request.contextPath}/resources/assets/css/application.css?#{msg['vrsn']}" />
 <link rel="stylesheet" type="text/css"	href="#{request.contextPath}/resources/assets/css/foundation-datepicker.css?#{msg['vrsn']}" />
+<link rel="stylesheet" type="text/css"	href="#{request.contextPath}/resources/assets/css/jquery.mCustomScrollbar.css?#{msg['vrsn']}" />
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" />
 
 <script type="text/javascript"	src="#{request.contextPath}/resources/assets/js/head.js?#{msg['vrsn']}"></script>
@@ -175,6 +176,7 @@
 	<script type="text/javascript"	src="#{request.contextPath}/resources/assets/js/foundation/motion-ui.js?#{msg['vrsn']}"></script>
 	<script type="text/javascript"	src="#{request.contextPath}/resources/assets/js/foundation/foundation.js?#{msg['vrsn']}"></script>
 	<script type="text/javascript"	src="#{request.contextPath}/resources/assets/js/foundation/what-input.min.js?#{msg['vrsn']}"></script>
+	<script type="text/javascript"	src="#{request.contextPath}/resources/assets/js/jquery.mCustomScrollbar.js?#{msg['vrsn']}"></script>
 	<script type="text/javascript"	src="#{request.contextPath}/resources/assets/js/application.js?#{msg['vrsn']}"></script>
 	<script type="text/javascript">
 		var Settings = {};
@@ -192,6 +194,8 @@
 					return results == null ? "" : decodeURIComponent(results[1].replace(
 							/\+/g, " "));
 				}
+			   
+			   //$("body").mCustomScrollbar({theme:"minimal-dark"});
 			
 		});   
 	</script>

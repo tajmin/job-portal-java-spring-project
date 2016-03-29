@@ -13,13 +13,14 @@
 		<!-- search bar starts here -->
 		<div class="row home-search">
 			<div class="medium-centered medium-9 large-7 columns" ng-controller="JobLookupCtrl">
-				<form>
+				<form name="indexForm">
 					<div class="row">
-						<div class="medium-9 columns">
-							<input class="search-bar border-radius-7px" type="text" placeholder="Search Text" ng-model="filter.searchText"/>
+						<div class="medium-9 columns helper-form-field" ng-class="(formSubmitted &amp;&amp; indexForm.search.$error.required == true)? 'error' : ''">
+							<input class="search-bar border-radius-7px" type="text" required="required" name="search" placeholder="Search Text" ng-model="filter.searchText"/>
+							<div style="top: 3px" class="icon fi-info" ng-class="(formSubmitted &amp;&amp; indexForm.search.$error.required == true)? '' : 'hide'"></div>
 						</div>
 						<div class="medium-3 columns">							
-							<a class="hlpr-color-info expanded button border-radius-7px" href="#{(authorizationBean.canView()) ? 'jobpost.xhtml?title={{filter.searchText}}' : ''}" data-toggle="not-logedin-modal" 
+							<a class="hlpr-color-info expanded button border-radius-7px" ng-click="formSubmitted = true;" href="#{(authorizationBean.canView()) ? 'jobpost.xhtml?title={{filter.searchText}}' : ''}" data-toggle="not-logedin-modal" 
 								type="submit" id="post-job1">Post</a>
 						</div>
 						<!-- <div class="medium-3 large-2 columns">

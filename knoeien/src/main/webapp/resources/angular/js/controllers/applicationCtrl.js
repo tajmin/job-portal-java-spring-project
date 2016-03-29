@@ -128,10 +128,11 @@ Controllers.controller("loginCtrl", function($scope, $rootScope, restservice, $c
 		if (!isValid) return;
 		
 		restservice.post($scope.user, "api/v1/user/login").then(function(response) {
-			$scope.isproceed = true;
-			$rootScope.userinfos = response;
-			console.log($rootScope.userinfos);
-			window.open($rootScope.getBaseUrl() + "/index.xhtml",	"_self");
+			if(response){
+				$scope.isproceed = true;
+				$rootScope.userinfos = response;
+				window.open($rootScope.getBaseUrl() + "/index.xhtml",	"_self");
+			}
 		});
 	};
 });
@@ -189,7 +190,7 @@ Controllers.controller("logoutCtrl", function($scope, $rootScope, restservice,$c
 	};
 });
 
-Controllers.controller("editProfileCtrl", function($scope, $rootScope, restservice, $cookies, utilservice, $http, authService) {
+Controllers.controller("editProfileCtrl", function($scope, $rootScope, restservice, $cookies, $http, authService) {
 	$scope.isproceed = false;
 	$scope.user = {};
 	$scope.balance = {};
@@ -218,7 +219,7 @@ Controllers.controller("editProfileCtrl", function($scope, $rootScope, restservi
 	$scope.profileInfo();
 	
 	$scope.editProfile = function(isValid) {
-		if(myprofile && !isValid) return;
+		if(!isValid) return;
 		
 		$scope.user.backgroundImageUrl = $scope.tempUploadedFilePath;
 		restservice.post( $scope.user, "api/v1/user/editProfile").then(function(response) {
@@ -802,4 +803,78 @@ Controllers.controller("jobDetailsCtrl", function($scope, $rootScope, restservic
     };
     $scope.getJobInterestDetailsByInterestUserId($scope.id);
     
+});
+
+//Slider Image control
+Controllers.controller("sliderImgCtrl", function($scope, $rootScope, restservice, $cookies, $http, authService) {
+	$scope.isproceed = false;
+	$scope.slider = {};
+	$scope.sliderList = {};
+	$scope.formSubmitted = false;
+	$scope.responseMessage = "";
+	$scope.thumb_image = "";
+	$scope.imageFile;
+	$scope.tempUploadedFilePath = "";
+	$scope.verifyMessage="";
+	
+	
+	$scope.openFileDialogue = function() {
+		$("#sliderImageFileUpload").trigger('click');
+	};
+	
+	$scope.imageUpload = function(input) {
+    	if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                $('#slider_thumbnail_image').attr('src', e.target.result);
+               // $('#user_cover_image').css('background-image', "url(" + e.target.result + ")");
+            };
+            $scope.imageFile = input.files[0];
+            reader.readAsDataURL(input.files[0]);
+            
+            // save file as temporary
+            var uploadUrl = "api/v1/sliderimage/uploadimage";
+            var fd = new FormData();
+            fd.append('file', $scope.imageFile);
+    		 
+            $http.post(uploadUrl, fd, {
+                transformRequest: angular.identity,
+                headers: {'Content-Type': undefined}
+            }).success(function(succResponse){
+            	$rootScope.restMessages = succResponse.message;
+            	$scope.tempUploadedFilePath = succResponse.response
+            }).error(function(errResponse){
+            	$rootScope.restMessages = errResponse.message;
+            });
+        }
+    };
+    
+    $scope.saveImage = function(isValid) {
+		if(!isValid) return;
+		
+		$scope.slider.imageUrl = $scope.tempUploadedFilePath;
+		restservice.post( $scope.slider, "api/v1/sliderimage/addimage").then(function(response) {
+			if (response != null) {
+				$scope.isproceed = true;
+				$scope.responseMessage = response.message;
+        	} 
+			$("#profile-response-modal").foundation('toggle');
+        });
+		
+    };
+    
+    $scope.showImage = function() {
+		console.log("shows image list");
+		restservice.get('', "api/v1/sliderimage/showslider").then(function(response) {
+			if (response != null) {
+				$scope.sliderList = response;
+				//$scope.tempUploadedFilePath = $scope.sliderList.backgroundImageUrl; 
+			} else {
+				$scope.responseMessage = response.message;
+			}
+		});
+
+	};
+	$scope.showImage();
+	
 });

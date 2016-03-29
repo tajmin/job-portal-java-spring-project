@@ -1,6 +1,5 @@
 package com.selvesperer.knoeien.service.impl;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;

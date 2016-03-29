@@ -25,6 +25,6 @@ public interface UserRepository extends JpaRepository<User, String>, UserReposit
 	User findUserById(@Param("id") String id);
 	
 	@Query(value="SELECT * FROM user u join job j on j.created_by_id=u.id where j.id=:jobId",nativeQuery=true)
-	public User findUserByJobId(@Param("jobId") String jobId);
+	User findUserByJobId(@Param("jobId") String jobId);
 	
 }
