@@ -11,6 +11,6 @@ public interface SliderImageService {
 	
 	public void saveImage(SliderImageModel sliderImageModel);
 	
-	
+	public void deleteImage(String id);
 
 }

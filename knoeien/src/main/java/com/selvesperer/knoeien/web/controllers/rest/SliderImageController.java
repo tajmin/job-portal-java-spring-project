@@ -78,7 +78,7 @@ public class SliderImageController extends AbstractController implements Seriali
 		return new ResponseEntity<RestResponse>(convertToRestGoodResponse(sliderImageModel), HttpStatus.BAD_REQUEST);
 	}
 	
-	@RequestMapping(value = "/showslider", method = RequestMethod.GET, produces = "application/json")
+	@RequestMapping(value = "/showimage", method = RequestMethod.GET, produces = "application/json")
 	public ResponseEntity<RestResponse> showSlider() {
 		RestResponse restResponse = null;
 		
@@ -88,6 +88,22 @@ public class SliderImageController extends AbstractController implements Seriali
 			SliderImageModel sliderImageModel = new SliderImageModel();
 			List <SliderImageModel> modelList = sliderImageModel.getSliderImageModel(sliderImageList);
 			return new ResponseEntity<RestResponse>( convertToRestGoodResponse(modelList, LocalizationUtil.findLocalizedString("")),HttpStatus.OK);
+		} catch (AuthenticationFailedException t) {
+			restResponse = convertToRestBadResponse("", t.getLocalizedMessage());
+		} catch (Exception t) {
+			restResponse = convertToRestBadResponse("", t.getLocalizedMessage());
+		}
+		return new ResponseEntity<RestResponse>( restResponse, HttpStatus.OK);
+	}
+	
+	@RequestMapping(value = "/deleteimage", method = RequestMethod.GET, produces = "application/json")
+	public ResponseEntity<RestResponse> deleteSliderById(@RequestParam(value = "sliderId", required = true) String sliderId) {
+		RestResponse restResponse = null;
+		
+		try{
+			SliderImageService sliderImageService = ApplicationBeanFactory.getBean(SliderImageService.class);
+			sliderImageService.deleteImage(sliderId);
+			return new ResponseEntity<RestResponse>( convertToRestGoodResponse(null, LocalizationUtil.findLocalizedString("imagedelete.text")),HttpStatus.OK);
 		} catch (AuthenticationFailedException t) {
 			restResponse = convertToRestBadResponse("", t.getLocalizedMessage());
 		} catch (Exception t) {
