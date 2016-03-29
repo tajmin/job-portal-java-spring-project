@@ -32,4 +32,10 @@ public class SliderImageServiceImpl implements SliderImageService {
 		sliderImageRepo.saveAndFlush(sliderImage);
 	}
 
+	@Override
+	public void deleteImage(String id) {	
+		SliderImage sliderImage = sliderImageRepo.findSliderImageById(id);
+		sliderImageRepo.delete(sliderImage);
+	}
+
 }
