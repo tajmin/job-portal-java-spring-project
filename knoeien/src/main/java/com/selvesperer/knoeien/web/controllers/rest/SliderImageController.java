@@ -84,7 +84,7 @@ public class SliderImageController extends AbstractController implements Seriali
 		
 		try{
 			SliderImageService sliderImageService = ApplicationBeanFactory.getBean(SliderImageService.class);
-			List <SliderImage> sliderImageList = sliderImageService.findSliderImages();
+			List <SliderImage> sliderImageList = sliderImageService.showSliderImages();
 			SliderImageModel sliderImageModel = new SliderImageModel();
 			List <SliderImageModel> modelList = sliderImageModel.getSliderImageModel(sliderImageList);
 			return new ResponseEntity<RestResponse>( convertToRestGoodResponse(modelList, LocalizationUtil.findLocalizedString("")),HttpStatus.OK);
@@ -102,7 +102,15 @@ public class SliderImageController extends AbstractController implements Seriali
 		
 		try{
 			SliderImageService sliderImageService = ApplicationBeanFactory.getBean(SliderImageService.class);
-			sliderImageService.deleteImage(sliderId);
+			SliderImageModel sliderModel = sliderImageService.findImageById(sliderId);
+			String sliderUrl = sliderModel.getImageUrl();
+			String slider = ConfigurationUtil.config().getString("document.sliderImageDoc") + sliderUrl;
+			File file = new File(slider);
+			
+			if(file.delete()) {
+				sliderImageService.deleteImage(sliderId);
+			}
+			
 			return new ResponseEntity<RestResponse>( convertToRestGoodResponse(null, LocalizationUtil.findLocalizedString("imagedelete.text")),HttpStatus.OK);
 		} catch (AuthenticationFailedException t) {
 			restResponse = convertToRestBadResponse("", t.getLocalizedMessage());
