@@ -865,7 +865,7 @@ Controllers.controller("sliderImgCtrl", function($scope, $rootScope, restservice
     
     $scope.showImage = function() {
 		console.log("shows image list");
-		restservice.get('', "api/v1/sliderimage/showslider").then(function(response) {
+		restservice.get('', "api/v1/sliderimage/showimage").then(function(response) {
 			if (response != null) {
 				$scope.sliderList = response;
 				//$scope.tempUploadedFilePath = $scope.sliderList.backgroundImageUrl; 
@@ -876,5 +876,17 @@ Controllers.controller("sliderImgCtrl", function($scope, $rootScope, restservice
 
 	};
 	$scope.showImage();
+	
+	$scope.deleteImage = function(id) {
+		console.log("deletes image");
+		restservice.get('', "api/v1/sliderimage/deleteimage?sliderId=" + id).then(function(response) {
+			if (response == null) {
+				//$scope.sliderList = response;
+				$scope.responseMessage = response.message;
+				//$scope.tempUploadedFilePath = $scope.sliderList.backgroundImageUrl; 
+			} 
+		});
+
+	};
 	
 });

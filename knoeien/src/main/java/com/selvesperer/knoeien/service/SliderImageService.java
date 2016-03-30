@@ -7,10 +7,12 @@ import com.selvesperer.knoeien.web.controllers.model.SliderImageModel;
 
 public interface SliderImageService {
 	
-	public List<SliderImage> findSliderImages();
+	public SliderImageModel findImageById(String id);
+	
+	public List<SliderImage> showSliderImages();
 	
 	public void saveImage(SliderImageModel sliderImageModel);
 	
-	
+	public void deleteImage(String id);
 
 }

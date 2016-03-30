@@ -24,12 +24,16 @@
 							</div>
 						</fieldset>
 					</div>
-				</form>
-				<div class="row" ng-repeat="model in sliderList">
+					<div class="row" ng-repeat="model in sliderList">
 						<div class="medium-3 columns">
 							<img class="border-radius-7px" src="/slider/{{model.imageUrl}}" alt="Slider Image" />
 						</div>
+						<div class="medium-3 columns">
+							<a ng-click="deleteImage(model.id);" class="button helper-color-alert">Delete Image</a>
+						</div>
 					</div>
+				</form>
+				
 			</div>
 		</div>
 	</ui:define>

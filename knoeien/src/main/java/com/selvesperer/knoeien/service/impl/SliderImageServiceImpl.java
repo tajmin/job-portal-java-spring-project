@@ -19,9 +19,16 @@ public class SliderImageServiceImpl implements SliderImageService {
 	
 	@Inject
 	private SliderImageRepository sliderImageRepo;
+	
+	@Override
+	public SliderImageModel findImageById(String id) {
+		SliderImage sliderImage = sliderImageRepo.findSliderImageById(id);
+		SliderImageModel sliderModel = new SliderImageModel(sliderImage);
+		return sliderModel;
+	}
 
 	@Override
-	public List<SliderImage> findSliderImages() {
+	public List<SliderImage> showSliderImages() {
 		List <SliderImage> sliderImageList = sliderImageRepo.findSliderImageList();
 		return sliderImageList;
 	}
@@ -32,4 +39,10 @@ public class SliderImageServiceImpl implements SliderImageService {
 		sliderImageRepo.saveAndFlush(sliderImage);
 	}
 
+	@Override
+	public void deleteImage(String id) {	
+		SliderImage sliderImage = sliderImageRepo.findSliderImageById(id);
+		sliderImageRepo.delete(sliderImage);
+	}
+	
 }
