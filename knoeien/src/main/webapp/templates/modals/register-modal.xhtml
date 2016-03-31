@@ -112,7 +112,7 @@
 						</div>
 						<div class="row">
 							<div class="medium-12 columns helper-form-field" ng-class="(contactRequired || (formSubmitted &amp;&amp; signupForm.contact.$error.required == true))? 'error' : ''" >
-								<input name="contact" ng-model="user.contact" type="text" id="phone" required="required" placeholder="Your Phone Number"  />
+								<input name="contact" ng-model="user.phone" type="text" id="phone" required="required" placeholder="Your Phone Number"  />
 								<div style="top: 3px" class="icon fi-info" ng-class="(contactRequired || (formSubmitted &amp;&amp; signupForm.contact.$error.required == true))? '' : 'hide'"></div>
 								<div ng-if="!contactRequired" ng-messages="formSubmitted &amp;&amp; signupForm.contact.$error">
 		                        	<div ng-message="required" class="error">Phone Number is required.</div>

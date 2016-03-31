@@ -59,7 +59,7 @@ public class User extends AuditableEntity {
 	@Column(name = "country_code", length = 3)
 	private String countryCode;
 
-	@Column(name = "phone", length = 10)
+	@Column(name = "phone", length = 20)
 	private String phone;
 
 	@Column(name = "active")
@@ -161,6 +161,7 @@ public class User extends AuditableEntity {
 		this.setAddress(userModel.getAddress());
 		this.setHouseNumber(userModel.getHouseNumber());
 		this.setAboutMe(userModel.getAboutMe());
+		this.setPhone(userModel.getPhone());
 	}
 		
 	public String getFullName() {					
