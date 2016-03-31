@@ -60,6 +60,7 @@ Controllers.controller("signupCtrl", function($scope, $rootScope, restservice, $
 			if (response != null) {
 				$scope.isproceed = true;
 			}
+			$("#signup-confirmation-modal").foundation('toggle');
 		});
 	};
 	
@@ -222,6 +223,9 @@ Controllers.controller("editProfileCtrl", function($scope, $rootScope, restservi
 		if(!isValid) return;
 		
 		$scope.user.backgroundImageUrl = $scope.tempUploadedFilePath;
+		$scope.user.latitude = $("#latitude").val();
+		$scope.user.longitude = $("#longitude").val();
+		$scope.user.address = $("#searchplace").val();
 		restservice.post( $scope.user, "api/v1/user/editProfile").then(function(response) {
 			if (response != null) {
 				$scope.isproceed = true;

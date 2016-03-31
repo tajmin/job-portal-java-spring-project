@@ -432,7 +432,20 @@
   background: #ccc;
 }
 /*Find Job Ends*/
-
+/*signup-confirmation-modal Starts*/
+#signup-confirmation-modal {
+	width: 450px;
+}
+#signup-confirmation-modal h4 {
+	font-size: 1.07em;
+    padding: 20px 0 10px 0;
+}
+#signup-confirmation-modal a {
+	margin-top: 10px;
+	width: 100%;
+    padding: 14px 10px;
+}
+/*signup-confirmation-modal Ends*/
 /*Job Confirmation Modal Starts*/
 #job-confirmation-modal {
 	border-radius: 8px;

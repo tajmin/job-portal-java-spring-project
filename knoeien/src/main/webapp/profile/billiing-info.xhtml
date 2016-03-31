@@ -12,7 +12,7 @@
 				    	<label class="right inline">Card Number</label>
 				 	</div>
 				    <div class="medium-8 columns helper-form-field" ng-class="(formSubmitted &amp;&amp; profileEditForm.cardNumber.$error.required == true)? 'error' : ''">
-				    	<input type="text" required="required" name="cardNumber" placeholder="Card Number" ng-model="user.cardNumber" />
+				    	<input type="text" required="required" name="cardNumber" placeholder="Card Number" maxlength="50" ng-model="user.cardNumber" />
 				    	<div style="top: 3px" class="icon fi-info" ng-class="(formSubmitted &amp;&amp; profileEditForm.cardNumber.$error.required == true)? '' : 'hide'"></div>
 				        <div ng-messages="formSubmitted &amp;&amp; profileEditForm.cardNumber.$error">
 			            	<div ng-message="required" class="error"><i class="bttm-icon fi-info"></i>Card Number is required</div>
@@ -24,7 +24,7 @@
 				    	<label class="right inline">Cardholder's Name</label>
 				 	</div>
 				    <div class="medium-8 columns helper-form-field" ng-class="(formSubmitted &amp;&amp; profileEditForm.cardholderName.$error.required == true)? 'error' : ''">
-				    	<input type="text" required="required" name="cardholderName" placeholder="Name of card holder" ng-model="user.cardholderName" />
+				    	<input type="text" required="required" name="cardholderName" placeholder="Name of card holder" maxlength="128" ng-model="user.cardholderName" />
 				    	<div style="top: 3px" class="icon fi-info" ng-class="(formSubmitted &amp;&amp; profileEditForm.cardholderName.$error.required == true)? '' : 'hide'"></div>
 				    	<div ng-messages="formSubmitted &amp;&amp; profileEditForm.cardholderName.$error">
 			            	<div ng-message="required" class="error"><i class="bttm-icon fi-info"></i>Cardholder's name is required</div>
@@ -37,7 +37,7 @@
 				    	<label class="right inline">Account number</label>
 				 	</div>
 				    <div class="medium-8 columns helper-form-field" ng-class="(formSubmitted &amp;&amp; profileEditForm.accountNumber.$error.required == true)? 'error' : ''">
-				    	<input type="text" required="required" name="accountNumber" placeholder=" Account number" ng-model="user.accountNumber" />
+				    	<input type="text" required="required" name="accountNumber" placeholder=" Account number" maxlength="50" ng-model="user.accountNumber" />
 				    	<div style="top: 3px" class="icon fi-info" ng-class="(formSubmitted &amp;&amp; profileEditForm.accountNumber.$error.required == true)? '' : 'hide'"></div>
 				    	<div ng-messages="formSubmitted &amp;&amp; profileEditForm.accountNumber.$error">
 			            	<div ng-message="required" class="error"><i class="bttm-icon fi-info"></i>Account number is required</div>
@@ -52,14 +52,14 @@
 					    	<label class="right inline">Date</label>
 					 	</div>
 					    <div class="medium-5 columns helper-form-field" ng-class="(formSubmitted &amp;&amp; profileEditForm.month.$error.required == true)? 'error' : ''">
-					    	<input type="text" required="required" name="month" placeholder="Month" ng-model="user.cardMonth" />
+					    	<input type="text" required="required" name="month" placeholder="Month" maxlength="02"  ng-model="user.cardMonth" />
 					    	<div style="top: 3px" class="icon fi-info" ng-class="(formSubmitted &amp;&amp; profileEditForm.month.$error.required == true)? '' : 'hide'"></div>
 					    	<div ng-messages="formSubmitted &amp;&amp; profileEditForm.month.$error">
 				            	<div ng-message="required" class="error"><i class="bttm-icon fi-info"></i>Expire month is required</div>
 				            </div>
 					    </div>
 					    <div class="medium-5 columns helper-form-field" ng-class="(formSubmitted &amp;&amp; profileEditForm.year.$error.required == true)? 'error' : ''">
-					    	<input type="text" required="required" name="year" placeholder="Year" ng-model="user.cardYear" />
+					    	<input type="text" required="required" name="year" placeholder="Year" maxlength="04" ng-model="user.cardYear" />
 					    	<div style="top: 3px" class="icon fi-info" ng-class="(formSubmitted &amp;&amp; profileEditForm.year.$error.required == true)? '' : 'hide'"></div>
 					    	<div ng-messages="formSubmitted &amp;&amp; profileEditForm.year.$error">
 				            	<div ng-message="required" class="error"><i class="bttm-icon fi-info"></i>Expire year is required</div>
@@ -73,7 +73,7 @@
 					    	<label class="right inline">CVC</label>
 					 	</div>
 					    <div class="medium-4 columns end helper-form-field" ng-class="(formSubmitted &amp;&amp; profileEditForm.cvc.$error.required == true)? 'error' : ''">
-					    	<input type="text" required="required" name="cvc" placeholder="000" ng-model="user.cvc" />
+					    	<input type="text" required="required" name="cvc" placeholder="000" maxlength="03" ng-model="user.cvc" />
 					    	<div style="top: 3px" class="icon fi-info" ng-class="(formSubmitted &amp;&amp; profileEditForm.cvc.$error.required == true)? '' : 'hide'"></div>
 					    	<div ng-messages="formSubmitted &amp;&amp; profileEditForm.cvc.$error">
 				            	<div ng-message="required" class="error"><i class="bttm-icon fi-info"></i>CVC is required</div>
