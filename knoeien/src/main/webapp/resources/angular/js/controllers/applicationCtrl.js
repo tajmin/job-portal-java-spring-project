@@ -60,6 +60,7 @@ Controllers.controller("signupCtrl", function($scope, $rootScope, restservice, $
 			if (response != null) {
 				$scope.isproceed = true;
 			}
+			$("#signup-confirmation-modal").foundation('toggle');
 		});
 	};
 	
