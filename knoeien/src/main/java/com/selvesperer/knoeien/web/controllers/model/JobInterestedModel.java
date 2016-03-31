@@ -22,6 +22,7 @@ public class JobInterestedModel  implements Serializable {
 	public JobInterestedModel() {}
 	
 	public JobInterestedModel(JobInterested jobInterested) {
+		this.setId(jobInterested.getId());
 		this.setJobId(jobInterested.getJobId());
 		this.setJobCreatedById(jobInterested.getJobCreatedById());
 		this.setJobInterestedUserId(jobInterested.getJobInterestedUserId());
