@@ -146,6 +146,12 @@ public class User extends AuditableEntity {
 	@Column(name = "cvc", length = 10)
 	private String cvc;
 	
+	@Column(name = "latitude", length = 30)
+	private String latitude;
+
+	@Column(name = "longitude", length = 30)
+	private String longitude;
+	
 	public User() {}
 	
 	public User(UserModel userModel) {
@@ -162,6 +168,8 @@ public class User extends AuditableEntity {
 		this.setHouseNumber(userModel.getHouseNumber());
 		this.setAboutMe(userModel.getAboutMe());
 		this.setPhone(userModel.getPhone());
+		this.setLatitude(userModel.getLatitude());
+		this.setLongitude(userModel.getLongitude());
 	}
 		
 	public String getFullName() {					
@@ -480,6 +488,23 @@ public class User extends AuditableEntity {
 	public void setCvc(String cvc) {
 		this.cvc = cvc;
 	}
+	
+	public String getLatitude() {
+		return latitude;
+	}
+
+	public void setLatitude(String latitude) {
+		this.latitude = latitude;
+	}
+
+	public String getLongitude() {
+		return longitude;
+	}
+
+	public void setLongitude(String longitude) {
+		this.longitude = longitude;
+	}
+
 
 	@JsonIgnore
 	public String getObjectCode() {
