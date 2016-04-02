@@ -1,6 +1,7 @@
 package com.selvesperer.knoeien.service;
 
 import java.io.IOException;
+import java.util.List;
 
 import org.apache.commons.mail.EmailException;
 
@@ -42,5 +43,5 @@ public interface UserService {
 	
 	public User findUserByJobId(String jobId);
 	
-	
+	public List<User> findAllUser();
 }
