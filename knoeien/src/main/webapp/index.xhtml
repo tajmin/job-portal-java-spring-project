@@ -11,14 +11,27 @@
 		<ui:insert name="register-modal"></ui:insert>
 		<ui:insert name="phone-verification-modal"></ui:insert>
 		<ui:insert name="signup-confirmation-modal"></ui:insert>
+		<ui:insert name="mail-confirmation-modal"></ui:insert>
 		
-		<f:viewParam name="key" value="#{activationBean.key}" />
-		<c:if test="#{not empty activationBean.key}">
-			<h3>Test</h3>
-			<h3>Test</h3>
-			<h3>Test</h3>
-		</c:if>
-   
+		<script type="text/javascript">
+		   jQuery(document).ready( function() {
+			   
+			   var param = getParameterByName('active');
+			   if(param == "true") {
+				   $('#mail-confirmation-modal').foundation('toggle');
+			   }
+			   function getParameterByName(name) {
+					name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+					var regex = new RegExp("[\\?&amp;]" + name + "=([^&amp;#]*)"), results = regex
+							.exec(location.search);
+					return results == null ? "" : decodeURIComponent(results[1].replace(
+							/\+/g, " "));
+				}
+			   
+			
+			});   
+		</script>
+		
 	</ui:define>
 	
 </ui:composition>
