@@ -688,8 +688,16 @@ Controllers.controller("jobCtrl", function($scope, $rootScope, restservice, $coo
     
     $scope.loadJobs('LGB', $scope.lgbPage);
     
+    
+    $scope.markersArray = [];
+    $scope.clearOverlays = function(){
+    	for (var i = 0; i < $scope.markersArray.length; i++ ) {
+    		$scope.markersArray[i].setMap(null);
+    	}
+    	$scope.markersArray.length = 0;
+    }
     $scope.showJobInMap = function(){
-    	//http://stackoverflow.com/questions/1544739/google-maps-api-v3-how-to-remove-all-markers
+    	$scope.clearOverlays();
     	var bounds = new google.maps.LatLngBounds();
     	for(i in $scope.job) {
     		if($scope.job[i] && $scope.job[i].title){
@@ -699,6 +707,7 @@ Controllers.controller("jobCtrl", function($scope, $rootScope, restservice, $coo
     	            map: $window.map,
     	            title: $scope.job[i].title
     	        });
+    	        $scope.markersArray.push(marker);
     	        bounds.extend(marker.position);
     		}
     	}
@@ -740,8 +749,10 @@ Controllers.controller("jobDetailsCtrl", function($scope, $rootScope, restservic
 			if (response != null) {
 				$scope.job = response;
 				$scope.jobInterest.bidAmount = $scope.job.price; 
-				$scope.showJobInMap();
 				$scope.getJobInterestDetailsByInterestUserId($scope.id);
+				jobs = [];
+				jobs.push($scope.job);
+				$scope.showJobsInMap(jobs);
         	}
         });
 	
@@ -758,18 +769,29 @@ Controllers.controller("jobDetailsCtrl", function($scope, $rootScope, restservic
     };
     $scope.getUserByJobId($scope.id);
     
+    $scope.markersArray = [];
+    $scope.clearOverlays = function(){
+    	for (var i = 0; i < $scope.markersArray.length; i++ ) {
+    		$scope.markersArray[i].setMap(null);
+    	}
+    	$scope.markersArray.length = 0;
+    }
     
-    $scope.showJobInMap = function(){
+    $scope.showJobsInMap = function(jobs){
+    	$scope.clearOverlays();
     	var bounds = new google.maps.LatLngBounds();
-		if($scope.job && $scope.job.title){
-			var latLng = new google.maps.LatLng($scope.job.latitude, $scope.job.longitude); 
-	        var marker = new google.maps.Marker({
-	            position: latLng,
-	            map: $window.map,
-	            title: $scope.job.title
-	        });
-	        bounds.extend(marker.position);
-		}
+    	for(i in jobs) {
+    		if(jobs[i] && jobs[i].title){
+    			var latLng = new google.maps.LatLng(jobs[i].latitude, jobs[i].longitude); 
+    	        var marker = new google.maps.Marker({
+    	            position: latLng,
+    	            map: $window.map,
+    	            title: jobs[i].title
+    	        });
+    	        $scope.markersArray.push(marker);
+    	        bounds.extend(marker.position);
+    		}
+    	}
     	$window.map.fitBounds(bounds);
     };
     
@@ -831,7 +853,7 @@ Controllers.controller("jobDetailsCtrl", function($scope, $rootScope, restservic
 				}else{
 					$scope.filter.page += 1;
 				}
-				//$scope.showJobInMap();
+				$scope.showJobsInMap($scope.interestjobs);
         	} else {
         		$scope.filter.moreLink = false;
         	}
