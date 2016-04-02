@@ -6,7 +6,7 @@
 		<div ng-controller="jobDetailsCtrl">
 			<ul class="tabs custom-tabs arrow-bottom green" data-tabs="data-tabs" id="job-detail-tabs">
 				<li class="tabs-title is-active"><a href="#detail" aria-selected="true">Job Detail</a></li>
-				<li class="tabs-title"><a ng-click="getAllJobInterestedByUserId();" href="#interest">My Interest</a></li>
+				<li class="tabs-title"><a ng-click="getAllJobs();" href="#interest">My Interest</a></li>
 			</ul>
 			<div class="tabs-content job-detail-content" data-tabs-content="job-detail-tabs">
 				<div class="tabs-panel is-active" id="detail">
@@ -40,7 +40,7 @@
 						<div class="small-6 columns">
 							<div class="input-group">
 								<span class="input-group-label border-radius-5px-left" style="width: 50%;">Last Bid</span>
-								<input ng-disabled="true" type="text" class="input-group-field text-right border-radius-5px-right" />
+								<input ng-disabled="true" ng-model="lowestBid" type="text" class="input-group-field text-right border-radius-5px-right" />
 							</div>
 						</div>
 						<div class="small-6 columns">
@@ -103,7 +103,7 @@
 					</div>
 				</div>
 				<div class="tabs-panel" id="interest">
-					<div class="row search-list" ng-repeat="model in interestjobs">
+					<div class="row search-list" ng-repeat="model in interestjobs" ng-click="selectJob(model.id)">
 						<div class="medium-3 columns text-center">
 							<img ng-if="(model.imageUrl !== null &amp;&amp; model.imageUrl !== '')" class="border-radius-7px" src="/img/{{model.imageUrl}}" alt="Job Image" />
 							<img ng-if="(model.imageUrl == null || model.imageUrl == '')" class="border-radius-7px" src="#{request.contextPath}/resources/assets/images/postjob/default_job.png" alt="Job Image" />
@@ -138,7 +138,7 @@
 							</div>
 						</div>
 					</div>
-					<a href="" ng-click="getAllJobInterestedByUserId();;" ng-if="filter.moreLink">Show More</a>
+					<a href="" ng-click="getAllJobByInterestedUserId();" ng-if="filter.moreLink">Show More</a>
 				</div>
 			</div>
 		</div>

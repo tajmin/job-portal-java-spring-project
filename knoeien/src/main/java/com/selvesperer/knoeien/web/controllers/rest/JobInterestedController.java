@@ -72,13 +72,13 @@ public class JobInterestedController extends AbstractController implements Seria
 		return new ResponseEntity<RestResponse>(convertToRestGoodResponse(jobInterested), HttpStatus.OK);
 	}
 	
-	@RequestMapping(value = "/getAllJobInterestedByUserId", method = RequestMethod.GET, produces = "application/json")
-	public ResponseEntity<RestResponse> getAllJobInterestedByUserId(@RequestParam(value="page", required=true) Integer page) {
+	@RequestMapping(value = "/getAllJobByInterestedUserId", method = RequestMethod.GET, produces = "application/json")
+	public ResponseEntity<RestResponse> getAllJobByInterestedUserId(@RequestParam(value="page", required=true) Integer page) {
 		RestResponse restResponse = null;
 		try {
 			JobInterestedService jobInterestedService = ApplicationBeanFactory.getBean(JobInterestedService.class);
 			String userId = SecurityManager.getCurrentUserId();
-			List<JobModel> jobModel = jobInterestedService.findAllJobInterestedByUserId(userId, page, Constants.JOB_INTEREST_SIZE);
+			List<JobModel> jobModel = jobInterestedService.findAllJobByInterestedUserId(userId, page, Constants.JOB_INTEREST_SIZE);
 			
 			return new ResponseEntity<RestResponse>( convertToRestGoodResponse(jobModel, LocalizationUtil.findLocalizedString("")),HttpStatus.OK);
 		} catch (AuthenticationFailedException t) {

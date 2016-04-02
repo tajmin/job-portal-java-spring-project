@@ -715,6 +715,7 @@ Controllers.controller("jobDetailsCtrl", function($scope, $rootScope, restservic
 	$scope.isproceed = false;
 	$scope.job = {};
 	$scope.interestjobs = [];
+	$scope.lowestBid = "";
 	$scope.chat = false;
 	$scope.employer = {};
 	$scope.jobInterest = {};
@@ -738,7 +739,7 @@ Controllers.controller("jobDetailsCtrl", function($scope, $rootScope, restservic
 		restservice.get( '', "api/v1/job/jobDetailsById?jobID=" + jobId).then(function(response) {
 			if (response != null) {
 				$scope.job = response;
-				//$scope.jobInterest.bidAmount = $scope.job.price; 
+				$scope.jobInterest.bidAmount = $scope.job.price; 
 				$scope.showJobInMap();
 				$scope.getJobInterestDetailsByInterestUserId($scope.id);
         	}
@@ -798,6 +799,7 @@ Controllers.controller("jobDetailsCtrl", function($scope, $rootScope, restservic
 			if (response != null) {
 				$scope.jobInterest = response;
 				$scope.chat = true;
+				$scope.getLowestBidAmount($scope.id);
         	}
         });	
     };
@@ -812,9 +814,13 @@ Controllers.controller("jobDetailsCtrl", function($scope, $rootScope, restservic
     };
 //    $scope.getJobInterestDetailsByInterestUserId($scope.id);
     
-    
-    $scope.getAllJobInterestedByUserId = function() {	
-    	restservice.get( '', "api/v1/jobInterested/getAllJobInterestedByUserId?page=" + $scope.filter.page).then(function(response) {
+    $scope.getAllJobs = function() {
+    	$scope.interestjobs=[]; 
+    	$scope.filter.page = 1; 
+    	$scope.getAllJobByInterestedUserId();
+    };
+    $scope.getAllJobByInterestedUserId = function() {	
+    	restservice.get( '', "api/v1/jobInterested/getAllJobByInterestedUserId?page=" + $scope.filter.page).then(function(response) {
 			if (response != null) {
 				for (var i = 0; i < response.length; i++) {
 					$scope.interestjobs.push(response[i]);
@@ -831,7 +837,20 @@ Controllers.controller("jobDetailsCtrl", function($scope, $rootScope, restservic
         	}
         });	
     };
-    //$scope.getAllJobInterestedByUserId();
+    
+    
+    $scope.getLowestBidAmount = function(jobID) {			
+		restservice.get( '', "api/v1/jobInterested/getLowestBidAmount?jobID=" + jobID).then(function(response) {
+			if (response.response != 0 && response != null) {
+				$scope.lowestBid = response;
+        	}
+        });	
+    };
+    $scope.getLowestBidAmount($scope.id);
+    
+    $scope.selectJob = function(jobid){
+    	window.open($rootScope.getBaseUrl() + "/jobdetail.xhtml?id=" + jobid,	"_self");
+    }
 });
 
 //Slider Image control

@@ -10,5 +10,5 @@ public interface JobInterestedService {
 	public JobInterested saveJobInterested(JobInterestedModel jobInterestedModel);	
 	public double findLowestBidAmount(String jobId);	
 	public JobInterested findJobInterestDetailsByInterestUserId(String jobId, String userId);
-	public List<JobModel> findAllJobInterestedByUserId(String userId, int page, int limit);
+	public List<JobModel> findAllJobByInterestedUserId(String userId, int page, int limit);
 }

@@ -30,7 +30,6 @@ public class JobInterestedServiceImpl implements JobInterestedService{
 	public JobInterested saveJobInterested(JobInterestedModel jobInterestedModel) {
 		JobInterested jobInterested = null;
 		if(StringUtils.isNotBlank(jobInterestedModel.getId())){
-			//jobInterested = jobInterestedRepository.findById(jobInterestedModel.getJobId());
 			jobInterested = jobInterestedRepository.findJobInterestDetailsByInterestUserId(jobInterestedModel.getJobId(), jobInterestedModel.getJobInterestedUserId());
 		}else{
 			jobInterested = new JobInterested();
@@ -41,16 +40,14 @@ public class JobInterestedServiceImpl implements JobInterestedService{
 	}
 
 	@Override
-	public List<JobModel> findAllJobInterestedByUserId(String userId, int page, int limit) {
-		List<JobModel> jobInterested= jobInterestedRepository.findAllJobInterestedByUserId(userId, page, limit);
+	public List<JobModel> findAllJobByInterestedUserId(String userId, int page, int limit) {
+		List<JobModel> jobInterested= jobInterestedRepository.findAllJobByInterestedUserId(userId, page, limit);
 		return jobInterested;
-		//return null;
 	}
 
 	@Override
 	public double findLowestBidAmount(String jobId) {
-		//return jobInterestedRepository.findLowestBid(jobId);
-		return 0.0;
+		return jobInterestedRepository.findLowestBid(jobId);
 	}
 
 	@Override
