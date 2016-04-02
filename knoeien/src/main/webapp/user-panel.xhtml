@@ -16,6 +16,14 @@
 						<div class="medium-2 columns">
 							<h4>{{model.lastName}}</h4>
 						</div>
+						<div class="medium-2 columns">
+							<h4>Active: {{model.active}}</h4>
+							<h4 ng-if="(!model.active)">Active: False</h4>
+							<h4 ng-if="(model.active)">Active: True</h4>
+						</div>
+						<div class="medium-2 columns">
+							<a ng-click="deleteUser(model.id);" class="button helper-color-alert">Delete Image</a>
+						</div>
 					</div>
 				
 			</div>

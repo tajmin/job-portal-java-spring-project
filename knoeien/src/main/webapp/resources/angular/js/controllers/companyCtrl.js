@@ -103,4 +103,15 @@ Controllers.controller("ClientCtrl", function($scope, $rootScope, restservice, $
 
 	};
 	$scope.showUser();
+	
+	$scope.deleteUser = function(id) {
+		console.log("deletes user");
+		restservice.get('', "api/v1/user/deleteuser?userId=" + id).then(function(response) {
+			if (response == null) {
+				//$scope.sliderList = response;
+				$scope.responseMessage = response.message;
+			} 
+		});
+
+	};
 });

@@ -44,4 +44,6 @@ public interface UserService {
 	public User findUserByJobId(String jobId);
 	
 	public List<User> findAllUser();
+	
+	public void deleteUserById(String id);
 }

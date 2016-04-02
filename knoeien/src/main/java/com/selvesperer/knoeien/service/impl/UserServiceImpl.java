@@ -329,5 +329,12 @@ public class UserServiceImpl implements UserService {
 		List<User> userList = userRepository.findAll();
 		return userList;
 	}
+
+	@Override
+	public void deleteUserById(String id) {
+		User user = userRepository.findUserById(id);
+		user.setActive(false);
+		userRepository.saveAndFlush(user);
+	}
 	
 }

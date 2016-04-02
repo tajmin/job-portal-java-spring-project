@@ -37,7 +37,7 @@ public class UserModel implements Serializable {
 
 	private String phone;
 
-	private boolean active = true;
+	private boolean active;
 
 	private Calendar passwordExpirationDate;
 
@@ -135,6 +135,7 @@ public class UserModel implements Serializable {
 		this.setLatitude(user.getLatitude());
 		this.setLongitude(user.getLongitude());
 		this.setId(user.getId());
+		this.setActive(user.isActive());
 	}
 	
 	public List<UserModel> getUserModelList(List<User> userList) {
@@ -498,5 +499,4 @@ public class UserModel implements Serializable {
 		this.id = id;
 	}
 
-		
 }
