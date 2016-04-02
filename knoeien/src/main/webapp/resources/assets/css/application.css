@@ -1578,3 +1578,17 @@ form .helper-form-field.error .bttm-icon {
 	font-size: 0.8rem;
 	font-weight: bold;
 }
+.notification {
+	top: 30% !important;
+	left: 50% !important;
+}
+
+/*notification.xhtml starts*/
+#notification-page h6 {
+	font-size: 1em;	
+	margin-left: -21px;
+}
+#notification-page p {
+	font-size: 18px;	
+}
+/*notification.xhtml ends*/

@@ -30,4 +30,7 @@ public interface Constants {
 	//sms verification code
 	public static final String VERIFICATION_CODE = "verificationCode";
 	
+	//notification
+	public static final int NOTIFICATION_SIZE = 5;
+	
 }
