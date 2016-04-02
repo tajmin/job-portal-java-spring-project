@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <ui:composition template="templates/angular-template.xhtml" 
-	xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core">
+	xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:c="http://java.sun.com/jsp/jstl/core">
 	<ui:param name="pageLocation" value="index"></ui:param>
 	<ui:define name="content">
 		<ui:include src="my-index.xhtml"></ui:include>
@@ -10,6 +10,28 @@
 		<ui:insert name="change-password-modal"></ui:insert>
 		<ui:insert name="register-modal"></ui:insert>
 		<ui:insert name="phone-verification-modal"></ui:insert>
-				
+		<ui:insert name="signup-confirmation-modal"></ui:insert>
+		<ui:insert name="mail-confirmation-modal"></ui:insert>
+		
+		<script type="text/javascript">
+		   jQuery(document).ready( function() {
+			   
+			   var param = getParameterByName('active');
+			   if(param == "true") {
+				   $('#mail-confirmation-modal').foundation('toggle');
+			   }
+			   function getParameterByName(name) {
+					name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+					var regex = new RegExp("[\\?&amp;]" + name + "=([^&amp;#]*)"), results = regex
+							.exec(location.search);
+					return results == null ? "" : decodeURIComponent(results[1].replace(
+							/\+/g, " "));
+				}
+			   
+			
+			});   
+		</script>
+		
 	</ui:define>
+	
 </ui:composition>

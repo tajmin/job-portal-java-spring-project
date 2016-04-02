@@ -185,6 +185,8 @@ public class UserServiceImpl implements UserService {
 		user.setCardMonth(userModel.getCardMonth());
 		user.setCardYear(userModel.getCardYear());
 		user.setCvc(userModel.getCvc());
+		user.setLatitude(userModel.getLatitude());
+		user.setLongitude(userModel.getLongitude());
 	
 		userRepository.saveAndFlush(user);		
 	}

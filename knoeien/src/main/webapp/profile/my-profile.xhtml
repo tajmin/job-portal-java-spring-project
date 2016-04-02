@@ -1,29 +1,29 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets">
- <div class="row wrapper-content" >
-	<div class="medium-12 columns" id="profileInfo">
+	<div class="row wrapper-content" >
+		<div class="medium-12 columns" id="profileInfo">
 			<div class="row collapse">
 				<div class="medium-6 columns">
 					<div class="row" style="margin-bottom: 15px;">
-				        <div class="medium-2 columns">
-				          <label class="right inline">Name</label>
+				    	<div class="medium-2 columns">
+				        	<label class="right inline">Name</label>
 				        </div>
 				        <div class="medium-9 columns end">
-				          <div class="row collapse">
-				          	<div class="small-6 columns helper-form-field" ng-class="(formSubmitted &amp;&amp; profileEditForm.firstName.$error.required == true)? 'error' : ''" style="padding-right: 5px;">
-				          		<input type="text" required="required" name="firstName" placeholder="First Name" ng-model="user.firstName" />
-				          		<div style="top: 3px" class="icon fi-info" ng-class="(formSubmitted &amp;&amp; profileEditForm.firstName.$error.required == true)? '' : 'hide'"></div>
-				          		<div ng-messages="formSubmitted &amp;&amp; profileEditForm.firstName.$error">
-			                     	<div ng-message="required" class="error"><i class="bttm-icon fi-info"></i>First name is required</div>
-			                     </div>
+				        	<div class="row collapse">
+					          	<div class="small-6 columns helper-form-field" ng-class="(formSubmitted &amp;&amp; profileEditForm.firstName.$error.required == true)? 'error' : ''" style="padding-right: 5px;">
+					          		<input type="text" required="required" name="firstName" placeholder="First Name" maxlength="50" ng-model="user.firstName" />
+					          		<div style="top: 3px" class="icon fi-info" ng-class="(formSubmitted &amp;&amp; profileEditForm.firstName.$error.required == true)? '' : 'hide'"></div>
+					          		<div ng-messages="formSubmitted &amp;&amp; profileEditForm.firstName.$error">
+				                     	<div ng-message="required" class="error"><i class="bttm-icon fi-info"></i>First name is required</div>
+				                     </div>
+					          	</div>
+					          	<div class="small-6 columns helper-form-field" ng-class="(formSubmitted &amp;&amp; profileEditForm.lastName.$error.required == true)? 'error' : ''" style="padding-left: 5px">
+					          		<input type="text" required="required" name="lastName" placeholder="Last Name" maxlength="50" ng-model="user.lastName" />
+					          		<div style="top: 3px" class="icon fi-info" ng-class="(formSubmitted &amp;&amp; profileEditForm.lastName.$error.required == true)? '' : 'hide'"></div>
+					          		<div ng-messages="formSubmitted &amp;&amp; profileEditForm.lastName.$error">
+				                    	<div ng-message="required" class="error"><i class="bttm-icon fi-info"></i>Last name is required</div>
+				                    </div>
+					          	</div>
 				          	</div>
-				          	<div class="small-6 columns helper-form-field" ng-class="(formSubmitted &amp;&amp; profileEditForm.lastName.$error.required == true)? 'error' : ''" style="padding-left: 5px">
-				          		<input type="text" required="required" name="lastName" placeholder="Last Name" ng-model="user.lastName" />
-				          		<div style="top: 3px" class="icon fi-info" ng-class="(formSubmitted &amp;&amp; profileEditForm.lastName.$error.required == true)? '' : 'hide'"></div>
-				          		<div ng-messages="formSubmitted &amp;&amp; profileEditForm.lastName.$error">
-			                    	<div ng-message="required" class="error"><i class="bttm-icon fi-info"></i>Last name is required</div>
-			                    </div>
-				          	</div>
-				          </div>
 				        </div>
 			      	</div>
 			      	<div class="row">
@@ -31,12 +31,12 @@
 					    	<label class="right inline">Telephone</label>
 						</div>
 						<div class="medium-9 columns end helper-form-field" ng-class="(formSubmitted &amp;&amp; profileEditForm.phone.$error.required == true)? 'error' : ''">
-					    	<input type="text" required="required" name="phone" placeholder="Telephone Number" ng-model="user.phone" />
+					    	<input type="text" required="required" name="phone" placeholder="Telephone Number" maxlength="20" ng-model="user.phone" />
 					    	<div style="top: 3px" class="icon fi-info" ng-class="(formSubmitted &amp;&amp; profileEditForm.phone.$error.required == true)? '' : 'hide'"></div>
 				          	<div ng-messages="formSubmitted &amp;&amp; profileEditForm.phone.$error">
 			                	<div ng-message="required" class="error"><i class="bttm-icon fi-info"></i>Phone number is required</div>
 			                </div>
-					    	<div class="row collapse">
+					    	<div class="row collapse" style="margin-top: 20px;">
 					        	<div class="medium-6 columns">
 						        	<label class="right inline">Verification Code</label>
 						    	</div>
@@ -46,12 +46,12 @@
 					       	</div>
 						</div>
 			     	</div>
-			      	<div class="row" style="margin-top: 15px;">
+			      	<div class="row">
 				  		<div class="medium-2 columns">
 				    		<label class="right inline">E-Post</label>
 				 		</div>
 				    	<div class="medium-9 columns end helper-form-field" ng-class="(formSubmitted &amp;&amp; profileEditForm.email.$error.required == true)? 'error' : ''">
-				    		<input type="text" required="required" name="email" placeholder=" e-mail Address" ng-model="user.email" />
+				    		<input type="text" required="required" name="email" placeholder=" e-mail Address" maxlength="100" ng-model="user.email" />
 				    		<div style="top: 3px" class="icon fi-info" ng-class="(formSubmitted &amp;&amp; profileEditForm.email.$error.required == true)? '' : 'hide'"></div>
 				          	<div ng-messages="formSubmitted &amp;&amp; profileEditForm.email.$error">
 			                	<div ng-message="required" class="error"><i class="bttm-icon fi-info"></i>Email is required</div>
@@ -65,26 +65,46 @@
 				    	<div class="medium-9 columns end">
 				    		<div class="row">
 				    			<div class="medium-7 columns">
-				    				<input type="text" placeholder=" Address" ng-model="user.address" />
+				    				<input type="text" id="searchplace" placeholder="Address" maxlength="512" ng-model="user.address" />
+				    				<input type="hidden" id="latitude" name="latitude" ng-model="user.latitude" />
+				    				<input type="hidden" id="longitude" name="longitude" ng-model="user.longitude" />
 				    			</div>
 				    			<div class="medium-1 small-3 columns">
 				    				<label class="right inline">Nr</label>
 				    			</div>
 				    			<div class="medium-4 small-6 columns">
-				    				<input type="text" placeholder=" House No" ng-model="user.houseNumber"/>
+				    				<input type="text" placeholder=" House No" maxlength="50" ng-model="user.houseNumber"/>
 				    			</div>
+				    			<script type="text/javascript">
+					function initialize() {
+						var searchBox = document.getElementById('searchplace');
+						var autocomplete =	new google.maps.places.Autocomplete(searchBox);
+						var latitude;
+						var longitude;
+						
+						google.maps.event.addListener(autocomplete, 'place_changed', function () {
+				            var place = autocomplete.getPlace();
+				            
+				            latitude = place.geometry.location.lat();
+				            longitude = place.geometry.location.lng();
+				            console.log($("#searchplace").val());
+				            document.getElementById('latitude').value = place.geometry.location.lat();
+				            document.getElementById('longitude').value = place.geometry.location.lng();				            			
+				        });												
+					}
+					google.maps.event.addDomListener(window, 'load', initialize);
+				</script>
 				    		</div>
 				    	</div>
 			      	</div>	      
 				</div>				
-
 				<div class="medium-6 columns">
 					<div class="row">
 				  		<div class="medium-2 small-3 columns">
 				    		<label for="" class="right inline">Post Code</label>
 				 		</div>
 				    	<div class="medium-10 small-12 columns">
-				    		<input type="text" id="" class="" placeholder=" Post Code " ng-model="user.postcode" />
+				    		<input type="text" id="" class="" placeholder="Post Code" maxlength="15" ng-model="user.postcode" />
 				    	</div>
 			      	</div>
 			      	<div class="row" style="margin-bottom: 6px;">
@@ -92,20 +112,18 @@
 				    		<label for="" class="right inline">Place</label>
 				 		</div>
 				    	<div class="medium-10 small-12 columns">
-				    		<input type="text" id="" class="" placeholder=" Place " ng-model="user.location"/>
+				    		<input type="text" id="" class="" placeholder="Place" ng-model="user.location"/>
 				    	</div>
 			      	</div>
 			      	<div class="row">
     					<div class="large-12 columns">
       						<label>A Brief Description of Yourself
-        						<textarea placeholder=" briefly describe yourself" style="" ng-model="user.aboutMe"></textarea>
+        						<textarea placeholder=" briefly describe yourself" style="" maxlength="1024" ng-model="user.aboutMe"></textarea>
       						</label>
     					</div>
   					</div>
 				</div>
 			</div>
-		
+		</div>
 	</div>
-</div>
-
 </ui:composition>

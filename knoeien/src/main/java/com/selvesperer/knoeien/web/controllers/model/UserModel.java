@@ -91,6 +91,10 @@ public class UserModel implements Serializable {
 	
 	private String cvc;
 	
+	private String latitude;
+	
+	private String longitude;
+	
 	public UserModel() {}
 	
 	public UserModel(User user) {
@@ -124,6 +128,8 @@ public class UserModel implements Serializable {
 		this.setCardMonth(user.getCardMonth());
 		this.setCardYear(user.getCardYear());
 		this.setCvc(user.getCvc());
+		this.setLatitude(user.getLatitude());
+		this.setLongitude(user.getLongitude());
 	}
 	
 	public String getCompanyId() {
@@ -452,6 +458,22 @@ public class UserModel implements Serializable {
 
 	public void setCvc(String cvc) {
 		this.cvc = cvc;
+	}
+
+	public String getLatitude() {
+		return latitude;
+	}
+
+	public void setLatitude(String latitude) {
+		this.latitude = latitude;
+	}
+
+	public String getLongitude() {
+		return longitude;
+	}
+
+	public void setLongitude(String longitude) {
+		this.longitude = longitude;
 	}
 
 		

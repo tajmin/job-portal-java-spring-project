@@ -60,6 +60,7 @@ Controllers.controller("signupCtrl", function($scope, $rootScope, restservice, $
 			if (response != null) {
 				$scope.isproceed = true;
 			}
+			$("#signup-confirmation-modal").foundation('toggle');
 		});
 	};
 	
@@ -222,6 +223,9 @@ Controllers.controller("editProfileCtrl", function($scope, $rootScope, restservi
 		if(!isValid) return;
 		
 		$scope.user.backgroundImageUrl = $scope.tempUploadedFilePath;
+		$scope.user.latitude = $("#latitude").val();
+		$scope.user.longitude = $("#longitude").val();
+		$scope.user.address = $("#searchplace").val();
 		restservice.post( $scope.user, "api/v1/user/editProfile").then(function(response) {
 			if (response != null) {
 				$scope.isproceed = true;
@@ -710,11 +714,15 @@ Controllers.controller("jobCtrl", function($scope, $rootScope, restservice, $coo
 Controllers.controller("jobDetailsCtrl", function($scope, $rootScope, restservice, $cookies, $window, utilservice) {
 	$scope.isproceed = false;
 	$scope.job = {};
+	$scope.interestjobs = [];
 	$scope.chat = false;
 	$scope.employer = {};
 	$scope.jobInterest = {};
 	$scope.formSubmitted = false;
 	$scope.responseMessage = "";
+	$scope.filter = {};
+	$scope.filter.page = 1;
+	$scope.filter.moreLink = true;
 	$scope.id = utilservice.getParameterByName("id");
 	
 	$window.map = new google.maps.Map(document.getElementById('g-map'), {
@@ -730,8 +738,9 @@ Controllers.controller("jobDetailsCtrl", function($scope, $rootScope, restservic
 		restservice.get( '', "api/v1/job/jobDetailsById?jobID=" + jobId).then(function(response) {
 			if (response != null) {
 				$scope.job = response;
-				$scope.jobInterest.bidAmount = $scope.job.price; 
+				//$scope.jobInterest.bidAmount = $scope.job.price; 
 				$scope.showJobInMap();
+				$scope.getJobInterestDetailsByInterestUserId($scope.id);
         	}
         });
 	
@@ -795,14 +804,34 @@ Controllers.controller("jobDetailsCtrl", function($scope, $rootScope, restservic
     
     $scope.getJobInterestDetailsByInterestUserId = function(jobID) {			
 		restservice.get( '', "api/v1/jobInterested/getJobInterestDetailsByInterestUserId?jobID=" + jobID).then(function(response) {
-			if (response != null) {
+			if (response.bidAmount != null) {
 				$scope.jobInterest = response;
 				$scope.chat = true;
         	}
         });	
     };
-    $scope.getJobInterestDetailsByInterestUserId($scope.id);
+//    $scope.getJobInterestDetailsByInterestUserId($scope.id);
     
+    
+    $scope.getAllJobInterestedByUserId = function() {	
+    	restservice.get( '', "api/v1/jobInterested/getAllJobInterestedByUserId?page=" + $scope.filter.page).then(function(response) {
+			if (response != null) {
+				for (var i = 0; i < response.length; i++) {
+					$scope.interestjobs.push(response[i]);
+				}
+				
+				if(response.length < 2){
+					$scope.filter.moreLink = false;				
+				}else{
+					$scope.filter.page += 1;
+				}
+				//$scope.showJobInMap();
+        	} else {
+        		$scope.filter.moreLink = false;
+        	}
+        });	
+    };
+    //$scope.getAllJobInterestedByUserId();
 });
 
 //Slider Image control
