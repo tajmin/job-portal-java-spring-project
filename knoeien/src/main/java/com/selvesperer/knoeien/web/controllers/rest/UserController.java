@@ -187,7 +187,8 @@ public class UserController extends AbstractController implements Serializable {
 			UserService userService = ApplicationBeanFactory.getBean(UserService.class);
 			User u = userService.login(username, password);
 			HashMap<String, String> uData = new HashMap<>();
-			uData.put(Constants.CURRENT_USER_ID, u.getEmail());
+			//uData.put(Constants.CURRENT_USER_ID, u.getEmail());
+			uData.put(Constants.CURRENT_USER_ID, u.getId());
 			uData.put(Constants.CURRENT_USER_NAME, u.getFullName());
 			
 			return new ResponseEntity<RestResponse>( convertToRestGoodResponse(uData, LocalizationUtil.findLocalizedString("signupsuccess.text")),HttpStatus.OK);

@@ -738,8 +738,9 @@ Controllers.controller("jobDetailsCtrl", function($scope, $rootScope, restservic
 		restservice.get( '', "api/v1/job/jobDetailsById?jobID=" + jobId).then(function(response) {
 			if (response != null) {
 				$scope.job = response;
-				$scope.jobInterest.bidAmount = $scope.job.price; 
+				//$scope.jobInterest.bidAmount = $scope.job.price; 
 				$scope.showJobInMap();
+				$scope.getJobInterestDetailsByInterestUserId($scope.id);
         	}
         });
 	
@@ -809,7 +810,7 @@ Controllers.controller("jobDetailsCtrl", function($scope, $rootScope, restservic
         	}
         });	
     };
-    $scope.getJobInterestDetailsByInterestUserId($scope.id);
+//    $scope.getJobInterestDetailsByInterestUserId($scope.id);
     
     
     $scope.getAllJobInterestedByUserId = function() {	

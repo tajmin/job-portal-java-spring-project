@@ -38,15 +38,20 @@ public class JobInterestedController extends AbstractController implements Seria
 	@ResponseBody
 	public ResponseEntity<RestResponse> saveJobInterest(@RequestBody JobInterestedModel jobInterestedModel) {		
 		JobInterested jobInterested  = null;
+		RestResponse restResponse = null;
 		try {
 			JobInterestedService jobInterestedService = ApplicationBeanFactory.getBean(JobInterestedService.class);
 			jobInterestedModel.setJobInterestedUserId(SecurityManager.getCurrentUserId());
-			jobInterested = jobInterestedService.saveJobInterested(jobInterestedModel);
-			return new ResponseEntity<RestResponse>( convertToRestGoodResponse(new JobInterestedModel(jobInterested), LocalizationUtil.findLocalizedString("")),HttpStatus.OK);
+			if(!jobInterestedModel.getJobCreatedById().equals(jobInterestedModel.getJobInterestedUserId())){
+				jobInterested = jobInterestedService.saveJobInterested(jobInterestedModel);
+				return new ResponseEntity<RestResponse>( convertToRestGoodResponse(new JobInterestedModel(jobInterested), LocalizationUtil.findLocalizedString("jobinterestsuccess.text")),HttpStatus.OK);
+			}else{
+				restResponse = convertToRestBadResponse("", LocalizationUtil.findLocalizedString("jobinterestfailed.text"));
+			}
 		} catch (Exception ex) {
-			Messages.addGlobalError(ex.getMessage());
+			restResponse = convertToRestBadResponse("", ex.getLocalizedMessage());
 		}
-		return new ResponseEntity<RestResponse>(convertToRestGoodResponse(jobInterested), HttpStatus.OK);
+		return new ResponseEntity<RestResponse>(restResponse, HttpStatus.OK);
 	}
 	
 	@RequestMapping(value = "/getJobInterestDetailsByInterestUserId", method = RequestMethod.GET, produces = "application/json")
