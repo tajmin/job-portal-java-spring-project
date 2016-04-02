@@ -68,7 +68,7 @@ public class JobRepositoryImpl implements JobRepositoryCustom {
 	@Override
 	public List<JobModel> findJobByCreatedUserId(String id, int page, int limit) {
 		StringBuffer queryString = new StringBuffer();
-		queryString.append("select j.id, j.title, j.price, j.image_url from job j");
+		queryString.append("select j.id, j.title, j.price, j.image_url, j.draft from job j");
 		queryString.append(" where j.created_by_id= '" + id +"'");
 		
 		Query query = entityManager.createNativeQuery(queryString.toString());
@@ -87,6 +87,7 @@ public class JobRepositoryImpl implements JobRepositoryCustom {
 			jobModel.setTitle((String) result[1]);
 			jobModel.setPrice(AppsUtil.doubleToString((Double) result[2]));
 			jobModel.setImageUrl((String) result[3]);
+			jobModel.setDraft((boolean) result[4]);
 			
 			listOfJobs.add(jobModel);
 		}

@@ -432,6 +432,7 @@
   background: #ccc;
 }
 /*Find Job Ends*/
+
 /*signup-confirmation-modal Starts*/
 #signup-confirmation-modal {
 	width: 450px;
@@ -446,6 +447,22 @@
     padding: 14px 10px;
 }
 /*signup-confirmation-modal Ends*/
+
+/*mail-confirmation-modal Starts*/
+#mail-confirmation-modal {
+	width: 400px;
+}
+#mail-confirmation-modal h4 {
+	font-size: 1.2em;
+    padding: 20px 0 10px 0;
+}
+#mail-confirmation-modal a {
+	margin-top: 10px;
+	width: 100%;
+    padding: 14px 10px;
+}
+/*mail-confirmation-modal Ends*/
+
 /*Job Confirmation Modal Starts*/
 #job-confirmation-modal {
 	border-radius: 8px;
@@ -1126,7 +1143,7 @@ font-size: 0.7em;
 line-height: 1.0em;  
 }
 #profileInfo textarea {
-	height: 141px; 
+	height: 145px; 
 	resize: none;
 }
 #profileInfo textarea::-webkit-input-placeholder {

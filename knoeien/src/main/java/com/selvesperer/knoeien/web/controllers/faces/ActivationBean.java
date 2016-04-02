@@ -47,7 +47,7 @@ public class ActivationBean implements Serializable {
 			}
 			
 			userService.activeUser(user);
-			Faces.redirect("index.xhtml");
+			Faces.redirect("index.xhtml?faces-redirect=true&active=true");
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
