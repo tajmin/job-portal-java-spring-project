@@ -4,9 +4,9 @@
 	<div>
 	<ui:define name="left-content">
 		<div ng-controller="jobDetailsCtrl">
-			<ul class="tabs custom-tabs arrow-bottom green" data-tabs="data-tabs" id="job-detail-tabs">
-				<li class="tabs-title is-active"><a ng-click="jobDetailsById(id);" href="#detail" aria-selected="true">Job Detail</a></li>
-				<li class="tabs-title"><a ng-click="getAllJobs();" href="#interest">My Interest</a></li>
+			<ul class="tabs row expanded text-center custom-tabs arrow-bottom green" data-tabs="data-tabs" id="job-detail-tabs">
+				<li class="tabs-title medium-6 columns is-active"><a ng-click="jobDetailsById(id);" href="#detail" aria-selected="true">Job Detail</a></li>
+				<li class="tabs-title medium-6 columns"><a ng-click="getAllJobs();" href="#interest">My Interest</a></li>
 			</ul>
 			<div class="tabs-content job-detail-content" data-tabs-content="job-detail-tabs">
 				<div class="tabs-panel is-active" id="detail">
