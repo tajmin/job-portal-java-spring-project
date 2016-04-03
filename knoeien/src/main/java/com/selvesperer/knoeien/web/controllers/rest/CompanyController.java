@@ -46,4 +46,5 @@ public class CompanyController extends AbstractController implements Serializabl
 		}
 		return new ResponseEntity<RestResponse>(convertToRestGoodResponse(company), HttpStatus.OK);
 	}
+
 }
