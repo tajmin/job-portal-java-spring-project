@@ -55,7 +55,7 @@
 			<div class="row">
 				<fieldset class="medium-12 columns">					
 					<div class="button-group">
-						<a data-toggle="register-modal" id="" class="button hlpr-color-info" style="width: 100%; border-radius: 8px; padding: 15px 0;">Register New User</a>
+						<a onclick="clearForm('register-modal');" data-toggle="register-modal" id="" class="button hlpr-color-info" style="width: 100%; border-radius: 8px; padding: 15px 0;">Register New User</a>
 					</div>
 				</fieldset>
 			</div>	
@@ -73,12 +73,12 @@
 			<p>Sorry your are not logged-in. Please login to search job. If you Don't have an account then please sign-up.</p>
 		</div>
 		<div class="button-group float-right">
-			<a data-toggle="register-modal" class="hlpr-color-info button" id="sign-up-btn" data-close="true" aria-label="Close reveal">Sign-up</a>
+			<a onclick="clearForm('register-modal');" data-toggle="register-modal" class="hlpr-color-info button" id="sign-up-btn" data-close="true" aria-label="Close reveal">Sign-up</a>
 			<a class="hlpr-color-alert button modal-close">Close</a>
 		</div>
 		<button class="close-button modal-close" type="button">
 			<span aria-hidden="true">&#215;</span>
-		</button>
+		</button>		
 	</div>
 	<!-- modal / reveal login error ends here -->
 </ui:composition>

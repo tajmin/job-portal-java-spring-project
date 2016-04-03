@@ -79,7 +79,7 @@
 					<div class="text-right menu-last">
 						<!-- menu button goes here -->
 						<c:if test="#{view.viewId == '/index.xhtml'}">
-							<a data-toggle="login-modal" class="hollow hlpr-color-white button border-radius-7px" style="display:#{authorizationBean.canView()?'none':''}">Login</a>
+							<a onclick="clearForm('login-modal');" data-toggle="login-modal" class="hollow hlpr-color-white button border-radius-7px" style="display:#{authorizationBean.canView()?'none':''}">Login</a>
 							<!-- <a data-toggle="not-logedin-modal" class="hollow hlpr-color-white button ">My page</a> -->
 						</c:if>
 						<c:if test="#{authorizationBean.canView()}">
@@ -198,6 +198,13 @@
 			   //$("body").mCustomScrollbar({theme:"minimal-dark"});
 			
 		});   
+
+	   function clearForm(modalId){
+			var scope = angular.element($("#" + modalId)).scope();
+			scope.$apply(function(){
+		        scope.formSubmitted = false;
+		    });
+		}
 	</script>
 </body>
 </html>
