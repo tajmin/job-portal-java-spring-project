@@ -804,6 +804,17 @@ line-height: 1.75em;
 }
 /*profile-response-modal ends*/
 
+/*post-confirmation-modal starts*/
+#post-confirmation-modal {
+	width: 400px;
+}
+#post-confirmation-modal h4 {
+	font-size: 1.1em;
+	color: #969595;
+	padding-top: 20px;
+}
+/*post-confirmation-modal ends*/
+
 /* Helper Colours Start */
 .hlpr-color-info {
 	background-color: #3ac5e6;
