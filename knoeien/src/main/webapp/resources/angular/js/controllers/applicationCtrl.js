@@ -459,6 +459,15 @@ Controllers.controller("addJobCtrl", function($scope, $rootScope, restservice, $
 	$scope.filter.isnext = true;
 	$scope.page = 1;
 	
+	$scope.fullImageUrl=function(imageUrl){
+		if (!imageUrl) {
+			imageUrl = "";
+			return "";
+			}
+				
+		return '/img/'+imageUrl;
+	}
+	
 	//@start this portion is responsible to edit draft job 
 	$scope.jobId = utilservice.getParameterByName("id");
 	if(!utilservice.isUndefinedOrNull($scope.jobId)){
@@ -688,8 +697,16 @@ Controllers.controller("jobCtrl", function($scope, $rootScope, restservice, $coo
     
     $scope.loadJobs('LGB', $scope.lgbPage);
     
+    
+    $scope.markersArray = [];
+    $scope.clearOverlays = function(){
+    	for (var i = 0; i < $scope.markersArray.length; i++ ) {
+    		$scope.markersArray[i].setMap(null);
+    	}
+    	$scope.markersArray.length = 0;
+    }
     $scope.showJobInMap = function(){
-    	//http://stackoverflow.com/questions/1544739/google-maps-api-v3-how-to-remove-all-markers
+    	$scope.clearOverlays();
     	var bounds = new google.maps.LatLngBounds();
     	for(i in $scope.job) {
     		if($scope.job[i] && $scope.job[i].title){
@@ -699,6 +716,7 @@ Controllers.controller("jobCtrl", function($scope, $rootScope, restservice, $coo
     	            map: $window.map,
     	            title: $scope.job[i].title
     	        });
+    	        $scope.markersArray.push(marker);
     	        bounds.extend(marker.position);
     		}
     	}
@@ -715,6 +733,7 @@ Controllers.controller("jobDetailsCtrl", function($scope, $rootScope, restservic
 	$scope.isproceed = false;
 	$scope.job = {};
 	$scope.interestjobs = [];
+	$scope.lowestBid = "";
 	$scope.chat = false;
 	$scope.employer = {};
 	$scope.jobInterest = {};
@@ -738,9 +757,11 @@ Controllers.controller("jobDetailsCtrl", function($scope, $rootScope, restservic
 		restservice.get( '', "api/v1/job/jobDetailsById?jobID=" + jobId).then(function(response) {
 			if (response != null) {
 				$scope.job = response;
-				//$scope.jobInterest.bidAmount = $scope.job.price; 
-				$scope.showJobInMap();
+				$scope.jobInterest.bidAmount = $scope.job.price; 
 				$scope.getJobInterestDetailsByInterestUserId($scope.id);
+				jobs = [];
+				jobs.push($scope.job);
+				$scope.showJobsInMap(jobs);
         	}
         });
 	
@@ -757,18 +778,29 @@ Controllers.controller("jobDetailsCtrl", function($scope, $rootScope, restservic
     };
     $scope.getUserByJobId($scope.id);
     
+    $scope.markersArray = [];
+    $scope.clearOverlays = function(){
+    	for (var i = 0; i < $scope.markersArray.length; i++ ) {
+    		$scope.markersArray[i].setMap(null);
+    	}
+    	$scope.markersArray.length = 0;
+    }
     
-    $scope.showJobInMap = function(){
+    $scope.showJobsInMap = function(jobs){
+    	$scope.clearOverlays();
     	var bounds = new google.maps.LatLngBounds();
-		if($scope.job && $scope.job.title){
-			var latLng = new google.maps.LatLng($scope.job.latitude, $scope.job.longitude); 
-	        var marker = new google.maps.Marker({
-	            position: latLng,
-	            map: $window.map,
-	            title: $scope.job.title
-	        });
-	        bounds.extend(marker.position);
-		}
+    	for(i in jobs) {
+    		if(jobs[i] && jobs[i].title){
+    			var latLng = new google.maps.LatLng(jobs[i].latitude, jobs[i].longitude); 
+    	        var marker = new google.maps.Marker({
+    	            position: latLng,
+    	            map: $window.map,
+    	            title: jobs[i].title
+    	        });
+    	        $scope.markersArray.push(marker);
+    	        bounds.extend(marker.position);
+    		}
+    	}
     	$window.map.fitBounds(bounds);
     };
     
@@ -798,6 +830,7 @@ Controllers.controller("jobDetailsCtrl", function($scope, $rootScope, restservic
 			if (response != null) {
 				$scope.jobInterest = response;
 				$scope.chat = true;
+				$scope.getLowestBidAmount($scope.id);
         	}
         });	
     };
@@ -812,9 +845,13 @@ Controllers.controller("jobDetailsCtrl", function($scope, $rootScope, restservic
     };
 //    $scope.getJobInterestDetailsByInterestUserId($scope.id);
     
-    
-    $scope.getAllJobInterestedByUserId = function() {	
-    	restservice.get( '', "api/v1/jobInterested/getAllJobInterestedByUserId?page=" + $scope.filter.page).then(function(response) {
+    $scope.getAllJobs = function() {
+    	$scope.interestjobs=[]; 
+    	$scope.filter.page = 1; 
+    	$scope.getAllJobByInterestedUserId();
+    };
+    $scope.getAllJobByInterestedUserId = function() {	
+    	restservice.get( '', "api/v1/jobInterested/getAllJobByInterestedUserId?page=" + $scope.filter.page).then(function(response) {
 			if (response != null) {
 				for (var i = 0; i < response.length; i++) {
 					$scope.interestjobs.push(response[i]);
@@ -825,97 +862,24 @@ Controllers.controller("jobDetailsCtrl", function($scope, $rootScope, restservic
 				}else{
 					$scope.filter.page += 1;
 				}
-				//$scope.showJobInMap();
+				$scope.showJobsInMap($scope.interestjobs);
         	} else {
         		$scope.filter.moreLink = false;
         	}
         });	
     };
-    //$scope.getAllJobInterestedByUserId();
-});
-
-//Slider Image control
-Controllers.controller("sliderImgCtrl", function($scope, $rootScope, restservice, $cookies, $http, authService) {
-	$scope.isproceed = false;
-	$scope.slider = {};
-	$scope.sliderList = {};
-	$scope.formSubmitted = false;
-	$scope.responseMessage = "";
-	$scope.thumb_image = "";
-	$scope.imageFile;
-	$scope.tempUploadedFilePath = "";
-	$scope.verifyMessage="";
-	
-	
-	$scope.openFileDialogue = function() {
-		$("#sliderImageFileUpload").trigger('click');
-	};
-	
-	$scope.imageUpload = function(input) {
-    	if (input.files && input.files[0]) {
-            var reader = new FileReader();
-            reader.onload = function (e) {
-                $('#slider_thumbnail_image').attr('src', e.target.result);
-               // $('#user_cover_image').css('background-image', "url(" + e.target.result + ")");
-            };
-            $scope.imageFile = input.files[0];
-            reader.readAsDataURL(input.files[0]);
-            
-            // save file as temporary
-            var uploadUrl = "api/v1/sliderimage/uploadimage";
-            var fd = new FormData();
-            fd.append('file', $scope.imageFile);
-    		 
-            $http.post(uploadUrl, fd, {
-                transformRequest: angular.identity,
-                headers: {'Content-Type': undefined}
-            }).success(function(succResponse){
-            	$rootScope.restMessages = succResponse.message;
-            	$scope.tempUploadedFilePath = succResponse.response
-            }).error(function(errResponse){
-            	$rootScope.restMessages = errResponse.message;
-            });
-        }
-    };
     
-    $scope.saveImage = function(isValid) {
-		if(!isValid) return;
-		
-		$scope.slider.imageUrl = $scope.tempUploadedFilePath;
-		restservice.post( $scope.slider, "api/v1/sliderimage/addimage").then(function(response) {
-			if (response != null) {
-				$scope.isproceed = true;
-				$scope.responseMessage = response.message;
-        	} 
-			$("#profile-response-modal").foundation('toggle');
-        });
-		
-    };
     
-    $scope.showImage = function() {
-		console.log("shows image list");
-		restservice.get('', "api/v1/sliderimage/showimage").then(function(response) {
-			if (response != null) {
-				$scope.sliderList = response;
-				//$scope.tempUploadedFilePath = $scope.sliderList.backgroundImageUrl; 
-			} else {
-				$scope.responseMessage = response.message;
-			}
-		});
-
-	};
-	$scope.showImage();
-	
-	$scope.deleteImage = function(id) {
-		console.log("deletes image");
-		restservice.get('', "api/v1/sliderimage/deleteimage?sliderId=" + id).then(function(response) {
-			if (response == null) {
-				//$scope.sliderList = response;
-				$scope.responseMessage = response.message;
-				//$scope.tempUploadedFilePath = $scope.sliderList.backgroundImageUrl; 
-			} 
-		});
-
-	};
-	
+    $scope.getLowestBidAmount = function(jobID) {			
+		restservice.get( '', "api/v1/jobInterested/getLowestBidAmount?jobID=" + jobID).then(function(response) {
+			if (response.response != 0 && response != null) {
+				$scope.lowestBid = response;
+        	}
+        });	
+    };
+    $scope.getLowestBidAmount($scope.id);
+    
+    $scope.selectJob = function(jobid){
+    	window.open($rootScope.getBaseUrl() + "/jobdetail.xhtml?id=" + jobid,	"_self");
+    }
 });

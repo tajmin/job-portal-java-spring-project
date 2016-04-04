@@ -804,6 +804,17 @@ line-height: 1.75em;
 }
 /*profile-response-modal ends*/
 
+/*post-confirmation-modal starts*/
+#post-confirmation-modal {
+	width: 400px;
+}
+#post-confirmation-modal h4 {
+	font-size: 1.1em;
+	color: #969595;
+	padding-top: 20px;
+}
+/*post-confirmation-modal ends*/
+
 /* Helper Colours Start */
 .hlpr-color-info {
 	background-color: #3ac5e6;
@@ -1099,8 +1110,8 @@ line-height: 1.75em;
 .detail-section .button {
 	position: absolute;
 	bottom: 0;
-	margin-bottom: 0;
-	width: 170px;
+	width: 60%;
+    padding: 14px 0;
 }
 .background-color-grey {
 	background-color: #ebebeb;
@@ -1117,7 +1128,10 @@ line-height: 1.75em;
 .employer-info {
 	padding: 20px 0;
 }
-
+.employer-info i {
+	font-size: 1.2em;
+	padding: 3px 0 12px;
+}
 /*my-profile.xhtml Starts */
 #profileInfo input[type="text"]::-webkit-input-placeholder {
 color: #B9B7B6 !important;
@@ -1516,7 +1530,7 @@ textarea {
 	background-color: #fff;
 }
 .helper-tab-button {
-	width: 150px;
+	width: 180px;
 }
 .reveal {
 	border-radius: 7px;
@@ -1592,3 +1606,13 @@ form .helper-form-field.error .bttm-icon {
 	font-size: 18px;	
 }
 /*notification.xhtml ends*/
+
+.job-image {
+	width: 120px;
+	max-height: 120px
+}
+.job-detail {
+	width: 180px;
+	height: 180px;
+}
+

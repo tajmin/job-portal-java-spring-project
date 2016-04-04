@@ -2,7 +2,9 @@ package com.selvesperer.knoeien.web.controllers.rest;
 import java.io.File;
 import java.io.IOException;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
@@ -451,6 +453,38 @@ public class UserController extends AbstractController implements Serializable {
 		}
 		return new ResponseEntity<RestResponse>( restResponse, HttpStatus.OK);
 	}
-
-
+	
+	@RequestMapping(value = "/showalluser", method = RequestMethod.GET, produces = "application/json")
+	public ResponseEntity<RestResponse> showAllUser() {
+		RestResponse restResponse = null;
+		
+		try { 
+			UserService userService = ApplicationBeanFactory.getBean(UserService.class);
+			List<User> userList = userService.findAllUser();
+			UserModel userModel = new UserModel();			
+			List<UserModel> modelList = userModel.getUserModelList(userList);
+			return new ResponseEntity<RestResponse>( convertToRestGoodResponse(modelList, LocalizationUtil.findLocalizedString("")),HttpStatus.OK);
+		} catch (AuthenticationFailedException t) {
+			restResponse = convertToRestBadResponse("", t.getLocalizedMessage());
+		} catch (Exception t) {
+			restResponse = convertToRestBadResponse("", t.getLocalizedMessage());
+		}
+		return new ResponseEntity<RestResponse>( restResponse, HttpStatus.OK);
+	}
+	
+	@RequestMapping(value = "/deleteuser", method = RequestMethod.GET, produces = "application/json")
+	public ResponseEntity<RestResponse> deleteUser(@RequestParam(value = "userId", required = true) String userId) {
+		RestResponse restResponse = null;
+		
+		try { 
+			UserService userService = ApplicationBeanFactory.getBean(UserService.class);
+			userService.deleteUserById(userId);
+			return new ResponseEntity<RestResponse>( convertToRestGoodResponse(null, LocalizationUtil.findLocalizedString("userdeletesuccess.text")),HttpStatus.OK);
+		} catch (AuthenticationFailedException t) {
+			restResponse = convertToRestBadResponse("", t.getLocalizedMessage());
+		} catch (Exception t) {
+			restResponse = convertToRestBadResponse("", t.getLocalizedMessage());
+		}
+		return new ResponseEntity<RestResponse>( restResponse, HttpStatus.OK);
+	}
 }

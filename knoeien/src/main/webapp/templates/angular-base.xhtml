@@ -34,6 +34,8 @@
 <script type="text/javascript"	src="#{request.contextPath}/resources/angular/js/services/applicationService.js?#{msg['vrsn']}"></script>
 <script type="text/javascript"	src="#{request.contextPath}/resources/angular/js/controllers/applicationCtrl.js?#{msg['vrsn']}"></script>
 <script type="text/javascript"	src="#{request.contextPath}/resources/angular/js/controllers/notificationDetailsCtrl.js?#{msg['vrsn']}"></script>
+<script type="text/javascript"	src="#{request.contextPath}/resources/angular/js/controllers/companyCtrl.js?#{msg['vrsn']}"></script>
+
 <script type="text/javascript"	src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAjAJgul5TdZNsTAo_WTXxtQb8C3jFPXwo&amp;libraries=places"></script>
 <script type="text/javascript"	src="#{request.contextPath}/resources/assets/js/foundation-datepicker.js"></script>
 <ui:insert name="head"></ui:insert>
@@ -80,7 +82,7 @@
 					<div class="text-right menu-last" ng-controller="notificationCtrl">
 						<!-- menu button goes here -->
 						<c:if test="#{view.viewId == '/index.xhtml'}">
-							<a data-toggle="login-modal" class="hollow hlpr-color-white button border-radius-7px" style="display:#{authorizationBean.canView()?'none':''}">Login</a>
+							<a onclick="clearForm('login-modal');" data-toggle="login-modal" class="hollow hlpr-color-white button border-radius-7px" style="display:#{authorizationBean.canView()?'none':''}">Login</a>
 							<!-- <a data-toggle="not-logedin-modal" class="hollow hlpr-color-white button ">My page</a> -->
 						</c:if>
 						<c:if test="#{authorizationBean.canView()}">
@@ -184,6 +186,13 @@
 			   //$("body").mCustomScrollbar({theme:"minimal-dark"});
 			
 		});   
+
+	   function clearForm(modalId){
+			var scope = angular.element($("#" + modalId)).scope();
+			scope.$apply(function(){
+		        scope.formSubmitted = false;
+		    });
+		}
 	</script>
 </body>
 </html>

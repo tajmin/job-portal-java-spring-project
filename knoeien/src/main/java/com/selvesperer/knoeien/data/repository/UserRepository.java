@@ -14,6 +14,9 @@ import com.selvesperer.knoeien.data.repository.custom.UserRepositoryCustom;
 public interface UserRepository extends JpaRepository<User, String>, UserRepositoryCustom {
 	@Query("from User u where u.companyId = :companyID")
 	List<User> findUsersByCompanyId(@Param("companyID") String companyID);
+	
+	@Query("from User u")
+	List<User> findAllUsers();
 
 	@Query("from User u where u.email = :email")
 	User findUserByEmail(@Param("email") String email);

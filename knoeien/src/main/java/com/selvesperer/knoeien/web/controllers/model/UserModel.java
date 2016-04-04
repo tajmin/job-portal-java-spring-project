@@ -1,7 +1,9 @@
 package com.selvesperer.knoeien.web.controllers.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
 import com.selvesperer.knoeien.data.domain.User;
 
@@ -35,7 +37,7 @@ public class UserModel implements Serializable {
 
 	private String phone;
 
-	private boolean active = true;
+	private boolean active;
 
 	private Calendar passwordExpirationDate;
 
@@ -95,6 +97,8 @@ public class UserModel implements Serializable {
 	
 	private String longitude;
 	
+	private String id;
+	
 	public UserModel() {}
 	
 	public UserModel(User user) {
@@ -130,6 +134,17 @@ public class UserModel implements Serializable {
 		this.setCvc(user.getCvc());
 		this.setLatitude(user.getLatitude());
 		this.setLongitude(user.getLongitude());
+		this.setId(user.getId());
+		this.setActive(user.isActive());
+	}
+	
+	public List<UserModel> getUserModelList(List<User> userList) {
+		List<UserModel> modelList = new ArrayList<>();
+		for(User iterator: userList) {
+			UserModel userModel = new UserModel(iterator);
+			modelList.add(userModel);
+		}
+		return modelList;
 	}
 	
 	public String getCompanyId() {
@@ -476,5 +491,12 @@ public class UserModel implements Serializable {
 		this.longitude = longitude;
 	}
 
-		
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
 }

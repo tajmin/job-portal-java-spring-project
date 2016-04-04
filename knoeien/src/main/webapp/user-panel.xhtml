@@ -1,0 +1,32 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition template="templates/angular-template.xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core">
+	<ui:param name="leftMenu" value="show"></ui:param>
+	<ui:define name="content">
+		<div class="row wrapper-content" ng-controller="ClientCtrl">
+			<div class="medium-12 columns">
+
+					<div class="row" ng-repeat="model in userList">
+						<div class="medium-3 columns">
+							<img class="border-radius-7px" src="/userimg/{{model.backgroundImageUrl}}" alt="Slider Image" />
+						</div>
+						<div class="medium-2 columns">
+							<h4>{{model.firstName}}</h4>
+						</div>
+						<div class="medium-2 columns">
+							<h4>{{model.lastName}}</h4>
+						</div>
+						<div class="medium-2 columns">
+							<h4>Active: {{model.active}}</h4>
+							<h4 ng-if="(!model.active)">Active: False</h4>
+							<h4 ng-if="(model.active)">Active: True</h4>
+						</div>
+						<div class="medium-2 columns">
+							<a ng-click="deleteUser(model.id);" class="button helper-color-alert">Delete Image</a>
+						</div>
+					</div>
+				
+			</div>
+		</div>
+	</ui:define>
+</ui:composition>
