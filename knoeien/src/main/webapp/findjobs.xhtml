@@ -4,11 +4,11 @@
 
 	<ui:define name="left-content">
 	<div ng-controller="jobCtrl">
-		<ul class="tabs custom-tabs arrow-bottom green" data-tabs="data-tabs" id="job-tabs">
-  			<li class="tabs-title is-active"><a href="#latest" aria-selected="true" ng-click="job = []; loadJobs('LGB', lgbPage=1)">Latest</a></li>
-  			<li class="tabs-title"><a href="#nearestYou" ng-click="job = []; loadJobs('NRJ', nrjPage=1)">Nearest You</a></li>
-  			<li class="tabs-title"><a href="#bestPaid" ng-click="job = []; loadJobs('BPJ', bpjPage=1)">Best Paid</a></li>
-  			<li class="tabs-title"><a href="#earliestDeadline" ng-click="job = []; loadJobs('EDJ', edjPage=1)">Earliest Deadline</a></li>  			
+		<ul class="tabs row expanded text-center custom-tabs arrow-bottom green" data-tabs="data-tabs" id="job-tabs">
+  			<li class="tabs-title medium-3 columns is-active"><a href="#latest" aria-selected="true" ng-click="job = []; loadJobs('LGB', lgbPage=1)">Latest</a></li>
+  			<li class="tabs-title medium-3"><a href="#nearestYou" ng-click="job = []; loadJobs('NRJ', nrjPage=1)">Nearest You</a></li>
+  			<li class="tabs-title medium-3"><a href="#bestPaid" ng-click="job = []; loadJobs('BPJ', bpjPage=1)">Best Paid</a></li>
+  			<li class="tabs-title medium-3"><a href="#earliestDeadline" ng-click="job = []; loadJobs('EDJ', edjPage=1)">Earliest Deadline</a></li>  			
 		</ul>
 		
 		<div class="tabs-content job-list" data-tabs-content="job-tabs">
