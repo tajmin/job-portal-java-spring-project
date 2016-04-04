@@ -1099,8 +1099,8 @@ line-height: 1.75em;
 .detail-section .button {
 	position: absolute;
 	bottom: 0;
-	margin-bottom: 0;
-	width: 170px;
+	width: 60%;
+    padding: 14px 0;
 }
 .background-color-grey {
 	background-color: #ebebeb;
@@ -1117,7 +1117,13 @@ line-height: 1.75em;
 .employer-info {
 	padding: 20px 0;
 }
-
+.employer-info i {
+	font-size: 1.2em;
+	padding: 3px 0 12px;
+}
+.employer-info p {
+	
+}
 /*my-profile.xhtml Starts */
 #profileInfo input[type="text"]::-webkit-input-placeholder {
 color: #B9B7B6 !important;
@@ -1580,5 +1586,9 @@ form .helper-form-field.error .bttm-icon {
 }
 .job-image {
 	width: 120px;
-	height: 120px
+	max-height: 120px
+}
+.job-detail {
+	width: 180px;
+	height: 180px;
 }

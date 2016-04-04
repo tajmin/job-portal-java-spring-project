@@ -10,12 +10,12 @@
 			</ul>
 			<div class="tabs-content job-detail-content" data-tabs-content="job-detail-tabs">
 				<div class="tabs-panel is-active" id="detail">
-					<div class="row">
-						<div class="medium-3 columns text-center">
-							<img ng-if="(job.imageUrl !== null &amp;&amp; job.imageUrl !== '')" class="border-radius-7px" src="/img/{{job.imageUrl}}" alt="Job Image" />
-							<img ng-if="(job.imageUrl == null || job.imageUrl == '')" class="border-radius-7px" src="#{request.contextPath}/resources/assets/images/postjob/default_job.png" alt="Job Image" />							
+					<div class="row large-collapse" style="margin: 15px 0 20px;">
+						<div class="medium-5 columns">
+							<img ng-if="(job.imageUrl !== null &amp;&amp; job.imageUrl !== '')" class="job-detail" src="/img/{{job.imageUrl}}" alt="Job Image" />
+							<img ng-if="(job.imageUrl == null || job.imageUrl == '')" class="job-detail" src="#{request.contextPath}/resources/assets/images/postjob/default_job.png" alt="Job Image" />							
 						</div>
-						<div class="medium-9 columns detail-section">
+						<div class="medium-7 columns detail-section">
 							<div class="row">
 								<div class="medium-12 columns">
 									<!-- <h6 class="bold">{{job.title}}</h6> -->
@@ -30,7 +30,7 @@
 							</div>
 							<div class="row">
 								<div class="medium-12 columns">
-									<a ng-click="saveJobInterest()" class="button hlpr-color-success border-radius-5px" style="margin-bottom: 10px">Show Interest</a>									
+									<a ng-click="saveJobInterest()" class="button hlpr-color-success border-radius-5px">Show Interest</a>									
 								</div>
 							</div>
 						</div>
@@ -66,21 +66,22 @@
 							</div>
 							<div class="row">
 								<div class="medium-12 columns" style="color: #26c6e8">
-									<p style="font-size: .75rem;">{{employer.address}}</p>
+									<p style="font-size: .85em; padding-bottom: 10px;">{{employer.address}}</p>
 								</div>
 							</div>
 							<div class="row" style="color: #26c6e8">
-								<div class="small-3 columns">
+								<div class="medium-4 columns">
 									<i class="fa fa-star"></i>
 									<i class="fa fa-star"></i>
 									<i class="fa fa-star"></i>
 									<i class="fa fa-star-half-o"></i>
 									<i class="fa fa-star-o"></i>
-									<a href="#" style="color: black; font-size: .8rem">See reviews</a>
+									<br></br>
+									<a href="#" style="color: black; font-size: .80rem">See reviews</a>
 								</div>
-								<div class="small-9 columns">
-									<span>90% Performed Jobs Posted</span><br />
-									<span>100% Done Job</span>
+								<div class="medium-8 columns">
+									<p style="font-size: .80em;">90% Performed Jobs Posted <br />
+									100% Done Job</p>
 								</div>
 							</div>							
 						</div>
