@@ -8,12 +8,12 @@
 			<ui:insert name="profile-response-modal"></ui:insert>
 			<form name="profileEditForm">
 				<div class="cover">
-					<canvas id="user_cover_image" class="cover-image" style="background-image: url(/userimg/{{(user.backgroundImageUrl != '')? user.backgroundImageUrl : '' }})"></canvas>
+					<canvas id="user_cover_image" class="cover-image" style="background-image: url(/userimg/{{(user.backgroundImageUrl != '')? user.backgroundImageUrl : '' }})" ></canvas>
 					<!-- <canvas class="cover-image" style=""></canvas> -->
 					<div class="row expanded profile-img">
 						<div class="small-2 small-centered columns">
 							<div class="thumbnail">
-								<img ng-click="openFileDialogue();" id="user_thumbnail_image" src="/userimg/{{(user.backgroundImageUrl != '')? user.backgroundImageUrl : '' }}" alt="Add Photo" />
+								<img ng-click="openFileDialogue();" id="user_thumbnail_image" src="/userimg/{{user.backgroundImageUrl}}" onerror="this.src='/userimg/default_job.png'"/>
 								<input type="file" id="userImageFileUpload" class="show-for-sr" file-model = "imageFile" onchange="angular.element(this).scope().imageUpload(this)" />
 							</div>
 						</div>
