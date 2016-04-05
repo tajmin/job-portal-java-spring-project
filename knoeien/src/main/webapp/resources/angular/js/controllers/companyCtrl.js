@@ -117,9 +117,43 @@ Controllers.controller("ClientCtrl", function($scope, $rootScope, restservice, $
 	$scope.updateUser = function(id) {
 		//if() return;
 
-		restservice.post( $scope.user, "api/v1/user/updateuser?id=" + id).then(function(response) {
+		restservice.post( $scope.userList, "api/v1/user/updateuser?id=" + id).then(function(response) {
 			if (response != null) {
 				$scope.isproceed = true;
+				$scope.responseMessage = response.message;
+        	} 
+			
+        });
+		
+    };
+});
+
+Controllers.controller("HelperCtrl", function($scope, $rootScope, restservice, $cookies, $http) {
+	$scope.isproceed = false;
+	$scope.company = {};
+	$scope.formSubmitted = false;
+	$scope.responseMessage = "";
+	
+	$scope.showCompany = function() {
+		console.log("shows company info");
+		restservice.get('', "api/v1/company/showcompanyinfo").then(function(response) {
+			if (response != null) {
+				$scope.company = response; 
+			} else {
+				$scope.responseMessage = response.message;
+			}
+		});
+
+	};
+	$scope.showCompany();
+
+	
+	$scope.updateCompany = function() {
+		//if() return;
+
+		restservice.post( $scope.company, "api/v1/company/editcompany").then(function(response) {
+			if (response != null) {
+				//$scope.isproceed = true;
 				$scope.responseMessage = response.message;
         	} 
 			

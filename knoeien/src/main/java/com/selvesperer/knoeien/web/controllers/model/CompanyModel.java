@@ -5,6 +5,8 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.Calendar;
 
+import com.selvesperer.knoeien.data.domain.Company;
+
 public class CompanyModel implements Serializable {
 
 	private static final long serialVersionUID = -4601977999718229676L;
@@ -46,6 +48,26 @@ public class CompanyModel implements Serializable {
 	private BigDecimal costPerLicense = BigDecimal.ZERO.setScale(2, RoundingMode.HALF_UP);
 	
 	private String adminId;
+	
+	private String vat;
+	
+	private String promocode;
+	
+	private String salescode;
+	
+	private String id;
+	
+	public CompanyModel() {}
+	
+	public CompanyModel(Company company) {
+		super();
+		this.setName(company.getName());
+		this.setDescription(company.getDescription());
+		this.setVat(company.getVat());
+		this.setPromocode(company.getPromocode());
+		this.setSalescode(company.getSalescode());
+		this.setId(company.getId());
+	}
 	
 	public String getName() {
 		return name;
@@ -197,6 +219,38 @@ public class CompanyModel implements Serializable {
 
 	public void setAdminId(String adminId) {
 		this.adminId = adminId;
+	}
+
+	public String getVat() {
+		return vat;
+	}
+
+	public void setVat(String vat) {
+		this.vat = vat;
+	}
+
+	public String getPromocode() {
+		return promocode;
+	}
+
+	public void setPromocode(String promocode) {
+		this.promocode = promocode;
+	}
+
+	public String getSalescode() {
+		return salescode;
+	}
+
+	public void setSalescode(String salescode) {
+		this.salescode = salescode;
+	}
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
 	}
 
 }
