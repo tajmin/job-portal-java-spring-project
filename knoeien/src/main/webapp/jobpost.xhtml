@@ -42,8 +42,8 @@
 				
 				<div class="row text-center">
 					<a  href="javascript:void(0);" ng-click="formSubmitted = true; draftJob(jobPostingForm.$valid, true);" class="button hlpr-color-alert helper-tab-button">Save Draft</a>
-					<a href="javascript:void(0);" ng-if="!filter.isnext" ng-click="formSubmitted = true; openPaymentWindow(jobPostingForm.$valid);" class="button hlpr-color-success helper-tab-button">Post</a>
-					<a href="javascript:void(0);" ng-show="filter.isnext" ng-click="formSubmitted = true; nextPage(jobPostingForm.$valid);" class="button hlpr-color-success helper-tab-button">Next</a> 										
+					<a href="javascript:void(0);" ng-if="isPost()" ng-click="formSubmitted = true; openPaymentWindow(jobPostingForm.$valid);" class="button hlpr-color-success helper-tab-button">Post</a>
+					<a href="javascript:void(0);" ng-if="!isPost()" ng-click="formSubmitted = true; nextPage(jobPostingForm.$valid);" class="button hlpr-color-success helper-tab-button">Next</a> 										
 				</div>				
 			</form>			
 		</div>		
