@@ -336,5 +336,18 @@ public class UserServiceImpl implements UserService {
 		user.setActive(false);
 		userRepository.saveAndFlush(user);
 	}
+
+	@Override
+	public void updateUserById(UserModel userModel, String id) {
+		User user = userRepository.findUserById(id);
+		
+		if (user == null) {
+			throw new AuthenticationFailedException("error.usernotfound.text");
+		}
+		
+		user.setFirstName(userModel.getFirstName());
+		user.setLastName(userModel.getLastName());
+		userRepository.saveAndFlush(user);
+	}
 	
 }

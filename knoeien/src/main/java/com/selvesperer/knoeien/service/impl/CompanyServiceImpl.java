@@ -24,8 +24,8 @@ public class CompanyServiceImpl implements CompanyService {
 	
 	@Override
 	public Company findCompanyById(String id) {
-		// TODO Auto-generated method stub
-		return null;
+		Company company = companyRepository.findCompanyById(id);
+		return company;
 	}
 	
 	@Override
@@ -33,6 +33,15 @@ public class CompanyServiceImpl implements CompanyService {
 		return companyRepository.saveAndFlush(new Company(companyModel));
 	}
 
-
+	@Override
+	public void updateComapny(CompanyModel companyModel, String id) {
+		Company company = companyRepository.findCompanyById(id);
+		
+		company.setVat(companyModel.getVat());
+		company.setPromocode(companyModel.getPromocode());
+		company.setSalescode(companyModel.getSalescode());
+		companyRepository.saveAndFlush(company);
+		
+	}
 	
 }

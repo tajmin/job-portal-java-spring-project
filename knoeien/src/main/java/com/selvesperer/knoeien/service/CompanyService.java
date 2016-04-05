@@ -8,4 +8,7 @@ public interface CompanyService {
 	public Company findCompanyById(String id);
 
 	public Company saveCompany(CompanyModel companyModel);
+	
+	public void updateComapny(CompanyModel companyModel, String id);
+	
 }

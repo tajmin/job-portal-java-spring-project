@@ -84,6 +84,16 @@ public class Company extends AuditableEntity {
 
 	@Column(name = "admin_id", length = 36)
 	private String adminId;
+	
+	@Column(name = "vat", length = 20)
+	private String vat;
+	
+	@Column(name = "promocode", length = 20)
+	private String promocode;
+	
+	@Column(name = "salescode", length = 20)
+	private String salescode;
+
 
 	public Company() {}
 	
@@ -242,6 +252,30 @@ public class Company extends AuditableEntity {
 
 	public void setAdminId(String adminId) {
 		this.adminId = adminId;
+	}
+	
+	public String getVat() {
+		return vat;
+	}
+
+	public void setVat(String vat) {
+		this.vat = vat;
+	}
+	
+	public String getPromocode() {
+		return promocode;
+	}
+
+	public void setPromocode(String promocode) {
+		this.promocode = promocode;
+	}
+	
+	public String getSalescode() {
+		return salescode;
+	}
+
+	public void setSalescode(String salescode) {
+		this.salescode = salescode;
 	}
 
 	@JsonIgnore

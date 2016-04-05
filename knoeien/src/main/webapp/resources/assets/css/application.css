@@ -1497,7 +1497,8 @@ label.helper-label {
 textarea {
 	border-radius: 7px;
 	background-color: #f4f4f2;
-	border-color: transparent;
+	border-color: #f4f4f2;
+	box-shadow: none;
 }
 .button {
 	border-radius: 5px;

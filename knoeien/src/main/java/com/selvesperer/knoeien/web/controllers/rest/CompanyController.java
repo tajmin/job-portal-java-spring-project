@@ -14,8 +14,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.selvesperer.knoeien.data.domain.Company;
+import com.selvesperer.knoeien.exception.AuthenticationFailedException;
+import com.selvesperer.knoeien.security.SecurityManager;
 import com.selvesperer.knoeien.service.CompanyService;
 import com.selvesperer.knoeien.spring.utils.ApplicationBeanFactory;
+import com.selvesperer.knoeien.utils.localization.LocalizationUtil;
 import com.selvesperer.knoeien.web.controllers.model.RestResponse;
 import com.selvesperer.knoeien.web.controllers.model.CompanyModel;
 
@@ -45,6 +48,42 @@ public class CompanyController extends AbstractController implements Serializabl
 			Messages.addGlobalError(ex.getMessage());
 		}
 		return new ResponseEntity<RestResponse>(convertToRestGoodResponse(company), HttpStatus.OK);
+	}
+	
+	@RequestMapping(value = "/editcompany", method = RequestMethod.POST, produces = "application/json")
+	public ResponseEntity<RestResponse> editCompany(@RequestBody CompanyModel companyModel) {
+		RestResponse restResponse = null;
+		if (log.isDebugEnabled()) log.debug("Edit Company");		
+		try {
+			CompanyService companyService = ApplicationBeanFactory.getBean(CompanyService.class);
+			String id = SecurityManager.getCurrentCompanyId();
+			companyService.updateComapny(companyModel, id);
+			return new ResponseEntity<RestResponse>(convertToRestGoodResponse(null, LocalizationUtil.findLocalizedString("updatecompanysuccess.text")),HttpStatus.OK);
+		} catch (AuthenticationFailedException t) {
+			restResponse = convertToRestBadResponse("", t.getLocalizedMessage());
+		} catch (Exception t) {
+			restResponse = convertToRestBadResponse("", t.getLocalizedMessage());
+		}
+		return new ResponseEntity<RestResponse>( restResponse, HttpStatus.OK);
+	}
+	
+	@RequestMapping(value = "/showcompanyinfo", method = RequestMethod.GET, produces = "application/json")
+	public ResponseEntity<RestResponse> showCompanyInfo() {
+		RestResponse restResponse = null;
+		if (log.isDebugEnabled()) log.debug("Show Company Info");		
+		try {
+			CompanyService companyService = ApplicationBeanFactory.getBean(CompanyService.class);
+			String id = SecurityManager.getCurrentCompanyId();
+			Company company = companyService.findCompanyById(id);
+			CompanyModel companyModel = new CompanyModel(company);
+
+			return new ResponseEntity<RestResponse>( convertToRestGoodResponse(companyModel, LocalizationUtil.findLocalizedString("")),HttpStatus.OK);
+		} catch (AuthenticationFailedException t) {
+			restResponse = convertToRestBadResponse("", t.getLocalizedMessage());
+		} catch (Exception t) {
+			restResponse = convertToRestBadResponse("", t.getLocalizedMessage());
+		}
+		return new ResponseEntity<RestResponse>( restResponse, HttpStatus.OK);
 	}
 
 }
