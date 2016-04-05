@@ -4,6 +4,7 @@ import java.io.IOException;
 import javax.servlet.FilterConfig;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
+import javax.servlet.http.HttpServletResponse;
 
 import org.apache.shiro.authc.LockedAccountException;
 import org.apache.shiro.web.filter.authc.UserFilter;
@@ -17,7 +18,8 @@ public class ApplicationSecurityFilter extends UserFilter {
     protected void redirectToLogin(ServletRequest req, ServletResponse res) throws IOException {
     	if (log.isDebugEnabled()) log.debug("Here auto-login will attempt from shiro"); 
     	try {
-	    	// Do logic here.
+	    	HttpServletResponse response = (HttpServletResponse) res; 		
+    		response.sendRedirect("/knoeien/index.xhtml");
     	} catch (LockedAccountException le) {
     		super.redirectToLogin(req, res);
 
