@@ -46,4 +46,6 @@ public interface UserService {
 	public List<User> findAllUser();
 	
 	public void deleteUserById(String id);
+	
+	public void updateUserById(UserModel userModel, String id);
 }

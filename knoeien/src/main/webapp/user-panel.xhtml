@@ -11,7 +11,7 @@
 							<img class="border-radius-7px" src="/userimg/{{model.backgroundImageUrl}}" alt="Slider Image" />
 						</div>
 						<div class="medium-2 columns">
-							<h4>{{model.firstName}}</h4>
+							<input type="text" name="firstName" placeholder="First Name" maxlength="50" ng-model="model.firstName" />
 						</div>
 						<div class="medium-2 columns">
 							<h4>{{model.lastName}}</h4>
@@ -22,7 +22,8 @@
 							<h4 ng-if="(model.active)">Active: True</h4>
 						</div>
 						<div class="medium-2 columns">
-							<a ng-click="deleteUser(model.id);" class="button helper-color-alert">Delete Image</a>
+							<a ng-click="deleteUser(model.id);" class="button helper-color-alert">Delete</a>
+							<a ng-click="updateUser(model.id);" class="button helper-color-alert">Update</a>
 						</div>
 					</div>
 				
