@@ -84,7 +84,7 @@ Controllers.controller("sliderImgCtrl", function($scope, $rootScope, restservice
 	
 });
 
-Controllers.controller("ClientCtrl", function($scope, $rootScope, restservice, $cookies, $http, authService) {
+Controllers.controller("ClientCtrl", function($scope, $rootScope, restservice, $cookies, $http, $window, utilservice) {
 	$scope.isproceed = false;
 	$scope.user = {};
 	$scope.userList = {};
@@ -126,6 +126,10 @@ Controllers.controller("ClientCtrl", function($scope, $rootScope, restservice, $
         });
 		
     };
+    
+    $scope.select = function(id) {
+    	window.open($rootScope.getBaseUrl() + "/client-detail.xhtml?id=" + id,	"_self");
+    }
 });
 
 Controllers.controller("HelperCtrl", function($scope, $rootScope, restservice, $cookies, $http) {
