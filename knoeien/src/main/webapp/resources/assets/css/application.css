@@ -1133,71 +1133,74 @@ line-height: 1.75em;
 	padding: 3px 0 12px;
 }
 /*my-profile.xhtml Starts */
-#profileInfo input[type="text"]::-webkit-input-placeholder {
+.panel-cls input[type="text"]::-webkit-input-placeholder {
 color: #B9B7B6 !important;
 font-size: 0.7em;
 line-height: 1.70em;
 }
  
-#profileInfo input[type="text"]:-moz-placeholder { /* Firefox 18- */
+.panel-cls input[type="text"]:-moz-placeholder { /* Firefox 18- */
 color: #B9B7B6 !important; 
 font-size: 0.7em;
 line-height: 1.0em;
 }
  
-#profileInfo input[type="text"]::-moz-placeholder {  /* Firefox 19+ */
+.panel-cls input[type="text"]::-moz-placeholder {  /* Firefox 19+ */
 color: #B9B7B6 !important; 
 font-size: 0.7em;
 line-height: 1.0em;
 }
  
-#profileInfo input[type="text"]:-ms-input-placeholder {  
+.panel-cls input[type="text"]:-ms-input-placeholder {  
 color: #B9B7B6 !important;
 font-size: 0.7em;
 line-height: 1.0em;  
 }
-#profileInfo textarea {
+.panel-cls textarea {
 	height: 145px; 
 	resize: none;
 }
-#profileInfo textarea::-webkit-input-placeholder {
+.panel-cls textarea::-webkit-input-placeholder {
 color: #B9B7B6 !important;
 font-size: 0.7em;
 line-height: 1.75em;
 padding: 10px 10px;
 }
  
-#profileInfo textarea:-moz-placeholder { /* Firefox 18- */
+.panel-cls textarea:-moz-placeholder { /* Firefox 18- */
 color: #B9B7B6 !important; 
 font-size: 0.7em;
 line-height: 1.75em;
 padding: 10px 10px;
 }
  
-#profileInfo textarea::-moz-placeholder {  /* Firefox 19+ */
+.panel-cls textarea::-moz-placeholder {  /* Firefox 19+ */
 color: #B9B7B6 !important; 
 font-size: 0.7em;
 line-height: 1.75em;
 padding: 10px 10px;
 }
  
-#profileInfo textarea:-ms-input-placeholder {  
+.panel-cls textarea:-ms-input-placeholder {  
 color: #B9B7B6 !important;
 font-size: 0.7em;
 line-height: 1.75em; 
 padding: 10px 10px;
 }
 
-#profileInfo label {
+.panel-cls label {
 	font-size: 0.75em;
 	color: #3A3938;
 	line-height: 2.7;
 }
-#profileInfo a {
-	border-radius: 7px;
-	padding: 12px 20px;
+.panel-cls a {
 	width: 100%;
-	font-size: 0.85em;
+	font-size: 0.9em;
+}
+.panel-cls p {
+	font-weight: bold;
+	font-size: 20px;
+	line-height: 1.7;
 }
 /*my-profile.xhtml Ends*/
 

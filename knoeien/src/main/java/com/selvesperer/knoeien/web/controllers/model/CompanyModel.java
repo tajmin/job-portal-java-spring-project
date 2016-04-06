@@ -62,6 +62,7 @@ public class CompanyModel implements Serializable {
 	public CompanyModel(Company company) {
 		super();
 		this.setName(company.getName());
+		this.setEmail(company.getEmail());
 		this.setDescription(company.getDescription());
 		this.setVat(company.getVat());
 		this.setPromocode(company.getPromocode());

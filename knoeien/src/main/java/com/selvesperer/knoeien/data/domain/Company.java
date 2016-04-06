@@ -100,6 +100,10 @@ public class Company extends AuditableEntity {
 	public Company(CompanyModel companyModel) {
 		super();
 		this.setName(companyModel.getName());
+		this.setEmail(companyModel.getEmail());
+		this.setVat(companyModel.getVat());
+		this.setSalescode(companyModel.getSalescode());
+		this.setPromocode(companyModel.getPromocode());
 	}
 
 	public String getName() {

@@ -129,9 +129,9 @@ Controllers.controller("ClientCtrl", function($scope, $rootScope, restservice, $
 });
 
 Controllers.controller("HelperCtrl", function($scope, $rootScope, restservice, $cookies, $http) {
-	$scope.isproceed = false;
+	//$scope.isproceed = false;
 	$scope.company = {};
-	$scope.formSubmitted = false;
+	//$scope.formSubmitted = false;
 	$scope.responseMessage = "";
 	
 	$scope.showCompany = function() {
@@ -139,6 +139,7 @@ Controllers.controller("HelperCtrl", function($scope, $rootScope, restservice, $
 		restservice.get('', "api/v1/company/showcompanyinfo").then(function(response) {
 			if (response != null) {
 				$scope.company = response; 
+				$scope.responseMessage = response.message;
 			} else {
 				$scope.responseMessage = response.message;
 			}
