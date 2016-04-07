@@ -1,0 +1,27 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets">
+	<div class="row wrapper-content" >
+		<div class="medium-12 columns" ng-controller="ClientCtrl">
+			<div class="row collapse search-list" ng-repeat="model in userList"  ng-click="select(model.id)">
+				<div class="medium-1 columns">
+					<img ng-if="(model.backgroundImageUrl !== null &amp;&amp; model.backgroundImageUrl !== '')" class="border-radius-7px" src="/userimg/{{model.backgroundImageUrl}}" alt="Job Image" style="width: 70px; height: 70px;" />
+					<img ng-if="(model.backgroundImageUrl == null || model.backgroundImageUrll == '')" class="border-radius-7px" src="#{request.contextPath}/resources/assets/images/postjob/default_job.png" alt="Job Image" style="width: 70px; height: 70px;" />
+				</div>
+				<div class="medium-11 columns">
+					<div class="row">
+						<div class="medium-6 columns">
+							<h6 class="bold">{{model.fullName}}</h6>
+						</div>
+						<div class="medium-6 columns text-right">
+							<a href="#">Joined | {{model.createdDate}}</a>
+						</div>
+					</div>
+					<div class="row">
+						<div class="medium-12 columns">
+							<a>Address | {{model.address}}</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</ui:composition>

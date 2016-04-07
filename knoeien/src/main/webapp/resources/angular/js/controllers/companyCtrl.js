@@ -84,12 +84,13 @@ Controllers.controller("sliderImgCtrl", function($scope, $rootScope, restservice
 	
 });
 
-Controllers.controller("ClientCtrl", function($scope, $rootScope, restservice, $cookies, $http, authService) {
+Controllers.controller("ClientCtrl", function($scope, $rootScope, restservice, $cookies, $http, $window, utilservice) {
 	$scope.isproceed = false;
 	$scope.user = {};
 	$scope.userList = {};
 	$scope.formSubmitted = false;
 	$scope.responseMessage = "";
+	$scope.id = utilservice.getParameterByName("id");
 	
 	$scope.showUser = function() {
 		console.log("shows user list");
@@ -126,12 +127,26 @@ Controllers.controller("ClientCtrl", function($scope, $rootScope, restservice, $
         });
 		
     };
+    
+    $scope.select = function(id) {
+    	window.open($rootScope.getBaseUrl() + "/client-details.xhtml?id=" + id,	"_self");
+    }
+    
+    $scope.clientDetailsById = function(clientId) {			
+		restservice.get( '', "api/v1/user/showuserbyid?id=" + clientId).then(function(response) {
+			if (response != null) {
+				$scope.user = response;
+        	}
+        });
+	
+    };
+    $scope.clientDetailsById($scope.id);
 });
 
 Controllers.controller("HelperCtrl", function($scope, $rootScope, restservice, $cookies, $http) {
-	$scope.isproceed = false;
+	//$scope.isproceed = false;
 	$scope.company = {};
-	$scope.formSubmitted = false;
+	//$scope.formSubmitted = false;
 	$scope.responseMessage = "";
 	
 	$scope.showCompany = function() {
@@ -139,6 +154,7 @@ Controllers.controller("HelperCtrl", function($scope, $rootScope, restservice, $
 		restservice.get('', "api/v1/company/showcompanyinfo").then(function(response) {
 			if (response != null) {
 				$scope.company = response; 
+				$scope.responseMessage = response.message;
 			} else {
 				$scope.responseMessage = response.message;
 			}

@@ -1,0 +1,28 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition template="templates/angular-template.xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core">
+	<ui:define name="content">
+		
+			
+		<ul class="tabs row expanded text-center custom-tabs arrow-bottom green" data-tabs="data-tabs" id="profile-tabs">
+			<li class="tabs-title is-active medium-4 columns"><a href="#panel1" aria-selected="true">Company Panel</a></li>
+		  	<li class="tabs-title medium-4 columns"><a href="#panel2">Client Panel</a></li>
+		  	<li class="tabs-title medium-4 columns"><a href="#panel3">Slider Panel</a></li>
+		</ul>
+		<div class="tabs-content" data-tabs-content="profile-tabs">
+		  <div class="tabs-panel is-active" id="panel1">
+		    <ui:include src="dashboard/company-panel.xhtml"></ui:include>
+		  </div>
+		   
+		  <div class="tabs-panel" id="panel2">
+		    <ui:include src="dashboard/client-panel.xhtml"></ui:include>
+		  </div>
+		  
+		  <div class="tabs-panel" id="panel3">
+		    <ui:include src="profile/proceed-payment.xhtml"></ui:include>
+		  </div>
+		
+		</div>
+	
+	</ui:define>
+</ui:composition>

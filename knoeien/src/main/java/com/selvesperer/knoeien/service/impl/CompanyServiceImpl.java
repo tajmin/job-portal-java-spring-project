@@ -24,7 +24,7 @@ public class CompanyServiceImpl implements CompanyService {
 	
 	@Override
 	public Company findCompanyById(String id) {
-		Company company = companyRepository.findCompanyById(id);
+		Company company = companyRepository.findCompanyById();
 		return company;
 	}
 	
@@ -35,12 +35,18 @@ public class CompanyServiceImpl implements CompanyService {
 
 	@Override
 	public void updateComapny(CompanyModel companyModel, String id) {
-		Company company = companyRepository.findCompanyById(id);
+		Company company = companyRepository.findCompanyById();
 		
-		company.setVat(companyModel.getVat());
-		company.setPromocode(companyModel.getPromocode());
-		company.setSalescode(companyModel.getSalescode());
-		companyRepository.saveAndFlush(company);
+		if(company == null) {
+			//companyModel.setName("Helper Limited");
+			companyRepository.saveAndFlush(new Company(companyModel));
+		} else {
+			company.setVat(companyModel.getVat());
+			company.setPromocode(companyModel.getPromocode());
+			company.setSalescode(companyModel.getSalescode());
+			company.setName(companyModel.getName());
+			companyRepository.saveAndFlush(company);
+		}
 		
 	}
 	
