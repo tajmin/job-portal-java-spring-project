@@ -3,28 +3,28 @@
 <ui:composition template="templates/two-column.xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core">
 
 	<ui:define name="left-content">
-		<div>
+		<div ng-controller="jobOutCtrl">
 			<ul class="tabs custom-tabs arrow-bottom green" data-tabs="data-tabs" id="job-out-tabs">
 	  			<li class="tabs-title is-active"><a href="#messenger">Messenger</a></li>
 	  			<li class="tabs-title"><a href="#assessment">Assessment</a></li>
 	  			<li class="tabs-title"><a href="#nearest">Nearest</a></li>
 			</ul>
 			
-			<div class="tabs-content job-list" data-tabs-content="job-out-tabs">
+			<div class="tabs-content job-list" data-tabs-content="job-out-tabs" >
 				<div class="row" style="margin-top: 15px;">
-					<div class="small-9 small-push-3 lead">Job Title</div>
-					<div class="small-9 small-push-3">Job description</div>
+					<div class="small-9 small-push-3 lead"><p>{{jobdetails.jobTitle}} </p></div>
+					<div class="small-9 small-push-3"><p>{{jobdetails.jobDescription}} </p> </div>
 				</div>
 				<div class="tabs-panel is-active" id="messenger">
-					<div class="row search-list">
-						<div class="medium-3 columns text-center">
-							<img class="border-radius-7px" src="#{request.contextPath}/resources/assets/images/postjob/default_job.png" alt="Job Image" />
-							<div>Name</div>
+					<div class="row search-list" ng-repeat="model in interesteduserlist" >
+						<div class="medium-3 columns text-center" ng-click="selectinteresteduser(model.firstname);">
+							<img class="border-radius-7px" src="/userimg/{{model.backgroundImageUrl}}" onerror="this.src='/userimg/default_job.png'" alt="Job Image" />
+							<div><p>{{model.firstname}} {{model.lastname}}</p></div>
 						</div>
 						<div class="medium-9 columns">
 							<div class="row">
 								<div class="medium-6 columns">
-									<h6 class="bold">380kr</h6>
+									<h6 class="bold">{{model.price}} Kr</h6>
 								</div>
 								<div class="medium-6 columns text-right">
 									<i class="fa fa-commenting-o" style="color: #6dbf54; font-size: 2rem; margin-right: 30px;"></i>
@@ -42,7 +42,7 @@
 									100% done
 								</div>
 								<div class="small-12 columns">
-									See reviews
+									See reviews {{selecteduser}}
 								</div>
 							</div>
 							<div class="row" style="margin-top: -7px;">
@@ -58,22 +58,24 @@
 		</div>
 	</ui:define>
 	<ui:define name="right-content">
-    	<div class="chat-section">
+    	<div class="chat-section" ng-controller="jobOutCtrl">
     		<form action="" style="margin-top: 10px;">
-    			<div class="row">
-    				<div class="small-6 columns lead" style="line-height: 64px;">Full Name</div>
-    				<div class="small-6 columns text-right chat-notification">
-    					<a href="#">
-    						<img src="#{request.contextPath}/resources/assets/images/user-2.png" alt="User name" />
+    			<div class="row" >
+    				<div class="small-6 columns lead" style="line-height: 64px;"><p>{{selecteduser}}</p></div>
+    				<div class="small-6 columns text-right chat-notification" >
+    					<a href="#" ng-repeat="model in interesteduserlist">
+    						<img src="/userimg/{{model.backgroundImageUrl}}" onerror="this.src='/userimg/default_job.png'" alt="User Image" />
+    						<span class="badge alert">{{model.countMessageId}}</span>
     					</a>
-    					<a href="#">
-    						<img src="#{request.contextPath}/resources/assets/images/user-1.png" alt="User name" />
-    						<span class="badge alert">2</span>
-    					</a>
-    					<a href="#" class="add-user">
+<!--     					<a href="#"> -->
+<!--     						<img src="#{request.contextPath}/resources/assets/images/user-1.png" alt="User name" /> -->
+<!--     						<span class="badge alert">2</span> -->
+<!--     					</a> -->
+							<a href="#" class="add-user">
     						<i class="fa fa-plus"></i>
     					</a>
     				</div>
+    				
     			</div>
 	    		<ul class="no-bullet" style="height: 50vh;">
 	    			<li class="me">
