@@ -750,6 +750,8 @@ Controllers.controller("jobDetailsCtrl", function($scope, $rootScope, restservic
 	$scope.filter.page = 1;
 	$scope.filter.moreLink = true;
 	$scope.id = utilservice.getParameterByName("id");
+	$scope.messages = [];
+	//$scope.newMessage = "";
 	
 	$window.map = new google.maps.Map(document.getElementById('g-map'), {
         center: {
@@ -855,6 +857,7 @@ Controllers.controller("jobDetailsCtrl", function($scope, $rootScope, restservic
     $scope.getAllJobs = function() {
     	$scope.interestjobs=[]; 
     	$scope.filter.page = 1; 
+    	$scope.chat = false;
     	$scope.getAllJobByInterestedUserId();
     };
     $scope.getAllJobByInterestedUserId = function() {	
@@ -889,4 +892,13 @@ Controllers.controller("jobDetailsCtrl", function($scope, $rootScope, restservic
     $scope.selectJob = function(jobid){
     	window.open($rootScope.getBaseUrl() + "/jobdetail.xhtml?id=" + jobid,	"_self");
     }
+    
+    
+    // chat part
+    $scope.getLowestBidAmount = function() {
+    	if(utilservice.isUndefinedOrNull($scope.newMessage)){
+    		return;
+    	}
+    }
+    
 });
