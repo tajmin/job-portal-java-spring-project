@@ -1,6 +1,7 @@
 package com.selvesperer.knoeien.web.controllers.model;
 
 import java.io.Serializable;
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -17,17 +18,23 @@ public class MessageModel implements Serializable {
 	private static final long serialVersionUID = -4472403961193063417L;
 	
 	
-	//member var
 	private String toUserId;
 	private String fromUserId;
 	private String userMessage;
 	private String jobId;
 	private Calendar sendDateTime;
-	//member var ends
 	
+	private String price;
+	private String bidAmount;
+	private String firstname;
+	private String lastname;
+	private String userId;
+	private String messageId;
+	private String backgroundImageUrl;
+	private BigInteger countMessageId;
+	private String jobTitle;
+	private String jobDescription;
 	
-	
-	//getter -setter
 	public String getToUserId() {
 		return toUserId;
 	}
@@ -58,8 +65,83 @@ public class MessageModel implements Serializable {
 	public void setSendDateTime(Calendar sendDateTime) {
 		this.sendDateTime = sendDateTime;
 	}
-	//getter setter ends
 	
+	
+	public String getPrice() {
+		return price;
+	}
+	public void setPrice(String price) {
+		this.price = price;
+	}
+	
+	
+	public String getLastname() {
+		return lastname;
+	}
+	public void setLastname(String lastname) {
+		this.lastname = lastname;
+	}
+	
+	
+	public String getUserId() {
+		return userId;
+	}
+	public void setUserId(String id) {
+		this.userId = id;
+	}
+	
+	
+	public String getMessageId() {
+		return messageId;
+	}
+	public void setMessageId(String messageId) {
+		this.messageId = messageId;
+	}
+	
+	
+	public String getBackgroundImageUrl() {
+		return backgroundImageUrl;
+	}
+	public void setBackgroundImageUrl(String backgroundImageUrl) {
+		this.backgroundImageUrl = backgroundImageUrl;
+	}
+	
+	
+	public BigInteger getCountMessageId() {
+		return countMessageId;
+	}
+	public void setCountMessageId(BigInteger countMessageId) {
+		this.countMessageId = countMessageId;
+	}
+	
+	
+	public String getFirstname() {
+		return firstname;
+	}
+	public void setFirstname(String firstname) {
+		this.firstname = firstname;
+	}
+	
+	public String getBidAmount() {
+		return bidAmount;
+	}
+	public void setBidAmount(String bidAmount) {
+		this.bidAmount = bidAmount;
+	}
+	
+	
+	public String getJobTitle() {
+		return jobTitle;
+	}
+	public void setJobTitle(String jobTitle) {
+		this.jobTitle = jobTitle;
+	}
+	public String getJobDescription() {
+		return jobDescription;
+	}
+	public void setJobDescription(String jobDescription) {
+		this.jobDescription = jobDescription;
+	}
 	//cons
 	public MessageModel(){}
 	
