@@ -461,14 +461,21 @@ Controllers.controller("addJobCtrl", function($scope, $rootScope, restservice, $
 	
 	$scope.fullImageUrl=function(imageUrl){
 		if (!imageUrl) {
-			imageUrl = "";
 			return "";
-			}
+		}
 				
 		return '/img/'+imageUrl;
 	}
 	
-	//@start this portion is responsible to edit draft job 
+
+	$scope.isPost = function(isValid) {
+		if ($scope.page >= 3) {
+			return true;
+		}
+		return false;
+	};
+	
+	// @start this portion is responsible to edit draft job
 	$scope.jobId = utilservice.getParameterByName("id");
 	if(!utilservice.isUndefinedOrNull($scope.jobId)){
 		$scope.jobDetailsById = function(jobId) {			

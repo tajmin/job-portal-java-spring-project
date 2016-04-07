@@ -160,19 +160,19 @@
 	</error-page>
 	<error-page>
 		<exception-type>java.lang.Throwable</exception-type>
-		<location>/error.xhtml</location>
+		<location>/error-page.xhtml</location>
 	</error-page>
 	<error-page>
 		<error-code>500</error-code>
-		<location>/error.xhtml</location>
+		<location>/error-page.xhtml</location>
 	</error-page>
 	<error-page>
 		<error-code>401</error-code>
-		<location>/401-not-authorized.xhtml</location>
+		<location>/error-page.xhtml</location>
 	</error-page>
 	<error-page>
 		<error-code>404</error-code>
-		<location>/pageNotFound.xhtml</location>
+		<location>/error-page.xhtml</location>
 	</error-page>
 	
 	<mime-mapping>

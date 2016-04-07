@@ -56,7 +56,8 @@ public class CompanyController extends AbstractController implements Serializabl
 		if (log.isDebugEnabled()) log.debug("Edit Company");		
 		try {
 			CompanyService companyService = ApplicationBeanFactory.getBean(CompanyService.class);
-			String id = SecurityManager.getCurrentCompanyId();
+			//String id = SecurityManager.getCurrentCompanyId();
+			String id = "";
 			companyService.updateComapny(companyModel, id);
 			return new ResponseEntity<RestResponse>(convertToRestGoodResponse(null, LocalizationUtil.findLocalizedString("updatecompanysuccess.text")),HttpStatus.OK);
 		} catch (AuthenticationFailedException t) {
@@ -73,7 +74,8 @@ public class CompanyController extends AbstractController implements Serializabl
 		if (log.isDebugEnabled()) log.debug("Show Company Info");		
 		try {
 			CompanyService companyService = ApplicationBeanFactory.getBean(CompanyService.class);
-			String id = SecurityManager.getCurrentCompanyId();
+			//String id = SecurityManager.getCurrentCompanyId();
+			String id = "";
 			Company company = companyService.findCompanyById(id);
 			CompanyModel companyModel = new CompanyModel(company);
 

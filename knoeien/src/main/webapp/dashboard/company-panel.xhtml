@@ -1,0 +1,77 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets">
+	<div class="row wrapper-content" >
+		<div class="panel-cls medium-12 columns" ng-controller="HelperCtrl">
+			<form name="companyForm">
+			<div class="row">
+				<div class="medium-12 columns text-center">
+					<h4 style="margin-bottom: 2.5em">{{company.name}}</h4>
+				</div>
+				<div class="medium-6 columns">
+					<div class="row collapse">
+				    	<div class="medium-3 columns">
+				        	<label class="right inline">Company Name</label>
+				        </div>
+				        <div class="medium-9 columns">
+					    	<input type="text" required="required" name="" placeholder="" maxlength="50" ng-model="company.name" />
+					    </div>
+			      	</div>
+			      	<div class="row collapse">
+				  		<div class="medium-3 columns">
+				    		<label class="right inline">E-Mail Address</label>
+				 		</div>
+				    	<div class="medium-9 columns">
+				    		<input type="text" required="required" name="email" placeholder="e-mail" maxlength="100" ng-model="company.email" />
+				    	</div>
+			      	</div>
+			      	<div class="row collapse">
+				  		<div class="medium-3 columns">
+				    		<label class="right inline">Sales Code</label>
+				 		</div>
+				    	<div class="medium-9 columns">
+				    		<input type="text" required="required" name="" placeholder="Sales Code" maxlength="100" ng-model="company.salescode" />
+				    	</div>
+			      	</div>  
+			      	<div class="row collapse">
+				  		<div class="medium-3 columns">
+				    		<label class="right inline">Overall VAT</label>
+				 		</div>
+				    	<div class="medium-9 columns">
+				    		<div class="row collapse">
+				    			<div class="medium-11 columns">
+				    				<input type="text" id="searchplace" placeholder="VAT in %" maxlength="512" ng-model="company.vat" />
+				    			</div>
+				    			<div class="medium-1 columns text-center">
+				    				<p class="right inline"> % </p>
+				    			</div>
+				    		</div>
+				    	</div>
+			      	</div>    
+				</div>				
+				<div class="medium-6 columns">
+					<div class="row">
+				  		<div class="medium-3 columns">
+				    		<label class="right inline">Promo Code</label>
+				 		</div>
+				    	<div class="medium-9 columns">
+				    		<input type="text" placeholder="Promo Code" maxlength="15" ng-model="company.promocode" />
+				    	</div>
+			      	</div>
+			      	<div class="row">
+				  		<div class="medium-3 columns">
+				    		<label class="right inline">Place</label>
+				 		</div>
+				    	<div class="medium-9 columns">
+				    		<input type="text" placeholder="" />
+				    	</div>
+			      	</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="medium-3 medium-centered columns text-center">
+					<a ng-click="updateCompany();" class="button hlpr-color-success" style="margin: 6em 0 -4em">Save Info</a>
+				</div>
+			</div>
+			</form>
+		</div>
+	</div>
+</ui:composition>
