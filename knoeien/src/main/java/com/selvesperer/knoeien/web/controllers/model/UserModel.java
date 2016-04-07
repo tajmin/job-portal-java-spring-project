@@ -6,6 +6,7 @@ import java.util.Calendar;
 import java.util.List;
 
 import com.selvesperer.knoeien.data.domain.User;
+import com.selvesperer.knoeien.utils.DateFormatUtils;
 
 public class UserModel implements Serializable {
 
@@ -99,6 +100,8 @@ public class UserModel implements Serializable {
 	
 	private String id;
 	
+	private String createdDate;
+	
 	public UserModel() {}
 	
 	public UserModel(User user) {
@@ -136,6 +139,7 @@ public class UserModel implements Serializable {
 		this.setLongitude(user.getLongitude());
 		this.setId(user.getId());
 		this.setActive(user.isActive());
+		this.setCreatedDate(DateFormatUtils.getWebFormattedDateString(user.getCreatedDate()));
 	}
 	
 	public List<UserModel> getUserModelList(List<User> userList) {
@@ -497,6 +501,14 @@ public class UserModel implements Serializable {
 
 	public void setId(String id) {
 		this.id = id;
+	}
+
+	public String getCreatedDate() {
+		return createdDate;
+	}
+
+	public void setCreatedDate(String createdDate) {
+		this.createdDate = createdDate;
 	}
 
 }

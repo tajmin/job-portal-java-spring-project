@@ -15,6 +15,6 @@ public interface CompanyRepository extends JpaRepository<Company, String>, Compa
 	@Query("from Company c where c.id = :companyID")
 	List<Company> findListCompanyById(@Param("companyID") String companyID);
 	
-	@Query("from Company c where c.id = :companyID")
-	Company findCompanyById(@Param("companyID") String companyID);	
+	@Query("from Company c")
+	Company findCompanyById();	
 }
