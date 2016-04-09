@@ -36,7 +36,7 @@
 						<div class="row">
 							<div class="medium-12 columns text-center">
 		        				<h5 ng-if="(user.active)" style="color: #6bbe54;">Status  |  Active</h5>
-		        				<h5 ng-if="(!user.active)" style="color: #6bbe54">Deactivated Account</h5>
+		        				<h5 ng-if="(!user.active)" style="color: red">Status  |  Deactivated</h5>
 		    				</div>
 						</div>
 					</div>
@@ -159,7 +159,7 @@
 							</div>
 							<div class="medium-9 columns">
 								<div class="switch round">
-									<input type="checkbox" value="" id="delete" /><label for="delete"></label>
+									<input type="checkbox" id="delete" ng-model="user.deactivate"/><label for="delete"></label>
 								</div>
 							</div>
 						</div>
@@ -168,8 +168,8 @@
 			</div>
 			<div class="medium-12 columns">
 				<div class="row">
-					<div class="medium-4 medium-offset-8 columns">
-						<a ng-click="updateClient();" class="button hlpr-color-success">Save Info</a>
+					<div class="medium-3 medium-offset-9 columns">
+						<a ng-click="updateUser(user.id);" class="button hlpr-color-success" style="width: 100%;">Save Info</a>
 					</div>
 				</div>
 			</div>
