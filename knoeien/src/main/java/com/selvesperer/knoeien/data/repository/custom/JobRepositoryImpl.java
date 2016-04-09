@@ -70,6 +70,7 @@ public class JobRepositoryImpl implements JobRepositoryCustom {
 		StringBuffer queryString = new StringBuffer();
 		queryString.append("select j.id, j.title, j.price, j.image_url, j.draft from job j");
 		queryString.append(" where j.created_by_id= '" + id +"'");
+		queryString.append(" order by j.created_date desc");
 		
 		Query query = entityManager.createNativeQuery(queryString.toString());
 		
@@ -99,6 +100,7 @@ public class JobRepositoryImpl implements JobRepositoryCustom {
 		StringBuffer queryString = new StringBuffer();
 		queryString.append("select j.id, j.title, j.price, j.image_url from job j");
 		queryString.append(" where j.assigned_user_id= '" + id +"'");
+		queryString.append(" order by j.created_date desc");
 		
 		Query query = entityManager.createNativeQuery(queryString.toString());
 		
