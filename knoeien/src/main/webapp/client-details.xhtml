@@ -1,0 +1,179 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition template="templates/angular-template.xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core">
+	<ui:define name="content">
+		<ul class="tabs row expanded text-center custom-tabs arrow-bottom green" id="profile-tabs">
+			<li class="tabs-title medium-4 columns"><a href="dashboard.xhtml">Company Panel</a></li>
+		  	<li class="tabs-title medium-4 columns"><a href="dashboard.xhtml">Client Panel</a></li>
+		  	<li class="tabs-title medium-4 columns"><a href="dashboard.xhtml">Slider Panel</a></li>
+		</ul>
+		<div class="client-detail row wrapper-content" ng-controller="ClientCtrl">
+			<div class="medium-12 columns">
+				<div class="row">
+					<div class="left-pan medium-4 columns" >
+						<div class="row">
+							<div class="medium-12 columns text-center">
+								<img ng-if="(user.backgroundImageUrl !== null &amp;&amp; user.backgroundImageUrl !== '')" class="border-radius-7px" src="/userimg/{{user.backgroundImageUrl}}" alt="Job Image" />
+								<img ng-if="(user.backgroundImageUrl == null || user.backgroundImageUrll == '')" class="border-radius-7px" src="#{request.contextPath}/resources/assets/images/postjob/default_job.png" alt="Job Image"  />
+							</div>					
+						</div>
+						<div class="row">
+							<div class="medium-12 columns text-center">
+								<h4>{{user.fullName}}</h4>
+							</div>
+						</div>
+						<div class="row">
+							<div class="medium-8 medium-centered columns text-center">
+								<h6>{{user.address}}</h6>
+								<span style="font-size: 0.85em;">Joined |</span><span style="color: #49A132; font-size: 0.85em;"> {{user.createdDate}}</span>
+							</div>
+						</div>
+						<div class="row">
+							<div class="medium-12 columns">
+		        				<p>{{user.aboutMe}}</p>
+		    				</div>
+						</div>
+						<div class="row">
+							<div class="medium-12 columns text-center">
+		        				<h5 ng-if="(user.active)" style="color: #6bbe54;">Status  |  Active</h5>
+		        				<h5 ng-if="(!user.active)" style="color: red">Status  |  Deactivated</h5>
+		    				</div>
+						</div>
+					</div>
+					<div class="medium-7 columns">
+						<div class="row">
+							<div class="medium-2 columns">
+								<label class="right inline">Name</label>
+							</div>
+							<div class="medium-10 columns">
+								<div class="row">
+									<div class="medium-6 columns">
+										<input type="text" name="firstName" maxlength="50" ng-model="user.firstName" />
+									</div>
+									<div class="medium-6 columns">
+										<input type="text" maxlength="50" ng-model="user.lastName" />
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="medium-2 columns">
+							    	<label class="right inline">Telephone</label>
+								</div>
+							<div class="medium-10 columns">
+								<input type="text"  maxlength="20" ng-model="user.phone" />
+							</div>
+						</div>
+						<div class="row">
+							<div class="medium-2 columns">
+						    	<label class="right inline">E-Post</label>
+						 	</div>
+							<div class="medium-10 columns">
+								<input type="text"  maxlength="100" ng-model="user.email" />
+							</div>
+						</div>
+						<div class="row">
+							<div class="medium-2 columns">
+						    	<label class="right inline">Address</label>
+						 	</div>
+							<div class="medium-10 columns">
+								<div class="row">
+									<div class="medium-7 columns">
+										<input type="text" maxlength="512" ng-model="user.address" />
+									</div>
+									<div class="medium-1 columns">
+							    		<label class="right inline">Nr</label>
+							    	</div>
+							    	<div class="medium-4 columns">
+							    		<input type="text" maxlength="50" ng-model="user.houseNumber"/>
+							    	</div>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="medium-3 columns">
+						    	<label class="right inline">Post Code</label>
+						 	</div>
+						    <div class="medium-9 columns">
+						    	<input type="text"  maxlength="15" ng-model="user.postcode" />
+						    </div>
+						</div>
+						<div class="row">
+							<div class="medium-3 columns">
+						    	<label for="" class="right inline">Place</label>
+						 	</div>
+						    <div class="medium-9 columns">
+						    	<input type="text" ng-model="user.location"/>
+						    </div>	
+						</div>
+						<div class="row">
+							<div class="medium-3 columns">
+								<label class="right inline">Card Number</label>
+							</div>
+							<div class="medium-9 columns">
+								<input type="text" maxlength="50" ng-model="user.cardNumber" />
+							</div>
+						</div>
+						<div class="row">
+							<div class="medium-3 columns">
+								<label class="right inline">Cardholder's Name</label>
+							</div>
+							<div class="medium-9 columns">
+								<input type="text" maxlength="128" ng-model="user.cardholderName" />
+							</div>
+						</div>
+						<div class="row">
+							<div class="medium-3 columns">
+								<label class="right inline">Account number</label>
+							</div>
+							<div class="medium-9 columns">
+								<input type="text" maxlength="50" ng-model="user.accountNumber" />
+							</div>
+						</div>
+						<div class="row">
+							<div class="medium-3 columns">
+								<label class="right inline">Date</label>
+							</div>
+							<div class="medium-9 columns">
+								<div class="row">
+									<div class="medium-5 columns">
+										<input type="text" maxlength="02"  ng-model="user.cardMonth" />
+									</div>
+									<div class="medium-7 columns">
+										<input type="text" maxlength="04" ng-model="user.cardYear" />
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="medium-3 columns">
+								<label class="right inline">CVC</label>
+							</div>
+							<div class="medium-9 columns">
+								<input type="text" maxlength="03" ng-model="user.cvc" />
+							</div>
+						</div>
+						<div class="row">
+							<div class="medium-3 columns">
+								<label class="right inline" style="color: red">Deactivate</label>
+							</div>
+							<div class="medium-9 columns">
+								<div class="switch round">
+									<input type="checkbox" id="delete" ng-model="user.deactivate"/><label for="delete"></label>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="medium-12 columns">
+				<div class="row">
+					<div class="medium-3 medium-offset-9 columns">
+						<a ng-click="updateUser(user.id);" class="button hlpr-color-success" style="width: 100%;">Save Info</a>
+					</div>
+				</div>
+			</div>
+			
+		</div>
+	</ui:define>
+</ui:composition>

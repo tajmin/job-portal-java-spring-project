@@ -90,6 +90,8 @@ Controllers.controller("ClientCtrl", function($scope, $rootScope, restservice, $
 	$scope.userList = {};
 	$scope.formSubmitted = false;
 	$scope.responseMessage = "";
+	$scope.user.deactivate = false;
+	$scope.id = utilservice.getParameterByName("id");
 	
 	$scope.showUser = function() {
 		console.log("shows user list");
@@ -116,8 +118,14 @@ Controllers.controller("ClientCtrl", function($scope, $rootScope, restservice, $
 	
 	$scope.updateUser = function(id) {
 		//if() return;
+	
+		if($scope.user.deactivate) {
+			$scope.user.active = false;
+		} else {
+			$scope.user.active = true;
+		}
 
-		restservice.post( $scope.userList, "api/v1/user/updateuser?id=" + id).then(function(response) {
+		restservice.post( $scope.user, "api/v1/user/updateuser?id=" + id).then(function(response) {
 			if (response != null) {
 				$scope.isproceed = true;
 				$scope.responseMessage = response.message;
@@ -128,8 +136,23 @@ Controllers.controller("ClientCtrl", function($scope, $rootScope, restservice, $
     };
     
     $scope.select = function(id) {
-    	window.open($rootScope.getBaseUrl() + "/client-detail.xhtml?id=" + id,	"_self");
+    	window.open($rootScope.getBaseUrl() + "/client-details.xhtml?id=" + id,	"_self");
     }
+    
+    $scope.clientDetailsById = function(clientId) {		
+		restservice.get( '', "api/v1/user/showuserbyid?id=" + clientId).then(function(response) {
+			if (response != null) {
+				$scope.user = response;
+				if($scope.user.active) {
+					$scope.user.deactivate = false;
+				} else {
+					$scope.user.deactivate = true;
+				}
+        	}
+        });
+	
+    };
+    $scope.clientDetailsById($scope.id);
 });
 
 Controllers.controller("HelperCtrl", function($scope, $rootScope, restservice, $cookies, $http) {

@@ -345,8 +345,7 @@ public class UserServiceImpl implements UserService {
 			throw new AuthenticationFailedException("error.usernotfound.text");
 		}
 		
-		user.setFirstName(userModel.getFirstName());
-		user.setLastName(userModel.getLastName());
+		user.setActive(userModel.isActive());
 		userRepository.saveAndFlush(user);
 	}
 	

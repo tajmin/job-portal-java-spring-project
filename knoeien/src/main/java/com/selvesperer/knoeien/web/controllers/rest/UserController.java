@@ -504,4 +504,21 @@ public class UserController extends AbstractController implements Serializable {
 		return new ResponseEntity<RestResponse>( restResponse, HttpStatus.OK);
 		
 	}
+	
+	@RequestMapping(value = "/showuserbyid", method = RequestMethod.GET, produces = "application/json")
+	public ResponseEntity<RestResponse> showUserById(@RequestParam(value = "id", required = true) String userId) {
+		RestResponse restResponse = null;
+		
+		try { 
+			UserService userService = ApplicationBeanFactory.getBean(UserService.class);
+			User user = userService.showUserInfo(userId);
+			UserModel userModel = new UserModel(user);
+			return new ResponseEntity<RestResponse>( convertToRestGoodResponse(userModel, LocalizationUtil.findLocalizedString("")),HttpStatus.OK);
+		} catch (AuthenticationFailedException t) {
+			restResponse = convertToRestBadResponse("", t.getLocalizedMessage());
+		} catch (Exception t) {
+			restResponse = convertToRestBadResponse("", t.getLocalizedMessage());
+		}
+		return new ResponseEntity<RestResponse>( restResponse, HttpStatus.OK);
+	}
 }
