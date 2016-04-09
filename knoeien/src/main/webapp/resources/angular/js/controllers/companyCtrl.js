@@ -90,6 +90,7 @@ Controllers.controller("ClientCtrl", function($scope, $rootScope, restservice, $
 	$scope.userList = {};
 	$scope.formSubmitted = false;
 	$scope.responseMessage = "";
+	$scope.id = utilservice.getParameterByName("id");
 	
 	$scope.showUser = function() {
 		console.log("shows user list");
@@ -128,8 +129,18 @@ Controllers.controller("ClientCtrl", function($scope, $rootScope, restservice, $
     };
     
     $scope.select = function(id) {
-    	window.open($rootScope.getBaseUrl() + "/client-detail.xhtml?id=" + id,	"_self");
+    	window.open($rootScope.getBaseUrl() + "/client-details.xhtml?id=" + id,	"_self");
     }
+    
+    $scope.clientDetailsById = function(clientId) {			
+		restservice.get( '', "api/v1/user/showuserbyid?id=" + clientId).then(function(response) {
+			if (response != null) {
+				$scope.user = response;
+        	}
+        });
+	
+    };
+    $scope.clientDetailsById($scope.id);
 });
 
 Controllers.controller("HelperCtrl", function($scope, $rootScope, restservice, $cookies, $http) {

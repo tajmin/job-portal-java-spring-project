@@ -1,176 +1,177 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <ui:composition template="templates/jobdetail-two-column.xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core">
-	<div>
-	<ui:define name="left-content-col">
+	<ui:define name="full-content">
 		<div ng-controller="jobDetailsCtrl">
-			<ul class="tabs row expanded text-center custom-tabs arrow-bottom green" data-tabs="data-tabs" id="job-detail-tabs">
-				<li class="tabs-title medium-6 columns is-active"><a ng-click="jobDetailsById(id);" href="#detail" aria-selected="true">Job Detail</a></li>
-				<li class="tabs-title medium-6 columns"><a ng-click="getAllJobs();" href="#interest">My Interest</a></li>
-			</ul>
-			<div class="tabs-content job-detail-content" data-tabs-content="job-detail-tabs">
-				<div class="tabs-panel is-active" id="detail">
-					<div class="row large-collapse" style="margin: 15px 0 20px;">
-						<div class="medium-5 columns">
-							<img ng-if="(job.imageUrl !== null &amp;&amp; job.imageUrl !== '')" class="job-detail" src="/img/{{job.imageUrl}}" alt="Job Image" />
-							<img ng-if="(job.imageUrl == null || job.imageUrl == '')" class="job-detail" src="#{request.contextPath}/resources/assets/images/postjob/default_job.png" alt="Job Image" />							
-						</div>
-						<div class="medium-7 columns detail-section">
-							<div class="row">
-								<div class="medium-12 columns">
-									<!-- <h6 class="bold">{{job.title}}</h6> -->
-									<label class="helper-label" style="font-weight: bold;">{{job.title}}</label>
-								</div>
+			<div class="medium-5 columns" style="position: relative;">
+				<ul class="tabs row expanded text-center custom-tabs arrow-bottom green" data-tabs="data-tabs" id="job-detail-tabs">
+					<li class="tabs-title medium-6 columns is-active"><a ng-click="jobDetailsById(id);" href="#detail" aria-selected="true">Job Detail</a></li>
+					<li class="tabs-title medium-6 columns"><a ng-click="getAllJobs();" href="#interest">My Interest</a></li>
+				</ul>
+				<div class="tabs-content job-detail-content" data-tabs-content="job-detail-tabs">
+					<div class="tabs-panel is-active" id="detail">
+						<div class="row large-collapse" style="margin: 15px 0 20px;">
+							<div class="medium-5 columns">
+								<img ng-if="(job.imageUrl !== null &amp;&amp; job.imageUrl !== '')" class="job-detail" src="/img/{{job.imageUrl}}" alt="Job Image" />
+								<img ng-if="(job.imageUrl == null || job.imageUrl == '')" class="job-detail" src="#{request.contextPath}/resources/assets/images/postjob/default_job.png" alt="Job Image" />							
 							</div>
-							<div class="row">
-								<div class="medium-12 columns">
-									<p style="font-size: .75em; font-weight: bold; margin-bottom: 0;">Job description</p>
-									<p style="font-size: .75em; margin-bottom: 0;">{{job.description}}</p>
+							<div class="medium-7 columns detail-section">
+								<div class="row">
+									<div class="medium-12 columns">
+										<!-- <h6 class="bold">{{job.title}}</h6> -->
+										<label class="helper-label" style="font-weight: bold;">{{job.title}}</label>
+									</div>
 								</div>
-							</div>
-							<div class="row">
-								<div class="medium-12 columns">
-									<a ng-click="saveJobInterest()" class="button hlpr-color-success border-radius-5px">Show Interest</a>									
+								<div class="row">
+									<div class="medium-12 columns">
+										<p style="font-size: .75em; font-weight: bold; margin-bottom: 0;">Job description</p>
+										<p style="font-size: .75em; margin-bottom: 0;">{{job.description}}</p>
+									</div>
 								</div>
-							</div>
-						</div>
-					</div>
-					
-					<div class="row background-color-grey job-bid-info">
-						<div class="small-6 columns">
-							<div class="input-group">
-								<span class="input-group-label border-radius-5px-left" style="width: 50%;">Last Bid</span>
-								<input ng-disabled="true" ng-model="lowestBid" type="text" class="input-group-field text-right border-radius-5px-right" />
-							</div>
-						</div>
-						<div class="small-6 columns">
-							<div class="input-group">
-								<a ng-click="jobInterest.bidAmount = decrement(jobInterest.bidAmount)" class="input-group-label border-radius-5px-left" style="width: 25%;" >-</a>
-								<input ng-model="jobInterest.bidAmount" id="bid-amount" type="text" class="input-group-field text-center" />
-								<a ng-click="jobInterest.bidAmount = increment(jobInterest.bidAmount)" class="input-group-label border-radius-5px-right" style="width: 25%;" >+</a>
-							</div>
-						</div>
-					</div>
-					<div class="row employer-info" style="padding-bottom: 0px;">
-						<div class="medium-3 columns text-center">
-							<div class="thumbnail">
-								<img ng-if="(employer.backgroundImageUrl !== null &amp;&amp; employer.backgroundImageUrl !== '')" src="/userimg/{{employer.backgroundImageUrl}}" width="128px" alt="Employer" />
-								<img ng-if="(employer.backgroundImageUrl == null || employer.backgroundImageUrl == '')" src="#{request.contextPath}/resources/assets/images/postjob/default_job.png" width="128px" alt="Employer" />
-							</div>
-						</div>
-						<div class="medium-9 columns detail-section" style="height: 130px">
-							<div class="row">
-								<div class="medium-12 columns">
-									<h6 class="bold" style="margin-bottom: 0px;">{{employer.fullName}}</h6>
-								</div>
-							</div>
-							<div class="row">
-								<div class="medium-12 columns" style="color: #26c6e8">
-									<p style="font-size: .85em; padding-bottom: 10px;">{{employer.address}}</p>
-								</div>
-							</div>
-							<div class="row" style="color: #26c6e8">
-								<div class="medium-4 columns">
-									<i class="fa fa-star"></i>
-									<i class="fa fa-star"></i>
-									<i class="fa fa-star"></i>
-									<i class="fa fa-star-half-o"></i>
-									<i class="fa fa-star-o"></i>
-									<br></br>
-									<a href="#" style="color: black; font-size: .80rem">See reviews</a>
-								</div>
-								<div class="medium-8 columns">
-									<p style="font-size: .80em;">90% Performed Jobs Posted <br />
-									100% Done Job</p>
-								</div>
-							</div>							
-						</div>
-					</div>
-					<div class="row job-location-info" style="padding: 10px 0; font-size: .75rem;">
-						<div class="small-6 columns"><i class="fa fa-caret-up fa-3" style="margin-right: 1rem; font-size: 1rem;"></i> Place</div>
-						<div class="small-6 columns text-right">{{job.addressLine1}}</div>
-					</div>
-					<div class="row background-color-grey" style="padding: 10px 0; font-size: .75rem;">
-						<div class="small-6 columns"><i class="fa fa-caret-up fa-3" style="margin-right: 1rem; font-size: 1rem;"></i> Date Posted</div>
-						<div class="small-6 columns text-right">{{job.createdDate}}</div>
-					</div>
-					<div class="row" style="padding: 10px 0; font-size: .75rem;">
-						<div class="small-6 columns"><i class="fa fa-caret-up fa-3" style="margin-right: 1rem; font-size: 1rem;"></i> Length of Job</div>
-						<div class="small-6 columns text-right">{{job.hours}}:{{job.minutes}} hours</div>
-					</div>
-					<div class="row background-color-grey" style="padding: 10px 0; font-size: .75rem;">
-						<div class="small-6 columns"><i class="fa fa-caret-up fa-3" style="margin-right: 1rem; font-size: 1rem;"></i> deadline</div>
-						<div class="small-6 columns text-right">{{job.deadline}}</div>
-					</div>
-				</div>
-				<div class="tabs-panel" id="interest">
-					<div class="row search-list" ng-repeat="model in interestjobs" ng-click="selectJob(model.id)">
-						<div class="medium-3 columns text-center">
-							<img ng-if="(model.imageUrl !== null &amp;&amp; model.imageUrl !== '')" class="border-radius-7px" src="/img/{{model.imageUrl}}" alt="Job Image" />
-							<img ng-if="(model.imageUrl == null || model.imageUrl == '')" class="border-radius-7px" src="#{request.contextPath}/resources/assets/images/postjob/default_job.png" alt="Job Image" />
-						</div>
-						<div class="medium-9 columns">
-							<div class="row">
-								<div class="medium-6 columns">
-									<h6 class="bold">{{model.title}}</h6>
-								</div>
-								<div class="medium-6 columns text-right">
-									<a href="#">posted | {{model.whenPosted}}</a>
-								</div>
-							</div>
-							<div class="row">
-								<div class="medium-12 columns">
-									<a>{{model.addressLine1}}</a>
-								</div>
-							</div>
-							<div class="row" style="margin-top: 50px; font-size: 12px">
-								<div class="small-4 columns">
-									<span><i class="fi-play transform-rotate-270deg"></i></span>
-									<span>{{model.price}},- timen</span>
-								</div>
-								<div class="small-4 columns">
-									<span><i class="fi-play transform-rotate-270deg"></i></span>
-									<span>about time {{model.hours}}:{{model.minutes}} hours</span>
-								</div>
-								<div class="small-4 columns">
-									<span><i class="fi-play transform-rotate-270deg"></i></span>
-									<span>deadline {{model.deadline}}</span>
+								<div class="row">
+									<div class="medium-12 columns">
+										<a ng-click="saveJobInterest()" class="button hlpr-color-success border-radius-5px">Show Interest</a>									
+									</div>
 								</div>
 							</div>
 						</div>
+						
+						<div class="row background-color-grey job-bid-info">
+							<div class="small-6 columns">
+								<div class="input-group">
+									<span class="input-group-label border-radius-5px-left" style="width: 50%;">Last Bid</span>
+									<input ng-disabled="true" ng-model="lowestBid" type="text" class="input-group-field text-right border-radius-5px-right" />
+								</div>
+							</div>
+							<div class="small-6 columns">
+								<div class="input-group">
+									<a ng-click="jobInterest.bidAmount = decrement(jobInterest.bidAmount)" class="input-group-label border-radius-5px-left" style="width: 25%;" >-</a>
+									<input ng-model="jobInterest.bidAmount" id="bid-amount" type="text" class="input-group-field text-center" />
+									<a ng-click="jobInterest.bidAmount = increment(jobInterest.bidAmount)" class="input-group-label border-radius-5px-right" style="width: 25%;" >+</a>
+								</div>
+							</div>
+						</div>
+						<div class="row employer-info" style="padding-bottom: 0px;">
+							<div class="medium-3 columns text-center">
+								<div class="thumbnail">
+									<img ng-if="(employer.backgroundImageUrl !== null &amp;&amp; employer.backgroundImageUrl !== '')" src="/userimg/{{employer.backgroundImageUrl}}" width="128px" alt="Employer" />
+									<img ng-if="(employer.backgroundImageUrl == null || employer.backgroundImageUrl == '')" src="#{request.contextPath}/resources/assets/images/postjob/default_job.png" width="128px" alt="Employer" />
+								</div>
+							</div>
+							<div class="medium-9 columns detail-section" style="height: 130px">
+								<div class="row">
+									<div class="medium-12 columns">
+										<h6 class="bold" style="margin-bottom: 0px;">{{employer.fullName}}</h6>
+									</div>
+								</div>
+								<div class="row">
+									<div class="medium-12 columns" style="color: #26c6e8">
+										<p style="font-size: .85em; padding-bottom: 10px;">{{employer.address}}</p>
+									</div>
+								</div>
+								<div class="row" style="color: #26c6e8">
+									<div class="medium-4 columns">
+										<i class="fa fa-star"></i>
+										<i class="fa fa-star"></i>
+										<i class="fa fa-star"></i>
+										<i class="fa fa-star-half-o"></i>
+										<i class="fa fa-star-o"></i>
+										<br></br>
+										<a href="#" style="color: black; font-size: .80rem">See reviews</a>
+									</div>
+									<div class="medium-8 columns">
+										<p style="font-size: .80em;">90% Performed Jobs Posted <br />
+										100% Done Job</p>
+									</div>
+								</div>							
+							</div>
+						</div>
+						<div class="row job-location-info" style="padding: 10px 0; font-size: .75rem;">
+							<div class="small-6 columns"><i class="fa fa-caret-up fa-3" style="margin-right: 1rem; font-size: 1rem;"></i> Place</div>
+							<div class="small-6 columns text-right">{{job.addressLine1}}</div>
+						</div>
+						<div class="row background-color-grey" style="padding: 10px 0; font-size: .75rem;">
+							<div class="small-6 columns"><i class="fa fa-caret-up fa-3" style="margin-right: 1rem; font-size: 1rem;"></i> Date Posted</div>
+							<div class="small-6 columns text-right">{{job.createdDate}}</div>
+						</div>
+						<div class="row" style="padding: 10px 0; font-size: .75rem;">
+							<div class="small-6 columns"><i class="fa fa-caret-up fa-3" style="margin-right: 1rem; font-size: 1rem;"></i> Length of Job</div>
+							<div class="small-6 columns text-right">{{job.hours}}:{{job.minutes}} hours</div>
+						</div>
+						<div class="row background-color-grey" style="padding: 10px 0; font-size: .75rem;">
+							<div class="small-6 columns"><i class="fa fa-caret-up fa-3" style="margin-right: 1rem; font-size: 1rem;"></i> deadline</div>
+							<div class="small-6 columns text-right">{{job.deadline}}</div>
+						</div>
 					</div>
-					<a href="" ng-click="getAllJobByInterestedUserId();" ng-if="filter.moreLink">Show More</a>
+					<div class="tabs-panel" id="interest">
+						<div class="row search-list" ng-repeat="model in interestjobs" ng-click="selectJob(model.id)">
+							<div class="medium-3 columns text-center">
+								<img ng-if="(model.imageUrl !== null &amp;&amp; model.imageUrl !== '')" class="border-radius-7px" src="/img/{{model.imageUrl}}" alt="Job Image" />
+								<img ng-if="(model.imageUrl == null || model.imageUrl == '')" class="border-radius-7px" src="#{request.contextPath}/resources/assets/images/postjob/default_job.png" alt="Job Image" />
+							</div>
+							<div class="medium-9 columns">
+								<div class="row">
+									<div class="medium-6 columns">
+										<h6 class="bold">{{model.title}}</h6>
+									</div>
+									<div class="medium-6 columns text-right">
+										<a href="#">posted | {{model.whenPosted}}</a>
+									</div>
+								</div>
+								<div class="row">
+									<div class="medium-12 columns">
+										<a>{{model.addressLine1}}</a>
+									</div>
+								</div>
+								<div class="row" style="margin-top: 50px; font-size: 12px">
+									<div class="small-4 columns">
+										<span><i class="fi-play transform-rotate-270deg"></i></span>
+										<span>{{model.price}},- timen</span>
+									</div>
+									<div class="small-4 columns">
+										<span><i class="fi-play transform-rotate-270deg"></i></span>
+										<span>about time {{model.hours}}:{{model.minutes}} hours</span>
+									</div>
+									<div class="small-4 columns">
+										<span><i class="fi-play transform-rotate-270deg"></i></span>
+										<span>deadline {{model.deadline}}</span>
+									</div>
+								</div>
+							</div>
+						</div>
+						<a href="" ng-click="getAllJobByInterestedUserId();" ng-if="filter.moreLink">Show More</a>
+					</div>
 				</div>
 			</div>
-		</div>
-	</ui:define>
-	<ui:define name="right-content-col">
-		<div>
-    	<div id="g-map" style="width:100%;height:98vh;"></div>
-    	
-    	<div class="chat-section" ng-if="chat==true">
-    		<form action="">
-	    		<ul class="no-bullet">
-	    			<li class="me">
-	    				<div>
-	    					Hi,<br />Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-	    				</div>
-	    				<img src="#{request.contextPath}/resources/assets/images/Xprofile_pic.png" />
-    				</li>
-	    			<li class="other">
-	    				<div>
-	    					Hi,<br />Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-	    				</div>
-    					<img src="#{request.contextPath}/resources/assets/images/woman.jpg" />
-    				</li>
-	    		</ul>
-	    		<textarea placeholder="Write your message..." rows="3" />
-	    		<div class="text-right">
-	    			<a href="#" type="submit" class="button hlpr-color-info border-radius-7px">Send</a>
-	    		</div>
-    		</form>
-    	</div>
-    	</div>
-	</ui:define>
-	</div>
+			
+			<div class="medium-7 columns" style="position: relative;">
+				<div id="g-map" style="width:100%;height:98vh;"></div>
+		    	<div class="chat-section" ng-if="chat==true">
+		    		<form name="chatForm" novalidate="true">
+			    		<ul class="no-bullet">
+			    			<li class="me">
+			    				<div>
+			    					Hi,<br />Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+			    				</div>
+			    				<img src="#{request.contextPath}/resources/assets/images/Xprofile_pic.png" />
+		    				</li>
+			    			<li class="other">
+			    				<div>
+			    					Hi,<br />Lorem Ipsum is simply dummy text of the printing and typesetting industry. {{formSubmitted}}
+			    				</div>
+		    					<img src="#{request.contextPath}/resources/assets/images/woman.jpg" />
+		    				</li>
+			    		</ul>
+			    		<div class="helper-form-field" ng-class="(formSubmitted &amp;&amp; chatForm.newMessage.$error.required == true)? 'error' : ''" >
+			    			<textarea name="newMessage" required="required" placeholder="Write your message..." rows="3" />
+			    			<div class="icon fi-info" ng-class="(formSubmitted &amp;&amp; chatForm.newMessage.$error.required == true)? '' : 'hide'"></div>
+			    		</div>
+			    		<div class="text-right">
+			    			<a ng-click="formSubmitted = true;" type="submit" class="button hlpr-color-info border-radius-7px">Send</a>
+			    		</div>
+		    		</form>
+		    	</div>
+			</div>	
+		</div>	
+	</ui:define>	
 </ui:composition>
