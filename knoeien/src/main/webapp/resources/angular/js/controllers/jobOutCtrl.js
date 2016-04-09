@@ -8,8 +8,10 @@ Controllers.controller("jobOutCtrl", function($scope, $rootScope, restservice, $
 	$scope.jobdetails={};
 	$scope.selectinteresteduser={};
 	$scope.selecteduser="";
-	$scope.jobId=utilservice.getParameterByName("jobId");
-	//$scope.jobId="46002544-3650-uuid-8f9c-8b0641fd1fea";
+	$scope.selectedusersmessage={};
+	$scope.userId="";
+	//$scope.jobId=utilservice.getParameterByName("jobId");
+	$scope.jobId="46002544-3650-uuid-8f9c-8b0641fd1fea";
 	$scope.jobOutLists = function() {
 		
 		console.log("Loading Job out List");
@@ -26,9 +28,23 @@ Controllers.controller("jobOutCtrl", function($scope, $rootScope, restservice, $
 	};
 	$scope.jobOutLists();
 	
-	$scope.selectinteresteduser= function(id){
+	$scope.selectinteresteduser= function(firstName,lastName,userMessage,imageUrl,Id){
 		$scope.isproceed = false;
-		$scope.selecteduser=id;
-		alert("www"+id);
+		$scope.selecteduser=firstName+" "+lastName;
+		$scope.selectedusersmessage=userMessage;
+		$scope.selectedusersimage=imageUrl;
+		
+		$(".comments").removeClass("fa-commenting-o");
+		$("#comments-" +Id).addClass("fa-commenting-o");
+		
+		
+		
+		console.log("Loading Job out Users Message List");
+//		restservice.get('', "api/v1/jobOut/getJobOutSentMessageListById?id=" +userId).then(function(response) {
+//			if (response != null) {
+//				$scope.selectedusersmessage=response;
+//				$scope.responseMessage = response.message;
+//			} 
+//		});
 	}
 });
