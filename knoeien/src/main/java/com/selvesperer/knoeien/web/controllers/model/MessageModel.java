@@ -5,27 +5,22 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
-import com.selvesperer.knoeien.data.domain.Job;
 import com.selvesperer.knoeien.data.domain.Message;
-import com.selvesperer.knoeien.utils.DateFormatUtils;
 
 public class MessageModel implements Serializable {
-
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -4472403961193063417L;
 	
-	
 	//member var
+	private String id;
 	private String toUserId;
 	private String fromUserId;
 	private String userMessage;
 	private String jobId;
 	private Calendar sendDateTime;
 	//member var ends
-	
-	
+	private String toUserBackgroundImageUrl;
+	private String fromUserBackgroundImageUrl;
+	private String me;
 	
 	//getter -setter
 	public String getToUserId() {
@@ -58,8 +53,30 @@ public class MessageModel implements Serializable {
 	public void setSendDateTime(Calendar sendDateTime) {
 		this.sendDateTime = sendDateTime;
 	}
-	//getter setter ends
-	
+	public String getToUserBackgroundImageUrl() {
+		return toUserBackgroundImageUrl;
+	}
+	public void setToUserBackgroundImageUrl(String toUserBackgroundImageUrl) {
+		this.toUserBackgroundImageUrl = toUserBackgroundImageUrl;
+	}
+	public String getFromUserBackgroundImageUrl() {
+		return fromUserBackgroundImageUrl;
+	}
+	public void setFromUserBackgroundImageUrl(String fromUserBackgroundImageUrl) {
+		this.fromUserBackgroundImageUrl = fromUserBackgroundImageUrl;
+	}
+	public String getId() {
+		return id;
+	}
+	public void setId(String id) {
+		this.id = id;
+	}
+	public String getMe() {
+		return me;
+	}
+	public void setMe(String me) {
+		this.me = me;
+	}
 	//cons
 	public MessageModel(){}
 	

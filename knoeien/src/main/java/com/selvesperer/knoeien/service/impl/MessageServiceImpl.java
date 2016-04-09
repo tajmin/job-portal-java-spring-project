@@ -9,10 +9,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 
-import com.selvesperer.knoeien.data.domain.Job;
 import com.selvesperer.knoeien.data.domain.Message;
 import com.selvesperer.knoeien.data.repository.MessageRepository;
-
 import com.selvesperer.knoeien.exception.AuthenticationFailedException;
 import com.selvesperer.knoeien.service.MessageService;
 import com.selvesperer.knoeien.spring.ScopeType;
@@ -58,6 +56,14 @@ public class MessageServiceImpl implements MessageService{
 		// TODO Auto-generated method stub
 		Message message = new Message(messageModel);
 		return messageRepository.saveAndFlush(message);
+	}
+
+	@Override
+	public List<MessageModel> showMessageByJobId(String jobId, String userId, int page, int limit) {
+		List<MessageModel> message=messageRepository.findAllMessages(jobId, userId, page, limit);
+		if(message==null)
+			throw new AuthenticationFailedException("error.usernotfound.text");
+		return message;
 	}
 
 }

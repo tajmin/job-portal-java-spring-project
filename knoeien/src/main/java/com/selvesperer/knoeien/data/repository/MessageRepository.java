@@ -8,10 +8,11 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import com.selvesperer.knoeien.data.domain.Message;
+import com.selvesperer.knoeien.data.repository.custom.MessageRepositroyCustom;
 
 
 @Repository
-public interface MessageRepository extends JpaRepository<Message, String>{
+public interface MessageRepository extends JpaRepository<Message, String>, MessageRepositroyCustom{
 
 	@Query("from Message m where m.toUserId = :toUserId")
 	List<Message> findMessageByToUserId(@Param("toUserId") String toUserId);
