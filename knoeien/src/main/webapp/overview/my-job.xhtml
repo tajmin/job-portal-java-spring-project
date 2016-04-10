@@ -76,6 +76,9 @@
 										<a ng-if="(!model.draft &amp;&amp; !model.jobComplete)" class="button hlpr-color-success" data-toggle="evaluate-helper-modal">Pay This Helper</a>
 										<a ng-if="(model.draft)" ng-click="postJob(model.id);" class="button alert">Post This Job</a>
 									</div>
+									<div class="medium-4 columns">
+										<a ng-if="(!model.draft &amp;&amp; !model.jobComplete)" ng-click="jobOut(model.id);" class="button hlpr-color-info">Job Out</a>
+									</div>
 								</div>
 								<div class="row" style="">
 									<div class="medium-4 columns">

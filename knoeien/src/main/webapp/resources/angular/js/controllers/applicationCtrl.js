@@ -407,6 +407,10 @@ Controllers.controller("overviewCtrl", function($scope, $rootScope, restservice,
     $scope.postJob = function(jobid){
     	window.open($rootScope.getBaseUrl() + "/jobpost.xhtml?id=" + jobid,	"_self");
     }
+    
+    $scope.jobOut = function(jobid){
+    	window.open($rootScope.getBaseUrl() + "/jobout.xhtml?id=" + jobid,	"_self");
+    }
 	
 });
 

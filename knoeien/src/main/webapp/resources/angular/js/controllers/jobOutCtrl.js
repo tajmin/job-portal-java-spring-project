@@ -10,8 +10,8 @@ Controllers.controller("jobOutCtrl", function($scope, $rootScope, restservice, $
 	$scope.selecteduser="";
 	$scope.selectedusersmessage={};
 	$scope.userId="";
-	//$scope.jobId=utilservice.getParameterByName("jobId");
-	$scope.jobId="46002544-3650-uuid-8f9c-8b0641fd1fea";
+	$scope.jobId=utilservice.getParameterByName("jobId");
+//	$scope.jobId="46002544-3650-uuid-8f9c-8b0641fd1fea";
 	$scope.jobOutLists = function() {
 		
 		console.log("Loading Job out List");
