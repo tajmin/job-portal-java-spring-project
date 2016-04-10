@@ -403,15 +403,6 @@ Controllers.controller("overviewCtrl", function($scope, $rootScope, restservice,
 	    });
 	};	
 	$scope.jobPosted();
-	
-	/*$scope.postJob = function(jobId) {			
-		restservice.post( '', "api/v1/job/postsavedjob?jobID=" + jobId).then(function(response) {
-			if (response != null) {
-				$scope.postedJob = response;
-        	}
-        });
-	
-    };*/
     
     $scope.postJob = function(jobid){
     	window.open($rootScope.getBaseUrl() + "/jobpost.xhtml?id=" + jobid,	"_self");

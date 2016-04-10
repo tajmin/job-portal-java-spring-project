@@ -50,6 +50,8 @@ public class JobModel implements Serializable {
 	private String whenPosted;
 	private String createdDate;
 	
+	private boolean jobComplete;
+	
 	public JobModel() {}
 	
 	public JobModel(Job job) {
@@ -87,6 +89,7 @@ public class JobModel implements Serializable {
 		
 		this.setWhenPosted(AppsUtil.getDiffenrence(job.getCreatedDate()));
 		this.setCreatedDate(DateFormatUtils.getWebFormattedDateString(job.getCreatedDate()));
+		this.setJobComplete(job.isJobComplete());
 	}
 	
 	public List<JobModel> getJobModelList(List<Job> jobList) {
@@ -336,6 +339,14 @@ public class JobModel implements Serializable {
 
 	public void setCreatedDate(String createdDate) {
 		this.createdDate = createdDate;
+	}
+
+	public boolean isJobComplete() {
+		return jobComplete;
+	}
+
+	public void setJobComplete(boolean jobComplete) {
+		this.jobComplete = jobComplete;
 	}
 	
 	

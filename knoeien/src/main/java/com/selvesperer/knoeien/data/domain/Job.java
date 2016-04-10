@@ -105,6 +105,9 @@ public class Job extends AuditableEntity {
 	
 	@Column(name = "total_price")
 	private Double totalPrice;
+	
+	@Column(name = "job_complete")
+	private boolean jobComplete;
 
 	public Job() {}
 
@@ -141,6 +144,7 @@ public class Job extends AuditableEntity {
 		this.setPrice(AppsUtil.stringToDouble(jobModel.getPrice()));
 		this.setPercent(AppsUtil.stringToDouble(jobModel.getPercent()));
 		this.setTotalPrice(AppsUtil.addCommision(this.getPrice(), this.getPercent()));
+		this.setJobComplete(jobModel.isJobComplete());
 	}
 	
 	public Job setJob(JobModel jobModel) {
@@ -175,7 +179,7 @@ public class Job extends AuditableEntity {
 		this.setPrice(AppsUtil.stringToDouble(jobModel.getPrice()));
 		this.setPercent(AppsUtil.stringToDouble(jobModel.getPercent()));
 		this.setTotalPrice(AppsUtil.addCommision(this.getPrice(), this.getPercent()));
-		
+		this.setJobComplete(jobModel.isJobComplete());
 		return this;
 	}
 
@@ -393,6 +397,14 @@ public class Job extends AuditableEntity {
 
 	public void setSeconds(Integer seconds) {
 		this.seconds = seconds;
+	}
+	
+	public boolean isJobComplete() {
+		return jobComplete;
+	}
+
+	public void setJobComplete(boolean jobComplete) {
+		this.jobComplete = jobComplete;
 	}
 	
 }
