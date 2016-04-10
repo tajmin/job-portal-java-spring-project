@@ -751,7 +751,9 @@ Controllers.controller("jobDetailsCtrl", function($scope, $rootScope, restservic
 	$scope.filter.moreLink = true;
 	$scope.id = utilservice.getParameterByName("id");
 	$scope.messages = [];
-	//$scope.newMessage = "";
+	$scope.newMessage = {};
+	$scope.msgpage = 1;
+	$scope.msgMoreLink = true;
 	
 	$window.map = new google.maps.Map(document.getElementById('g-map'), {
         center: {
@@ -849,6 +851,7 @@ Controllers.controller("jobDetailsCtrl", function($scope, $rootScope, restservic
 			if (response.bidAmount != null) {
 				$scope.jobInterest = response;
 				$scope.chat = true;
+				$scope.getAllMessages(jobID);
         	}
         });	
     };
@@ -895,10 +898,39 @@ Controllers.controller("jobDetailsCtrl", function($scope, $rootScope, restservic
     
     
     // chat part
-    $scope.getLowestBidAmount = function() {
-    	if(utilservice.isUndefinedOrNull($scope.newMessage)){
-    		return;
-    	}
+    $scope.sendMessageToEmployeer = function(isValid) {
+    	//if(!isValid) return;
+    	
+    	$scope.newMessage.jobId = $scope.id;
+    	$scope.newMessage.toUserId = $scope.employer.id;
+    	restservice.post($scope.newMessage, "api/v1/message/sendMessageToEmployeer").then(function(response) {
+			if (response != null) {
+				//console.log(response);
+				$newMessage.userMessage = "";
+				$scope.msgMoreLink = true;
+				$scope.msgpage = 1;
+				$scope.getAllMessages($scope.id);
+        	}
+        });	
     }
+    
+    $scope.getAllMessages = function(jobID) {
+    	restservice.get('', "api/v1/message/getMessageListByJobId?jobId=" + jobID + "&page="+ $scope.msgpage).then(function(response) {
+			if (response != null) {
+				for (var i = 0; i < response.length; i++) {
+					$scope.messages.push(response[i]);
+				}
+				
+				if(response.length < 2){
+					$scope.msgMoreLink = false;				
+				}else{
+					$scope.msgpage += 1;
+				}
+        	}else {
+        		$scope.msgMoreLink = false;
+        	}
+        });	
+    }
+    
     
 });

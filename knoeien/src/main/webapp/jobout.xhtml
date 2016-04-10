@@ -1,9 +1,10 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<ui:composition template="templates/two-column.xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core">
+<ui:composition template="templates/jobdetail-two-column.xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core">
 
-	<ui:define name="left-content">
+	<ui:define name="full-content">
 		<div ng-controller="jobOutCtrl">
+		<div class="medium-6 columns" style="position: relative;">
 			<ul class="tabs custom-tabs arrow-bottom green" data-tabs="data-tabs" id="job-out-tabs">
 	  			<li class="tabs-title is-active"><a href="#messenger">Messenger</a></li>
 	  			<li class="tabs-title"><a href="#assessment">Assessment</a></li>
@@ -16,8 +17,8 @@
 					<div class="small-9 small-push-3"><p>{{jobdetails.jobDescription}} </p> </div>
 				</div>
 				<div class="tabs-panel is-active" id="messenger">
-					<div class="row search-list" ng-repeat="model in interesteduserlist" >
-						<div class="medium-3 columns text-center" ng-click="selectinteresteduser(model.firstname);">
+					<div class="row search-list" ng-repeat="model in interesteduserlist" ng-click="selectinteresteduser(model.firstname,model.lastname,model.userMessage,model.backgroundImageUrl,model.userId);">
+						<div class="medium-3 columns text-center"  >
 							<img class="border-radius-7px" src="/userimg/{{model.backgroundImageUrl}}" onerror="this.src='/userimg/default_job.png'" alt="Job Image" />
 							<div><p>{{model.firstname}} {{model.lastname}}</p></div>
 						</div>
@@ -27,7 +28,7 @@
 									<h6 class="bold">{{model.price}} Kr</h6>
 								</div>
 								<div class="medium-6 columns text-right">
-									<i class="fa fa-commenting-o" style="color: #6dbf54; font-size: 2rem; margin-right: 30px;"></i>
+									<i id="comments-{{model.userId}}" class="comments fa" style="color: #6dbf54; font-size: 2rem; margin-right: 30px;"></i>
 								</div>
 							</div>
 							<div class="row" style="margin-top: 30px;">
@@ -55,10 +56,10 @@
 					</div>
 				</div>		
 			</div>
+		
 		</div>
-	</ui:define>
-	<ui:define name="right-content">
-    	<div class="chat-section" ng-controller="jobOutCtrl">
+		<div class="medium-6 columns" style="position: relative;">
+    	<div class="chat-section" >
     		<form action="" style="margin-top: 10px;">
     			<div class="row" >
     				<div class="small-6 columns lead" style="line-height: 64px;"><p>{{selecteduser}}</p></div>
@@ -80,9 +81,9 @@
 	    		<ul class="no-bullet" style="height: 50vh;">
 	    			<li class="me">
 	    				<div>
-	    					Hi,<br />Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+	    					Hi,<br />{{selectedusersmessage}}
 	    				</div>
-	    				<img src="#{request.contextPath}/resources/assets/images/Xprofile_pic.png" />
+	    				<img src="/userimg/{{selectedusersimage}}" onerror="this.src='/userimg/default_job.png'" alt="User Image"/>
     				</li>
 	    			<li class="other">
 	    				<div>
@@ -98,6 +99,8 @@
 	    		<a class="button hlpr-color-alert">Decline</a>
 	    		<a class="button hlpr-color-success">Offer Job</a>
     		</form>
+    	</div>
+    	</div>
     	</div>
 	</ui:define>
 	

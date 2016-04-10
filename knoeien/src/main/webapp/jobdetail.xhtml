@@ -70,7 +70,7 @@
 									</div>
 								</div>
 								<div class="row" style="color: #26c6e8">
-									<div class="medium-4 columns">
+									<div class="medium-5 columns">
 										<i class="fa fa-star"></i>
 										<i class="fa fa-star"></i>
 										<i class="fa fa-star"></i>
@@ -79,7 +79,7 @@
 										<br></br>
 										<a href="#" style="color: black; font-size: .80rem">See reviews</a>
 									</div>
-									<div class="medium-8 columns">
+									<div class="medium-7 columns">
 										<p style="font-size: .80em;">90% Performed Jobs Posted <br />
 										100% Done Job</p>
 									</div>
@@ -149,25 +149,22 @@
 		    	<div class="chat-section" ng-if="chat==true">
 		    		<form name="chatForm" novalidate="true">
 			    		<ul class="no-bullet">
-			    			<li class="me">
+			    			<li ng-repeat="message in messages" class="{{(message.me == '1')? 'me' : 'other'}}">
 			    				<div>
-			    					Hi,<br />Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+			    					{{message.userMessage}}
 			    				</div>
-			    				<img src="#{request.contextPath}/resources/assets/images/Xprofile_pic.png" />
-		    				</li>
-			    			<li class="other">
-			    				<div>
-			    					Hi,<br />Lorem Ipsum is simply dummy text of the printing and typesetting industry. {{formSubmitted}}
-			    				</div>
-		    					<img src="#{request.contextPath}/resources/assets/images/woman.jpg" />
+			    				<img src="/userimg/{{message.fromUserBackgroundImageUrl}}" onerror="this.src='#{request.contextPath}/resources/assets/images/postjob/default_job.png'" />
 		    				</li>
 			    		</ul>
 			    		<div class="helper-form-field" ng-class="(formSubmitted &amp;&amp; chatForm.newMessage.$error.required == true)? 'error' : ''" >
-			    			<textarea name="newMessage" required="required" placeholder="Write your message..." rows="3" />
+			    			<textarea name="newMessage" ng-model="newMessage.userMessage" required="required" placeholder="Write your message..." rows="3" />
 			    			<div class="icon fi-info" ng-class="(formSubmitted &amp;&amp; chatForm.newMessage.$error.required == true)? '' : 'hide'"></div>
+			    			<div ng-messages="formSubmitted &amp;&amp; chatForm.newMessage.$error">
+		                    	<div ng-message="required" class="error"><i class="bttm-icon fi-info"></i>Message is required</div>
+		                    </div>	
 			    		</div>
 			    		<div class="text-right">
-			    			<a ng-click="formSubmitted = true;" type="submit" class="button hlpr-color-info border-radius-7px">Send</a>
+			    			<a ng-click="formSubmitted = true; sendMessageToEmployeer(chatForm.$valid);" type="submit" class="button hlpr-color-info border-radius-7px">Send</a>
 			    		</div>
 		    		</form>
 		    	</div>

@@ -17,7 +17,7 @@ public class MessageModel implements Serializable {
 	 */
 	private static final long serialVersionUID = -4472403961193063417L;
 	
-	
+	private String id;
 	private String toUserId;
 	private String fromUserId;
 	private String userMessage;
@@ -34,6 +34,10 @@ public class MessageModel implements Serializable {
 	private BigInteger countMessageId;
 	private String jobTitle;
 	private String jobDescription;
+	
+	private String toUserBackgroundImageUrl;
+	private String fromUserBackgroundImageUrl;
+	private String me;
 	
 	public String getToUserId() {
 		return toUserId;
@@ -141,6 +145,30 @@ public class MessageModel implements Serializable {
 	}
 	public void setJobDescription(String jobDescription) {
 		this.jobDescription = jobDescription;
+	}
+	public String getId() {
+		return id;
+	}
+	public void setId(String id) {
+		this.id = id;
+	}
+	public String getToUserBackgroundImageUrl() {
+		return toUserBackgroundImageUrl;
+	}
+	public void setToUserBackgroundImageUrl(String toUserBackgroundImageUrl) {
+		this.toUserBackgroundImageUrl = toUserBackgroundImageUrl;
+	}
+	public String getFromUserBackgroundImageUrl() {
+		return fromUserBackgroundImageUrl;
+	}
+	public void setFromUserBackgroundImageUrl(String fromUserBackgroundImageUrl) {
+		this.fromUserBackgroundImageUrl = fromUserBackgroundImageUrl;
+	}
+	public String getMe() {
+		return me;
+	}
+	public void setMe(String me) {
+		this.me = me;
 	}
 	//cons
 	public MessageModel(){}
