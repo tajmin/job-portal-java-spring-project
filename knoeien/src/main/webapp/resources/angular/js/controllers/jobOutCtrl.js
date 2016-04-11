@@ -69,7 +69,7 @@ Controllers.controller("jobOutCtrl", function($scope, $rootScope, restservice, $
     	restservice.post($scope.newMessage, "api/v1/message/sendMessageToEmployeer").then(function(response) {
 			if (response != null) {
 				//console.log(response);
-				$newMessage.userMessage = "";
+				$scope.newMessage = {};
 				$scope.msgMoreLink = true;
 				$scope.msgpage = 1;
 				$scope.getAllMessages($scope.jobId,jobSeekerId);
