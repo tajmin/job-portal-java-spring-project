@@ -1,5 +1,5 @@
 .hero {
-	background: url("../images/start.png") no-repeat center center;
+	background: url("../images/start.jpg") no-repeat center center;
 	background-size: cover;
 	background-attachment: fixed;
 	min-height: 100vh;
@@ -1314,7 +1314,8 @@ line-height: 1.75em;
 #my-job a {
 	padding: 5px 10px;
     font-size: 11px;
-    border-radius: 6px;
+    border-radius: 5px;
+    width: 100%;
 }
 .job-thumb {
 	max-width: 80px;

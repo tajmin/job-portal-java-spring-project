@@ -2,7 +2,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <ui:composition template="templates/jobdetail-two-column.xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core">
 	<ui:define name="full-content">
-		<div ng-controller="jobDetailsCtrl">
+		<div class="row expanded medium-collapse" ng-controller="jobDetailsCtrl">
 			<div class="medium-5 columns" style="position: relative;">
 				<ul class="tabs row expanded text-center custom-tabs arrow-bottom green" data-tabs="data-tabs" id="job-detail-tabs">
 					<li class="tabs-title medium-6 columns is-active"><a ng-click="jobDetailsById(id);" href="#detail" aria-selected="true">Job Detail</a></li>
