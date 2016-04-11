@@ -1597,6 +1597,21 @@ form .helper-form-field.error .bttm-icon {
 	font-size: 0.8rem;
 	font-weight: bold;
 }
+.notification {
+	top: 30% !important;
+	left: 50% !important;
+}
+
+/*notification.xhtml starts*/
+#notification-page h6 {
+	font-size: 1em;	
+	margin-left: -21px;
+}
+#notification-page p {
+	font-size: 18px;	
+}
+/*notification.xhtml ends*/
+
 .job-image {
 	width: 120px;
 	max-height: 120px
@@ -1605,6 +1620,7 @@ form .helper-form-field.error .bttm-icon {
 	width: 180px;
 	height: 180px;
 }
+
 /*client-details.xhtml starts */
 .client-detail .left-pan {
 	/*background: rgba(97, 181, 63, 0.48);  */
@@ -1637,3 +1653,4 @@ form .helper-form-field.error .bttm-icon {
 	background-color: red;
 }
 /*client-details.xhtml ends*/
+
