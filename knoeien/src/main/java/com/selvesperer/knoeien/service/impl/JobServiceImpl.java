@@ -76,5 +76,10 @@ public class JobServiceImpl implements JobService {
 		
 		return null;
 	}
+
+	@Override
+	public Object[] makeStripePayment(String id) {
+		return jobRepository.makePaymentByJobId(id);
+	}
 	
 }

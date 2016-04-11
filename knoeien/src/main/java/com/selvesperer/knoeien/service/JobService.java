@@ -19,4 +19,6 @@ public interface JobService {
 	
 	public Job updateJob(String id);
 	
+	public Object[] makeStripePayment(String id);
+	
 }

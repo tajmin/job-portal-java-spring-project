@@ -40,6 +40,20 @@ public class AppsUtil {
 		return null;
 	}
 	
+	public static Integer doubleToInt(Double value) {
+		try {
+			if (value != null) {
+				String convString = doubleToString(value);
+				int convertedValue = stringToInt(convString);
+				return convertedValue;
+			}
+		} catch (Throwable t) {
+			t.printStackTrace();
+		}
+		return null;
+		
+	}
+	
 	public static String integerToString(Integer value) {
 		try {
 			if (value != null) {

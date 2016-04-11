@@ -365,6 +365,7 @@ Controllers.controller("overviewCtrl", function($scope, $rootScope, restservice,
 	$scope.assignedFilter.moreLink = true;
 	$scope.filter.page = 1;
 	$scope.filter.moreLink = true;
+	$scope.job = {};
 
 	$scope.jobAssigned = function() {
 		$scope.assignedFilter.moreLink = true;
@@ -411,6 +412,16 @@ Controllers.controller("overviewCtrl", function($scope, $rootScope, restservice,
     $scope.jobOut = function(jobid){
     	window.open($rootScope.getBaseUrl() + "/jobout.xhtml?id=" + jobid,	"_self");
     }
+    
+    $scope.makePayment = function(jobID) {
+		
+		restservice.get('', "api/v1/payment/stripeCharge?jobID=" + jobID).then(function(response) {
+			if (response != null) {
+				$scope.job = response;
+        	}
+        });
+		
+    };
 	
 });
 

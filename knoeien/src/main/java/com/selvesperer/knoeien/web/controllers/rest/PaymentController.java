@@ -16,8 +16,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.selvesperer.knoeien.exception.AuthenticationFailedException;
 import com.selvesperer.knoeien.security.SecurityManager;
+import com.selvesperer.knoeien.service.JobService;
 import com.selvesperer.knoeien.service.TransactionHistoryService;
 import com.selvesperer.knoeien.spring.utils.ApplicationBeanFactory;
+import com.selvesperer.knoeien.utils.AppsUtil;
 import com.selvesperer.knoeien.utils.configuration.ConfigurationUtil;
 import com.selvesperer.knoeien.utils.localization.LocalizationUtil;
 import com.selvesperer.knoeien.web.controllers.model.RestResponse;
@@ -51,21 +53,30 @@ public class PaymentController extends AbstractController implements Serializabl
 		return 1;
 	}
 
-	@RequestMapping(value = "/stripeCharge", method = RequestMethod.POST, produces = "application/json")
-	public ResponseEntity<RestResponse> stripeCharge() {
+	@RequestMapping(value = "/stripeCharge", method = RequestMethod.GET, produces = "application/json")
+	public ResponseEntity<RestResponse> stripeCharge(@RequestParam(value = "jobID", required = true) String jobID) {
 		RestResponse restResponse = null;
-		if (log.isDebugEnabled())
+		
+		if (log.isDebugEnabled()) {
 			log.debug("Stripe Charge");
+		}
+		JobService jobService = ApplicationBeanFactory.getBean(JobService.class);
+		Object[] jobObj = jobService.makeStripePayment(jobID);
+		double d = (Double) jobObj[0];
+		int payableAmount = (int) d;		
+		String cardNumber = (String) jobObj[1];
+		int month = AppsUtil.stringToInt((String) jobObj[2]);
+		int year = AppsUtil.stringToInt((String) jobObj[3]);
 		RequestOptionsBuilder requestOptionsBuilder=new RequestOptionsBuilder();
 		final String testSecretKey = ConfigurationUtil.config().getString("stripe.testSecretKey");
 		RequestOptions requestOptions = (requestOptionsBuilder).setApiKey(testSecretKey).build();
 		Map<String, Object> chargeMap = new HashMap<String, Object>();
-		chargeMap.put("amount", 100);
+		chargeMap.put("amount", payableAmount);
 		chargeMap.put("currency", "usd");
 		Map<String, Object> cardMap = new HashMap<String, Object>();
-		cardMap.put("number", "4242424242424242");
-		cardMap.put("exp_month", 12);
-		cardMap.put("exp_year", 2020);
+		cardMap.put("number", cardNumber);
+		cardMap.put("exp_month", month);
+		cardMap.put("exp_year", year);
 		chargeMap.put("card", cardMap);
 		String id = SecurityManager.getCurrentUserId(); 
 		TransactionHistoryService transactionHistoryService = ApplicationBeanFactory.getBean(TransactionHistoryService.class);
