@@ -912,18 +912,15 @@ Controllers.controller("jobDetailsCtrl", function($scope, $rootScope, restservic
     	restservice.post($scope.newMessage, "api/v1/message/sendMessageToEmployeer").then(function(response) {
 			if (response != null) {
 				//console.log(response);
-				$scope.newMessage = {};
-				$scope.formSubmitted = false;
+				$newMessage.userMessage = "";
 				$scope.msgMoreLink = true;
 				$scope.msgpage = 1;
 				$scope.getAllMessages($scope.id);
-				
         	}
         });	
     }
     
     $scope.getAllMessages = function(jobID) {
-    	$scope.messages = [];
     	restservice.get('', "api/v1/message/getMessageListByJobId?jobId=" + jobID + "&page="+ $scope.msgpage).then(function(response) {
 			if (response != null) {
 				for (var i = 0; i < response.length; i++) {
