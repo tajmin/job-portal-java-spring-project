@@ -365,6 +365,7 @@ Controllers.controller("overviewCtrl", function($scope, $rootScope, restservice,
 	$scope.assignedFilter.moreLink = true;
 	$scope.filter.page = 1;
 	$scope.filter.moreLink = true;
+	$scope.job = {};
 
 	$scope.jobAssigned = function() {
 		$scope.assignedFilter.moreLink = true;
@@ -403,19 +404,24 @@ Controllers.controller("overviewCtrl", function($scope, $rootScope, restservice,
 	    });
 	};	
 	$scope.jobPosted();
-	
-	/*$scope.postJob = function(jobId) {			
-		restservice.post( '', "api/v1/job/postsavedjob?jobID=" + jobId).then(function(response) {
-			if (response != null) {
-				$scope.postedJob = response;
-        	}
-        });
-	
-    };*/
     
     $scope.postJob = function(jobid){
     	window.open($rootScope.getBaseUrl() + "/jobpost.xhtml?id=" + jobid,	"_self");
     }
+    
+    $scope.jobOut = function(jobid){
+    	window.open($rootScope.getBaseUrl() + "/jobout.xhtml?id=" + jobid,	"_self");
+    }
+    
+    $scope.makePayment = function(jobID) {
+		
+		restservice.get('', "api/v1/payment/stripeCharge?jobID=" + jobID).then(function(response) {
+			if (response != null) {
+				$scope.job = response;
+        	}
+        });
+		
+    };
 	
 });
 
@@ -906,15 +912,18 @@ Controllers.controller("jobDetailsCtrl", function($scope, $rootScope, restservic
     	restservice.post($scope.newMessage, "api/v1/message/sendMessageToEmployeer").then(function(response) {
 			if (response != null) {
 				//console.log(response);
-				$newMessage.userMessage = "";
+				$scope.newMessage = {};
+				$scope.formSubmitted = false;
 				$scope.msgMoreLink = true;
 				$scope.msgpage = 1;
 				$scope.getAllMessages($scope.id);
+				
         	}
         });	
     }
     
     $scope.getAllMessages = function(jobID) {
+    	$scope.messages = [];
     	restservice.get('', "api/v1/message/getMessageListByJobId?jobId=" + jobID + "&page="+ $scope.msgpage).then(function(response) {
 			if (response != null) {
 				for (var i = 0; i < response.length; i++) {

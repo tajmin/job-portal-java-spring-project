@@ -12,8 +12,10 @@ import org.springframework.stereotype.Service;
 import com.selvesperer.knoeien.data.domain.TransactionHistory;
 import com.selvesperer.knoeien.data.repository.TransactionHistoryRepository;
 import com.selvesperer.knoeien.exception.AuthenticationFailedException;
+
 import com.selvesperer.knoeien.service.TransactionHistoryService;
 import com.selvesperer.knoeien.spring.ScopeType;
+import com.selvesperer.knoeien.web.controllers.model.TransactionHistoryModel;
 
 
 @Service("transactionHistoryService")
@@ -51,6 +53,16 @@ public class TransactionHistoryServiceImpl implements TransactionHistoryService 
 		}
 		return transactionHistory;
 	}
-
+	
+	public void saveTransactionHistory(TransactionHistoryModel transactionHistoryModel, String id) {
+		// TODO Auto-generated method stub
+		TransactionHistory transactionHistory = transactionHistoryRepository.findTransactionHistoryById(id);
+		transactionHistory.setFromUserId(transactionHistoryModel.getFromUserId());
+		transactionHistory.setToUserId(transactionHistoryModel.getToUserId());
+		transactionHistory.setAmount(transactionHistoryModel.getAmount());
+		transactionHistory.setJobId(transactionHistoryModel.getJobId());
+		transactionHistory.setUserId(transactionHistoryModel.getUserId());
+		transactionHistoryRepository.saveAndFlush(transactionHistory);   
+	}
 	
 }

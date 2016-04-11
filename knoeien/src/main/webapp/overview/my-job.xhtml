@@ -73,8 +73,11 @@
 							<div class="medium-10  columns">
 								<div class="row">
 									<div class="medium-4 columns">
-										<a ng-if="(!model.draft)" class="button hlpr-color-success" data-toggle="evaluate-helper-modal">Pay This Helper</a>
+										<a ng-if="(!model.draft &amp;&amp; !model.jobComplete)" ng-click="makePayment(model.id);" class="button hlpr-color-success" data-toggle="evaluate-helper-modal">Pay This Helper</a>
 										<a ng-if="(model.draft)" ng-click="postJob(model.id);" class="button alert">Post This Job</a>
+									</div>
+									<div class="medium-4 columns">
+										<a ng-if="(!model.draft &amp;&amp; !model.jobComplete)" ng-click="jobOut(model.id);" class="button hlpr-color-info">Job Out</a>
 									</div>
 								</div>
 								<div class="row" style="">
@@ -88,7 +91,7 @@
 										<span>{{model.price}}</span>
 									</div>
 									<div class="medium-2 columns text-center">
-										<img class="job-done-tick" src="#{request.contextPath}/resources/assets/images/success.png" alt="Job Image" />
+										<img ng-if="(!model.draft &amp;&amp; model.jobComplete)" class="job-done-tick" src="#{request.contextPath}/resources/assets/images/success.png" alt="Job Image" />
 									</div>
 								</div>
 								<div class="row">

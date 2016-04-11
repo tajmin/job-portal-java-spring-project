@@ -33,8 +33,10 @@
 <script type="text/javascript"	src="#{request.contextPath}/resources/angular/js/directives/directives.js?#{msg['vrsn']}"></script>
 <script type="text/javascript"	src="#{request.contextPath}/resources/angular/js/services/applicationService.js?#{msg['vrsn']}"></script>
 <script type="text/javascript"	src="#{request.contextPath}/resources/angular/js/controllers/applicationCtrl.js?#{msg['vrsn']}"></script>
+<script type="text/javascript"	src="#{request.contextPath}/resources/angular/js/controllers/notificationDetailsCtrl.js?#{msg['vrsn']}"></script>
 <script type="text/javascript"	src="#{request.contextPath}/resources/angular/js/controllers/jobOutCtrl.js?#{msg['vrsn']}"></script>
 <script type="text/javascript"	src="#{request.contextPath}/resources/angular/js/controllers/companyCtrl.js?#{msg['vrsn']}"></script>
+
 <script type="text/javascript"	src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAjAJgul5TdZNsTAo_WTXxtQb8C3jFPXwo&amp;libraries=places"></script>
 <script type="text/javascript"	src="#{request.contextPath}/resources/assets/js/foundation-datepicker.js"></script>
 <ui:insert name="head"></ui:insert>
@@ -78,7 +80,7 @@
 				</li>
 				
 				<li class="home-buttons clearfix" style="width: 25%;">
-					<div class="text-right menu-last">
+					<div class="text-right menu-last" ng-controller="notificationCtrl">
 						<!-- menu button goes here -->
 						<c:if test="#{view.viewId == '/index.xhtml'}">
 							<a onclick="clearForm('login-modal');" data-toggle="login-modal" class="hollow hlpr-color-white button border-radius-7px" style="display:#{authorizationBean.canView()?'none':''}">Login</a>
@@ -86,13 +88,11 @@
 						</c:if>
 						<c:if test="#{authorizationBean.canView()}">
 							<a href="#" id="notification" data-toggle="notification-list">
-								<img alt="My Notification" width="48"
-								src="#{request.contextPath}/resources/assets/images/bell.png" />
-								<span class="alert badge">2</span>
+								<img alt="My Notification" width="48" src="#{request.contextPath}/resources/assets/images/bell.png" />
+								<span class="alert badge">{{notificationCount}}</span>
 							</a>
-							<a href="profile.xhtml" id="profile-pic"> <img
-								class="circular-img" width="48" alt="My Profile"
-								src="#{request.contextPath}/resources/assets/images/profile_pic_white.png" />
+							<a href="profile.xhtml" id="profile-pic"> 
+								<img class="circular-img" width="48" alt="My Profile" src="#{request.contextPath}/resources/assets/images/profile_pic_white.png" />
 							</a>
 						</c:if>
 					</div>
@@ -101,36 +101,23 @@
 			<!-- menu for large device ends here -->
 		</nav>
 	</header>
-	<div id="notification-list" class="dropdown-pane"
-		data-dropdown="data-dropdown" data-auto-focus="true">
+	<div id="notification-list" class="dropdown-pane" data-dropdown="data-dropdown" data-auto-focus="true">
 		<ul class="no-bullet">
-			<li><a href="#">
-					<div class="media-object">
-						<div class="media-object-section">
-							<div class="thumbnail">
-								<img src="#{request.contextPath}/resources/assets/images/profile/user1.jpg" />
-							</div>
-						</div>
-						<div class="media-object-section main-section">
-							<p class="lead">Dreams feel.</p>
-							<p>I'm going to improvise.</p>
+			<li class="view-more text-center" ng-controller="notificationCtrl"><a href="#">
+				<div class="media-object" ng-repeat="model in notification">
+					<div class="media-object-section">
+						<div class="thumbnail">
+							<img src="#{request.contextPath}/resources/assets/images/profile/user1.jpg" />
 						</div>
 					</div>
-			</a></li>
-			<li><a href="#">
-					<div class="media-object">
-						<div class="media-object-section">
-							<div class="thumbnail">
-								<img src="#{request.contextPath}/resources/assets/images/profile/user2.jpg" />
-							</div>
-						</div>
-						<div class="media-object-section main-section">
-							<p class="lead">Dreams feel.</p>
-							<p>I'm going to improvise.</p>
-						</div>
+					<div class="media-object-section main-section">
+						<p class="lead">{{model.name}</p>
+						<p style="margin: -14px -14px -14px -47px;">{{model.description}}</p>
+					</div>
 					</div>
 			</a></li>
-			<li class="view-more text-center"><a href="#">more</a></li>
+			
+			<li class="view-more text-center"><a href="notifications.xhtml"  ng-if="filter.moreLink">Show more</a></li>
 		</ul>
 	</div>
 	<!-- body wrapper starts here -->

@@ -76,6 +76,11 @@ public class JobServiceImpl implements JobService {
 		
 		return null;
 	}
+
+	@Override
+	public Object[] makeStripePayment(String id) {
+		return jobRepository.makePaymentByJobId(id);
+	}
 	
 	@Override
 	public List<JobModel> findNearestjobs(String userLatitude,String userLongitude,int page, int limit){

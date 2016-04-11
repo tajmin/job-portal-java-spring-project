@@ -1,0 +1,83 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition template="templates/angular-template.xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+
+	<ui:define name="content">
+
+		<div class="row wrapper-content" ng-controller="notificationCtrl" id="notification-page">
+			<div class="medium-7 medium-centered columns">
+				<h4>Your notifications {{notificationCount}} Unread</h4>
+				<hr style="margin: 0"></hr>
+				<div class="row" ng-repeat="model in notification" ng-style="{'background-color':model.hasSeen == 1 ?  'rgb(255, 255, 255)': 'rgb(238, 238, 238)'}">
+					<div style="padding: 16px;">
+					<!-- Foundation "abide" plug-in used for validation  style="background-color: rgb(238, 238, 238);"-->
+					<div class="medium-3 short-left columns">
+						<div class="">
+							<img 
+								src="#{request.contextPath}/resources/assets/images/profile/user2.jpg"
+								style="height: 72px; width: 72px;border-radius: 58px;" />
+						</div>
+					</div>
+
+					<div class="medium-9 medium columns" >
+						<div style="float: right; margin: -4px -1px -43px;">
+							<a  ng-click="deleteNotification(model.id);" id="notification-setting"> <i
+								class="fi-x"></i>
+<!-- 								class="fi-play transform-rotate-90deg" -->
+							</a>
+
+						</div>
+						<div style="float: right; margin-top: 60px; margin-right: -62px;">
+							
+							<input id="hasSeen" type="checkbox" ng-model="model.hasSeen"  ng-show="!model.hasSeen"
+								ng-click="updateSeenNotification(model.id)"
+								style="margin: -73px;"></input>
+							
+						</div>
+						<div style="margin-top: 20px;" >
+							<p style="margin: -21px;"> Name:
+								{{model.name}}</p><br></br>
+							<h6>  Description: {{model.description}}</h6>
+						</div>
+
+
+					</div>
+					</div>
+					<hr style="margin: 0"></hr>
+				
+				</div>
+				<a id="show-more" ng-click="loadMoreNotifications();" ng-if="filter.moreLink">Show More</a>
+			</div>
+
+
+			<div class="medium-7 medium-centered columns">
+				<!-- Foundation "abide" plug-in used for validation  -->
+				<form name="facebookLoginForm">
+					<div class="row">
+						<div class="medium-12 columns text-center"></div>
+					</div>
+				</form>
+			</div>
+
+			<div id="notification-setting-list" class="notification dropdown-pane" data-dropdown="data-dropdown" data-auto-focus="true" >
+				<ul class="no-bullet">
+					<li><a >
+							<div class="">
+								<div class="media-object-section main-section">
+									<a href="" ng-click="deleteNotification(101);">
+									<p class="lead">Delete Notification</p></a>
+									<p>I'm going to improvise.</p>
+								</div>
+							</div>
+					</a></li>
+				</ul>
+			</div>
+
+		</div>
+
+	</ui:define>
+</ui:composition>

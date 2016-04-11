@@ -68,8 +68,9 @@ public class JobRepositoryImpl implements JobRepositoryCustom {
 	@Override
 	public List<JobModel> findJobByCreatedUserId(String id, int page, int limit) {
 		StringBuffer queryString = new StringBuffer();
-		queryString.append("select j.id, j.title, j.price, j.image_url, j.draft from job j");
+		queryString.append("select j.id, j.title, j.price, j.image_url, j.draft, j.job_complete from job j");
 		queryString.append(" where j.created_by_id= '" + id +"'");
+		queryString.append(" order by j.created_date desc");
 		
 		Query query = entityManager.createNativeQuery(queryString.toString());
 		
@@ -88,6 +89,7 @@ public class JobRepositoryImpl implements JobRepositoryCustom {
 			jobModel.setPrice(AppsUtil.doubleToString((Double) result[2]));
 			jobModel.setImageUrl((String) result[3]);
 			jobModel.setDraft((boolean) result[4]);
+			jobModel.setJobComplete((boolean) result[5]);
 			
 			listOfJobs.add(jobModel);
 		}
@@ -99,6 +101,7 @@ public class JobRepositoryImpl implements JobRepositoryCustom {
 		StringBuffer queryString = new StringBuffer();
 		queryString.append("select j.id, j.title, j.price, j.image_url from job j");
 		queryString.append(" where j.assigned_user_id= '" + id +"'");
+		queryString.append(" order by j.created_date desc");
 		
 		Query query = entityManager.createNativeQuery(queryString.toString());
 		
