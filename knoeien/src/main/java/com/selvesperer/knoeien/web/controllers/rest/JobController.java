@@ -212,4 +212,24 @@ public class JobController extends AbstractController implements Serializable {
 		}
 		return new ResponseEntity<RestResponse>( restResponse, HttpStatus.OK);
 	}
+	
+	@RequestMapping(value = "/findNearestjobs", method = RequestMethod.GET, produces = "application/json")
+	public ResponseEntity<RestResponse> findNearestjobs() {
+		RestResponse restResponse = null;
+		if (log.isDebugEnabled()) log.debug("Find nearest Job Info");
+		try {
+			String userLatitude="23.6226398";
+			String userLongitude="90.49979729999995";
+			int page=1;
+			JobService jobService = ApplicationBeanFactory.getBean(JobService.class);
+			List<JobModel> jobs = jobService.findNearestjobs(userLatitude, userLongitude,page,Constants.JOB_LATEST_SIZE);
+			return new ResponseEntity<RestResponse>( convertToRestGoodResponse(jobs, LocalizationUtil.findLocalizedString("")),HttpStatus.OK);
+		} catch (AuthenticationFailedException t) {
+			restResponse = convertToRestBadResponse("", t.getLocalizedMessage());
+		} catch (Exception t) {
+			restResponse = convertToRestBadResponse("", t.getLocalizedMessage());
+		}
+		return new ResponseEntity<RestResponse>( restResponse, HttpStatus.OK);
+	}	
+	
 }

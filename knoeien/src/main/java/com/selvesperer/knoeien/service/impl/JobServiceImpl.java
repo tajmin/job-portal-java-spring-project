@@ -77,4 +77,10 @@ public class JobServiceImpl implements JobService {
 		return null;
 	}
 	
+	@Override
+	public List<JobModel> findNearestjobs(String userLatitude,String userLongitude,int page, int limit){
+		List<JobModel> jobs = jobRepository.findNearestJobs(userLatitude, userLongitude,page,limit);
+		return jobs;
+	}
+	
 }

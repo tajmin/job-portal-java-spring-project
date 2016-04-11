@@ -137,6 +137,27 @@ public class MessageController extends AbstractController implements Serializabl
 		return new ResponseEntity<RestResponse>(convertToRestGoodResponse(message), HttpStatus.BAD_REQUEST);
 	}
 
-	
+	@RequestMapping(value = "/getMessageListByJobSeekerId", method = RequestMethod.GET, produces = "application/json")
+	public ResponseEntity<RestResponse> getMessageListByJobSeekerId(@RequestParam(value = "jobId", required = true) String jobId,@RequestParam(value = "jobSeekerId", required = true) String  jobSeekerId,@RequestParam(value="page", required=true) Integer page) {
+		RestResponse restResponse = null;
+		if (log.isDebugEnabled()) log.debug("Message List for Job Seeker");
+		
+		try {
+			//String jobId="46002544-3650-uuid-8f9c-8b0641fd1fea";
+			//String jobSeekerId="46002537-4352-uuid-8a00-52ffe25330f6";
+			//String jobPosterId="45975303-2462-uuid-8718-db3d5754b154";
+			//int page=1;
+			MessageService messageService = ApplicationBeanFactory.getBean(MessageService.class);	
+			String jobPosterId=SecurityManager.getCurrentUserId();
+			List<MessageModel> message = messageService.findAllMessagesBySeekerId(jobId,jobSeekerId,jobPosterId,page,Constants.MESSAGE_RESULT_LIMIT);
+			
+			return new ResponseEntity<RestResponse>( convertToRestGoodResponse(message, LocalizationUtil.findLocalizedString("")),HttpStatus.OK);
+		} catch (AuthenticationFailedException t) {
+			restResponse = convertToRestBadResponse("", t.getLocalizedMessage());
+		} catch (Exception t) {
+			restResponse = convertToRestBadResponse("", t.getLocalizedMessage());
+		}
+		return new ResponseEntity<RestResponse>( restResponse, HttpStatus.OK);
+	}
 
 }

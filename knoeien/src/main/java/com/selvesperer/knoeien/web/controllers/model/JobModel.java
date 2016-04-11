@@ -49,6 +49,7 @@ public class JobModel implements Serializable {
 	
 	private String whenPosted;
 	private String createdDate;
+	private String distance;
 	
 	public JobModel() {}
 	
@@ -336,6 +337,14 @@ public class JobModel implements Serializable {
 
 	public void setCreatedDate(String createdDate) {
 		this.createdDate = createdDate;
+	}
+
+	public String getDistance() {
+		return distance;
+	}
+
+	public void setDistance(String distance) {
+		this.distance = distance;
 	}
 	
 	
