@@ -16,7 +16,7 @@ public interface TransactionHistoryRepository extends JpaRepository<TransactionH
 	@Query("from TransactionHistory t where t.id = :id")
 	TransactionHistory findTransactionHistoryById(@Param("id") String id);
 	
-	@Query("from TransactionHistory t where t.userId = :id")
+	@Query("from TransactionHistory t where t.createdByID = :id")
 	List<TransactionHistory> findTransactionHistoryByUserId(@Param("id") String id);
 	
 	@Query(value="SELECT t.amount, t.created_by_name, t.created_date, j.title FROM transaction_history t join job j on t.job_id=j.id where t.to_user_id = :toUserId Order by t.created_date desc",nativeQuery=true)

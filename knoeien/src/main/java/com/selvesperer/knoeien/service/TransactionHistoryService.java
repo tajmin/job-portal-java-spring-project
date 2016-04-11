@@ -13,6 +13,6 @@ public interface TransactionHistoryService {
 	
 	public List<Object[]> getPaymentPaidByUser(String id);
 	
-	public void saveTransactionHistory(TransactionHistoryModel transactionHistoryModel, String id);
+	public void saveTransactionHistory(TransactionHistoryModel transactionHistoryModel);
 
 }
