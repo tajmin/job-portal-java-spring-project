@@ -43,9 +43,8 @@ public class TransactionHistoryController extends AbstractController implements 
 			TransactionHistoryService transactionHistoryService = ApplicationBeanFactory.getBean(TransactionHistoryService.class);
 			String id = SecurityManager.getCurrentUserId();
 			List<TransactionHistory> transactionHistory = transactionHistoryService.showTransactionInfo(id);
-			TransactionHistoryModel transactionHistoryModel = new TransactionHistoryModel(transactionHistory.get(0));			
-			System.out.println(id);
-			return new ResponseEntity<RestResponse>( convertToRestGoodResponse(transactionHistoryModel, LocalizationUtil.findLocalizedString("signupsuccess.text")),HttpStatus.OK);
+			TransactionHistoryModel transactionHistoryModel = new TransactionHistoryModel(transactionHistory.get(0));
+			return new ResponseEntity<RestResponse>(convertToRestGoodResponse(transactionHistoryModel, LocalizationUtil.findLocalizedString("")),HttpStatus.OK);
 			
 		} catch (AuthenticationFailedException t) {
 			restResponse = convertToRestBadResponse("", t.getLocalizedMessage());
@@ -54,7 +53,7 @@ public class TransactionHistoryController extends AbstractController implements 
 			restResponse = convertToRestBadResponse("", t.getLocalizedMessage());
 			t.printStackTrace();
 		}
-		return new ResponseEntity<RestResponse>( restResponse, HttpStatus.OK);
+		return new ResponseEntity<RestResponse>(restResponse, HttpStatus.OK);
 	}
 	@RequestMapping(value = "/paymentReceived", method = RequestMethod.GET, produces = "application/json")
 	public ResponseEntity<RestResponse> paymentReceived() {
@@ -75,7 +74,7 @@ public class TransactionHistoryController extends AbstractController implements 
 			restResponse = convertToRestBadResponse("", t.getLocalizedMessage());
 			t.printStackTrace();
 		}
-		return new ResponseEntity<RestResponse>( restResponse, HttpStatus.OK);
+		return new ResponseEntity<RestResponse>(restResponse, HttpStatus.OK);
 	}
 	
 	@RequestMapping(value = "/paymentMade", method = RequestMethod.GET, produces = "application/json")
@@ -97,6 +96,6 @@ public class TransactionHistoryController extends AbstractController implements 
 			restResponse = convertToRestBadResponse("", t.getLocalizedMessage());
 			t.printStackTrace();
 		}
-		return new ResponseEntity<RestResponse>( restResponse, HttpStatus.OK);
+		return new ResponseEntity<RestResponse>(restResponse, HttpStatus.OK);
 	}
 }

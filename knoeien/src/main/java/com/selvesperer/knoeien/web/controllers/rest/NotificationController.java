@@ -83,7 +83,7 @@ public class NotificationController extends AbstractController implements Serial
 			//String id = SecurityManager.getCurrentUserId();
 			String toUserId="100";
 			List<NotificationModel> notificationModelList = notificationService.findNotifications(toUserId, page, Constants.NOTIFICATION_SIZE);		
-			return new ResponseEntity<RestResponse>( convertToRestGoodResponse(notificationModelList, LocalizationUtil.findLocalizedString("signupsuccess.text")),HttpStatus.OK);
+			return new ResponseEntity<RestResponse>(convertToRestGoodResponse(notificationModelList, LocalizationUtil.findLocalizedString("")),HttpStatus.OK);
 			
 			
 		} catch (AuthenticationFailedException t) {
@@ -106,7 +106,7 @@ public class NotificationController extends AbstractController implements Serial
 			//String id = SecurityManager.getCurrentUserId();
 			//String id = "100";
 			notificationService.saveSeenNotification(id);
-			return new ResponseEntity<RestResponse>(convertToRestGoodResponse(null, LocalizationUtil.findLocalizedString("settingssaved.text")), HttpStatus.OK);
+			return new ResponseEntity<RestResponse>(convertToRestGoodResponse(null, LocalizationUtil.findLocalizedString("")), HttpStatus.OK);
 		} catch (Exception ex) {
 			// Messages.addGlobalError(ex.getMessage());
 		}
@@ -123,7 +123,7 @@ public class NotificationController extends AbstractController implements Serial
 			//String id = SecurityManager.getCurrentUserId();
 			//String id = "100";
 			notificationService.deleteNotification(id);
-			return new ResponseEntity<RestResponse>(convertToRestGoodResponse(null, LocalizationUtil.findLocalizedString("settingssaved.text")), HttpStatus.OK);
+			return new ResponseEntity<RestResponse>(convertToRestGoodResponse(null, LocalizationUtil.findLocalizedString("")), HttpStatus.OK);
 		} catch (Exception ex) {
 			// Messages.addGlobalError(ex.getMessage());
 		}
@@ -143,7 +143,7 @@ public class NotificationController extends AbstractController implements Serial
 			//String id = SecurityManager.getCurrentUserId();
 			String id="100";
 			BigInteger bigInteger=notificationService.countHasSeeNotification(id);	
-			return new ResponseEntity<RestResponse>( convertToRestGoodResponse(bigInteger, LocalizationUtil.findLocalizedString("signupsuccess.text")),HttpStatus.OK);
+			return new ResponseEntity<RestResponse>( convertToRestGoodResponse(bigInteger, LocalizationUtil.findLocalizedString("")),HttpStatus.OK);
 			
 			
 		} catch (AuthenticationFailedException t) {
@@ -166,7 +166,7 @@ public class NotificationController extends AbstractController implements Serial
 			String id="100";
 			NotificationService notificationService=ApplicationBeanFactory.getBean(NotificationService.class);
 			notificationService.setAllHasSeenTrue(id);
-			return new ResponseEntity<RestResponse>(convertToRestGoodResponse(null, LocalizationUtil.findLocalizedString("settingssaved.text")), HttpStatus.OK);
+			return new ResponseEntity<RestResponse>(convertToRestGoodResponse(null, LocalizationUtil.findLocalizedString("")), HttpStatus.OK);
 		} catch (Exception ex) {
 			// Messages.addGlobalError(ex.getMessage());
 		}

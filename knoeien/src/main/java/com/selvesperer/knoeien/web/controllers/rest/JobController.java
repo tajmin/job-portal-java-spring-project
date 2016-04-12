@@ -189,7 +189,7 @@ public class JobController extends AbstractController implements Serializable {
 
 			JobService jobService = ApplicationBeanFactory.getBean(JobService.class);
 			job = jobService.saveJob(jobModel);		
-			return new ResponseEntity<RestResponse>( convertToRestGoodResponse(null, LocalizationUtil.findLocalizedString("jobpostsuccess.text")),HttpStatus.OK);
+			return new ResponseEntity<RestResponse>( convertToRestGoodResponse(null, LocalizationUtil.findLocalizedString("")),HttpStatus.OK);
 		} catch (Exception ex) {
 			ex.printStackTrace();
 			// Messages.addGlobalError(ex.getMessage());
@@ -223,6 +223,7 @@ public class JobController extends AbstractController implements Serializable {
 			int page=1;
 			JobService jobService = ApplicationBeanFactory.getBean(JobService.class);
 			List<JobModel> jobs = jobService.findNearestjobs(userLatitude, userLongitude,page,Constants.JOB_LATEST_SIZE);
+			
 			return new ResponseEntity<RestResponse>( convertToRestGoodResponse(jobs, LocalizationUtil.findLocalizedString("")),HttpStatus.OK);
 		} catch (AuthenticationFailedException t) {
 			restResponse = convertToRestBadResponse("", t.getLocalizedMessage());

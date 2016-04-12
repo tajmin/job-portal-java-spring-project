@@ -2,7 +2,6 @@ package com.selvesperer.knoeien.web.controllers.rest;
 import java.io.File;
 import java.io.IOException;
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -193,7 +192,7 @@ public class UserController extends AbstractController implements Serializable {
 			uData.put(Constants.CURRENT_USER_ID, u.getId());
 			uData.put(Constants.CURRENT_USER_NAME, u.getFullName());
 			
-			return new ResponseEntity<RestResponse>( convertToRestGoodResponse(uData, LocalizationUtil.findLocalizedString("signupsuccess.text")),HttpStatus.OK);
+			return new ResponseEntity<RestResponse>( convertToRestGoodResponse(uData, LocalizationUtil.findLocalizedString("")),HttpStatus.OK);
 		} catch (AuthenticationFailedException t) {
 			restResponse = convertToRestBadResponse("", t.getLocalizedMessage());
 		} catch (Exception t) {
@@ -269,7 +268,7 @@ public class UserController extends AbstractController implements Serializable {
 			
 			userService.resetPassword(password, token);
 			
-			return new ResponseEntity<RestResponse>( convertToRestGoodResponse(null, "Your password has been change successfully, Please click for login"),HttpStatus.OK);			
+			return new ResponseEntity<RestResponse>( convertToRestGoodResponse(null, "Your password has been changed successfully, Please click for login"),HttpStatus.OK);			
 		} catch (AuthenticationFailedException t) {
 			restResponse = convertToRestBadResponse("", t.getLocalizedMessage());
 		} catch (Exception t) {
@@ -306,7 +305,7 @@ public class UserController extends AbstractController implements Serializable {
 			User user = userService.showUserInfo(id);
 			UserModel userModel = new UserModel(user);
 
-			return new ResponseEntity<RestResponse>( convertToRestGoodResponse(userModel, LocalizationUtil.findLocalizedString("updatesuccess.text")),HttpStatus.OK);
+			return new ResponseEntity<RestResponse>( convertToRestGoodResponse(userModel, LocalizationUtil.findLocalizedString("")),HttpStatus.OK);
 		} catch (AuthenticationFailedException t) {
 			restResponse = convertToRestBadResponse("", t.getLocalizedMessage());
 		} catch (Exception t) {
@@ -324,7 +323,7 @@ public class UserController extends AbstractController implements Serializable {
 			User user = userService.showUserInfo(id);
 			PaymentInfoModel paymentInfoModel = new PaymentInfoModel(user);
 
-			return new ResponseEntity<RestResponse>( convertToRestGoodResponse(paymentInfoModel, LocalizationUtil.findLocalizedString("updatesuccess.text")),HttpStatus.OK);
+			return new ResponseEntity<RestResponse>( convertToRestGoodResponse(paymentInfoModel, LocalizationUtil.findLocalizedString("")),HttpStatus.OK);
 		} catch (AuthenticationFailedException t) {
 			restResponse = convertToRestBadResponse("", t.getLocalizedMessage());
 		} catch (Exception t) {
@@ -340,7 +339,7 @@ public class UserController extends AbstractController implements Serializable {
 			UserService userService = ApplicationBeanFactory.getBean(UserService.class);
 			String id = SecurityManager.getCurrentUserId();
 			userService.updatePaymentInfo(paymentInfoModel, id);						
-			return new ResponseEntity<RestResponse>(convertToRestGoodResponse(true, LocalizationUtil.findLocalizedString("updatesuccess.text")),HttpStatus.OK);
+			return new ResponseEntity<RestResponse>(convertToRestGoodResponse(true, LocalizationUtil.findLocalizedString("paymentinfosave.text")),HttpStatus.OK);
 		} catch (AuthenticationFailedException t) {
 			restResponse = convertToRestBadResponse("", t.getLocalizedMessage());
 		} catch (Exception t) {
