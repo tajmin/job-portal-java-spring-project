@@ -66,4 +66,12 @@ public class MessageServiceImpl implements MessageService{
 		return message;
 	}
 
+	@Override
+	public List<MessageModel> findAllMessagesBySeekerId(String jobId,String jobSeekerId,String userId, int page, int limit){
+		List<MessageModel> message=messageRepository.findAllMessagesBySeekerId(jobId,jobSeekerId, userId, page, limit);
+		if(message==null)
+			throw new AuthenticationFailedException("error.usernotfound.text");
+		return message;
+	}
+
 }

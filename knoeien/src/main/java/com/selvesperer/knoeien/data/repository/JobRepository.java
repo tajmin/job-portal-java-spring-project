@@ -28,4 +28,7 @@ public interface JobRepository extends JpaRepository<Job, String>, JobRepository
 	@Query("from Job j Where j.draft=false Order by j.createdDate desc")
 	List<Job> findJobOrderByCreatedDateDesc();
 	
+	@Query(value="SELECT j.price, j.created_by_id, j.assigned_user_id, u.card_number, u.card_month, u.card_year FROM job j join user u on j.created_by_id=u.id where j.id = :jobId",nativeQuery=true)
+	Object[]  makePaymentByJobId(@Param("jobId") String jobId);
+	
 }

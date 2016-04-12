@@ -11,4 +11,7 @@ public interface MessageService {
 	List<Message> showMessageByJobId(String jobId);
 	List<MessageModel> showMessageByJobId(String jobId, String userId, int page, int limit);
 	public Message saveMessage(MessageModel messageModel);
+	
+	List<MessageModel> findAllMessagesBySeekerId(String jobId,String jobSeekerId,String userId, int page, int limit);
+	
 }

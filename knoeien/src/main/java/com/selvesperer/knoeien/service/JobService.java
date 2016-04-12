@@ -19,4 +19,8 @@ public interface JobService {
 	
 	public Job updateJob(String id);
 	
+	public List<JobModel> findNearestjobs(String userLatitude,String userLongitude,int page, int limit);	
+	
+	public Object[] makeStripePayment(String id);
+	
 }

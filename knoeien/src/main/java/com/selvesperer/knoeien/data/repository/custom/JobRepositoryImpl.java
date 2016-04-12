@@ -124,5 +124,49 @@ public class JobRepositoryImpl implements JobRepositoryCustom {
 		}
 		return listOfJobs;
 	}
+	
+	
+	public List<JobModel> findNearestJobs(String userLatitude, String userLongitude,int page, int limit){
+		StringBuilder jql=new StringBuilder();
+		jql.append("SELECT  j.id,j.address_line_1, j.price, j.hours, j.deadline, j.minutes, j.created_date, j.image_url,j.title,j.latitude, j.longitude, ");
+		jql.append(" ( 3959 * acos( cos( radians(").append(userLatitude).append(") ) * cos( radians( j.latitude ) ) * cos( radians( j.longitude ) - radians(");
+		jql.append(userLongitude).append(") ) + sin( radians(").append(userLatitude).append(") ) * sin( radians( j.latitude ) ) ) ) AS distance FROM job j HAVING distance < 1000000");
+		
+		Query query = entityManager.createNativeQuery(jql.toString());
+		if (limit > 0) {
+			page = page - 1;
+			query.setFirstResult(page * limit);
+			query.setMaxResults(limit);
+		}
+		
+		List<Object[]> results = query.getResultList();
+		List<JobModel> listOfJobs = new ArrayList<JobModel>();
+		for (Object[] result : results) {
+			JobModel jobModel = new JobModel(); 
+			
+			jobModel.setId((String) result[0]);
+			jobModel.setAddressLine1((String) result[1]);
+			jobModel.setPrice(AppsUtil.doubleToString((Double) result[2]));
+			jobModel.setHours(QueryUtils.parseInteger(result[3], false));
+			jobModel.setDeadline(DateFormatUtils.getWebDateFromTimestamp((Timestamp) result[4]));
+			jobModel.setMinutes(QueryUtils.parseInteger(result[5], false));
+			jobModel.setCreatedDate(DateFormatUtils.getDBFormattedFromTimestamp((Timestamp) result[6]));			
+			jobModel.setWhenPosted(AppsUtil.getDiffenrence(jobModel.getCreatedDate()));
+
+			jobModel.setImageUrl((String) result[7]);
+			
+			
+			
+			jobModel.setTitle((String) result[8]);
+			jobModel.setLatitude((String) result[9]);
+			jobModel.setLongitude((String) result[10]);
+			jobModel.setDistance( AppsUtil.doubleToString((Double)result[11]));
+			
+			listOfJobs.add(jobModel);
+		}
+		return listOfJobs;
+		
+		
+	}
 
 }

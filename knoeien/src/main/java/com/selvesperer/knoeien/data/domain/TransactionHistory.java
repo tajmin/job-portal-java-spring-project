@@ -4,6 +4,8 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
+import com.selvesperer.knoeien.web.controllers.model.TransactionHistoryModel;
+
 @Entity
 @Table(name = "transaction_history")
 public class TransactionHistory extends AuditableEntity {
@@ -22,11 +24,15 @@ public class TransactionHistory extends AuditableEntity {
 	@Column(name = "job_id", nullable = false, length = 100)
 	private String jobId;
 	
-	@Column(name = "user_id", nullable = false, length = 100)
-	private String userId;
-	
 	public TransactionHistory() {
+	}
+	
+	public TransactionHistory(TransactionHistoryModel transactionHistoryModel) {
 		super();
+		this.setFromUserId(transactionHistoryModel.getFromUserId());
+		this.setToUserId(transactionHistoryModel.getToUserId());
+		this.setAmount(transactionHistoryModel.getAmount());
+		this.setJobId(transactionHistoryModel.getJobId());
 	}
 	
 	public String getFromUserId() {
@@ -61,11 +67,4 @@ public class TransactionHistory extends AuditableEntity {
 		this.jobId = jobId;
 	}
 	
-	public String getUserId() {
-		return userId;
-	}
-	
-	public void setUserId(String userId) {
-		this.userId = userId;
-	}
 }
