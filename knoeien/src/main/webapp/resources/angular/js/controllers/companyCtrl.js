@@ -44,7 +44,7 @@ Controllers.controller("sliderImgCtrl", function($scope, $rootScope, restservice
     
     $scope.saveImage = function(isValid) {
 		if(!isValid) return;
-		
+
 		$scope.slider.imageUrl = $scope.tempUploadedFilePath;
 		restservice.post( $scope.slider, "api/v1/sliderimage/addimage").then(function(response) {
 			if (response != null) {
@@ -78,6 +78,7 @@ Controllers.controller("sliderImgCtrl", function($scope, $rootScope, restservice
 				$scope.responseMessage = response.message;
 				//$scope.tempUploadedFilePath = $scope.sliderList.backgroundImageUrl; 
 			} 
+			$("#profile-response-modal").foundation('toggle');
 		});
 
 	};
