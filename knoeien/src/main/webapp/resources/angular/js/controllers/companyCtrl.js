@@ -130,7 +130,7 @@ Controllers.controller("ClientCtrl", function($scope, $rootScope, restservice, $
 				$scope.isproceed = true;
 				$scope.responseMessage = response.message;
         	} 
-			
+			$("#profile-response-modal").foundation('toggle');
         });
 		
     };
@@ -184,7 +184,7 @@ Controllers.controller("HelperCtrl", function($scope, $rootScope, restservice, $
 				//$scope.isproceed = true;
 				$scope.responseMessage = response.message;
         	} 
-			
+			$("#profile-response-modal").foundation('toggle');
         });
 		
     };
