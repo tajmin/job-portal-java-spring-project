@@ -1653,4 +1653,11 @@ form .helper-form-field.error .bttm-icon {
 	background-color: red;
 }
 /*client-details.xhtml ends*/
-
+.job-type-wraper{
+  width:100%;
+  overflow: hidden;
+  /*position: relative;*/
+}
+.job-type-container {
+  display: inline-flex;
+}
