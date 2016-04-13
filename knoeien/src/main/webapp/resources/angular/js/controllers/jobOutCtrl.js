@@ -62,9 +62,8 @@ Controllers.controller("jobOutCtrl", function($scope, $rootScope, restservice, $
 	
 	// chat part
     $scope.sendMessageToEmployeer = function(jobSeekerId) {
-    	alert(jobSeekerId);
     	$scope.newMessage.jobId = $scope.jobId;
-    	$scope.newMessage.toUserId = $scope.employer.id;; //employer Id
+    	$scope.newMessage.toUserId = jobSeekerId; //employer Id
     	
     	restservice.post($scope.newMessage, "api/v1/message/sendMessageToEmployeer").then(function(response) {
 			if (response != null) {
@@ -78,7 +77,7 @@ Controllers.controller("jobOutCtrl", function($scope, $rootScope, restservice, $
     }
     
     $scope.getAllMessages = function(jobID,jobSeekerId) {
-    	alert("   aaa");
+    	$scope.messages=[];
     	restservice.get('', "api/v1/message/getMessageListByJobId?jobId=" + jobID +"&jobSeekerId="+ jobSeekerId + "&page="+ $scope.msgpage).then(function(response) {
 			if (response != null) {
 				for (var i = 0; i < response.length; i++) {

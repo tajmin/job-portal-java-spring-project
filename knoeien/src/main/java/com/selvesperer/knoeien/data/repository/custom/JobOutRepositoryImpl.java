@@ -26,7 +26,7 @@ public class JobOutRepositoryImpl implements JobOutRepositoryCustom{
 		StringBuffer queryString = new StringBuffer();
 		//String jobId="46002544-3650-uuid-8f9c-8b0641fd1fea";
 		//String Id1="45975303-2462-uuid-8718-db3d5754b154";
-		queryString.append("select m.user_message,m.job_id,j.price,u.last_name,count(distinct(m.id)),u.background_image_url,u.first_name, ji.bid_amount,j.title,j.description,m.from_user_id,m.to_user_id ");
+		queryString.append("select m.user_message,m.job_id,j.price,u.last_name,count(distinct(m.id)),u.background_image_url,u.first_name, ji.bid_amount,j.title,j.description,m.from_user_id,m.to_user_id,u.id ");
 		queryString.append("from message m");
 		queryString.append(" join user u on (m.from_user_id=u.id)");
 		queryString.append(" join job_interested ji on ( m.from_user_id =ji.job_interested_user_id and m.job_id = ji.job_id)");
@@ -52,6 +52,7 @@ public class JobOutRepositoryImpl implements JobOutRepositoryCustom{
 			messageModel.setJobDescription((String)result[9]);
 			messageModel.setFromUserId((String) result[10]);
 			messageModel.setToUserId((String) result[11]);
+			messageModel.setUserId((String) result[12]);
 			
 			listOfMessages.add(messageModel);
 		}
