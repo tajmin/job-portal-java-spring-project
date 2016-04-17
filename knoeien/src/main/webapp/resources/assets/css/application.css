@@ -1656,8 +1656,63 @@ form .helper-form-field.error .bttm-icon {
 .job-type-wraper{
   width:100%;
   overflow: hidden;
-  /*position: relative;*/
+  position: relative;
 }
 .job-type-container {
   display: inline-flex;
+}
+.job-type-container .helper-type {
+	width: 25vw;
+}
+.nav-btn {
+  font-size: 3rem;
+  line-height: 100px;
+  color: #fff;
+  width: 100%;
+}
+.nav-btn a {
+  position: absolute;
+  height: 100%;
+  width: 200px;
+  z-index: 1;
+}
+.nav-btn a i {
+  line-height: 100px;
+  position: absolute;
+  top: 50%;
+  margin-top: -50px;
+}
+.nav-btn a.scroll-left {
+  left: 0px;
+  padding-left: 6px;
+}
+.nav-btn a.scroll-right {
+  right: 0px;
+  text-align: right;
+  padding-right: 6px;
+}
+.nav-btn a.scroll-right i {
+	right: 0px;
+}
+.nav-btn a {
+  text-decoration: none;
+  color: #fff;
+}
+/* Small only */
+@media screen and (max-width: 39.9375em) {
+	.job-type-container .helper-type {
+		width: 100vw;
+	}
+	.nav-btn a {
+		width: 70px;
+	}
+}
+/* Medium only */
+@media screen and (min-width: 40em) and (max-width: 63.9375em) {
+	.job-type-container .helper-type {
+		width: 50vw;
+	}
+	.nav-btn a {
+		width: 70px;
+	}
 }

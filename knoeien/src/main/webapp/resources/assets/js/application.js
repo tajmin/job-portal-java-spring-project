@@ -15,6 +15,35 @@
 	$(document).on('click tap touchstart', '.reveal .modal-close', function() {
 		return $('[data-reveal="data-reveal"]').foundation('close');
 	});
+	
+	var scrolling = true;
+	$(".scroll-left").bind("mouseover", function(e){
+		e.preventDefault();
+		scrolling = true;
+		scrollContent("left");
+	}).bind("mouseout", function(event) {
+	    scrolling = false;
+	});
+	
+	$(".scroll-right").bind("mouseover", function(e){
+		e.preventDefault();
+	  scrolling = true;
+	  scrollContent("right");
+	}).bind("mouseout", function(event) {
+	    scrolling = false;
+	});
+	
+	function scrollContent(direction) {
+	    var amount = (direction === "left" ? "-=10px" : "+=10px");
+	    $(".job-type-wraper").animate({
+	    		scrollLeft: amount
+	    }, 1, function() {
+	        if (scrolling) {
+	            scrollContent(direction);
+	        }
+	    });
+	};
+	
 }(jQuery);
 
 /* Generate date, month and year select options */
