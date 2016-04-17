@@ -31,7 +31,7 @@
 							<div class="medium-3 columns text-center">
 								<img class="border-radius-7px"
 									src="/userimg/{{model.backgroundImageUrl}}"
-									onerror="this.src='/userimg/default_job.png'" alt="Job Image" />
+									onerror="this.src='#{request.contextPath}/resources/assets/images/postjob/default_job.png'" alt="Job Image" />
 								<div>
 									<p>{{model.firstname}} {{model.lastname}}</p>
 								</div>
@@ -76,9 +76,9 @@
 								<p>{{selecteduser}}</p>
 							</div>
 							<div class="small-6 columns text-right chat-notification">
-								<a href="#" ng-repeat="model in interesteduserlist"> <img
-									src="/userimg/{{model.backgroundImageUrl}}"
-									onerror="this.src='/userimg/default_job.png'" alt="User Image" />
+								<a href="#" ng-repeat="model in interesteduserlist"> 
+									<img src="/userimg/{{model.backgroundImageUrl}}"
+									onerror="this.src='#{request.contextPath}/resources/assets/images/postjob/default_job.png'" alt="User Image" />
 									<span class="badge alert">{{model.countMessageId}}</span>
 								</a>
 								<!--     					<a href="#"> -->
@@ -96,7 +96,7 @@
 								<div>
 									<br />{{message.userMessage}} 
 								</div> <img src="/userimg/{{selectedusersimage}}"
-								onerror="this.src='/userimg/default_job.png'" alt="User Image" />
+								onerror="this.src='#{request.contextPath}/resources/assets/images/postjob/default_job.png'" alt="User Image" />
 							</li>
 							<li class="other">
 								<div>
