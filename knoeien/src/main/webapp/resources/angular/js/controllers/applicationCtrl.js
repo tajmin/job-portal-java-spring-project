@@ -410,7 +410,7 @@ Controllers.controller("overviewCtrl", function($scope, $rootScope, restservice,
     }
     
     $scope.jobOut = function(jobid){
-    	window.open($rootScope.getBaseUrl() + "/jobout.xhtml?id=" + jobid,	"_self");
+    	window.open($rootScope.getBaseUrl() + "/jobout.xhtml?jobId=" + jobid,	"_self");
     }
     
     $scope.makePayment = function(jobID) {
