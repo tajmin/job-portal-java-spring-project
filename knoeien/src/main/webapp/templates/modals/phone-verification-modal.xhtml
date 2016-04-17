@@ -1,6 +1,6 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets">
 	<!-- modal / reveal forget password starts here -->
-	<div class="reveal fast ease-in" id="phone-verification-modal" data-reveal="data-reveal" data-close-on-click="true" data-animation-in="wiggle" data-animation-out="slide-out-right" >
+	<div class="reveal fast ease-in" id="phone-verification-modal" data-reveal="data-reveal" data-close-on-click="true" data-animation-out="slide-out-right" >
 		<div class="row" ng-if="!isproceed">
 			<div class="medium-12 medium-centered columns" >
 				<form name="phoneverifyForm">
@@ -18,13 +18,6 @@
 		                    </div>					
 						</div>
 					</div>			
-					
-					<ul class="global-message" style="white-space:normal">
-						<span ng-repeat="m in restMessages"> 
-							<li class="info-text info-modal">{{m.message}}</li>
-						</span>								
-					</ul>
-							
 					<div class="row">
 						<fieldset class="medium-12 columns">
 							<div class="button-group">						

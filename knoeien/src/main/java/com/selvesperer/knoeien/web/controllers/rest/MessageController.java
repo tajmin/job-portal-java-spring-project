@@ -48,7 +48,7 @@ public class MessageController extends AbstractController implements Serializabl
 			MessageModel messageModel = new MessageModel();
 			List<MessageModel> messageModelList = messageModel.getMessageModelList(message);
 
-			return new ResponseEntity<RestResponse>( convertToRestGoodResponse(messageModelList, LocalizationUtil.findLocalizedString("signupsuccess.text")),HttpStatus.OK);
+			return new ResponseEntity<RestResponse>( convertToRestGoodResponse(messageModelList, LocalizationUtil.findLocalizedString("")),HttpStatus.OK);
 		} catch (AuthenticationFailedException t) {
 			restResponse = convertToRestBadResponse("", t.getLocalizedMessage());
 		} catch (Exception t) {

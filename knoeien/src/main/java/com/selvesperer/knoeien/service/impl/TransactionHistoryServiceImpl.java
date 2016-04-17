@@ -54,14 +54,9 @@ public class TransactionHistoryServiceImpl implements TransactionHistoryService 
 		return transactionHistory;
 	}
 	
-	public void saveTransactionHistory(TransactionHistoryModel transactionHistoryModel, String id) {
+	public void saveTransactionHistory(TransactionHistoryModel transactionHistoryModel) {
 		// TODO Auto-generated method stub
-		TransactionHistory transactionHistory = transactionHistoryRepository.findTransactionHistoryById(id);
-		transactionHistory.setFromUserId(transactionHistoryModel.getFromUserId());
-		transactionHistory.setToUserId(transactionHistoryModel.getToUserId());
-		transactionHistory.setAmount(transactionHistoryModel.getAmount());
-		transactionHistory.setJobId(transactionHistoryModel.getJobId());
-		transactionHistory.setUserId(transactionHistoryModel.getUserId());
+		TransactionHistory transactionHistory = new TransactionHistory(transactionHistoryModel);
 		transactionHistoryRepository.saveAndFlush(transactionHistory);   
 	}
 	

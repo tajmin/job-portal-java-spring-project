@@ -1627,7 +1627,7 @@ form .helper-form-field.error .bttm-icon {
 	background: #F4F2F2;
 }
 
-.client-detail img {
+.client-detail-img {
 	width: 225px;
 	height: 225px;
 	border: 3px solid #fff;
@@ -1653,4 +1653,11 @@ form .helper-form-field.error .bttm-icon {
 	background-color: red;
 }
 /*client-details.xhtml ends*/
-
+.job-type-wraper{
+  width:100%;
+  overflow: hidden;
+  /*position: relative;*/
+}
+.job-type-container {
+  display: inline-flex;
+}

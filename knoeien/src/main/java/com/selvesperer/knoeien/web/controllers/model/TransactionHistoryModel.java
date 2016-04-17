@@ -37,7 +37,7 @@ public class TransactionHistoryModel implements Serializable{
 		this.setFromUserId(transactionHistory.getFromUserId());
 		this.setToUserId(transactionHistory.getToUserId());
 		this.setJobId(transactionHistory.getJobId());
-		this.setUserId(transactionHistory.getUserId());		
+				
 	}
 	
 	public List<TransactionHistoryModel> getModelList(List<Object[]> List) {

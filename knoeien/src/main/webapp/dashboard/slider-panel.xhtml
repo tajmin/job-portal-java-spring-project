@@ -1,31 +1,39 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets">
 		<div class="row wrapper-content" ng-controller="sliderImgCtrl">
+			<ui:insert name="profile-response-modal"></ui:insert>
 			<div class="medium-12 columns">
-				<form name="inviteForm">
+				<form name="sliderForm">
 					<div class="row">
 						<div class="medium-12 columns text-center">
-							<h2>Upload Image</h2>
+							<h4>Upload Image</h4>
 						</div>
 					</div>
 					<div class="row">
+						<div class="medium-2 columns">
+							<a href="javascript:void(0);" ng-click="formSubmitted = true; openFileDialogue();" class="button hlpr-color-info" style="width: 100%">Upload Image</a>
+							<input type="file" id="sliderImageFileUpload" class="show-for-sr" file-model = "imageFile" onchange="angular.element(this).scope().imageUpload(this)" />
+						</div>
+						<div class="medium-2 columns end">
+							<a href="javascript:void(0);" ng-click="formSubmitted = true; saveImage(sliderForm.$valid);" class="button hlpr-color-success" style="width: 100%">Save Image</a>
+						</div>
 						<div class="medium-12 columns">
-							<img ng-click="openFileDialogue();" id="slider_thumbnail_image" src="/slider/{{(slider.imageUrl != '')? slider.imageUrl : '' }}" alt="Add Photo" />
-							<input type="file" id="sliderImageFileUpload" class="show-for-sr" file-model = "imageFile" onchange="angular.element(this).scope().imageUpload(this)" />							
-						</div>
-					</div>							
-					<div class="row">
-						<fieldset class="medium-12 columns">
-							<div class="button-group float-right">
-								<a href="javascript:void(0);" ng-click="formSubmitted = true; saveImage(inviteForm.$valid);" class="button hlpr-color-info" >Save Image</a>
-							</div>
-						</fieldset>
+							<hr/>
+						</div>						
 					</div>
+					<div class="row">
+						<div class="medium-4 columns">
+							<img id="slider_thumbnail_image" src="/slider/{{(slider.imageUrl != '')? slider.imageUrl : '' }}" alt=""  style="padding-bottom: 25px;"/>							
+						</div>
+					</div>				
 					<div class="row" ng-repeat="model in sliderList">
 						<div class="medium-3 columns">
 							<img class="border-radius-7px" src="/slider/{{model.imageUrl}}" alt="Slider Image" />
 						</div>
 						<div class="medium-3 columns">
-							<a ng-click="deleteImage(model.id);" class="button helper-color-alert">Delete Image</a>
+							<a ng-click="deleteImage(model.id);" class="button hlpr-color-alert">Delete Image</a>
+						</div>
+						<div class="medium-12 columns">
+							<hr/>
 						</div>
 					</div>
 				</form>

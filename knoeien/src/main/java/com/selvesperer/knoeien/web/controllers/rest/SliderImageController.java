@@ -60,7 +60,7 @@ public class SliderImageController extends AbstractController implements Seriali
 		} catch (Throwable t) {
 			restResponse = convertToRestBadResponse("", t.getLocalizedMessage());
 		}
-		return new ResponseEntity<RestResponse>( restResponse, HttpStatus.OK);
+		return new ResponseEntity<RestResponse>(restResponse, HttpStatus.OK);
 	}
 	
 	@RequestMapping(value = "/addimage", method = RequestMethod.POST, produces = "application/json")

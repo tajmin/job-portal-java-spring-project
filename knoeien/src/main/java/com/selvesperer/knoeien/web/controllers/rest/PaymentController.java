@@ -60,13 +60,18 @@ public class PaymentController extends AbstractController implements Serializabl
 		if (log.isDebugEnabled()) {
 			log.debug("Stripe Charge");
 		}
+		
 		JobService jobService = ApplicationBeanFactory.getBean(JobService.class);
 		Object[] jobObj = jobService.makeStripePayment(jobID);
 		double d = (Double) jobObj[0];
+		String jobCreatedBy =  (String) jobObj[1];
+		String jobAssignedTo = "7495-uuid-9444";
+		d *= 100;
 		int payableAmount = (int) d;		
-		String cardNumber = (String) jobObj[1];
-		int month = AppsUtil.stringToInt((String) jobObj[2]);
-		int year = AppsUtil.stringToInt((String) jobObj[3]);
+		String cardNumber = (String) jobObj[3];
+		int month = AppsUtil.stringToInt((String) jobObj[4]);
+		int year = AppsUtil.stringToInt((String) jobObj[5]);
+		
 		RequestOptionsBuilder requestOptionsBuilder=new RequestOptionsBuilder();
 		final String testSecretKey = ConfigurationUtil.config().getString("stripe.testSecretKey");
 		RequestOptions requestOptions = (requestOptionsBuilder).setApiKey(testSecretKey).build();
@@ -78,9 +83,13 @@ public class PaymentController extends AbstractController implements Serializabl
 		cardMap.put("exp_month", month);
 		cardMap.put("exp_year", year);
 		chargeMap.put("card", cardMap);
-		String id = SecurityManager.getCurrentUserId(); 
+		
 		TransactionHistoryService transactionHistoryService = ApplicationBeanFactory.getBean(TransactionHistoryService.class);
-		TransactionHistoryModel transactionHistoryModel = null;
+		TransactionHistoryModel transactionHistoryModel = new TransactionHistoryModel();
+		transactionHistoryModel.setFromUserId(jobCreatedBy);
+		transactionHistoryModel.setToUserId(jobAssignedTo);
+		transactionHistoryModel.setAmount(d);
+		transactionHistoryModel.setJobId(jobID);
 		try {
 			 Charge charge = Charge.create(chargeMap, requestOptions);
 	         System.out.println(charge);
@@ -88,9 +97,9 @@ public class PaymentController extends AbstractController implements Serializabl
 	         String chargePaid = json.getString("paid");
 	         //if charge successful
 	         if(chargePaid.equals("true")) {
-	        	 transactionHistoryService.saveTransactionHistory(transactionHistoryModel, id);
+	        	 transactionHistoryService.saveTransactionHistory(transactionHistoryModel);
 	        }
-			return new ResponseEntity<RestResponse>(convertToRestGoodResponse(null, LocalizationUtil.findLocalizedString("signupsuccess.text")), HttpStatus.OK);
+			return new ResponseEntity<RestResponse>(convertToRestGoodResponse(null, LocalizationUtil.findLocalizedString("transactioncreatesuccess.text")), HttpStatus.OK);
 
 		} catch (AuthenticationFailedException t) {
 			restResponse = convertToRestBadResponse("", t.getLocalizedMessage());
