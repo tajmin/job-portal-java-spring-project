@@ -31,7 +31,7 @@
 							<div class="medium-3 columns text-center">
 								<img class="border-radius-7px"
 									src="/userimg/{{model.backgroundImageUrl}}"
-									onerror="this.src='/userimg/default_job.png'" alt="Job Image" />
+									onerror="this.src='#{request.contextPath}/resources/assets/images/postjob/default_job.png'" alt="Job Image" />
 								<div>
 									<p>{{model.firstname}} {{model.lastname}}</p>
 								</div>
@@ -76,54 +76,35 @@
 								<p>{{selecteduser}}</p>
 							</div>
 							<div class="small-6 columns text-right chat-notification">
-								<a href="#" ng-repeat="model in interesteduserlist"> <img
-									src="/userimg/{{model.backgroundImageUrl}}"
-									onerror="this.src='/userimg/default_job.png'" alt="User Image" />
+								<a href="#" ng-repeat="model in interesteduserlist"> 
+									<img src="/userimg/{{model.backgroundImageUrl}}"
+									onerror="this.src='#{request.contextPath}/resources/assets/images/postjob/default_job.png'" alt="User Image" />
 									<span class="badge alert">{{model.countMessageId}}</span>
 								</a>
-								<!--     					<a href="#"> -->
-								<!--     						<img src="#{request.contextPath}/resources/assets/images/user-1.png" alt="User name" /> -->
-								<!--     						<span class="badge alert">2</span> -->
-								<!--     					</a> -->
 								<a href="#" class="add-user"> <i class="fa fa-plus"></i>
 								</a>
 							</div>
 
 						</div>
 						<div>
-						<ul class="no-bullet" style="height: 50vh;">
-						<li ng-repeat="message in messages" class="{{(message.me == '1')? 'me' : 'other'}}">
-			    				<div>
-			    					{{message.userMessage}}
-			    				</div>
-			    				<img src="/userimg/{{message.fromUserBackgroundImageUrl}}" onerror="this.src='#{request.contextPath}/resources/assets/images/postjob/default_job.png'" />
-		    				</li>
-<!-- 							<li class="me"  ng-repeat="message in messages"> -->
-<!-- 								<div> -->
-<!-- 									<br />{{message.userMessage}}  -->
-<!-- 								</div> <img src="/userimg/{{selectedusersimage}}" -->
-<!-- 								onerror="this.src='/userimg/default_job.png'" alt="User Image" /> -->
-<!-- 							</li> -->
-<!-- 							<li class="other"> -->
-<!-- 								<div> -->
-<!-- 									Hi,<br />Lorem Ipsum is simply dummy text of the printing and -->
-<!-- 									typesetting industry. -->
-<!-- 								</div> <img -->
-<!-- 								src="#{request.contextPath}/resources/assets/images/woman.jpg" /> -->
-<!-- 							</li> -->
-						</ul>
-						<textarea ng-model="newMessage.userMessage" placeholder="Write your message..." rows="3" />
-						<div class="text-right">
-							<a ng-click="sendMessageToEmployeer(jobSeekerId);" type="submit"
-								class="button hlpr-color-info border-radius-7px">Send</a>
+							<ul class="no-bullet" style="height: 50vh;">
+								<li ng-repeat="message in messages" class="{{(message.me == '1')? 'me' : 'other'}}">
+				    				<div>
+				    					{{message.userMessage}}
+				    				</div>
+				    				<img src="/userimg/{{message.fromUserBackgroundImageUrl}}" onerror="this.src='#{request.contextPath}/resources/assets/images/postjob/default_job.png'" />
+			    				</li>
+							</ul>
+							<textarea ng-model="newMessage.userMessage" placeholder="Write your message..." rows="3" />
+							<div class="text-right">
+								<a ng-click="sendMessageToEmployeer(jobSeekerId);" type="submit"
+									class="button hlpr-color-info border-radius-7px">Send</a>
+							</div>
 						</div>
-						</div>
-						<a class="button hlpr-color-alert">Decline</a> <a
-							class="button hlpr-color-success">Offer Job</a>
+						<a class="button hlpr-color-alert">Decline</a> <a class="button hlpr-color-success">Offer Job</a>
 					</form>
 				</div>
 			</div>
 		</div>
 	</ui:define>
-
 </ui:composition>

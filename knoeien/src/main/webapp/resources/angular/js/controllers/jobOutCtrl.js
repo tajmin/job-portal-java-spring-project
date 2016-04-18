@@ -10,7 +10,7 @@ Controllers.controller("jobOutCtrl", function($scope, $rootScope, restservice, $
 	$scope.selecteduser="";
 	$scope.selectedusersmessage={};
 	$scope.userId="";
-	$scope.jobId=utilservice.getParameterByName("id");
+	$scope.jobId=utilservice.getParameterByName("jobId");
 	$scope.messages = [];
 	$scope.newMessage = {};
 	$scope.msgpage = 1;
@@ -68,7 +68,6 @@ Controllers.controller("jobOutCtrl", function($scope, $rootScope, restservice, $
     	
     	restservice.post($scope.newMessage, "api/v1/message/sendMessageToEmployeer").then(function(response) {
 			if (response != null) {
-				//console.log(response);
 				$scope.newMessage = {};
 				$scope.msgMoreLink = true;
 				$scope.msgpage = 1;

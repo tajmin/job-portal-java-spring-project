@@ -123,7 +123,7 @@ public class SocialNetworkController extends AbstractController implements Seria
 			uData.put(Constants.CURRENT_USER_ID, fbUser.getEmail());
 			uData.put(Constants.CURRENT_USER_NAME, fbUser.getFullName());
 			
-			URI appUri = new URI("/knoeien/home.xhtml?login=fb");
+			URI appUri = new URI("/knoeien/index.xhtml?login=fb");
 			httpHeaders.setLocation(appUri);
 			return new ResponseEntity<>(httpHeaders, HttpStatus.SEE_OTHER);
 
