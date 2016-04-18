@@ -13,7 +13,7 @@
 					<div class="row expanded profile-img">
 						<div class="small-2 small-centered columns">
 							<div class="thumbnail">
-								<img ng-click="openFileDialogue();" id="user_thumbnail_image" src="/userimg/{{user.backgroundImageUrl}}" onerror="this.src='/userimg/default_job.png'"/>
+								<img ng-click="openFileDialogue();" id="user_thumbnail_image" src="/userimg/{{user.backgroundImageUrl}}" onerror="this.src='#{request.contextPath}/resources/assets/images/postjob/default_job.png'"/>
 								<input type="file" id="userImageFileUpload" class="show-for-sr" file-model = "imageFile" onchange="angular.element(this).scope().imageUpload(this)" />
 							</div>
 						</div>

@@ -130,7 +130,7 @@ public class JobRepositoryImpl implements JobRepositoryCustom {
 		StringBuilder jql=new StringBuilder();
 		jql.append("SELECT  j.id,j.address_line_1, j.price, j.hours, j.deadline, j.minutes, j.created_date, j.image_url,j.title,j.latitude, j.longitude, ");
 		jql.append(" ( 3959 * acos( cos( radians(").append(userLatitude).append(") ) * cos( radians( j.latitude ) ) * cos( radians( j.longitude ) - radians(");
-		jql.append(userLongitude).append(") ) + sin( radians(").append(userLatitude).append(") ) * sin( radians( j.latitude ) ) ) ) AS distance FROM job j HAVING distance < 1000000");
+		jql.append(userLongitude).append(") ) + sin( radians(").append(userLatitude).append(") ) * sin( radians( j.latitude ) ) ) ) AS distance FROM job j HAVING distance < 1000000 order by distance");
 		
 		Query query = entityManager.createNativeQuery(jql.toString());
 		if (limit > 0) {

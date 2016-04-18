@@ -20,9 +20,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 import com.selvesperer.knoeien.data.domain.Job;
+import com.selvesperer.knoeien.data.domain.User;
 import com.selvesperer.knoeien.exception.AuthenticationFailedException;
 import com.selvesperer.knoeien.security.SecurityManager;
 import com.selvesperer.knoeien.service.JobService;
+import com.selvesperer.knoeien.service.UserService;
 import com.selvesperer.knoeien.spring.utils.ApplicationBeanFactory;
 import com.selvesperer.knoeien.utils.Constants;
 import com.selvesperer.knoeien.utils.IdGenerator;
@@ -214,17 +216,22 @@ public class JobController extends AbstractController implements Serializable {
 	}
 	
 	@RequestMapping(value = "/findNearestjobs", method = RequestMethod.GET, produces = "application/json")
-	public ResponseEntity<RestResponse> findNearestjobs() {
+	public ResponseEntity<RestResponse> findNearestjobs(@RequestParam(value="page", required=true) Integer page) {
 		RestResponse restResponse = null;
 		if (log.isDebugEnabled()) log.debug("Find nearest Job Info");
 		try {
-			String userLatitude="23.6226398";
-			String userLongitude="90.49979729999995";
-			int page=1;
-			JobService jobService = ApplicationBeanFactory.getBean(JobService.class);
-			List<JobModel> jobs = jobService.findNearestjobs(userLatitude, userLongitude,page,Constants.JOB_LATEST_SIZE);
+			String currentUserId = SecurityManager.getCurrentUserId();
+			UserService userService = ApplicationBeanFactory.getBean(UserService.class);
+			User currentUser  = userService.findUserById(currentUserId);
 			
-			return new ResponseEntity<RestResponse>( convertToRestGoodResponse(jobs, LocalizationUtil.findLocalizedString("")),HttpStatus.OK);
+			String userLatitude = currentUser.getLatitude();
+			String userLongitude = currentUser.getLongitude();
+			if(currentUser != null && StringUtils.isNotBlank(userLatitude) && StringUtils.isNotBlank(userLongitude)){
+				JobService jobService = ApplicationBeanFactory.getBean(JobService.class);
+				List<JobModel> jobs = jobService.findNearestjobs(userLatitude, userLongitude,page,Constants.JOB_LATEST_SIZE);
+				
+				return new ResponseEntity<RestResponse>( convertToRestGoodResponse(jobs, LocalizationUtil.findLocalizedString("")),HttpStatus.OK);
+			}
 		} catch (AuthenticationFailedException t) {
 			restResponse = convertToRestBadResponse("", t.getLocalizedMessage());
 		} catch (Exception t) {

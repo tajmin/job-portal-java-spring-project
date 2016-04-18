@@ -706,9 +706,31 @@ Controllers.controller("jobCtrl", function($scope, $rootScope, restservice, $coo
         		$scope.filter.moreLink = false;
         	}
         });	
-    };
-    
+    };    
     $scope.loadJobs('LGB', $scope.lgbPage);
+    
+    
+    $scope.loadNearestJobs = function(type, page) {
+		$scope.filter = {};
+		$scope.filter.page = page;
+		$scope.filter.moreLink = true;
+		restservice.get( '', "api/v1/job/findNearestjobs?page="+$scope.filter.page).then(function(response) {
+			if (response != null) {
+				for (var i = 0; i < response.length; i++) {
+					$scope.job.push(response[i]);
+				}
+				
+				if(response.length < 2){
+					$scope.filter.moreLink = false;				
+				}else{
+					if(type == "NRJ") $scope.nrjPage += 1;					
+				}
+				$scope.showJobInMap();
+        	} else {
+        		$scope.filter.moreLink = false;
+        	}
+        });	
+    };
     
     
     $scope.markersArray = [];
