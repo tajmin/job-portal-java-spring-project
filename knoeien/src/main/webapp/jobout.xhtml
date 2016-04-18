@@ -27,7 +27,7 @@
 					<div class="tabs-panel is-active" id="messenger">
 						<div class="row search-list"
 							ng-repeat="model in interesteduserlist"
-							ng-click="selectinteresteduser(model.firstname,model.lastname,model.userMessage,model.backgroundImageUrl,model.userId,model.toUserId,model.fromUserId);">
+							ng-click="selectinteresteduser(model.firstname,model.lastname,model.userMessage,model.backgroundImageUrl,model.userId,model.toUserId,model.fromUserId,model.bidAmount);">
 							<div class="medium-3 columns text-center">
 								<img class="border-radius-7px"
 									src="/userimg/{{model.backgroundImageUrl}}"
@@ -39,7 +39,7 @@
 							<div class="medium-9 columns">
 								<div class="row">
 									<div class="medium-6 columns">
-										<h6 class="bold">{{model.price}} Kr</h6>
+										<h6 class="bold">{{model.bidAmount}} Kr</h6>
 									</div>
 									<div class="medium-6 columns text-right">
 										<i id="comments-{{model.userId}}" class="comments fa"

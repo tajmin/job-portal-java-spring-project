@@ -10,14 +10,13 @@ Controllers.controller("jobOutCtrl", function($scope, $rootScope, restservice, $
 	$scope.selecteduser="";
 	$scope.selectedusersmessage={};
 	$scope.userId="";
-	//$scope.jobId=utilservice.getParameterByName("jobId");
-	$scope.jobId="46002544-3650-uuid-8f9c-8b0641fd1fea";
+	$scope.jobId=utilservice.getParameterByName("id");
 	$scope.messages = [];
 	$scope.newMessage = {};
 	$scope.msgpage = 1;
 	$scope.msgMoreLink = true;
 	$scope.employer = {};
-	
+	$scope.selectedUserBidAmount="";
 	
 	$scope.jobOutLists = function() {
 		
@@ -35,19 +34,21 @@ Controllers.controller("jobOutCtrl", function($scope, $rootScope, restservice, $
 	};
 	$scope.jobOutLists();
 	
-	$scope.selectinteresteduser= function(firstName,lastName,userMessage,imageUrl,Id,jobPosterId,jobSeekerId){
+	$scope.selectinteresteduser= function(firstName,lastName,userMessage,imageUrl,Id,jobPosterId,jobSeekerId,bidAmount){
 		$scope.isproceed = false;
 		$scope.selecteduser=firstName+" "+lastName;
 		$scope.selectedusersmessage=userMessage;
 		$scope.selectedusersimage=imageUrl;
 		$scope.jobPosterId=jobPosterId;
-		$scope.jobSeekerId=Id;
-		//$scope.jobSeekerId=jobSeekerId;
+		$scope.jobSeekerId=jobSeekerId;
+		$scope.selectedUserBidAmount=bidAmount;
+		$scope.msgpage = 1;
 		
 		$(".comments").removeClass("fa-commenting-o");
 		$("#comments-" +Id).addClass("fa-commenting-o");
 		console.log("Loading Job out Users Message List");
 		$scope.getAllMessages($scope.jobId,jobSeekerId);
+		
 	}
 	
 	$scope.getUserByJobId = function(jobId) {			
@@ -72,29 +73,28 @@ Controllers.controller("jobOutCtrl", function($scope, $rootScope, restservice, $
 				$scope.msgMoreLink = true;
 				$scope.msgpage = 1;
 				$scope.getAllMessages($scope.jobId,jobSeekerId);
+				
         	}
         });	
     }
     
     $scope.getAllMessages = function(jobID,jobSeekerId) {
     	$scope.messages=[];
-    	restservice.get('', "api/v1/message/getMessageListByJobId?jobId=" + jobID +"&jobSeekerId="+ jobSeekerId + "&page="+ $scope.msgpage).then(function(response) {
+    	restservice.get('', "api/v1/message/getMessageListByJobSeekerId?jobId=" + jobID +"&jobSeekerId="+ jobSeekerId + "&page="+ $scope.msgpage).then(function(response) {
+    		
 			if (response != null) {
 				for (var i = 0; i < response.length; i++) {
 					$scope.messages.push(response[i]);
 				}
-				
 				if(response.length < 2){
 					$scope.msgMoreLink = false;				
 				}else{
 					$scope.msgpage += 1;
 				}
+				
         	}else {
         		$scope.msgMoreLink = false;
         	}
-        });	
-    }
-	
-	
-	
+        });
+    }	
 });
